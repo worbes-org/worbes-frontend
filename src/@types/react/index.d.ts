@@ -1,14 +1,14 @@
 declare namespace React {
-  interface AsyncFunctionComponent<P = {}> {
+  interface AsyncFunctionComponent<Props = object> {
     (
-      props: P,
-      deprecatedLegacyContext?: unknown
+      props: Props,
+      deprecatedLegacyContext?: unknown,
     ): Promise<AwaitedReactNode<unknown, unknown>>;
-    propTypes?: WeakValidationMap<P>;
+    propTypes?: WeakValidationMap<Props>;
     contextTypes?: ValidationMap<unknown>;
-    defaultProps?: Partial<P>;
+    defaultProps?: Partial<Props>;
     displayName?: string;
   }
 
-  type AFC<P = {}> = AsyncFunctionComponent<P>;
+  type AFC<Props = object> = AsyncFunctionComponent<Props>;
 }
