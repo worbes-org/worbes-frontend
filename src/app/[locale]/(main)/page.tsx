@@ -1,7 +1,7 @@
 import { cn } from "@/utils/styles";
-import React from "react";
+import { type FC } from "react";
 
-const HomePage: React.FC = () => {
+const HomePage: FC = () => {
   return <div className={cn("")}>HomePage</div>;
 };
 

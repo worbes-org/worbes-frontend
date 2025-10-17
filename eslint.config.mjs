@@ -27,6 +27,14 @@ const eslintConfig = [
                 "Use path imports (@/*) instead of relative imports (../)",
             },
           ],
+          paths: [
+            {
+              name: "next-intl",
+              importNames: ["useTranslations"],
+              message:
+                "Please import useTranslations from `~/hooks/i18n` instead.",
+            },
+          ],
         },
       ],
     },
