@@ -1,4 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
+import pluginQuery from "@tanstack/eslint-plugin-query";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -13,6 +14,7 @@ const compat = new FlatCompat({
 /** @type {import('eslint').Linter.Config} */
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...pluginQuery.configs["flat/recommended"],
   eslintPluginPrettierRecommended,
   {
     rules: {
