@@ -1,3 +1,5 @@
+"use client";
+
 import { A_MINUTE } from "@/constants/misc";
 import { type Nullable } from "@/types/misc";
 import {
