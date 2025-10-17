@@ -2,7 +2,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-950;
+    @apply font-primary bg-gray-950;
   }
 
   button:not(:disabled),
@@ -69,6 +69,8 @@
   --color-green-800: #2c433d;
   --color-green-900: #273a34;
   --color-green-950: #13201d;
+
+  --font-primary: var(--font-primary);
 
   --breakpoint-3xl: 1920px;
 
