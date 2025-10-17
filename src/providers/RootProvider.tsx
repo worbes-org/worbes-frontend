@@ -5,12 +5,9 @@ import { type AFC, type PropsWithChildren } from "react";
 
 type Props = {
   locale: Locale;
-};
+} & PropsWithChildren;
 
-const RootProvider: AFC<PropsWithChildren<Props>> = async ({
-  locale,
-  children,
-}) => {
+const RootProvider: AFC<Props> = async ({ locale, children }) => {
   return (
     <IntlProvider locale={locale}>
       <TanstackQueryProvider>{children}</TanstackQueryProvider>

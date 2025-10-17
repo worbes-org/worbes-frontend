@@ -5,12 +5,9 @@ import { type AFC, type PropsWithChildren } from "react";
 
 type Props = {
   locale: string;
-};
+} & PropsWithChildren;
 
-const IntlProvider: AFC<PropsWithChildren<Props>> = async ({
-  locale,
-  children,
-}) => {
+const IntlProvider: AFC<Props> = async ({ locale, children }) => {
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
