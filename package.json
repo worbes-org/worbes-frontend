@@ -11,9 +11,12 @@
     "dev:locale": "nodemon scripts/locale.mjs --watch src/i18n --ext yml"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
+    "@heroicons/react": "^2.2.0",
     "@tanstack/react-query": "^5.90.5",
     "@tanstack/react-query-devtools": "^5.90.2",
     "clsx": "^2.1.1",
+    "lodash-es": "^4.17.21",
     "next": "15.5.5",
     "next-intl": "^4.3.12",
     "react": "19.2.0",
