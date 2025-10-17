@@ -10,7 +10,7 @@ const HomeBackground: FC<Props> = ({ className }) => {
   return (
     <div className={cn("h-200", className)}>
       <ImageWithPlaceholder
-        className="h-200 opacity-15"
+        className="h-200 opacity-50"
         imgClassName="object-cover object-center"
         height={1536}
         width={1024}
