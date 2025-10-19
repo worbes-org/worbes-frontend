@@ -6,28 +6,26 @@ type Props = {
   className?: string;
   theme: "primary" | "secondary" | "clear";
   size: "xs" | "sm" | "md";
-  Icon: FC<{ className?: string }>;
   isLoading?: boolean;
 } & ComponentProps<"button">;
 
-const IconButton: FC<Props> = ({
+const Button: FC<Props> = ({
   className,
   size = "md",
   theme,
-  Icon,
   isLoading,
   disabled,
   type = "button",
-  onClick,
+  children,
   ...props
 }) => {
   return (
     <button
       className={cn(
-        "rounded-xl text-white transition-colors",
-        size === "md" && "p-3",
-        size === "sm" && "p-2.5",
-        size === "xs" && "rounded-lg p-2",
+        "inline-flex items-center justify-center rounded-xl text-white transition-colors",
+        size === "md" && "px-4 py-3 text-sm",
+        size === "sm" && "px-3 py-2.5 text-sm",
+        size === "xs" && "rounded-lg px-2.5 py-2 text-xs",
         theme === "primary" && "bg-purple-600",
         theme === "primary" &&
           !disabled &&
@@ -43,33 +41,27 @@ const IconButton: FC<Props> = ({
           !disabled &&
           "hover:bg-blue-500/10 active:bg-blue-500/20",
         theme === "clear" && disabled && "text-gray-500",
+        (disabled || isLoading) && "cursor-not-allowed",
         className,
       )}
       disabled={disabled || isLoading}
       type={type}
-      onClick={onClick}
       {...props}
     >
       {isLoading ? (
         <ProcessingIcon
           className={cn(
             "animate-angle-rotate",
-            size === "md" && "size-6",
+            size === "md" && "size-5",
             size === "sm" && "size-5",
             size === "xs" && "size-4",
           )}
         />
       ) : (
-        <Icon
-          className={cn(
-            size === "md" && "size-6",
-            size === "sm" && "size-5",
-            size === "xs" && "size-4",
-          )}
-        />
+        children
       )}
     </button>
   );
 };
 
-export default IconButton;
+export default Button;
