@@ -1,9 +1,8 @@
-import { type Locale } from "@/constants/i18n";
 import RootProvider from "@/providers/RootProvider";
 import { type AFC, type PropsWithChildren } from "react";
 
 type Props = {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 };
 
 const MainLayout: AFC<PropsWithChildren<Props>> = async ({
