@@ -9,13 +9,8 @@ import {
   motion,
   useDragControls,
 } from "framer-motion";
-import {
-  useId,
-  useRef,
-  type FC,
-  type PointerEvent,
-  type PropsWithChildren,
-} from "react";
+import { isFunction } from "lodash-es";
+import { useId, useRef, type FC, type PointerEvent } from "react";
 import { useKeyPressEvent } from "react-use";
 
 type Props = {
@@ -27,9 +22,12 @@ type Props = {
   theme?: "primary" | "secondary";
   hideCloseButton?: boolean;
   onClose: () => void;
+  children:
+    | React.ReactNode
+    | ((props: { isOpen: boolean; onClose: () => void }) => React.ReactNode);
 };
 
-const BottomDrawer: FC<PropsWithChildren<Props>> = ({
+const BottomDrawer: FC<Props> = ({
   className,
   panelClassName,
   overlayClassName,
@@ -63,9 +61,11 @@ const BottomDrawer: FC<PropsWithChildren<Props>> = ({
   );
 };
 
-const DrawerPanel: FC<Omit<PropsWithChildren<Props>, "overlayClassName">> = ({
+type DrawerPanelProps = Omit<Props, "overlayClassName">;
+
+const DrawerPanel: FC<DrawerPanelProps> = ({
   className,
-  isOpen: visible,
+  isOpen,
   title,
   hideCloseButton,
   theme = "primary",
@@ -100,7 +100,7 @@ const DrawerPanel: FC<Omit<PropsWithChildren<Props>, "overlayClassName">> = ({
       }}
       initial="hidden"
       exit="hidden"
-      animate={visible ? "visible" : "hidden"}
+      animate={isOpen ? "visible" : "hidden"}
       drag="y"
       dragElastic={0.4}
       dragControls={controls}
@@ -153,7 +153,11 @@ const DrawerPanel: FC<Omit<PropsWithChildren<Props>, "overlayClassName">> = ({
         </div>
       </section>
 
-      <section>{children}</section>
+      <section>
+        {isFunction(children)
+          ? children({ isOpen: isOpen, onClose })
+          : children}
+      </section>
     </motion.aside>
   );
 
