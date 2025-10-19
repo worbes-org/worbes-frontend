@@ -15,8 +15,6 @@ import { useKeyPressEvent } from "react-use";
 
 type Props = {
   className?: string;
-  panelClassName?: string;
-  overlayClassName?: string;
   isOpen: boolean;
   title?: string;
   theme?: "primary" | "secondary";
@@ -27,29 +25,18 @@ type Props = {
     | ((props: { isOpen: boolean; onClose: () => void }) => React.ReactNode);
 };
 
-const BottomDrawer: FC<Props> = ({
-  className,
-  panelClassName,
-  overlayClassName,
-  isOpen,
-  onClose,
-  ...props
-}) => {
+const BottomDrawer: FC<Props> = ({ className, isOpen, onClose, ...props }) => {
   useKeyPressEvent("Escape", onClose);
 
   return (
     <Portal>
       <AnimatePresence>
         {isOpen && (
-          <div className={cn("relative z-50", className)}>
-            <DrawerOverlay
-              className={overlayClassName}
-              visible={isOpen}
-              onClose={onClose}
-            />
+          <div className="relative z-50">
+            <DrawerOverlay visible={isOpen} onClose={onClose} />
 
             <DrawerPanel
-              className={panelClassName}
+              className={className}
               isOpen={isOpen}
               onClose={onClose}
               {...props}
@@ -61,7 +48,7 @@ const BottomDrawer: FC<Props> = ({
   );
 };
 
-type DrawerPanelProps = Omit<Props, "overlayClassName">;
+type DrawerPanelProps = Props;
 
 const DrawerPanel: FC<DrawerPanelProps> = ({
   className,
