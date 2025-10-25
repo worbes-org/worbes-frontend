@@ -15,10 +15,9 @@ import { useKeyPressEvent } from "react-use";
 
 type Props = {
   className?: string;
+  title: string;
+  theme: "primary" | "secondary";
   isOpen: boolean;
-  title?: string;
-  theme?: "primary" | "secondary";
-  hideCloseButton?: boolean;
   onClose: () => void;
   children:
     | React.ReactNode
@@ -52,10 +51,9 @@ type DrawerPanelProps = Props;
 
 const DrawerPanel: FC<DrawerPanelProps> = ({
   className,
-  isOpen,
   title,
-  hideCloseButton,
-  theme = "primary",
+  theme,
+  isOpen,
   onClose,
   children,
 }) => {
@@ -66,9 +64,10 @@ const DrawerPanel: FC<DrawerPanelProps> = ({
   return (
     <motion.aside
       className={cn(
-        "fixed bottom-0 left-0 w-full space-y-6 bg-gray-950 px-5 shadow-[0px_0px_16px_0px_#111111CC]",
-        "after:absolute after:bottom-0 after:-mx-5 after:h-[100vh] after:w-full after:translate-y-full after:bg-inherit",
-        theme === "primary" && "rounded-t-3xl pb-12",
+        "fixed inset-x-0 bottom-0 w-full shadow-2xl",
+        theme === "primary" && "px-4 pb-6",
+        theme === "secondary" &&
+          "after:absolute after:bottom-0 after:-mx-5 after:h-[100vh] after:w-full after:translate-y-full after:bg-inherit",
         className,
       )}
       key={`bottom-sheet-${id}`}
@@ -109,27 +108,33 @@ const DrawerPanel: FC<DrawerPanelProps> = ({
         });
       }}
     >
-      <section>
-        {theme === "primary" && (
-          <div
-            className="-mx-5 touch-none py-3"
-            aria-label="drawer handle bar"
-            onPointerDown={handleDragStart}
-          >
-            <div className="mx-auto h-1 w-8 rounded-full bg-gray-600" />
-          </div>
+      <div
+        className={cn(
+          "relative h-full space-y-4 bg-gray-950 px-4",
+          theme === "primary" && "rounded-4xl pb-12",
+          theme === "secondary" && "rounded-t-2xl pt-4",
         )}
-
-        <div className={cn("relative h-6", theme === "secondary" && "mt-3")}>
-          {title && (
-            <div className="text-xl leading-6 font-semibold">{title}</div>
+      >
+        <section>
+          {theme === "primary" && (
+            <div
+              className="-mx-4 touch-none py-3.5"
+              aria-label="drawer handle bar"
+              onPointerDown={handleDragStart}
+            >
+              <div className="mx-auto h-1 w-12 rounded-full bg-gray-600" />
+            </div>
           )}
-          {!hideCloseButton && (
+
+          {title && (
+            <div className="text-xl font-semibold text-green-400">{title}</div>
+          )}
+
+          {theme === "secondary" && (
             <IconButton
               className={cn(
-                "absolute -top-1 rounded-full p-1 text-gray-300",
-                theme === "primary" && "right-0",
-                theme === "secondary" && "-right-4",
+                "absolute top-1 rounded-full text-gray-300",
+                theme === "secondary" && "right-1",
               )}
               theme="clear"
               size="md"
@@ -137,14 +142,14 @@ const DrawerPanel: FC<DrawerPanelProps> = ({
               onClick={onClose}
             />
           )}
-        </div>
-      </section>
+        </section>
 
-      <section>
-        {isFunction(children)
-          ? children({ isOpen: isOpen, onClose })
-          : children}
-      </section>
+        <section>
+          {isFunction(children)
+            ? children({ isOpen: isOpen, onClose })
+            : children}
+        </section>
+      </div>
     </motion.aside>
   );
 
