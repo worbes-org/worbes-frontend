@@ -9,12 +9,14 @@ type Props = {
   className?: string;
   title: React.ReactNode;
   isOpen?: boolean;
+  onToggle?: (isOpen: boolean) => void;
 } & PropsWithChildren;
 
 const Disclosure: FC<Props> = ({
   className,
   title,
   isOpen: _isOpen,
+  onToggle,
   children,
 }) => {
   const [isOpen, setIsOpen] = useState(!!_isOpen);
@@ -32,7 +34,7 @@ const Disclosure: FC<Props> = ({
         {title}
         <ChevronDownIcon
           className={cn(
-            "size-6 text-green-200 transition-transform duration-300 ease-in-out",
+            "size-5 text-green-200 transition-transform duration-300 ease-in-out",
             isOpen && "rotate-180",
           )}
         />
@@ -49,7 +51,9 @@ const Disclosure: FC<Props> = ({
   );
 
   function handleToggle() {
-    setIsOpen((prev) => !prev);
+    const next = !isOpen;
+    setIsOpen(next);
+    onToggle?.(next);
   }
 };
 
