@@ -1,6 +1,6 @@
-import type { ItemCategory } from "@/types/category";
+import type { ItemRootCategory } from "@/types/category";
 
-export const ITEM_CATEGORIES: ItemCategory[] = [
+export const ITEM_CATEGORIES: ItemRootCategory[] = [
   {
     name: "무기",
     detailColumn: {

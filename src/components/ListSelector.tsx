@@ -5,21 +5,24 @@ import { cn } from "@/utils/styles";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { type FC, type RefObject } from "react";
 
-type ListSelectorProps<TValue> = {
+type ListSelectorProps<TValue, TMetadata = unknown> = {
   className?: string;
   ref?: RefObject<Nullable<HTMLUListElement>>;
-  options: ListSelectorOption<TValue>[];
+  options: ListSelectorOption<TValue, TMetadata>[];
   selectedValues: TValue[];
-  onSelect: (value: TValue, isOpen?: boolean) => void;
+  onSelect: (
+    option: ListSelectorOption<TValue, TMetadata>,
+    isOpen?: boolean,
+  ) => void;
 };
 
-const ListSelector = <TValue extends string | number>({
+const ListSelector = <TValue extends string | number, TMetadata = unknown>({
   className,
   ref,
   options,
   selectedValues,
   onSelect,
-}: ListSelectorProps<TValue>) => {
+}: ListSelectorProps<TValue, TMetadata>) => {
   return (
     <ul className={cn("divide-y divide-gray-800", className)} ref={ref}>
       {options.map((option) => {
@@ -36,7 +39,7 @@ const ListSelector = <TValue extends string | number>({
                   />
                 }
                 isOpen={isSelected}
-                onToggle={handleSelect(option.value)}
+                onToggle={handleSelect(option)}
               >
                 <ListSelector
                   className="pl-5"
@@ -50,7 +53,7 @@ const ListSelector = <TValue extends string | number>({
                 className="w-full py-2"
                 label={option.label}
                 isSelected={isSelected}
-                onClick={handleSelect(option.value)}
+                onClick={handleSelect(option)}
               />
             )}
           </li>
@@ -59,8 +62,8 @@ const ListSelector = <TValue extends string | number>({
     </ul>
   );
 
-  function handleSelect(value: TValue) {
-    return (isOpen?: boolean) => onSelect(value, isOpen);
+  function handleSelect(option: ListSelectorOption<TValue, TMetadata>) {
+    return (isOpen?: boolean) => onSelect(option, isOpen);
   }
 };
 

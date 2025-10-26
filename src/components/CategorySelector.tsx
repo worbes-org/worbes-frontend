@@ -3,12 +3,14 @@ import ListSelector from "@/components/ListSelector";
 import ScrollFade from "@/components/ScrollFade";
 import Translation from "@/components/Translation";
 import { ITEM_CATEGORIES } from "@/constants/category";
+import { useTranslations } from "@/hooks/useTranslations";
+import type {
+  ItemCategory,
+  ItemChildCategory,
+  ItemRootCategory,
+} from "@/types/category";
 import type { Nullable } from "@/types/misc";
-import {
-  buildCategoryOptions,
-  findClassCategory,
-  findSubClassCategory,
-} from "@/utils/category";
+import type { ListSelectorOption } from "@/types/selector";
 import { cn } from "@/utils/styles";
 import { last, noop } from "lodash-es";
 import { type FC, useMemo, useRef, useState } from "react";
@@ -24,6 +26,7 @@ const CategorySelector: FC<Props> = ({
   listClassName,
   onChange,
 }) => {
+  const t = useTranslations();
   const options = useMemo(() => buildCategoryOptions(ITEM_CATEGORIES), []);
   const listRef = useRef<Nullable<HTMLUListElement>>(null);
 
@@ -52,7 +55,11 @@ const CategorySelector: FC<Props> = ({
     </div>
   );
 
-  function handleSelect(value: string, isOpen?: boolean) {
+  function handleSelect(
+    option: ListSelectorOption<string, ItemCategory>,
+    isOpen?: boolean,
+  ) {
+    const value = option.value;
     const keys = value.split(":");
     const parentKey = keys.slice(0, -1).join(":");
 
@@ -62,18 +69,27 @@ const CategorySelector: FC<Props> = ({
     const next = [...filtered, parentKey, isOpen ? value : ""].filter(Boolean);
 
     setSelectedValues(next);
-    handleChange(value);
+    onChange?.(option.metadata?.class, option.metadata?.subClass);
   }
 
-  function handleChange(value: string) {
-    const names = value.split(":");
-    const className = names[0];
-    const subClassNames = names.slice(1);
+  function buildCategoryOptions(
+    categories: ItemRootCategory[] | ItemChildCategory[],
+    parentValue?: string,
+  ): ListSelectorOption<string, ItemCategory>[] {
+    return categories.map((category) => {
+      const value = parentValue
+        ? `${parentValue}:${category.name}`
+        : category.name;
 
-    const classCategory = findClassCategory(ITEM_CATEGORIES, className);
-    const subCategory = findSubClassCategory(classCategory, subClassNames);
-
-    onChange?.(classCategory?.class, subCategory?.subClass);
+      return {
+        label: category.name,
+        value,
+        children: category.subcategories
+          ? buildCategoryOptions(category.subcategories, value)
+          : undefined,
+        metadata: category,
+      };
+    });
   }
 };
 

@@ -1,4 +1,6 @@
-export type ItemCategory = {
+export type ItemCategory = ItemRootCategory | ItemChildCategory;
+
+export type ItemRootCategory = {
   name: string;
   class: number;
   detailColumn?: {
@@ -7,10 +9,10 @@ export type ItemCategory = {
   };
   subClass?: number;
   subClasses?: number[];
-  subcategories?: ItemSubCategory[];
+  subcategories?: ItemChildCategory[];
 };
 
-export type ItemSubCategory = {
+export type ItemChildCategory = {
   name: string;
   class: number;
   bonusStat?: number;
@@ -18,5 +20,5 @@ export type ItemSubCategory = {
   invTypes?: number[];
   subClass?: number;
   subClasses?: number[];
-  subcategories?: ItemSubCategory[];
+  subcategories?: ItemChildCategory[];
 };
