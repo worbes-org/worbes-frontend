@@ -28,10 +28,10 @@ const IconButton: FC<Props> = ({
         size === "md" && "p-3",
         size === "sm" && "p-2.5",
         size === "xs" && "rounded-lg p-2",
-        theme === "primary" && "bg-purple-600 text-white/70",
+        theme === "primary" && "bg-blue-600 text-white/70",
         theme === "primary" &&
           !disabled &&
-          "hover:bg-purple-700 active:bg-purple-800",
+          "hover:bg-blue-700 active:bg-blue-800",
         theme === "primary" && disabled && "bg-gray-600 text-gray-400",
         theme === "secondary" &&
           "border border-blue-500/25 bg-transparent text-white/70",

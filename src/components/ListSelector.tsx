@@ -1,29 +1,32 @@
 import Disclosure from "@/components/Disclosure";
+import type { Nullable } from "@/types/misc";
 import type { ListSelectorOption } from "@/types/selector";
 import { cn } from "@/utils/styles";
 import { CheckIcon } from "@heroicons/react/24/outline";
-import { type FC } from "react";
+import { type FC, type RefObject } from "react";
 
 type ListSelectorProps<TValue> = {
   className?: string;
+  ref?: RefObject<Nullable<HTMLUListElement>>;
   options: ListSelectorOption<TValue>[];
   selectedValues: TValue[];
-  onSelect: (value: TValue) => void;
+  onSelect: (value: TValue, isOpen?: boolean) => void;
 };
 
 const ListSelector = <TValue extends string | number>({
   className,
+  ref,
   options,
   selectedValues,
   onSelect,
 }: ListSelectorProps<TValue>) => {
   return (
-    <div className={cn("divide-y divide-gray-800", className)}>
+    <ul className={cn("divide-y divide-gray-800", className)} ref={ref}>
       {options.map((option) => {
         const isSelected = selectedValues.includes(option.value);
 
         return (
-          <section key={option.value}>
+          <li key={option.value}>
             {option.children ? (
               <Disclosure
                 title={
@@ -50,14 +53,14 @@ const ListSelector = <TValue extends string | number>({
                 onClick={handleSelect(option.value)}
               />
             )}
-          </section>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 
   function handleSelect(value: TValue) {
-    return () => onSelect(value);
+    return (isOpen?: boolean) => onSelect(value, isOpen);
   }
 };
 
