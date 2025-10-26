@@ -41,10 +41,10 @@ const Input: FC<Props> = ({
           size === "md" && "px-4 py-3 text-sm",
           size === "sm" && "px-3 py-2.5 text-sm",
           size === "xs" && "rounded-lg px-2.5 py-2 text-xs",
-          theme === "primary" && "border border-blue-500/25 bg-blue-600/10",
-          theme === "primary" && "hover:bg-blue-600/15",
+          theme === "primary" && "border border-blue-500/25 bg-green-600/40",
+          theme === "primary" && "hover:bg-green-600/40",
           theme === "primary" &&
-            "focus-visible:ring-2 focus-visible:ring-blue-500",
+            "focus-visible:ring-2 focus-visible:ring-green-500",
           theme === "secondary" && "border border-blue-500/25 bg-transparent",
           theme === "secondary" && "hover:bg-blue-500/10",
           theme === "secondary" &&
