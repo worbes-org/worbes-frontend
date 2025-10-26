@@ -1,4 +1,4 @@
-import CategoryPicker from "@/components/CategoryPicker";
+import CategoryFilterTrigger from "@/components/CategoryFilterTrigger";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HomeBackground from "@/components/HomeBackground";
@@ -13,7 +13,7 @@ const HomePage: FC = () => {
       <HomeBackground className="fixed inset-0 top-16 -z-10" />
 
       <LayoutContainer className="space-y-3 pt-3">
-        <CategoryPicker />
+        <CategoryFilterTrigger />
       </LayoutContainer>
 
       <Footer className="mt-auto" />

@@ -16,7 +16,7 @@ type Props = {
   className?: string;
 };
 
-const CategoryPicker: FC<Props> = ({ className }) => {
+const CategoryFilterTrigger: FC<Props> = ({ className }) => {
   const t = useTranslations();
 
   return (
@@ -73,4 +73,4 @@ const CategoryPicker: FC<Props> = ({ className }) => {
   );
 };
 
-export default CategoryPicker;
+export default CategoryFilterTrigger;
