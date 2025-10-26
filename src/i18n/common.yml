@@ -17,3 +17,7 @@ Select region:
 "Selected region: {selectedRegion}":
   ko: "선택된 지역: {selectedRegion}"
   en: "Selected region: {selectedRegion}"
+
+"Selected realm: {selectedRealm}":
+  ko: "선택된 서버: {selectedRealm}"
+  en: "Selected realm: {selectedRealm}"

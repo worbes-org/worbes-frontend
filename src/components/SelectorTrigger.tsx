@@ -36,8 +36,8 @@ const SelectorTrigger: FC<Props> = ({
   useKeyPressEvent("Escape", () => setIsOpen(false));
 
   return (
-    <div className="relative" ref={ref}>
-      <div className={cn("", className)} role="button" onClick={handleToggle()}>
+    <div className={cn("relative", className)} ref={ref}>
+      <div role="button" onClick={handleToggle()}>
         <Input
           className="pointer-events-none"
           value={label ?? ""}

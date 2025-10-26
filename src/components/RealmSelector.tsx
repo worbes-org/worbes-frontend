@@ -5,24 +5,26 @@ import DropdownPanel from "@/components/DropdownPanel";
 import ListSelector from "@/components/ListSelector";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
-import { Region } from "@/constants/game-server";
-import { useSelectedRegion } from "@/hooks/useSelectedRegion";
+import { useSelectedRealm } from "@/hooks/useSelectedRealm";
 import { useTranslations } from "@/hooks/useTranslations";
 import { cn } from "@/utils/styles";
-import { ChevronDownIcon, GlobeAltIcon } from "@heroicons/react/24/outline";
+import {
+  BuildingOfficeIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/24/outline";
 import { type FC } from "react";
 
 type Props = {
   className?: string;
 };
 
-const RegionSelector: FC<Props> = ({ className }) => {
+const RealmSelector: FC<Props> = ({ className }) => {
   const t = useTranslations();
 
-  const [selectedRegion, setSelectedRegion] = useSelectedRegion();
+  const [selectedRealm, setSelectedRealm] = useSelectedRealm();
 
-  const label = selectedRegion
-    ? t("Selected region: {selectedRegion}", { selectedRegion })
+  const label = selectedRealm
+    ? t("Selected realm: {selectedRealm}", { selectedRealm: "asd" })
     : "";
 
   return (
@@ -32,7 +34,7 @@ const RegionSelector: FC<Props> = ({ className }) => {
       size="md"
       label={label}
       placeholder={t("Select region")}
-      LeftIcon={GlobeAltIcon}
+      LeftIcon={BuildingOfficeIcon}
       RightIcon={ChevronDownIcon}
     >
       {({ isOpen, onClose }) => (
@@ -45,24 +47,18 @@ const RegionSelector: FC<Props> = ({ className }) => {
               onClose={onClose}
             >
               <ListSelector
-                options={Object.values(Region).map((region) => ({
-                  label: region,
-                  value: region,
-                }))}
-                selectedValues={[selectedRegion]}
-                onSelect={(option) => setSelectedRegion(option.value)}
+                options={[]}
+                selectedValues={[]}
+                onSelect={(option) => setSelectedRealm(option.value)}
               />
             </BottomDrawer>
           }
           desktop={
             <DropdownPanel isOpen={isOpen} closeOnClick onClose={onClose}>
               <ListSelector
-                options={Object.values(Region).map((region) => ({
-                  label: region,
-                  value: region,
-                }))}
-                selectedValues={[selectedRegion]}
-                onSelect={(option) => setSelectedRegion(option.value)}
+                options={[]}
+                selectedValues={[]}
+                onSelect={(option) => setSelectedRealm(option.value)}
               />
             </DropdownPanel>
           }
@@ -72,4 +68,4 @@ const RegionSelector: FC<Props> = ({ className }) => {
   );
 };
 
-export default RegionSelector;
+export default RealmSelector;

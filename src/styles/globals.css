@@ -72,6 +72,7 @@
 
   --font-primary: var(--font-primary);
 
+  --breakpoint-xs: 480px;
   --breakpoint-3xl: 1920px;
 
   --animate-angle-rotate: rotate 1s steps(8, end) infinite;
