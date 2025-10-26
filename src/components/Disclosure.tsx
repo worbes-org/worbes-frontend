@@ -2,12 +2,17 @@
 
 import { cn } from "@/utils/styles";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { useState, type FC, type PropsWithChildren } from "react";
+import {
+  useState,
+  type FC,
+  type PropsWithChildren,
+  type ReactNode,
+} from "react";
 import { useIsomorphicLayoutEffect } from "react-use";
 
 type Props = {
   className?: string;
-  title: React.ReactNode;
+  title: ReactNode;
   isOpen?: boolean;
   onToggle?: (isOpen: boolean) => void;
 } & PropsWithChildren;

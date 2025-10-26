@@ -1,11 +1,11 @@
 import { cn } from "@/utils/styles";
-import React from "react";
+import { type FC } from "react";
 
 type Props = {
   className?: string;
 };
 
-const ProcessingIcon: React.FC<Props> = ({ className }) => {
+const ProcessingIcon: FC<Props> = ({ className }) => {
   return (
     <svg
       className={cn("", className)}

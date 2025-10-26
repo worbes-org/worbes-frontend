@@ -5,3 +5,7 @@ Apply:
 Close:
   en: "Close"
   ko: "닫기"
+
+Filter by category:
+  ko: "카테고리 필터"
+  en: "Filter by category"

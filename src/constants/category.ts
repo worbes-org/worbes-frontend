@@ -1,6 +1,6 @@
-import type { ItemRootCategory } from "@/types/category";
+import type { RootItemCategory } from "@/types/category";
 
-export const ITEM_CATEGORIES: ItemRootCategory[] = [
+export const ITEM_CATEGORIES = [
   {
     name: "무기",
     detailColumn: {
@@ -1474,4 +1474,4 @@ export const ITEM_CATEGORIES: ItemRootCategory[] = [
     name: "WoW 토큰",
     class: 18,
   },
-] as const;
+] as const satisfies RootItemCategory[];

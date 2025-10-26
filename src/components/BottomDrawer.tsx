@@ -10,7 +10,13 @@ import {
   useDragControls,
 } from "framer-motion";
 import { isFunction } from "lodash-es";
-import { useId, useRef, type FC, type PointerEvent } from "react";
+import {
+  useId,
+  useRef,
+  type FC,
+  type PointerEvent,
+  type ReactNode,
+} from "react";
 import { useKeyPressEvent } from "react-use";
 
 type Props = {
@@ -20,8 +26,8 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   children:
-    | React.ReactNode
-    | ((props: { isOpen: boolean; onClose: () => void }) => React.ReactNode);
+    | ReactNode
+    | ((props: { isOpen: boolean; onClose: () => void }) => ReactNode);
 };
 
 const BottomDrawer: FC<Props> = ({ className, isOpen, onClose, ...props }) => {
