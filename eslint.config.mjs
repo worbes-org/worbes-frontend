@@ -18,6 +18,7 @@ const eslintConfig = [
   eslintPluginPrettierRecommended,
   {
     rules: {
+      "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/consistent-type-imports": "error",
       "no-restricted-imports": [
         "error",
