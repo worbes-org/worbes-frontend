@@ -3,6 +3,7 @@
 import ListSelector from "@/components/ListSelector";
 import ScrollFade from "@/components/ScrollFade";
 import { ITEM_CATEGORIES } from "@/constants/category";
+import { useCategorySelection } from "@/hooks/useCategorySelection";
 import type { CategorySelection, ItemCategory } from "@/types/category";
 import type { Nullable } from "@/types/misc";
 import type { ListSelectorOption } from "@/types/selector";
@@ -13,7 +14,7 @@ import { useMemo, useRef, useState, type FC, type ReactNode } from "react";
 type Props = {
   className?: string;
   listClassName?: string;
-  renderButton?: (selection: CategorySelection) => ReactNode;
+  renderButton?: (selection: Nullable<CategorySelection>) => ReactNode;
   onChange?: (event: CategorySelection) => void;
 };
 
@@ -27,7 +28,7 @@ const CategorySelectorPanel: FC<Props> = ({
   const listRef = useRef<Nullable<HTMLUListElement>>(null);
 
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
-  const [state, setState] = useState<CategorySelection>({});
+  const [state, setState] = useCategorySelection();
 
   return (
     <div className={cn("relative", className)}>

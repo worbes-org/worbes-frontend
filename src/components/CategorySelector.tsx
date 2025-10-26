@@ -7,11 +7,11 @@ import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
 import SideDrawer from "@/components/SideDrawer";
 import Translation from "@/components/Translation";
+import { useCategorySelection } from "@/hooks/useCategorySelection";
 import { useTranslations } from "@/hooks/useTranslations";
-import type { CategorySelection } from "@/types/category";
 import { cn } from "@/utils/styles";
 import { ChevronDownIcon, FunnelIcon } from "@heroicons/react/24/outline";
-import { useState, type FC } from "react";
+import { type FC } from "react";
 
 type Props = {
   className?: string;
@@ -20,9 +20,9 @@ type Props = {
 const CategorySelector: FC<Props> = ({ className }) => {
   const t = useTranslations();
 
-  const [state, setState] = useState<CategorySelection>({});
+  const [state, setState] = useCategorySelection();
 
-  const label = state.label ? state.label : "";
+  const label = state?.label ? state.label : "";
 
   return (
     <SelectorTrigger
@@ -45,7 +45,7 @@ const CategorySelector: FC<Props> = ({ className }) => {
             >
               <CategorySelectorPanel
                 listClassName="scrollbar-hide h-[calc(65dvh-10.5rem)] overflow-y-auto"
-                renderButton={({ label }) => (
+                renderButton={() => (
                   <Button
                     className="w-full"
                     theme="primary"
