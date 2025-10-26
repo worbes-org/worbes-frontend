@@ -2,7 +2,6 @@
 
 import Skeleton from "@/components/Skeleton";
 import { cn } from "@/utils/styles";
-import Image from "next/image";
 import {
   type ComponentProps,
   type FC,
@@ -26,7 +25,7 @@ type Props = {
   fallbackSrc?: string;
   renderPlaceholder?: () => ReactNode;
   onStatusChange?: (status: ImageStatus) => void;
-} & Omit<ComponentProps<typeof Image>, "onLoadStart" | "onLoad" | "onError">;
+} & Omit<ComponentProps<"img">, "onLoadStart" | "onLoad" | "onError">;
 
 const ImageWithPlaceholder: FC<Props> = ({
   className,
@@ -70,7 +69,8 @@ const ImageWithPlaceholder: FC<Props> = ({
         <div className="absolute inset-0">{renderPlaceholder?.()}</div>
       )}
 
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         {...props}
         className={cn(
           "size-full transition-opacity duration-500 ease-out",

@@ -2,7 +2,7 @@ import { type Maybe } from "@/types/misc";
 import { cn } from "@/utils/styles";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { isFunction } from "lodash-es";
-import { type FC } from "react";
+import { type FC, type ReactNode } from "react";
 
 type Props = {
   className?: string;
@@ -10,8 +10,8 @@ type Props = {
   position: "left" | "right";
   onClose: () => void;
   children:
-    | React.ReactNode
-    | ((props: { isOpen: boolean; onClose: () => void }) => React.ReactNode);
+    | ReactNode
+    | ((props: { isOpen: boolean; onClose: () => void }) => ReactNode);
 };
 
 const SideDrawer: FC<Props> = ({
