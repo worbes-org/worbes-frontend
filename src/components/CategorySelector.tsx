@@ -1,3 +1,5 @@
+"use client";
+
 import ListSelector from "@/components/ListSelector";
 import ScrollFade from "@/components/ScrollFade";
 import { ITEM_CATEGORIES } from "@/constants/category";
