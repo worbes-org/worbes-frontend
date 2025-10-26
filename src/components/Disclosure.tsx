@@ -32,8 +32,9 @@ const Disclosure: FC<Props> = ({
 
   return (
     <div className={cn("overflow-hidden pt-2", className)}>
-      <button
+      <div
         className="flex w-full items-center justify-between text-left"
+        role="button"
         onClick={handleToggle}
       >
         {title}
@@ -43,7 +44,7 @@ const Disclosure: FC<Props> = ({
             isOpen && "rotate-180",
           )}
         />
-      </button>
+      </div>
       <div
         className={cn(
           "max-h-[2000px] pt-2 transition-all duration-200 ease-in-out",

@@ -1,6 +1,7 @@
 import Input from "@/components/Input";
 import type { Optional } from "@/types/misc";
 import { cn } from "@/utils/styles";
+import { noop } from "lodash-es";
 import {
   useRef,
   useState,
@@ -42,6 +43,7 @@ const SelectorTrigger: FC<Props> = ({
           className="pointer-events-none"
           value={label ?? ""}
           placeholder={placeholder}
+          onChange={noop} // HACK: Suppress uncontrolled input warning
           {...props}
         />
       </div>
