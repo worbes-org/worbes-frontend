@@ -1,6 +1,6 @@
 import BlockSection from "@/components/BlockSection";
-import CategoryFilterTrigger from "@/components/CategoryFilterTrigger";
-import CategorySelector from "@/components/CategorySelector";
+import CategorySelector from "@/components/CategoryPicker";
+import CategorySelectorPanel from "@/components/CategorySelectorPanel";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HomeBackground from "@/components/HomeBackground";
@@ -16,11 +16,11 @@ const HomePage: FC = () => {
 
       <LayoutContainer className="flex gap-x-6 py-6">
         <BlockSection className="h-fit min-w-[15rem] not-lg:hidden">
-          <CategorySelector />
+          <CategorySelectorPanel />
         </BlockSection>
 
         <BlockSection className="min-h-lvh flex-1">
-          <CategoryFilterTrigger />
+          <CategorySelector />
         </BlockSection>
       </LayoutContainer>
 

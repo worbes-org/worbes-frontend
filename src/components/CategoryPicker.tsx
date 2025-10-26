@@ -2,7 +2,7 @@
 
 import BottomDrawer from "@/components/BottomDrawer";
 import Button from "@/components/Button";
-import CategorySelector from "@/components/CategorySelector";
+import CategorySelectorPanel from "@/components/CategorySelectorPanel";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
 import SideDrawer from "@/components/SideDrawer";
@@ -16,7 +16,7 @@ type Props = {
   className?: string;
 };
 
-const CategoryFilterTrigger: FC<Props> = ({ className }) => {
+const CategorySelector: FC<Props> = ({ className }) => {
   const t = useTranslations();
 
   return (
@@ -37,7 +37,7 @@ const CategoryFilterTrigger: FC<Props> = ({ className }) => {
               isOpen={isOpen}
               onClose={onClose}
             >
-              <CategorySelector listClassName="scrollbar-hide h-[calc(65dvh-10.5rem)] overflow-y-auto">
+              <CategorySelectorPanel listClassName="scrollbar-hide h-[calc(65dvh-10.5rem)] overflow-y-auto">
                 {({ label }) => (
                   <Button
                     className="w-full"
@@ -51,7 +51,7 @@ const CategoryFilterTrigger: FC<Props> = ({ className }) => {
                     {label ? label : <Translation messageKey="Close" />}
                   </Button>
                 )}
-              </CategorySelector>
+              </CategorySelectorPanel>
             </BottomDrawer>
           }
           desktop={
@@ -61,7 +61,7 @@ const CategoryFilterTrigger: FC<Props> = ({ className }) => {
               position="right"
               onClose={onClose}
             >
-              <CategorySelector
+              <CategorySelectorPanel
                 listClassName="overflow-y-auto"
                 onChange={({ label }) => setLabel(label)}
               />
@@ -73,4 +73,4 @@ const CategoryFilterTrigger: FC<Props> = ({ className }) => {
   );
 };
 
-export default CategoryFilterTrigger;
+export default CategorySelector;

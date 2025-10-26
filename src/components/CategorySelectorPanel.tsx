@@ -23,7 +23,7 @@ type Props = {
   children?: ReactNode | ((selection: CategorySelection) => ReactNode);
 };
 
-const CategorySelector: FC<Props> = ({
+const CategorySelectorPanel: FC<Props> = ({
   className,
   listClassName,
   onChange,
@@ -103,4 +103,4 @@ const CategorySelector: FC<Props> = ({
   }
 };
 
-export default CategorySelector;
+export default CategorySelectorPanel;
