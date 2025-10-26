@@ -37,8 +37,9 @@ const CategorySelector: FC<Props> = ({ className }) => {
               isOpen={isOpen}
               onClose={onClose}
             >
-              <CategorySelectorPanel listClassName="scrollbar-hide h-[calc(65dvh-10.5rem)] overflow-y-auto">
-                {({ label }) => (
+              <CategorySelectorPanel
+                listClassName="scrollbar-hide h-[calc(65dvh-10.5rem)] overflow-y-auto"
+                renderButton={({ label }) => (
                   <Button
                     className="w-full"
                     theme="primary"
@@ -51,7 +52,7 @@ const CategorySelector: FC<Props> = ({ className }) => {
                     {label ? label : <Translation messageKey="Close" />}
                   </Button>
                 )}
-              </CategorySelectorPanel>
+              />
             </BottomDrawer>
           }
           desktop={

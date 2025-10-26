@@ -19,15 +19,15 @@ type CategorySelection = {
 type Props = {
   className?: string;
   listClassName?: string;
+  renderButton?: (selection: CategorySelection) => ReactNode;
   onChange?: (event: CategorySelection) => void;
-  children?: ReactNode | ((selection: CategorySelection) => ReactNode);
 };
 
 const CategorySelectorPanel: FC<Props> = ({
   className,
   listClassName,
   onChange,
-  children,
+  renderButton,
 }) => {
   const options = useMemo(() => buildCategoryOptions(ITEM_CATEGORIES), []);
   const listRef = useRef<Nullable<HTMLUListElement>>(null);
@@ -52,7 +52,7 @@ const CategorySelectorPanel: FC<Props> = ({
         />
       </>
 
-      {typeof children === "function" ? children(state) : children}
+      {renderButton?.(state)}
     </div>
   );
 
