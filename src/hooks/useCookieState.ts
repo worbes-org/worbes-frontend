@@ -1,3 +1,5 @@
+"use client";
+
 import { useSSRCookies } from "@/hooks/useSSRCookies";
 import { safelyGet } from "@/utils/misc";
 import cookies from "js-cookie";
@@ -71,7 +73,11 @@ const useCookieState = <TValue>(key: string, defaultValue: TValue) => {
 
   const store = getOrCreateStore<TValue>(key, initialValue ?? defaultValue);
 
-  const state = useSyncExternalStore(store.subscribe, store.get, store.get);
+  const state = useSyncExternalStore<TValue>(
+    store.subscribe,
+    store.get,
+    store.get,
+  );
   const setState = useCallback(
     (action: SetStateAction<TValue>) => {
       const prev = store.get();

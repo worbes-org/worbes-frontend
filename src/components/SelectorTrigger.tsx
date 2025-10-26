@@ -1,18 +1,22 @@
 import Input from "@/components/Input";
 import type { Optional } from "@/types/misc";
 import { cn } from "@/utils/styles";
-import { useState, type ComponentProps, type FC, type ReactNode } from "react";
+import {
+  useRef,
+  useState,
+  type ComponentProps,
+  type FC,
+  type ReactNode,
+} from "react";
+import { useKeyPressEvent } from "react-use";
 
 type Props = {
   className?: string;
-  placeholder: string;
+  label: Optional<string>;
+  placeholder: Optional<string>;
   children?:
     | ReactNode
-    | ((props: {
-        isOpen: boolean;
-        onClose: () => void;
-        setLabel: (label: Optional<string>) => void;
-      }) => ReactNode);
+    | ((props: { isOpen: boolean; onClose: () => void }) => ReactNode);
 } & Pick<
   ComponentProps<typeof Input>,
   "LeftIcon" | "RightIcon" | "theme" | "size"
@@ -20,36 +24,36 @@ type Props = {
 
 const SelectorTrigger: FC<Props> = ({
   className,
+  label,
   placeholder,
   children,
   ...props
 }) => {
-  const [label, setLabel] = useState<Optional<string>>(placeholder);
+  const ref = useRef<HTMLDivElement>(null);
+
   const [isOpen, setIsOpen] = useState(false);
 
+  useKeyPressEvent("Escape", () => setIsOpen(false));
+
   return (
-    <div className="relative">
-      <div
-        className={cn("", className)}
-        role="button"
-        onClick={handleToggle(true)}
-      >
+    <div className="relative" ref={ref}>
+      <div className={cn("", className)} role="button" onClick={handleToggle()}>
         <Input
           className="pointer-events-none"
-          value={label === placeholder ? "" : label}
+          value={label ?? ""}
           placeholder={placeholder}
           {...props}
         />
       </div>
 
       {typeof children === "function"
-        ? children({ isOpen, onClose: handleToggle(false), setLabel })
+        ? children({ isOpen, onClose: handleToggle(false) })
         : children}
     </div>
   );
 
-  function handleToggle(visible: boolean) {
-    return () => setIsOpen(visible);
+  function handleToggle(visible?: boolean) {
+    return () => setIsOpen(visible ?? !isOpen);
   }
 };
 

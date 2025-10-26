@@ -9,7 +9,7 @@ type ListSelectorProps<TValue, TMetadata = unknown> = {
   className?: string;
   ref?: RefObject<Nullable<HTMLUListElement>>;
   options: ListSelectorOption<TValue, TMetadata>[];
-  selectedValues: TValue[];
+  selectedValues: Nullable<TValue>[];
   onSelect: (
     option: ListSelectorOption<TValue, TMetadata>,
     isOpen?: boolean,

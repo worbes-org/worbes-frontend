@@ -3,6 +3,7 @@ import { cn } from "@/utils/styles";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { isFunction } from "lodash-es";
 import { type FC, type ReactNode } from "react";
+import { useKeyPressEvent } from "react-use";
 
 type Props = {
   className?: string;
@@ -22,6 +23,8 @@ const SideDrawer: FC<Props> = ({
   children,
 }) => {
   const isOpen = !!_isOpen;
+
+  useKeyPressEvent("Escape", onClose);
 
   return (
     <Dialog

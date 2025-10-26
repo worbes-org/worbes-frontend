@@ -22,3 +22,9 @@ export type ChildItemCategory = {
   subClasses?: number[];
   subcategories?: ChildItemCategory[];
 };
+
+export type CategorySelection = {
+  classId?: number;
+  subClassId?: number;
+  label?: string;
+};

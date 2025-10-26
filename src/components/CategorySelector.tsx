@@ -8,9 +8,10 @@ import SelectorTrigger from "@/components/SelectorTrigger";
 import SideDrawer from "@/components/SideDrawer";
 import Translation from "@/components/Translation";
 import { useTranslations } from "@/hooks/useTranslations";
+import type { CategorySelection } from "@/types/category";
 import { cn } from "@/utils/styles";
 import { ChevronDownIcon, FunnelIcon } from "@heroicons/react/24/outline";
-import { type FC } from "react";
+import { useState, type FC } from "react";
 
 type Props = {
   className?: string;
@@ -19,16 +20,21 @@ type Props = {
 const CategorySelector: FC<Props> = ({ className }) => {
   const t = useTranslations();
 
+  const [state, setState] = useState<CategorySelection>({});
+
+  const label = state.label ? state.label : "";
+
   return (
     <SelectorTrigger
       className={cn("", className)}
       theme="primary"
       size="md"
+      label={label}
       placeholder={t("Filter by category")}
       LeftIcon={FunnelIcon}
       RightIcon={ChevronDownIcon}
     >
-      {({ isOpen, setLabel, onClose }) => (
+      {({ isOpen, onClose }) => (
         <Responsive
           mobile={
             <BottomDrawer
@@ -44,14 +50,12 @@ const CategorySelector: FC<Props> = ({ className }) => {
                     className="w-full"
                     theme="primary"
                     size="md"
-                    onClick={() => {
-                      setLabel(label);
-                      onClose();
-                    }}
+                    onClick={onClose}
                   >
                     {label ? label : <Translation messageKey="Close" />}
                   </Button>
                 )}
+                onChange={setState}
               />
             </BottomDrawer>
           }
@@ -64,7 +68,7 @@ const CategorySelector: FC<Props> = ({ className }) => {
             >
               <CategorySelectorPanel
                 listClassName="overflow-y-auto"
-                onChange={({ label }) => setLabel(label)}
+                onChange={setState}
               />
             </SideDrawer>
           }

@@ -9,3 +9,11 @@ Close:
 Filter by category:
   ko: "카테고리 필터"
   en: "Filter by category"
+
+Select region:
+  ko: "지역 선택"
+  en: "Select region"
+
+"Selected region: {selectedRegion}":
+  ko: "선택된 지역: {selectedRegion}"
+  en: "Selected region: {selectedRegion}"

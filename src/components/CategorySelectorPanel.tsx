@@ -3,18 +3,12 @@
 import ListSelector from "@/components/ListSelector";
 import ScrollFade from "@/components/ScrollFade";
 import { ITEM_CATEGORIES } from "@/constants/category";
-import { type ItemCategory } from "@/types/category";
+import type { CategorySelection, ItemCategory } from "@/types/category";
 import type { Nullable } from "@/types/misc";
 import type { ListSelectorOption } from "@/types/selector";
 import { cn } from "@/utils/styles";
 import { last } from "lodash-es";
 import { useMemo, useRef, useState, type FC, type ReactNode } from "react";
-
-type CategorySelection = {
-  classId?: number;
-  subClassId?: number;
-  label?: string;
-};
 
 type Props = {
   className?: string;
