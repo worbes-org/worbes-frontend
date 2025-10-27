@@ -5,7 +5,7 @@ import DropdownPanel from "@/components/DropdownPanel";
 import ListSelector from "@/components/ListSelector";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
-import { Locale } from "@/constants/i18n";
+import type { Locale } from "@/constants/i18n";
 import { useRealms } from "@/hooks/useRealms";
 import { useSelectedRealm } from "@/hooks/useSelectedRealm";
 import { useSelectedRegion } from "@/hooks/useSelectedRegion";
