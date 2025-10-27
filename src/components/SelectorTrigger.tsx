@@ -20,7 +20,7 @@ type Props = {
     | ((props: { isOpen: boolean; onClose: () => void }) => ReactNode);
 } & Pick<
   ComponentProps<typeof Input>,
-  "LeftIcon" | "RightIcon" | "theme" | "size"
+  "LeftIcon" | "RightIcon" | "theme" | "size" | "isLoading"
 >;
 
 const SelectorTrigger: FC<Props> = ({

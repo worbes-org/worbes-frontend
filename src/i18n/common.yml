@@ -21,3 +21,7 @@ Select region:
 "Selected realm: {selectedRealm}":
   ko: "선택된 서버: {selectedRealm}"
   en: "Selected realm: {selectedRealm}"
+
+Select realm:
+  ko: "서버 선택"
+  en: "Select realm"
