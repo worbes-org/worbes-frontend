@@ -1,5 +1,7 @@
 import { cn } from "@/utils/styles";
-import { type FC, type PropsWithChildren } from "react";
+import { noop } from "lodash-es";
+import { useRef, type FC, type PropsWithChildren } from "react";
+import { useClickAway } from "react-use";
 
 type Props = {
   className?: string;
@@ -15,6 +17,10 @@ const DropdownPanel: FC<Props> = ({
   onClose,
   children,
 }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useClickAway(ref, onClose ?? noop);
+
   return (
     <section
       className={cn(
@@ -22,6 +28,7 @@ const DropdownPanel: FC<Props> = ({
         !isOpen && "pointer-events-none translate-y-1 opacity-0",
         className,
       )}
+      ref={ref}
       role="menu"
       onClick={closeOnClick ? onClose : undefined}
     >

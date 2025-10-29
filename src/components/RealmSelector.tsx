@@ -89,6 +89,10 @@ const RealmSelector: FC<Props> = ({ className }) => {
   );
 
   function handleSelect(option: ListSelectorOption<number, Realm>) {
+    if (!option.metadata) {
+      return;
+    }
+
     setSelectedRealm(option.metadata);
   }
 
