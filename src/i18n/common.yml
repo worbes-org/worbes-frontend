@@ -45,3 +45,7 @@ Crafting Tier:
 Quantity:
   ko: "수량"
   en: "Quantity"
+
+Filter by:
+  ko: "필터 종류"
+  en: "Filter by"

@@ -10,7 +10,7 @@ import Translation from "@/components/Translation";
 import { useCategorySelection } from "@/hooks/useCategorySelection";
 import { useTranslations } from "@/hooks/useTranslations";
 import { cn } from "@/utils/styles";
-import { ChevronDownIcon, FunnelIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { type FC } from "react";
 
 type Props = {
@@ -31,7 +31,6 @@ const CategorySelector: FC<Props> = ({ className }) => {
       size="md"
       label={label}
       placeholder={t("Filter by category")}
-      LeftIcon={FunnelIcon}
       RightIcon={ChevronDownIcon}
     >
       {({ isOpen, onClose }) => (

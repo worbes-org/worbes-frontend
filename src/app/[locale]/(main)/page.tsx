@@ -2,12 +2,13 @@ import AuctionTable from "@/components/AuctionTable";
 import BlockSection from "@/components/BlockSection";
 import CategorySelector from "@/components/CategorySelector";
 import CategorySelectorPanel from "@/components/CategorySelectorPanel";
+import FilterDialogContainer from "@/components/FilterDialogContainer";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HomeBackground from "@/components/HomeBackground";
+import Input from "@/components/Input";
 import LayoutContainer from "@/components/LayoutContainer";
-import RealmSelector from "@/components/RealmSelector";
-import RegionSelector from "@/components/RegionSelector";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { type FC } from "react";
 
 const HomePage: FC = () => {
@@ -21,16 +22,21 @@ const HomePage: FC = () => {
           <CategorySelectorPanel className="scrollbar-hide h-full overflow-y-auto" />
         </BlockSection>
 
-        <div className="flex h-[calc(100dvh-10rem)] flex-col space-y-6">
-          <div className="flex flex-col">
-            <div className="flex gap-x-4 not-xs:flex-col not-xs:gap-y-2">
-              <RegionSelector className="w-full" />
-              <RealmSelector className="w-full" />
-            </div>
-            <CategorySelector className="not-lg:mt-6 lg:hidden" />
+        <div className="flex h-[calc(100dvh-10rem)] flex-col">
+          <CategorySelector className="w-full" />
+
+          <div className="mt-3 flex gap-x-2">
+            <FilterDialogContainer />
+            <Input
+              className="w-full"
+              theme="primary"
+              size="md"
+              placeholder="Search"
+              LeftIcon={MagnifyingGlassIcon}
+            />
           </div>
 
-          <AuctionTable className="scrollbar-hide h-full flex-1 overflow-auto" />
+          <AuctionTable className="mt-6 scrollbar-hide h-full flex-1 overflow-auto" />
         </div>
       </LayoutContainer>
 
