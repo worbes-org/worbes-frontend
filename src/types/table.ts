@@ -20,12 +20,14 @@ export type TableProps<TValue> = {
   rowClassName?: string | ((value: TValue) => string);
   values: Optional<TValue[]>;
   columns: TableColumn<TValue>[];
+  rowSize?: "sm" | "md" | "lg";
   isLoading?: boolean;
   placeholderRowCount?: number;
   keyExtractor: (value: TValue, index: number) => string | number;
   renderEmpty?: () => ReactNode;
   onClickRow?: (value: TValue, event: MouseEvent) => void;
   onLastVisible?: () => void;
+  onRowsRendered?: () => void;
 };
 
 export type TableHeaderProps<TValue> = {

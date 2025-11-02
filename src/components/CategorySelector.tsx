@@ -67,7 +67,7 @@ const CategorySelector: FC<Props> = ({ className }) => {
               onClose={onClose}
             >
               <CategorySelectorPanel
-                listClassName="overflow-y-auto"
+                listClassName="scrollbar-hide h-dvh overflow-y-auto"
                 onChange={setState}
               />
             </SideDrawer>

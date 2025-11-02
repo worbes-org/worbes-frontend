@@ -1,4 +1,5 @@
 import { cn } from "@/utils/styles";
+import { Transition } from "@headlessui/react";
 import { noop } from "lodash-es";
 import { useRef, type FC, type PropsWithChildren } from "react";
 import { useClickAway } from "react-use";
@@ -22,18 +23,20 @@ const DropdownPanel: FC<Props> = ({
   useClickAway(ref, onClose ?? noop);
 
   return (
-    <section
+    <Transition
       className={cn(
         "absolute inset-x-0 z-10 mt-2 rounded-4xl bg-gray-950 px-4 py-3 transition duration-200 ease-out",
-        !isOpen && "pointer-events-none translate-y-1 opacity-0",
+        "data-[closed]:pointer-events-none data-[closed]:translate-y-1 data-[closed]:opacity-0",
         className,
       )}
+      show={isOpen}
       ref={ref}
       role="menu"
+      as="section"
       onClick={closeOnClick ? onClose : undefined}
     >
       {children}
-    </section>
+    </Transition>
   );
 };
 

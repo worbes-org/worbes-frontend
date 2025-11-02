@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { type AFC, type PropsWithChildren } from "react";
 
 const primaryFont = localFont({
@@ -18,6 +19,18 @@ export const metadata: Metadata = {
 const RootLayout: AFC<PropsWithChildren> = async ({ children }) => {
   return (
     <html lang="en">
+      <Script id="wh-init" strategy="beforeInteractive">
+        {`
+            var whTooltips = {
+              colorLinks: true,
+              iconizeLinks: true,
+              iconSize: 'large',
+              renameLinks: true,
+            };
+        `}
+      </Script>
+      <Script src="https://wow.zamimg.com/js/tooltips.js" />
+
       <body className={`${primaryFont.variable} antialiased`}>{children}</body>
     </html>
   );

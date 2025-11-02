@@ -25,3 +25,23 @@ Select region:
 Select realm:
   ko: "서버 선택"
   en: "Select realm"
+
+Price:
+  ko: "가격"
+  en: "Price"
+
+Name:
+  ko: "이름"
+  en: "Name"
+
+iLevel:
+  ko: "레벨"
+  en: "iLvl"
+
+Crafting Tier:
+  ko: "제작 등급"
+  en: "Crafting Tier"
+
+Quantity:
+  ko: "수량"
+  en: "Quantity"

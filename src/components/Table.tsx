@@ -13,6 +13,7 @@ import { useVirtualizer, type VirtualItem } from "@tanstack/react-virtual";
 import { range } from "lodash-es";
 import { useRef } from "react";
 import { InView } from "react-intersection-observer";
+import { useIsomorphicLayoutEffect } from "react-use";
 
 function Table<TData>({
   className,
@@ -21,8 +22,10 @@ function Table<TData>({
   bodyClassName,
   columns: _columns,
   values: _values,
+  rowSize = "md",
   isLoading,
   placeholderRowCount = 10,
+  onRowsRendered,
   ...props
 }: TableProps<TData>) {
   const columns = _columns.filter((column) => !column.hide);
@@ -32,11 +35,15 @@ function Table<TData>({
   const virtualizer = useVirtualizer({
     count: (_values?.length ?? 0) + (isLoading ? placeholderRowCount : 0),
     overscan: 5,
-    estimateSize: () => 44,
+    estimateSize: () => getRowHeight(rowSize),
     getScrollElement: () => scrollContainerRef.current,
   });
   const virtualItems = virtualizer.getVirtualItems();
   const virtualValues = _values ? getVirtualValues(virtualItems, _values) : [];
+
+  useIsomorphicLayoutEffect(() => {
+    onRowsRendered?.();
+  }, [virtualValues]);
 
   const totalSize = virtualizer.getTotalSize();
   const paddingTop = virtualItems.length > 0 ? virtualItems[0].start : 0;
@@ -56,7 +63,10 @@ function Table<TData>({
       <div style={{ height: totalSize === 0 ? "auto" : totalSize }}>
         <table
           className={cn(
-            "w-full text-green-100 [&_th,&_td]:p-3",
+            "w-full text-green-100 [&_th]:h-11 [&_th,&_td]:p-3 [&_th,&_td]:first-of-type:pl-5 [&_th,&_td]:last-of-type:pr-5",
+            rowSize === "sm" && "[&_td]:h-11",
+            rowSize === "md" && "[&_td]:h-17",
+            rowSize === "lg" && "[&_td]:h-23",
             tableClassName,
           )}
         >
@@ -82,6 +92,19 @@ function Table<TData>({
 
   function getVirtualValues(items: VirtualItem[], values: TData[]) {
     return items.map((item) => values[item.index]).filter(Boolean);
+  }
+
+  function getRowHeight(rowSize: TableProps<TData>["rowSize"]) {
+    switch (rowSize) {
+      case "sm":
+        return 44;
+      case "md":
+        return 68;
+      case "lg":
+        return 92;
+      default:
+        return 68;
+    }
   }
 }
 
@@ -189,6 +212,26 @@ function TableBody<TData>({
             </tr>
           ))}
 
+          {isLoading &&
+            range(placeholderRowCount).map((index) => (
+              <tr key={index}>
+                {columns.map((column, index) => (
+                  <td
+                    className={cn(
+                      resolveAlignClass({
+                        align: column.align,
+                        isFirstColumn: index === 0,
+                      }),
+                      columnClassName,
+                    )}
+                    key={column.key}
+                  >
+                    <Skeleton className="inline-block size-full max-w-2/3 min-w-6" />
+                  </td>
+                ))}
+              </tr>
+            ))}
+
           {virtualPaddingBottom > 0 && (
             <tr aria-hidden>
               <td
@@ -216,26 +259,6 @@ function TableBody<TData>({
           </tr>
         </>
       )}
-
-      {isLoading &&
-        range(placeholderRowCount).map((index) => (
-          <tr key={index}>
-            {columns.map((column, index) => (
-              <td
-                className={cn(
-                  resolveAlignClass({
-                    align: column.align,
-                    isFirstColumn: index === 0,
-                  }),
-                  columnClassName,
-                )}
-                key={column.key}
-              >
-                <Skeleton className="inline-block size-full max-w-2/3 min-w-6" />
-              </td>
-            ))}
-          </tr>
-        ))}
     </tbody>
   );
 }

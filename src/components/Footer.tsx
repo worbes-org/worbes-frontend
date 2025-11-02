@@ -12,15 +12,20 @@ const Footer: FC<Props> = ({ className }) => {
   const now = useNow();
 
   return (
-    <div className={cn("h-28 border-t border-t-gray-800 py-6", className)}>
-      <LayoutContainer className="space-y-1">
+    <div
+      className={cn(
+        "box-border h-12 border-t border-t-gray-900/40 pt-2",
+        className,
+      )}
+    >
+      <LayoutContainer>
         <Link
-          className="inline-block text-2xl font-extrabold text-green-300"
+          className="inline text-base font-extrabold text-green-300"
           href="/"
         >
           Worbes
         </Link>
-        <p className="text-sm text-gray-400">
+        <p className="ml-7 inline-block text-xs text-gray-600">
           &copy; {now.getFullYear()} Worbes. All rights reserved.
         </p>
       </LayoutContainer>
