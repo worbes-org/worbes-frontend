@@ -8,7 +8,8 @@ import type { FC, PropsWithChildren } from "react";
 type Props = {
   className?: string;
   id: number | string;
-  iconSize: "tiny" | "small" | "medium" | "large";
+  level: number;
+  iconSize: "sm" | "md" | "lg";
   locale: Locale;
   href?: string;
   bonus?: Nullable<string>;
@@ -17,6 +18,7 @@ type Props = {
 const WowheadItemLink: FC<Props> = ({
   className,
   id,
+  level,
   iconSize,
   locale,
   href,
@@ -27,6 +29,7 @@ const WowheadItemLink: FC<Props> = ({
     item: id,
     domain: locale,
     bonus,
+    ilvl: level,
   });
 
   return (
@@ -34,11 +37,24 @@ const WowheadItemLink: FC<Props> = ({
       className={cn("", className)}
       href={href ?? `https://www.wowhead.com/${locale}/item=${id}`}
       data-wowhead={dataWowhead}
-      data-wh-icon-size={iconSize}
+      data-wh-icon-size={getIconSize(iconSize)}
     >
       {children}
     </ConditionalLink>
   );
+
+  function getIconSize(iconSize: "sm" | "md" | "lg") {
+    switch (iconSize) {
+      case "sm":
+        return "tiny";
+      case "md":
+        return "small";
+      case "lg":
+        return "large";
+      default:
+        return "medium";
+    }
+  }
 };
 
 export default WowheadItemLink;
