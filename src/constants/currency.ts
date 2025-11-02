@@ -1,0 +1,2 @@
+export const COPPER_PER_SILVER = 100;
+export const SILVER_PER_GOLD = COPPER_PER_SILVER * 100;
