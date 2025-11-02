@@ -63,7 +63,7 @@ function Table<TData>({
       <div style={{ height: totalSize === 0 ? "auto" : totalSize }}>
         <table
           className={cn(
-            "w-full text-green-100 [&_th]:h-11 [&_th,&_td]:p-3",
+            "w-full text-green-100 [&_th]:h-11 [&_th,&_td]:p-3 [&_th,&_td]:first-of-type:pl-5 [&_th,&_td]:last-of-type:pr-5",
             rowSize === "sm" && "[&_td]:h-11",
             rowSize === "md" && "[&_td]:h-17",
             rowSize === "lg" && "[&_td]:h-23",
