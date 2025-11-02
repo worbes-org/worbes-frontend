@@ -23,7 +23,7 @@ const HomePage: FC = () => {
         </BlockSection>
 
         <div className="flex h-[calc(100dvh-10rem)] flex-col">
-          <CategorySelector className="w-full" />
+          <CategorySelector className="w-full lg:hidden" />
 
           <div className="mt-3 flex gap-x-2">
             <FilterDialogContainer />
