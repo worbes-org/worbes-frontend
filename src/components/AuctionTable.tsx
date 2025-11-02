@@ -130,7 +130,7 @@ const AuctionTable: FC<Props> = ({ className }) => {
         headClassName: "w-[max(8rem,10cqw)]",
         render: (auction: Auction) => {
           if (!auction.craftingTier) {
-            return null;
+            return "-";
           }
 
           return (
