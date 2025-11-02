@@ -13,6 +13,7 @@ import { useVirtualizer, type VirtualItem } from "@tanstack/react-virtual";
 import { range } from "lodash-es";
 import { useRef } from "react";
 import { InView } from "react-intersection-observer";
+import { useIsomorphicLayoutEffect } from "react-use";
 
 function Table<TData>({
   className,
@@ -23,6 +24,7 @@ function Table<TData>({
   values: _values,
   isLoading,
   placeholderRowCount = 10,
+  onRowsRendered,
   ...props
 }: TableProps<TData>) {
   const columns = _columns.filter((column) => !column.hide);
@@ -37,6 +39,10 @@ function Table<TData>({
   });
   const virtualItems = virtualizer.getVirtualItems();
   const virtualValues = _values ? getVirtualValues(virtualItems, _values) : [];
+
+  useIsomorphicLayoutEffect(() => {
+    onRowsRendered?.();
+  }, [virtualValues]);
 
   const totalSize = virtualizer.getTotalSize();
   const paddingTop = virtualItems.length > 0 ? virtualItems[0].start : 0;
@@ -189,6 +195,26 @@ function TableBody<TData>({
             </tr>
           ))}
 
+          {isLoading &&
+            range(placeholderRowCount).map((index) => (
+              <tr key={index}>
+                {columns.map((column, index) => (
+                  <td
+                    className={cn(
+                      resolveAlignClass({
+                        align: column.align,
+                        isFirstColumn: index === 0,
+                      }),
+                      columnClassName,
+                    )}
+                    key={column.key}
+                  >
+                    <Skeleton className="inline-block size-full max-w-2/3 min-w-6" />
+                  </td>
+                ))}
+              </tr>
+            ))}
+
           {virtualPaddingBottom > 0 && (
             <tr aria-hidden>
               <td
@@ -216,26 +242,6 @@ function TableBody<TData>({
           </tr>
         </>
       )}
-
-      {isLoading &&
-        range(placeholderRowCount).map((index) => (
-          <tr key={index}>
-            {columns.map((column, index) => (
-              <td
-                className={cn(
-                  resolveAlignClass({
-                    align: column.align,
-                    isFirstColumn: index === 0,
-                  }),
-                  columnClassName,
-                )}
-                key={column.key}
-              >
-                <Skeleton className="inline-block size-full max-w-2/3 min-w-6" />
-              </td>
-            ))}
-          </tr>
-        ))}
     </tbody>
   );
 }

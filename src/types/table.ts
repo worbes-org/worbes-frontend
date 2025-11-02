@@ -26,6 +26,7 @@ export type TableProps<TValue> = {
   renderEmpty?: () => ReactNode;
   onClickRow?: (value: TValue, event: MouseEvent) => void;
   onLastVisible?: () => void;
+  onRowsRendered?: () => void;
 };
 
 export type TableHeaderProps<TValue> = {
