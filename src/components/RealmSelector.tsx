@@ -77,6 +77,7 @@ const RealmSelector: FC<Props> = ({ className }) => {
           desktop={
             <DropdownPanel isOpen={isOpen} closeOnClick onClose={onClose}>
               <ListSelector
+                className="max-h-[max(7rem,50dvh)] overflow-y-auto"
                 options={options}
                 selectedValues={selectedValues}
                 onSelect={handleSelect}
