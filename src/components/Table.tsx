@@ -22,6 +22,7 @@ function Table<TData>({
   bodyClassName,
   columns: _columns,
   values: _values,
+  rowSize = "md",
   isLoading,
   placeholderRowCount = 10,
   onRowsRendered,
@@ -34,7 +35,7 @@ function Table<TData>({
   const virtualizer = useVirtualizer({
     count: (_values?.length ?? 0) + (isLoading ? placeholderRowCount : 0),
     overscan: 5,
-    estimateSize: () => 44,
+    estimateSize: () => getRowHeight(rowSize),
     getScrollElement: () => scrollContainerRef.current,
   });
   const virtualItems = virtualizer.getVirtualItems();
@@ -62,7 +63,10 @@ function Table<TData>({
       <div style={{ height: totalSize === 0 ? "auto" : totalSize }}>
         <table
           className={cn(
-            "w-full text-green-100 [&_th,&_td]:p-3",
+            "w-full text-green-100 [&_th]:h-11 [&_th,&_td]:p-3",
+            rowSize === "sm" && "[&_td]:h-11",
+            rowSize === "md" && "[&_td]:h-17",
+            rowSize === "lg" && "[&_td]:h-23",
             tableClassName,
           )}
         >
@@ -88,6 +92,19 @@ function Table<TData>({
 
   function getVirtualValues(items: VirtualItem[], values: TData[]) {
     return items.map((item) => values[item.index]).filter(Boolean);
+  }
+
+  function getRowHeight(rowSize: TableProps<TData>["rowSize"]) {
+    switch (rowSize) {
+      case "sm":
+        return 44;
+      case "md":
+        return 68;
+      case "lg":
+        return 92;
+      default:
+        return 68;
+    }
   }
 }
 
