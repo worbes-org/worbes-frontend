@@ -4,7 +4,6 @@ import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import Table from "@/components/Table";
 import WowheadItemLink from "@/components/WowheadItemLink";
 import { COPPER_PER_SILVER, SILVER_PER_GOLD } from "@/constants/currency";
-import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useInfiniteAuctions } from "@/hooks/useInfiniteAuctions";
 import { useSelectedRealm } from "@/hooks/useSelectedRealm";
 import { useSelectedRegion } from "@/hooks/useSelectedRegion";
@@ -23,8 +22,6 @@ type Props = {
 };
 
 const AuctionTable: FC<Props> = ({ className }) => {
-  const isLargeBreakpoint = useBreakpoint("lg");
-
   const [selectedRegion] = useSelectedRegion();
   const [selectedRealm] = useSelectedRealm();
 
@@ -32,7 +29,7 @@ const AuctionTable: FC<Props> = ({ className }) => {
     useInfiniteAuctions({
       filters: {
         region: selectedRegion,
-        realmId: selectedRealm?.id,
+        realmId: selectedRealm?.connectedRealmId,
       },
       initialPagination: {
         page: 0,
@@ -48,7 +45,7 @@ const AuctionTable: FC<Props> = ({ className }) => {
       tableClassName="table-fixed"
       columns={columns}
       values={data}
-      rowSize={isLargeBreakpoint ? "lg" : "md"}
+      rowSize="md"
       isLoading={isLoading || isFetchingNextPage}
       placeholderRowCount={30}
       keyExtractor={(value) => value.uuid}
@@ -75,17 +72,24 @@ const AuctionTable: FC<Props> = ({ className }) => {
         label: t("Name"),
         align: "left",
         className: "truncate",
-        headClassName: "w-[max(12rem,10cqw)]",
+        headClassName: "w-[max(20rem,20cqw)]",
         render: (auction: Auction) => (
-          <WowheadItemLink
-            className="space-x-1 truncate"
-            href="#"
-            id={auction.itemId}
-            level={auction.itemLevel}
-            locale={locale}
-            iconSize={isLargeBreakpoint ? "lg" : "md"}
-            bonus={auction.itemBonus}
-          />
+          <div className="inline-flex items-center gap-x-2">
+            <WowheadItemLink
+              className="space-x-1 truncate"
+              href="#"
+              id={auction.itemId}
+              level={auction.itemLevel}
+              locale={locale}
+              iconSize={"md"}
+              bonus={auction.itemBonus}
+            />
+            <ImageWithPlaceholder
+              className="size-4"
+              src={AppUrlBuilder.craftingTierImage(auction.craftingTier ?? 0)}
+              alt={t("Crafting Tier")}
+            />
+          </div>
         ),
       },
       {
@@ -116,31 +120,11 @@ const AuctionTable: FC<Props> = ({ className }) => {
         headClassName: "w-[max(4rem,10cqw)]",
         render: (auction: Auction) => auction.itemLevel,
       },
-
       {
         key: "quantity",
         label: t("Quantity"),
         headClassName: "w-[max(5rem,10cqw)]",
         render: (auction: Auction) => auction.totalQuantity,
-      },
-
-      {
-        key: "craftingTier",
-        label: t("Crafting Tier"),
-        headClassName: "w-[max(8rem,10cqw)]",
-        render: (auction: Auction) => {
-          if (!auction.craftingTier) {
-            return "-";
-          }
-
-          return (
-            <ImageWithPlaceholder
-              className="inline-block size-8"
-              src={AppUrlBuilder.craftingTierImage(auction.craftingTier)}
-              alt={auction.craftingTier.toString()}
-            />
-          );
-        },
       },
     ];
   }
