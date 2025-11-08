@@ -76,7 +76,7 @@ const AuctionTable: FC<Props> = ({ className }) => {
         render: (auction: Auction) => (
           <div className="inline-flex items-center gap-x-2">
             <WowheadItemLink
-              className="space-x-1 truncate"
+              className="peer space-x-1 truncate"
               href="#"
               id={auction.itemId}
               level={auction.itemLevel}
@@ -84,11 +84,13 @@ const AuctionTable: FC<Props> = ({ className }) => {
               iconSize={"md"}
               bonus={auction.itemBonus}
             />
-            <ImageWithPlaceholder
-              className="size-4"
-              src={AppUrlBuilder.craftingTierImage(auction.craftingTier ?? 0)}
-              alt={t("Crafting Tier")}
-            />
+            {!!auction.craftingTier && (
+              <ImageWithPlaceholder
+                className="size-4 peer-empty:hidden"
+                src={AppUrlBuilder.craftingTierImage(auction.craftingTier)}
+                alt={t("Crafting Tier")}
+              />
+            )}
           </div>
         ),
       },
