@@ -9,7 +9,7 @@ import {
   type FC,
   type ReactNode,
 } from "react";
-import { useKeyPressEvent } from "react-use";
+import { useClickAway, useKeyPressEvent } from "react-use";
 
 type Props = {
   className?: string;
@@ -34,11 +34,12 @@ const SelectorTrigger: FC<Props> = ({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  useKeyPressEvent("Escape", () => setIsOpen(false));
+  useKeyPressEvent("Escape", handleToggle(false));
+  useClickAway(ref, handleToggle(false));
 
   return (
     <div className={cn("relative", className)} ref={ref}>
-      <div role="button" onClick={handleToggle()}>
+      <div role="button" onClick={handleToggle(!isOpen)}>
         <Input
           className="pointer-events-none"
           value={label ?? ""}
@@ -54,8 +55,8 @@ const SelectorTrigger: FC<Props> = ({
     </div>
   );
 
-  function handleToggle(visible?: boolean) {
-    return () => setIsOpen(visible ?? !isOpen);
+  function handleToggle(visible: boolean) {
+    return () => setIsOpen(visible);
   }
 };
 

@@ -1,8 +1,6 @@
 import { cn } from "@/utils/styles";
 import { Transition } from "@headlessui/react";
-import { noop } from "lodash-es";
-import { useRef, type FC, type PropsWithChildren } from "react";
-import { useClickAway } from "react-use";
+import { type FC, type PropsWithChildren } from "react";
 
 type Props = {
   className?: string;
@@ -18,10 +16,6 @@ const DropdownPanel: FC<Props> = ({
   onClose,
   children,
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useClickAway(ref, onClose ?? noop);
-
   return (
     <Transition
       className={cn(
@@ -30,7 +24,6 @@ const DropdownPanel: FC<Props> = ({
         className,
       )}
       show={isOpen}
-      ref={ref}
       role="menu"
       as="section"
       onClick={closeOnClick ? onClose : undefined}
