@@ -8,7 +8,7 @@ type Props = {
 
 const HomeBackground: FC<Props> = ({ className }) => {
   return (
-    <div className={cn("h-200", className)}>
+    <div className={cn("h-65 overflow-hidden", className)}>
       <ImageWithPlaceholder
         className="h-200 opacity-50"
         imgClassName="object-cover object-center"

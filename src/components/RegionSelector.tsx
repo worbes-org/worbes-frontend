@@ -22,7 +22,7 @@ const RegionSelector: FC<Props> = ({ className }) => {
   const [selectedRegion, setSelectedRegion] = useSelectedRegion();
 
   const label = selectedRegion
-    ? t("Selected region: {selectedRegion}", { selectedRegion })
+    ? t("Region: {selectedRegion}", { selectedRegion })
     : "";
 
   return (

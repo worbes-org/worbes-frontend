@@ -2,8 +2,6 @@
 
 import IconButton from "@/components/IconButton";
 import Modal from "@/components/Modal";
-import RealmSelector from "@/components/RealmSelector";
-import RegionSelector from "@/components/RegionSelector";
 import Responsive from "@/components/Responsive";
 import SideDrawer from "@/components/SideDrawer";
 import Translation from "@/components/Translation";
@@ -80,12 +78,7 @@ type FilterContentPanelProps = {
 };
 
 const FilterContentPanel: FC<FilterContentPanelProps> = ({ className }) => {
-  return (
-    <div className={cn("space-y-3", className)}>
-      <RegionSelector className="w-full" />
-      <RealmSelector className="w-full" />
-    </div>
-  );
+  return <div className={cn("space-y-3", className)}></div>;
 };
 
 export default FilterDialogContainer;

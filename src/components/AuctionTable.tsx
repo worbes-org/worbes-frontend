@@ -4,9 +4,6 @@ import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import Table from "@/components/Table";
 import WowheadItemLink from "@/components/WowheadItemLink";
 import { COPPER_PER_SILVER, SILVER_PER_GOLD } from "@/constants/currency";
-import { useInfiniteAuctions } from "@/hooks/useInfiniteAuctions";
-import { useSelectedRealm } from "@/hooks/useSelectedRealm";
-import { useSelectedRegion } from "@/hooks/useSelectedRegion";
 import { useTranslations } from "@/hooks/useTranslations";
 import type { Auction } from "@/types/auction";
 import type { TableColumn } from "@/types/table";
@@ -19,24 +16,17 @@ import { type FC } from "react";
 
 type Props = {
   className?: string;
+  values: Auction[];
+  isLoading: boolean;
+  onLastVisible: () => void;
 };
 
-const AuctionTable: FC<Props> = ({ className }) => {
-  const [selectedRegion] = useSelectedRegion();
-  const [selectedRealm] = useSelectedRealm();
-
-  const { data, fetchNextPage, isLoading, isFetchingNextPage } =
-    useInfiniteAuctions({
-      filters: {
-        region: selectedRegion,
-        realmId: selectedRealm?.connectedRealmId,
-      },
-      initialPagination: {
-        page: 0,
-        size: 30,
-      },
-    });
-
+const AuctionTable: FC<Props> = ({
+  className,
+  values,
+  isLoading,
+  onLastVisible,
+}) => {
   const columns = useColumns();
 
   return (
@@ -44,12 +34,12 @@ const AuctionTable: FC<Props> = ({ className }) => {
       className={cn("@container/auction-table", className)}
       tableClassName="table-fixed"
       columns={columns}
-      values={data}
-      rowSize="md"
-      isLoading={isLoading || isFetchingNextPage}
+      values={values}
+      rowSize="sm"
+      isLoading={isLoading}
       placeholderRowCount={30}
       keyExtractor={(value) => value.uuid}
-      onLastVisible={fetchNextPage}
+      onLastVisible={onLastVisible}
       onRowsRendered={handleRowsRendered}
     />
   );

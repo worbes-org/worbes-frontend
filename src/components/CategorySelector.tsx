@@ -7,22 +7,23 @@ import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
 import SideDrawer from "@/components/SideDrawer";
 import Translation from "@/components/Translation";
-import { useCategorySelection } from "@/hooks/useCategorySelection";
 import { useTranslations } from "@/hooks/useTranslations";
+import { CategorySelection } from "@/types/category";
+import { Nullable } from "@/types/misc";
 import { cn } from "@/utils/styles";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { type FC } from "react";
 
 type Props = {
   className?: string;
+  value: Nullable<CategorySelection>;
+  onChange?: (value: CategorySelection) => void;
 };
 
-const CategorySelector: FC<Props> = ({ className }) => {
+const CategorySelector: FC<Props> = ({ className, value, onChange }) => {
   const t = useTranslations();
 
-  const [state, setState] = useCategorySelection();
-
-  const label = state?.label ? state.label : "";
+  const label = value?.label ? value.label : "";
 
   return (
     <SelectorTrigger
@@ -44,6 +45,7 @@ const CategorySelector: FC<Props> = ({ className }) => {
             >
               <CategorySelectorPanel
                 listClassName="scrollbar-hide h-[calc(65dvh-10.5rem)] overflow-y-auto"
+                value={value}
                 renderButton={() => (
                   <Button
                     className="w-full"
@@ -54,7 +56,7 @@ const CategorySelector: FC<Props> = ({ className }) => {
                     {label ? label : <Translation messageKey="Close" />}
                   </Button>
                 )}
-                onChange={setState}
+                onChange={onChange}
               />
             </BottomDrawer>
           }
@@ -67,7 +69,8 @@ const CategorySelector: FC<Props> = ({ className }) => {
             >
               <CategorySelectorPanel
                 listClassName="scrollbar-hide h-dvh overflow-y-auto"
-                onChange={setState}
+                value={value}
+                onChange={onChange}
               />
             </SideDrawer>
           }

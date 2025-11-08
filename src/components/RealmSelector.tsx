@@ -41,7 +41,7 @@ const RealmSelector: FC<Props> = ({ className }) => {
 
   const selectedValues = selectedRealm ? [selectedRealm.id] : [];
   const label = selectedRealm
-    ? t("Selected realm: {selectedRealm}", {
+    ? t("Realm: {selectedRealm}", {
         selectedRealm: getRealmNameByLocale(selectedRealm, locale),
       })
     : "";
@@ -67,7 +67,7 @@ const RealmSelector: FC<Props> = ({ className }) => {
               onClose={onClose}
             >
               <ListSelector
-                className="max-h-[calc(70dvh-7.5rem)] overflow-y-auto"
+                className="scrollbar-hide max-h-[calc(70dvh-7.5rem)] overflow-y-auto"
                 options={options}
                 selectedValues={selectedValues}
                 onSelect={handleSelect}
@@ -77,7 +77,7 @@ const RealmSelector: FC<Props> = ({ className }) => {
           desktop={
             <DropdownPanel isOpen={isOpen} closeOnClick onClose={onClose}>
               <ListSelector
-                className="max-h-[max(7rem,50dvh)] overflow-y-auto"
+                className="scrollbar-hide max-h-[max(7rem,50dvh)] overflow-y-auto"
                 options={options}
                 selectedValues={selectedValues}
                 onSelect={handleSelect}

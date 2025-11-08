@@ -1,6 +1,4 @@
-import type { Region } from "@/constants/game-server";
-import type { Auction } from "@/types/auction";
-import type { Maybe } from "@/types/misc";
+import type { Auction, AuctionsFilter } from "@/types/auction";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import qs from "qs";
 import { z } from "zod";
@@ -23,26 +21,13 @@ const AuctionsResponseSchema = z.object({
   }),
 });
 
-type AuctionsFilters = {
-  region: Maybe<Region>;
-  realmId: Maybe<number>;
-  name?: string;
-  classId?: number;
-  subclassId?: number;
-  minQuality?: number;
-  maxQuality?: number;
-  minItemLevel?: number;
-  maxItemLevel?: number;
-  expansionId?: number;
-};
-
 type AuctionsPagination = {
   page: number;
   size: number;
 };
 
 export function useInfiniteAuctions(args: {
-  filters: AuctionsFilters;
+  filters: AuctionsFilter;
   initialPagination: AuctionsPagination;
 }) {
   const query = useInfiniteQuery({

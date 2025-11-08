@@ -39,7 +39,7 @@ const Input: FC<Props> = ({
 
       <input
         className={cn(
-          "w-full rounded-xl text-white placeholder-white/40 transition-colors outline-none",
+          "w-full truncate rounded-xl text-white placeholder-white/40 transition-colors outline-none",
           size === "md" && "px-4 py-3 text-sm",
           size === "sm" && "px-3 py-2.5 text-sm",
           size === "xs" && "rounded-lg px-2.5 py-2 text-xs",
