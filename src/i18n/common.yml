@@ -21,3 +21,11 @@ Select region:
 Select realm:
   ko: "서버 선택"
   en: "Select realm"
+
+Select language:
+  ko: "언어 선택"
+  en: "Select language"
+
+"Language: {selectedLanguage}":
+  ko: "언어: {selectedLanguage}"
+  en: "Language: {selectedLanguage}"

@@ -48,11 +48,12 @@ const Header: FC<Props> = ({ className }) => {
       </div>
 
       <SideDrawer
+        className="w-full max-w-md"
         isOpen={menuOpen}
         position="right"
         onClose={handleToggleSideMenu(false)}
       >
-        <SideMenuPanel />
+        {({ onClose }) => <SideMenuPanel onClose={onClose} />}
       </SideDrawer>
     </>
   );
