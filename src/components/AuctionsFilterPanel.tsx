@@ -110,7 +110,7 @@ const AuctionsFilterPanel: FC<Props> = ({ className, filter, onChange }) => {
                 onClose={onClose}
               >
                 <ListSelector
-                  className="scrollbar-hide h-[calc(95dvh-8rem)] overflow-y-auto"
+                  className="scrollbar-hide max-h-[calc(95dvh-8rem)] overflow-y-auto"
                   options={EXPANSIONS}
                   selectedValues={
                     selectedExpansion ? [selectedExpansion.value] : []

@@ -29,8 +29,8 @@ type Props = {
 const AuctionBrowseSection: FC<Props> = ({ className }) => {
   const t = useTranslations();
 
-  const [selectedRegion] = useSelectedRegion();
-  const [selectedRealm] = useSelectedRealm();
+  const [selectedRegion, setSelectedRegion] = useSelectedRegion();
+  const [selectedRealm, setSelectedRealm] = useSelectedRealm();
   const [categorySelection, setCategorySelection] = useCategorySelection();
 
   const [restFilters, setRestFilters] = useState<
@@ -96,8 +96,17 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
 
             <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-[1fr_auto] lg:grid-cols-1">
               <div className="flex gap-x-3">
-                <RegionSelector className="flex-1" />
-                <RealmSelector className="flex-1" />
+                <RegionSelector
+                  className="flex-1"
+                  value={selectedRegion}
+                  onChange={setSelectedRegion}
+                />
+                <RealmSelector
+                  className="flex-1"
+                  region={selectedRegion}
+                  value={selectedRealm}
+                  onChange={setSelectedRealm}
+                />
               </div>
               <CategorySelector
                 className="lg:hidden"
@@ -119,7 +128,7 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
         </BlockSection>
 
         <AuctionTable
-          className="scrollbar-hide h-[60vh] overflow-auto lg:h-[75dvh]"
+          className="scrollbar-hide h-[60vh] overflow-auto lg:h-[calc(max(60dvh,39rem))]"
           values={auctions}
           isLoading={isLoading || isFetchingNextPage}
           onLastVisible={fetchNextPage}

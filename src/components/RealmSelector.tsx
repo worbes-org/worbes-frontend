@@ -5,12 +5,12 @@ import DropdownPanel from "@/components/DropdownPanel";
 import ListSelector from "@/components/ListSelector";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
+import { Region } from "@/constants/game-server";
 import type { Locale } from "@/constants/i18n";
 import { useRealms } from "@/hooks/useRealms";
-import { useSelectedRealm } from "@/hooks/useSelectedRealm";
-import { useSelectedRegion } from "@/hooks/useSelectedRegion";
 import { useTranslations } from "@/hooks/useTranslations";
 import type { Realm } from "@/types/game-server";
+import { Nullable } from "@/types/misc";
 import type { ListSelectorOption } from "@/types/selector";
 import { getRealmNameByLocale } from "@/utils/realm";
 import { cn } from "@/utils/styles";
@@ -23,26 +23,26 @@ import { useMemo, type FC } from "react";
 
 type Props = {
   className?: string;
+  region: Nullable<Region>;
+  value: Nullable<Realm>;
+  onChange: (value: Realm) => void;
 };
 
-const RealmSelector: FC<Props> = ({ className }) => {
+const RealmSelector: FC<Props> = ({ className, region, value, onChange }) => {
   const t = useTranslations();
   const locale = useLocale();
 
-  const [selectedRegion] = useSelectedRegion();
-  const [selectedRealm, setSelectedRealm] = useSelectedRealm();
-
-  const { data: realms, isLoading } = useRealms(selectedRegion);
+  const { data: realms, isLoading } = useRealms(region);
 
   const options = useMemo(
     () => buildRealmOptions(realms ?? [], locale),
     [realms, locale],
   );
 
-  const selectedValues = selectedRealm ? [selectedRealm.id] : [];
-  const label = selectedRealm
+  const selectedValues = value ? [value.id] : [];
+  const label = value
     ? t("Realm: {selectedRealm}", {
-        selectedRealm: getRealmNameByLocale(selectedRealm, locale),
+        selectedRealm: getRealmNameByLocale(value, locale),
       })
     : "";
 
@@ -94,7 +94,7 @@ const RealmSelector: FC<Props> = ({ className }) => {
       return;
     }
 
-    setSelectedRealm(option.metadata);
+    onChange(option.metadata);
   }
 
   function buildRealmOptions(
