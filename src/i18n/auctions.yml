@@ -33,3 +33,23 @@ Track prices and availability across realms.:
 Search by name:
   ko: "이름으로 검색"
   en: "Search by name"
+
+"Quality: {min}~{max}":
+  ko: "품질: {min}~{max}"
+  en: "Quality: {min}~{max}"
+
+"Item level: {min}~{max}":
+  ko: "아이템 레벨: {min}~{max}"
+  en: "Item level: {min}~{max}"
+
+"Expansion pack: {min}~{max}":
+  ko: "확장팩: {min}~{max}"
+  en: "Expansion pack: {min}~{max}"
+
+Select Expansion:
+  ko: "확장팩 선택"
+  en: "Select Expansion"
+
+"Expansion: {expansion}":
+  ko: "확장팩: {expansion}"
+  en: "Expansion: {expansion}"

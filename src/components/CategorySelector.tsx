@@ -33,6 +33,7 @@ const CategorySelector: FC<Props> = ({ className, value, onChange }) => {
       label={label}
       placeholder={t("Filter by category")}
       RightIcon={ChevronDownIcon}
+      closeOnClickAway={false}
     >
       {({ isOpen, onClose }) => (
         <Responsive

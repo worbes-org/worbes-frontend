@@ -1,10 +1,10 @@
 "use client";
 
+import AuctionsFilterDialogContainer from "@/components/AuctionsFilterDialogContainer";
 import AuctionTable from "@/components/AuctionTable";
 import BlockSection from "@/components/BlockSection";
 import CategorySelector from "@/components/CategorySelector";
 import CategorySelectorPanel from "@/components/CategorySelectorPanel";
-import FilterDialogContainer from "@/components/FilterDialogContainer";
 import HomeBackground from "@/components/HomeBackground";
 import Input from "@/components/Input";
 import LayoutContainer from "@/components/LayoutContainer";
@@ -16,9 +16,11 @@ import { useInfiniteAuctions } from "@/hooks/useInfiniteAuctions";
 import { useSelectedRealm } from "@/hooks/useSelectedRealm";
 import { useSelectedRegion } from "@/hooks/useSelectedRegion";
 import { useTranslations } from "@/hooks/useTranslations";
+import { AuctionsFilter } from "@/types/auction";
 import { cn } from "@/utils/styles";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { FC } from "react";
+import { ChangeEvent, FC, useState } from "react";
+import { useDebounce } from "react-use";
 
 type Props = {
   className?: string;
@@ -29,8 +31,21 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
 
   const [selectedRegion] = useSelectedRegion();
   const [selectedRealm] = useSelectedRealm();
-
   const [categorySelection, setCategorySelection] = useCategorySelection();
+
+  const [restFilters, setRestFilters] = useState<
+    Pick<
+      AuctionsFilter,
+      | "name"
+      | "minQuality"
+      | "maxQuality"
+      | "minItemLevel"
+      | "maxItemLevel"
+      | "expansionId"
+    >
+  >({});
+  const [debouncedRestFilters, setDebouncedRestFilters] = useState(restFilters);
+  useDebounce(() => setDebouncedRestFilters(restFilters), 500, [restFilters]);
 
   const {
     data: auctions = [],
@@ -41,6 +56,9 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
     filters: {
       region: selectedRegion,
       realmId: selectedRealm?.connectedRealmId,
+      classId: categorySelection?.classId,
+      subclassId: categorySelection?.subClassId,
+      ...debouncedRestFilters,
     },
     initialPagination: {
       page: 0,
@@ -61,13 +79,18 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
 
           <div className="flex gap-3 not-lg:flex-col">
             <div className="flex gap-x-2 not-lg:order-last md:min-w-lg">
-              <FilterDialogContainer />
+              <AuctionsFilterDialogContainer
+                filter={restFilters}
+                onChange={handleFilterChange}
+              />
               <Input
                 className="w-full"
                 theme="primary"
                 size="md"
                 placeholder={t("Search by name")}
                 LeftIcon={MagnifyingGlassIcon}
+                value={restFilters.name ?? ""}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -104,6 +127,14 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
       </LayoutContainer>
     </section>
   );
+
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+    setRestFilters((prev) => ({ ...prev, name: event.target.value }));
+  }
+
+  function handleFilterChange(newFilter: Partial<AuctionsFilter>) {
+    setRestFilters((prev) => ({ ...prev, ...newFilter }));
+  }
 };
 
 export default AuctionBrowseSection;

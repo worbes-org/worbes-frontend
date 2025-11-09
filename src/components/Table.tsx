@@ -55,7 +55,7 @@ function Table<TData>({
   return (
     <div
       className={cn(
-        "overflow-auto rounded-xl border border-blue-500/25",
+        "overflow-auto rounded-xl border border-blue-500/25 bg-green-900/50",
         className,
       )}
       ref={scrollContainerRef}
@@ -64,7 +64,7 @@ function Table<TData>({
         <table
           className={cn(
             "w-full text-green-100 [&_th]:h-11 [&_th,&_td]:p-3 [&_th,&_td]:first-of-type:pl-5 [&_th,&_td]:last-of-type:pr-5",
-            rowSize === "sm" && "[&_td]:h-11",
+            rowSize === "sm" && "[&_td]:h-12.5",
             rowSize === "md" && "[&_td]:h-17",
             rowSize === "lg" && "[&_td]:h-23",
             tableClassName,
@@ -97,7 +97,7 @@ function Table<TData>({
   function getRowHeight(rowSize: TableProps<TData>["rowSize"]) {
     switch (rowSize) {
       case "sm":
-        return 44;
+        return 50;
       case "md":
         return 68;
       case "lg":
@@ -156,7 +156,7 @@ function TableBody<TData>({
   const isEmpty = values.length === 0 && !isLoading;
 
   return (
-    <tbody className={cn("bg-green-900/50", className)}>
+    <tbody className={cn("", className)}>
       {isEmpty && (
         <tr>
           <td className={columnClassName} colSpan={columns.length}>
