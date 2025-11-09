@@ -4,6 +4,7 @@ import ListSelector from "@/components/ListSelector";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
 import { Locale } from "@/constants/i18n";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useTranslations } from "@/hooks/useTranslations";
 import { ListSelectorOption } from "@/types/selector";
 import { cn } from "@/utils/styles";
@@ -13,11 +14,18 @@ import { type FC } from "react";
 type Props = {
   className?: string;
   value: Locale;
+
   onChange?: (locale: Locale) => void;
 };
 
-const LanguageSelector: FC<Props> = ({ className, value, onChange }) => {
+const LanguageSelector: FC<Props> = ({
+  className,
+  value,
+
+  onChange,
+}) => {
   const t = useTranslations();
+  const isMdBreakpoint = useBreakpoint("md");
 
   return (
     <SelectorTrigger
@@ -28,6 +36,7 @@ const LanguageSelector: FC<Props> = ({ className, value, onChange }) => {
         selectedLanguage: getLanguageLabel(value),
       })}
       placeholder={t("Select language")}
+      closeOnClickAway={isMdBreakpoint}
       LeftIcon={GlobeAltIcon}
       RightIcon={ChevronDownIcon}
     >

@@ -6,6 +6,7 @@ import ListSelector from "@/components/ListSelector";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
 import { Region } from "@/constants/game-server";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useTranslations } from "@/hooks/useTranslations";
 import { Nullable } from "@/types/misc";
 import { cn } from "@/utils/styles";
@@ -20,6 +21,7 @@ type Props = {
 
 const RegionSelector: FC<Props> = ({ className, value, onChange }) => {
   const t = useTranslations();
+  const isMdBreakpoint = useBreakpoint("md");
 
   const label = value
     ? t("Region: {selectedRegion}", { selectedRegion: value })
@@ -32,6 +34,7 @@ const RegionSelector: FC<Props> = ({ className, value, onChange }) => {
       size="md"
       label={label}
       placeholder={t("Select region")}
+      closeOnClickAway={isMdBreakpoint}
       LeftIcon={GlobeAltIcon}
       RightIcon={ChevronDownIcon}
     >

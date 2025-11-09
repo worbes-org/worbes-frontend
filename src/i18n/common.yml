@@ -29,3 +29,15 @@ Select language:
 "Language: {selectedLanguage}":
   ko: "언어: {selectedLanguage}"
   en: "Language: {selectedLanguage}"
+
+Home:
+  ko: "홈"
+  en: "Home"
+
+Auctions:
+  ko: "경매 목록"
+  en: "Auctions"
+
+Settings:
+  ko: "환경설정"
+  en: "Settings"

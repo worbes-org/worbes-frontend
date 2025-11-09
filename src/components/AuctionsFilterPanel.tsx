@@ -6,6 +6,7 @@ import SelectorTrigger from "@/components/SelectorTrigger";
 import Slider from "@/components/Slider";
 import Translation from "@/components/Translation";
 import { EXPANSIONS, ITEM_LEVEL, QUALITY } from "@/constants/auction";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useTranslations } from "@/hooks/useTranslations";
 import { AuctionsFilter } from "@/types/auction";
 import { ListSelectorOption } from "@/types/selector";
@@ -26,6 +27,7 @@ type Props = {
 
 const AuctionsFilterPanel: FC<Props> = ({ className, filter, onChange }) => {
   const t = useTranslations();
+  const isMdBreakpoint = useBreakpoint("md");
 
   const selectedExpansion = EXPANSIONS.find(
     (expansion) => expansion.value === filter.expansionId,
@@ -98,7 +100,7 @@ const AuctionsFilterPanel: FC<Props> = ({ className, filter, onChange }) => {
         size="md"
         RightIcon={ChevronDownIcon}
         placeholder={t("Select Expansion")}
-        closeOnClickAway={false}
+        closeOnClickAway={isMdBreakpoint}
       >
         {({ isOpen, onClose }) => (
           <Responsive

@@ -7,6 +7,7 @@ import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
 import { Region } from "@/constants/game-server";
 import type { Locale } from "@/constants/i18n";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useRealms } from "@/hooks/useRealms";
 import { useTranslations } from "@/hooks/useTranslations";
 import type { Realm } from "@/types/game-server";
@@ -31,6 +32,7 @@ type Props = {
 const RealmSelector: FC<Props> = ({ className, region, value, onChange }) => {
   const t = useTranslations();
   const locale = useLocale();
+  const isMdBreakpoint = useBreakpoint("md");
 
   const { data: realms, isLoading } = useRealms(region);
 
@@ -54,6 +56,7 @@ const RealmSelector: FC<Props> = ({ className, region, value, onChange }) => {
       isLoading={isLoading}
       label={label}
       placeholder={t("Select realm")}
+      closeOnClickAway={isMdBreakpoint}
       LeftIcon={BuildingOfficeIcon}
       RightIcon={ChevronDownIcon}
     >

@@ -7,6 +7,7 @@ import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
 import SideDrawer from "@/components/SideDrawer";
 import Translation from "@/components/Translation";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useTranslations } from "@/hooks/useTranslations";
 import { CategorySelection } from "@/types/category";
 import { Nullable } from "@/types/misc";
@@ -22,6 +23,7 @@ type Props = {
 
 const CategorySelector: FC<Props> = ({ className, value, onChange }) => {
   const t = useTranslations();
+  const isMdBreakpoint = useBreakpoint("md");
 
   const label = value?.label ? value.label : "";
 
@@ -33,7 +35,7 @@ const CategorySelector: FC<Props> = ({ className, value, onChange }) => {
       label={label}
       placeholder={t("Filter by category")}
       RightIcon={ChevronDownIcon}
-      closeOnClickAway={false}
+      closeOnClickAway={isMdBreakpoint}
     >
       {({ isOpen, onClose }) => (
         <Responsive

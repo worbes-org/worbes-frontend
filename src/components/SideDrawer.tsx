@@ -46,7 +46,7 @@ const SideDrawer: FC<Props> = ({
 
       <DialogPanel
         className={cn(
-          "fixed inset-y-0 bg-gray-950 duration-200 ease-out",
+          "fixed inset-y-0 bg-gray-950 duration-200 ease-out md:bg-gray-950/95",
           position === "left" && "left-0 data-[closed]:-translate-x-full",
           position === "right" && "right-0 data-[closed]:translate-x-full",
           className,
