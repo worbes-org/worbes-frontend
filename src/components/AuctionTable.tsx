@@ -35,7 +35,7 @@ const AuctionTable: FC<Props> = ({
       tableClassName="table-fixed"
       columns={columns}
       values={values}
-      rowSize="sm"
+      rowSize="md"
       isLoading={isLoading}
       placeholderRowCount={30}
       keyExtractor={(value) => value.uuid}
@@ -67,11 +67,11 @@ const AuctionTable: FC<Props> = ({
           <div className="inline-flex items-center gap-x-2">
             <WowheadItemLink
               className="peer space-x-1 truncate"
-              href="#"
+              href={AppUrlBuilder.auctionDetail(auction)}
               id={auction.itemId}
               level={auction.itemLevel}
               locale={locale}
-              iconSize={"md"}
+              iconSize="md"
               bonus={auction.itemBonus}
             />
             {!!auction.craftingTier && (

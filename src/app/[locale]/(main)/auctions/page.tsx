@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { type FC } from "react";
 
-const HomePage: FC = () => {
+const AuctionsPage: FC = () => {
   return (
     <div>
       <Header className="sticky top-0 z-10" />
@@ -13,4 +13,4 @@ const HomePage: FC = () => {
   );
 };
 
-export default HomePage;
+export default AuctionsPage;

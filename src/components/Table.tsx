@@ -64,7 +64,7 @@ function Table<TData>({
         <table
           className={cn(
             "w-full text-green-100 [&_th]:h-11 [&_th,&_td]:p-3 [&_th,&_td]:first-of-type:pl-5 [&_th,&_td]:last-of-type:pr-5",
-            rowSize === "sm" && "[&_td]:h-12.5",
+            rowSize === "sm" && "[&_td]:h-11",
             rowSize === "md" && "[&_td]:h-17",
             rowSize === "lg" && "[&_td]:h-23",
             tableClassName,
@@ -97,9 +97,9 @@ function Table<TData>({
   function getRowHeight(rowSize: TableProps<TData>["rowSize"]) {
     switch (rowSize) {
       case "sm":
-        return 50;
+        return 44;
       case "md":
-        return 68;
+        return 50;
       case "lg":
         return 92;
       default:
