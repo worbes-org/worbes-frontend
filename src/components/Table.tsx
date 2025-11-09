@@ -34,7 +34,7 @@ function Table<TData>({
 
   const virtualizer = useVirtualizer({
     count: (_values?.length ?? 0) + (isLoading ? placeholderRowCount : 0),
-    overscan: 5,
+    overscan: 30,
     estimateSize: () => getRowHeight(rowSize),
     getScrollElement: () => scrollContainerRef.current,
   });

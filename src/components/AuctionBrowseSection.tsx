@@ -128,7 +128,7 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
         </BlockSection>
 
         <AuctionTable
-          className="scrollbar-hide h-[60vh] overflow-auto lg:h-[calc(max(60dvh,39rem))]"
+          className="scrollbar-hide h-[60vh] overflow-auto lg:h-[calc(max(75dvh,39rem))]"
           values={auctions}
           isLoading={isLoading || isFetchingNextPage}
           onLastVisible={fetchNextPage}
