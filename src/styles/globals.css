@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    --header-height: 4rem;
+  }
+
   body {
     @apply bg-gray-950 font-primary;
   }
@@ -12,6 +16,10 @@
 
   *:disabled {
     @apply cursor-not-allowed;
+  }
+
+  .wowhead-tooltip-powered {
+    @apply !hidden;
   }
 }
 

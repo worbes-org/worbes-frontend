@@ -4,10 +4,6 @@ import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import Table from "@/components/Table";
 import WowheadItemLink from "@/components/WowheadItemLink";
 import { COPPER_PER_SILVER, SILVER_PER_GOLD } from "@/constants/currency";
-import { useBreakpoint } from "@/hooks/useBreakpoint";
-import { useInfiniteAuctions } from "@/hooks/useInfiniteAuctions";
-import { useSelectedRealm } from "@/hooks/useSelectedRealm";
-import { useSelectedRegion } from "@/hooks/useSelectedRegion";
 import { useTranslations } from "@/hooks/useTranslations";
 import type { Auction } from "@/types/auction";
 import type { TableColumn } from "@/types/table";
@@ -20,26 +16,17 @@ import { type FC } from "react";
 
 type Props = {
   className?: string;
+  values: Auction[];
+  isLoading: boolean;
+  onLastVisible: () => void;
 };
 
-const AuctionTable: FC<Props> = ({ className }) => {
-  const isLargeBreakpoint = useBreakpoint("lg");
-
-  const [selectedRegion] = useSelectedRegion();
-  const [selectedRealm] = useSelectedRealm();
-
-  const { data, fetchNextPage, isLoading, isFetchingNextPage } =
-    useInfiniteAuctions({
-      filters: {
-        region: selectedRegion,
-        realmId: selectedRealm?.id,
-      },
-      initialPagination: {
-        page: 0,
-        size: 30,
-      },
-    });
-
+const AuctionTable: FC<Props> = ({
+  className,
+  values,
+  isLoading,
+  onLastVisible,
+}) => {
   const columns = useColumns();
 
   return (
@@ -47,12 +34,12 @@ const AuctionTable: FC<Props> = ({ className }) => {
       className={cn("@container/auction-table", className)}
       tableClassName="table-fixed"
       columns={columns}
-      values={data}
-      rowSize={isLargeBreakpoint ? "lg" : "md"}
-      isLoading={isLoading || isFetchingNextPage}
+      values={values}
+      rowSize="md"
+      isLoading={isLoading}
       placeholderRowCount={30}
       keyExtractor={(value) => value.uuid}
-      onLastVisible={fetchNextPage}
+      onLastVisible={onLastVisible}
       onRowsRendered={handleRowsRendered}
     />
   );
@@ -75,17 +62,26 @@ const AuctionTable: FC<Props> = ({ className }) => {
         label: t("Name"),
         align: "left",
         className: "truncate",
-        headClassName: "w-[max(12rem,10cqw)]",
+        headClassName: "w-[max(20rem,20cqw)]",
         render: (auction: Auction) => (
-          <WowheadItemLink
-            className="space-x-1 truncate"
-            href="#"
-            id={auction.itemId}
-            level={auction.itemLevel}
-            locale={locale}
-            iconSize={isLargeBreakpoint ? "lg" : "md"}
-            bonus={auction.itemBonus}
-          />
+          <div className="inline-flex items-center gap-x-2">
+            <WowheadItemLink
+              className="peer space-x-1 truncate"
+              href={AppUrlBuilder.auctionDetail(auction)}
+              id={auction.itemId}
+              level={auction.itemLevel}
+              locale={locale}
+              iconSize="md"
+              bonus={auction.itemBonus}
+            />
+            {!!auction.craftingTier && (
+              <ImageWithPlaceholder
+                className="size-4 peer-empty:hidden"
+                src={AppUrlBuilder.craftingTierImage(auction.craftingTier)}
+                alt={t("Crafting Tier")}
+              />
+            )}
+          </div>
         ),
       },
       {
@@ -116,31 +112,11 @@ const AuctionTable: FC<Props> = ({ className }) => {
         headClassName: "w-[max(4rem,10cqw)]",
         render: (auction: Auction) => auction.itemLevel,
       },
-
       {
         key: "quantity",
         label: t("Quantity"),
         headClassName: "w-[max(5rem,10cqw)]",
         render: (auction: Auction) => auction.totalQuantity,
-      },
-
-      {
-        key: "craftingTier",
-        label: t("Crafting Tier"),
-        headClassName: "w-[max(8rem,10cqw)]",
-        render: (auction: Auction) => {
-          if (!auction.craftingTier) {
-            return "-";
-          }
-
-          return (
-            <ImageWithPlaceholder
-              className="inline-block size-8"
-              src={AppUrlBuilder.craftingTierImage(auction.craftingTier)}
-              alt={auction.craftingTier.toString()}
-            />
-          );
-        },
       },
     ];
   }

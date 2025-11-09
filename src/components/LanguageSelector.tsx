@@ -1,37 +1,33 @@
-"use client";
-
 import BottomDrawer from "@/components/BottomDrawer";
 import DropdownPanel from "@/components/DropdownPanel";
 import ListSelector from "@/components/ListSelector";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
-import { Region } from "@/constants/game-server";
+import { Locale } from "@/constants/i18n";
 import { useTranslations } from "@/hooks/useTranslations";
-import { Nullable } from "@/types/misc";
+import { ListSelectorOption } from "@/types/selector";
 import { cn } from "@/utils/styles";
 import { ChevronDownIcon, GlobeAltIcon } from "@heroicons/react/24/outline";
 import { type FC } from "react";
 
 type Props = {
   className?: string;
-  value: Nullable<Region>;
-  onChange: (value: Region) => void;
+  value: Locale;
+  onChange?: (locale: Locale) => void;
 };
 
-const RegionSelector: FC<Props> = ({ className, value, onChange }) => {
+const LanguageSelector: FC<Props> = ({ className, value, onChange }) => {
   const t = useTranslations();
-
-  const label = value
-    ? t("Region: {selectedRegion}", { selectedRegion: value })
-    : "";
 
   return (
     <SelectorTrigger
       className={cn("", className)}
       theme="primary"
       size="md"
-      label={label}
-      placeholder={t("Select region")}
+      label={t("Language: {selectedLanguage}", {
+        selectedLanguage: getLanguageLabel(value),
+      })}
+      placeholder={t("Select language")}
       LeftIcon={GlobeAltIcon}
       RightIcon={ChevronDownIcon}
     >
@@ -39,30 +35,30 @@ const RegionSelector: FC<Props> = ({ className, value, onChange }) => {
         <Responsive
           mobile={
             <BottomDrawer
-              title={t("Select region")}
+              title={t("Select language")}
               theme="primary"
               isOpen={isOpen}
               onClose={onClose}
             >
               <ListSelector
-                options={Object.values(Region).map((region) => ({
-                  label: region,
-                  value: region,
+                options={Object.values(Locale).map((locale) => ({
+                  value: locale,
+                  label: getLanguageLabel(locale),
                 }))}
                 selectedValues={[value]}
-                onSelect={(option) => onChange(option.value)}
+                onSelect={handleSelect}
               />
             </BottomDrawer>
           }
           desktop={
             <DropdownPanel isOpen={isOpen} closeOnClick onClose={onClose}>
               <ListSelector
-                options={Object.values(Region).map((region) => ({
-                  label: region,
-                  value: region,
+                options={Object.values(Locale).map((locale) => ({
+                  value: locale,
+                  label: getLanguageLabel(locale),
                 }))}
                 selectedValues={[value]}
-                onSelect={(option) => onChange(option.value)}
+                onSelect={handleSelect}
               />
             </DropdownPanel>
           }
@@ -70,6 +66,22 @@ const RegionSelector: FC<Props> = ({ className, value, onChange }) => {
       )}
     </SelectorTrigger>
   );
+
+  function handleSelect(option: ListSelectorOption<Locale>) {
+    onChange?.(option.value);
+  }
+
+  function getLanguageLabel(locale: Locale) {
+    switch (locale) {
+      case Locale.KOREAN:
+        return "한국어";
+      case Locale.ENGLISH:
+        return "English";
+      default:
+        console.warn(`Unsupported locale: ${locale}`);
+        return "";
+    }
+  }
 };
 
-export default RegionSelector;
+export default LanguageSelector;

@@ -5,12 +5,12 @@ import DropdownPanel from "@/components/DropdownPanel";
 import ListSelector from "@/components/ListSelector";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
+import { Region } from "@/constants/game-server";
 import type { Locale } from "@/constants/i18n";
 import { useRealms } from "@/hooks/useRealms";
-import { useSelectedRealm } from "@/hooks/useSelectedRealm";
-import { useSelectedRegion } from "@/hooks/useSelectedRegion";
 import { useTranslations } from "@/hooks/useTranslations";
 import type { Realm } from "@/types/game-server";
+import { Nullable } from "@/types/misc";
 import type { ListSelectorOption } from "@/types/selector";
 import { getRealmNameByLocale } from "@/utils/realm";
 import { cn } from "@/utils/styles";
@@ -23,26 +23,26 @@ import { useMemo, type FC } from "react";
 
 type Props = {
   className?: string;
+  region: Nullable<Region>;
+  value: Nullable<Realm>;
+  onChange: (value: Realm) => void;
 };
 
-const RealmSelector: FC<Props> = ({ className }) => {
+const RealmSelector: FC<Props> = ({ className, region, value, onChange }) => {
   const t = useTranslations();
   const locale = useLocale();
 
-  const [selectedRegion] = useSelectedRegion();
-  const [selectedRealm, setSelectedRealm] = useSelectedRealm();
-
-  const { data: realms, isLoading } = useRealms(selectedRegion);
+  const { data: realms, isLoading } = useRealms(region);
 
   const options = useMemo(
     () => buildRealmOptions(realms ?? [], locale),
     [realms, locale],
   );
 
-  const selectedValues = selectedRealm ? [selectedRealm.id] : [];
-  const label = selectedRealm
-    ? t("Selected realm: {selectedRealm}", {
-        selectedRealm: getRealmNameByLocale(selectedRealm, locale),
+  const selectedValues = value ? [value.id] : [];
+  const label = value
+    ? t("Realm: {selectedRealm}", {
+        selectedRealm: getRealmNameByLocale(value, locale),
       })
     : "";
 
@@ -67,7 +67,7 @@ const RealmSelector: FC<Props> = ({ className }) => {
               onClose={onClose}
             >
               <ListSelector
-                className="max-h-[calc(70dvh-7.5rem)] overflow-y-auto"
+                className="scrollbar-hide max-h-[calc(70dvh-7.5rem)] overflow-y-auto"
                 options={options}
                 selectedValues={selectedValues}
                 onSelect={handleSelect}
@@ -77,7 +77,7 @@ const RealmSelector: FC<Props> = ({ className }) => {
           desktop={
             <DropdownPanel isOpen={isOpen} closeOnClick onClose={onClose}>
               <ListSelector
-                className="max-h-[max(7rem,50dvh)] overflow-y-auto"
+                className="scrollbar-hide max-h-[max(7rem,50dvh)] overflow-y-auto"
                 options={options}
                 selectedValues={selectedValues}
                 onSelect={handleSelect}
@@ -94,7 +94,7 @@ const RealmSelector: FC<Props> = ({ className }) => {
       return;
     }
 
-    setSelectedRealm(option.metadata);
+    onChange(option.metadata);
   }
 
   function buildRealmOptions(

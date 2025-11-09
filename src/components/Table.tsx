@@ -55,7 +55,7 @@ function Table<TData>({
   return (
     <div
       className={cn(
-        "overflow-auto rounded-xl border border-blue-500/25",
+        "overflow-auto rounded-xl border border-blue-500/25 bg-green-900/50",
         className,
       )}
       ref={scrollContainerRef}
@@ -99,7 +99,7 @@ function Table<TData>({
       case "sm":
         return 44;
       case "md":
-        return 68;
+        return 50;
       case "lg":
         return 92;
       default:
@@ -156,7 +156,7 @@ function TableBody<TData>({
   const isEmpty = values.length === 0 && !isLoading;
 
   return (
-    <tbody className={cn("bg-green-900/50", className)}>
+    <tbody className={cn("", className)}>
       {isEmpty && (
         <tr>
           <td className={columnClassName} colSpan={columns.length}>

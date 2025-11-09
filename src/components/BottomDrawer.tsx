@@ -21,7 +21,7 @@ import { useKeyPressEvent } from "react-use";
 
 type Props = {
   className?: string;
-  title: string;
+  title: ReactNode;
   theme: "primary" | "secondary";
   isOpen: boolean;
   onClose: () => void;

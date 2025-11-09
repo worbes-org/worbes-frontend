@@ -6,6 +6,7 @@ const API_URL =
   "http://worbes-server-alb-281547945.ap-northeast-2.elb.amazonaws.com";
 
 const nextConfig: NextConfig = {
+  reactCompiler: true,
   env: {
     API_URL,
   },

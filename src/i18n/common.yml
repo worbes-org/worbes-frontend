@@ -6,46 +6,26 @@ Close:
   en: "Close"
   ko: "닫기"
 
-Filter by category:
-  ko: "카테고리 필터"
-  en: "Filter by category"
-
 Select region:
   ko: "지역 선택"
   en: "Select region"
 
-"Selected region: {selectedRegion}":
-  ko: "선택된 지역: {selectedRegion}"
-  en: "Selected region: {selectedRegion}"
+"Region: {selectedRegion}":
+  ko: "지역: {selectedRegion}"
+  en: "Region: {selectedRegion}"
 
-"Selected realm: {selectedRealm}":
-  ko: "선택된 서버: {selectedRealm}"
-  en: "Selected realm: {selectedRealm}"
+"Realm: {selectedRealm}":
+  ko: "서버: {selectedRealm}"
+  en: "Realm: {selectedRealm}"
 
 Select realm:
   ko: "서버 선택"
   en: "Select realm"
 
-Price:
-  ko: "가격"
-  en: "Price"
+Select language:
+  ko: "언어 선택"
+  en: "Select language"
 
-Name:
-  ko: "이름"
-  en: "Name"
-
-iLevel:
-  ko: "레벨"
-  en: "iLvl"
-
-Crafting Tier:
-  ko: "제작 등급"
-  en: "Crafting Tier"
-
-Quantity:
-  ko: "수량"
-  en: "Quantity"
-
-Filter by:
-  ko: "필터 종류"
-  en: "Filter by"
+"Language: {selectedLanguage}":
+  ko: "언어: {selectedLanguage}"
+  en: "Language: {selectedLanguage}"
