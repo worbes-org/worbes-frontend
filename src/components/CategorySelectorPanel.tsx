@@ -67,8 +67,8 @@ const CategorySelectorPanel: FC<Props> = ({
       Boolean,
     );
     const nextState = {
-      classId: option.metadata?.class,
-      subClassId: option.metadata?.subClass,
+      classId: nextValues.length > 0 ? option.metadata?.class : undefined,
+      subClassId: nextValues.length > 0 ? option.metadata?.subClass : undefined,
       label: last(nextValues)?.split(":").join(" > "),
     };
 

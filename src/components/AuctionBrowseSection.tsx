@@ -11,12 +11,13 @@ import LayoutContainer from "@/components/LayoutContainer";
 import RealmSelector from "@/components/RealmSelector";
 import RegionSelector from "@/components/RegionSelector";
 import Translation from "@/components/Translation";
-import { useCategorySelection } from "@/hooks/useCategorySelection";
 import { useInfiniteAuctions } from "@/hooks/useInfiniteAuctions";
 import { useSelectedRealm } from "@/hooks/useSelectedRealm";
 import { useSelectedRegion } from "@/hooks/useSelectedRegion";
 import { useTranslations } from "@/hooks/useTranslations";
 import { AuctionsFilter } from "@/types/auction";
+import { CategorySelection } from "@/types/category";
+import { Nullable } from "@/types/misc";
 import { cn } from "@/utils/styles";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { ChangeEvent, FC, useState } from "react";
@@ -31,7 +32,8 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
 
   const [selectedRegion, setSelectedRegion] = useSelectedRegion();
   const [selectedRealm, setSelectedRealm] = useSelectedRealm();
-  const [categorySelection, setCategorySelection] = useCategorySelection();
+  const [categorySelection, setCategorySelection] =
+    useState<Nullable<CategorySelection>>(null);
 
   const [restFilters, setRestFilters] = useState<
     Pick<
