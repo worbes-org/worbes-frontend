@@ -5,13 +5,21 @@ import {
   LinearButton,
   LinearCard,
   LinearCategoryList,
+  LinearDropdown,
+  type LinearDropdownOption,
   LinearHeading,
   LinearInput,
+  LinearSegmentedControl,
+  type LinearSegmentedControlOption,
   LinearSeparator,
   LinearText,
 } from "@/components/linear";
 import type { CategorySelection } from "@/types/category";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import {
+  BuildingOfficeIcon,
+  GlobeAltIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
 import { type FC, useState } from "react";
 
 const ComponentsPage: FC = () => {
@@ -19,6 +27,37 @@ const ComponentsPage: FC = () => {
   const [inputError, setInputError] = useState("");
   const [categorySelection, setCategorySelection] =
     useState<CategorySelection | null>(null);
+
+  // Dropdown 데모 상태
+  const [selectedRegion, setSelectedRegion] = useState<string>("");
+  const [selectedRealm, setSelectedRealm] = useState<string>("");
+  const [selectedSimple, setSelectedSimple] = useState<string>("");
+
+  // Segmented Control 데모 상태
+  const [selectedRegionSegmented, setSelectedRegionSegmented] =
+    useState<string>("KR");
+
+  const regionOptions: LinearDropdownOption[] = [
+    { value: "KR", label: "Korea", icon: <GlobeAltIcon className="size-4" /> },
+    { value: "US", label: "United States", icon: <GlobeAltIcon className="size-4" /> },
+    { value: "EU", label: "Europe", icon: <GlobeAltIcon className="size-4" /> },
+  ];
+
+  const realmOptions: LinearDropdownOption[] = [
+    { value: "azshara", label: "아즈샤라", icon: <BuildingOfficeIcon className="size-4" /> },
+    { value: "dalaran", label: "달라란", icon: <BuildingOfficeIcon className="size-4" /> },
+    { value: "stormrage", label: "스톰레이지", icon: <BuildingOfficeIcon className="size-4" /> },
+    { value: "arthas", label: "아서스", icon: <BuildingOfficeIcon className="size-4" /> },
+    { value: "kiljaeden", label: "킬제덴", icon: <BuildingOfficeIcon className="size-4" /> },
+  ];
+
+  const simpleOptions: LinearDropdownOption[] = [
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
+    { value: "option4", label: "Option 4", disabled: true },
+    { value: "option5", label: "Option 5" },
+  ];
 
   return (
     <div className="min-h-screen bg-[var(--linear-bg-primary)]">
@@ -304,6 +343,420 @@ const ComponentsPage: FC = () => {
                       </code>
                       : 추가 스타일
                     </div>
+                  </div>
+                </div>
+              </div>
+            </LinearCard>
+          </div>
+        </section>
+
+        {/* Dropdown Section */}
+        <section className="mb-16">
+          <LinearHeading level={2} className="mb-6">
+            Dropdown
+          </LinearHeading>
+          <div className="grid gap-6 lg:grid-cols-2">
+            <LinearCard variant="default" padding="lg" className="space-y-6">
+              <div>
+                <LinearHeading level={4} className="mb-2">
+                  Dropdown Menu
+                </LinearHeading>
+                <LinearText variant="tertiary" size="sm">
+                  Linear 스타일의 드롭다운 메뉴 컴포넌트
+                </LinearText>
+              </div>
+              <LinearSeparator />
+              <div className="space-y-4">
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-3">
+                    Basic Dropdown
+                  </LinearText>
+                  <LinearDropdown
+                    options={simpleOptions}
+                    value={selectedSimple}
+                    onChange={(value) => setSelectedSimple(value)}
+                    placeholder="Select an option..."
+                  />
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-3">
+                    With Icons
+                  </LinearText>
+                  <LinearDropdown
+                    options={regionOptions}
+                    value={selectedRegion}
+                    onChange={(value) => setSelectedRegion(value)}
+                    placeholder="Select region..."
+                    leftIcon={<GlobeAltIcon className="size-4" />}
+                  />
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-3">
+                    Searchable Dropdown
+                  </LinearText>
+                  <LinearDropdown
+                    options={realmOptions}
+                    value={selectedRealm}
+                    onChange={(value) => setSelectedRealm(value)}
+                    placeholder="Search realm..."
+                    searchable
+                    searchPlaceholder="서버 검색..."
+                    leftIcon={<MagnifyingGlassIcon className="size-4" />}
+                  />
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-3">
+                    With Label & Helper Text
+                  </LinearText>
+                  <LinearDropdown
+                    label="Region"
+                    options={regionOptions}
+                    value={selectedRegion}
+                    onChange={(value) => setSelectedRegion(value)}
+                    placeholder="Select region..."
+                    helperText="Choose your region"
+                  />
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-3">
+                    Sizes
+                  </LinearText>
+                  <div className="space-y-3">
+                    <LinearDropdown
+                      size="sm"
+                      options={simpleOptions.slice(0, 3)}
+                      placeholder="Small dropdown"
+                    />
+                    <LinearDropdown
+                      size="md"
+                      options={simpleOptions.slice(0, 3)}
+                      placeholder="Medium dropdown"
+                    />
+                    <LinearDropdown
+                      size="lg"
+                      options={simpleOptions.slice(0, 3)}
+                      placeholder="Large dropdown"
+                    />
+                  </div>
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-3">
+                    States
+                  </LinearText>
+                  <div className="space-y-3">
+                    <LinearDropdown
+                      options={simpleOptions.slice(0, 3)}
+                      placeholder="Disabled dropdown"
+                      disabled
+                    />
+                    <LinearDropdown
+                      options={simpleOptions.slice(0, 3)}
+                      placeholder="Loading dropdown"
+                      isLoading
+                    />
+                  </div>
+                </div>
+              </div>
+            </LinearCard>
+            <LinearCard variant="elevated" padding="lg">
+              <LinearHeading level={4} className="mb-4">
+                사용 방법
+              </LinearHeading>
+              <div className="space-y-4">
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                    Features
+                  </LinearText>
+                  <ul className="space-y-1.5 text-sm text-[var(--linear-text-secondary)]">
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      검색 가능한 드롭다운 (searchable)
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      아이콘 지원 (leftIcon, rightIcon, option.icon)
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      키보드 네비게이션 (Arrow keys, Enter, Escape)
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      외부 클릭 시 자동 닫기
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      선택 상태 시각적 표시
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      커스텀 렌더링 지원 (renderOption, renderTrigger)
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      Linear 테마 스타일 적용
+                    </li>
+                  </ul>
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                    Props
+                  </LinearText>
+                  <div className="space-y-2 text-xs text-[var(--linear-text-tertiary)]">
+                    <div>
+                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                        options
+                      </code>
+                      : 드롭다운 옵션 배열
+                    </div>
+                    <div>
+                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                        value
+                      </code>
+                      : 선택된 값
+                    </div>
+                    <div>
+                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                        onChange
+                      </code>
+                      : 선택 변경 핸들러
+                    </div>
+                    <div>
+                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                        searchable
+                      </code>
+                      : 검색 기능 활성화
+                    </div>
+                    <div>
+                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                        size
+                      </code>
+                      : 크기 (sm, md, lg)
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </LinearCard>
+          </div>
+        </section>
+
+        {/* Segmented Control Section */}
+        <section className="mb-16">
+          <LinearHeading level={2} className="mb-6">
+            Segmented Control
+          </LinearHeading>
+          <div className="grid gap-6 lg:grid-cols-2">
+            <LinearCard variant="default" padding="lg" className="space-y-6">
+              <div>
+                <LinearHeading level={4} className="mb-2">
+                  Region Selector
+                </LinearHeading>
+                <LinearText variant="tertiary" size="sm">
+                  4개 이하의 옵션 선택에 적합한 Segmented Control
+                </LinearText>
+              </div>
+              <LinearSeparator />
+              <div className="space-y-6">
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-3">
+                    Region Selection (추천)
+                  </LinearText>
+                  <LinearSegmentedControl
+                    options={[
+                      { value: "KR", label: "KR" },
+                      { value: "EU", label: "EU" },
+                      { value: "US", label: "US" },
+                      { value: "TW", label: "TW" },
+                    ]}
+                    value={selectedRegionSegmented}
+                    onChange={setSelectedRegionSegmented}
+                  />
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-3">
+                    With Icons
+                  </LinearText>
+                  <LinearSegmentedControl
+                    options={[
+                      {
+                        value: "KR",
+                        label: "Korea",
+                        icon: <GlobeAltIcon className="size-4" />,
+                      },
+                      {
+                        value: "EU",
+                        label: "Europe",
+                        icon: <GlobeAltIcon className="size-4" />,
+                      },
+                      {
+                        value: "US",
+                        label: "United States",
+                        icon: <GlobeAltIcon className="size-4" />,
+                      },
+                      {
+                        value: "TW",
+                        label: "Taiwan",
+                        icon: <GlobeAltIcon className="size-4" />,
+                      },
+                    ]}
+                    value={selectedRegionSegmented}
+                    onChange={setSelectedRegionSegmented}
+                  />
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-3">
+                    Full Width
+                  </LinearText>
+                  <LinearSegmentedControl
+                    options={[
+                      { value: "KR", label: "KR" },
+                      { value: "EU", label: "EU" },
+                      { value: "US", label: "US" },
+                      { value: "TW", label: "TW" },
+                    ]}
+                    value={selectedRegionSegmented}
+                    onChange={setSelectedRegionSegmented}
+                    fullWidth
+                  />
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-3">
+                    Sizes
+                  </LinearText>
+                  <div className="space-y-3">
+                    <LinearSegmentedControl
+                      size="sm"
+                      options={[
+                        { value: "KR", label: "KR" },
+                        { value: "EU", label: "EU" },
+                      ]}
+                      value={selectedRegionSegmented}
+                      onChange={setSelectedRegionSegmented}
+                    />
+                    <LinearSegmentedControl
+                      size="md"
+                      options={[
+                        { value: "KR", label: "KR" },
+                        { value: "EU", label: "EU" },
+                      ]}
+                      value={selectedRegionSegmented}
+                      onChange={setSelectedRegionSegmented}
+                    />
+                    <LinearSegmentedControl
+                      size="lg"
+                      options={[
+                        { value: "KR", label: "KR" },
+                        { value: "EU", label: "EU" },
+                      ]}
+                      value={selectedRegionSegmented}
+                      onChange={setSelectedRegionSegmented}
+                    />
+                  </div>
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-3">
+                    States
+                  </LinearText>
+                  <div className="space-y-3">
+                    <LinearSegmentedControl
+                      options={[
+                        { value: "KR", label: "KR" },
+                        { value: "EU", label: "EU", disabled: true },
+                        { value: "US", label: "US" },
+                      ]}
+                      value={selectedRegionSegmented}
+                      onChange={setSelectedRegionSegmented}
+                    />
+                    <LinearSegmentedControl
+                      options={[
+                        { value: "KR", label: "KR" },
+                        { value: "EU", label: "EU" },
+                      ]}
+                      value={selectedRegionSegmented}
+                      onChange={setSelectedRegionSegmented}
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+            </LinearCard>
+            <LinearCard variant="elevated" padding="lg">
+              <LinearHeading level={4} className="mb-4">
+                Region 선택 UI/UX 제안
+              </LinearHeading>
+              <div className="space-y-4">
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                    추천: Segmented Control
+                  </LinearText>
+                  <ul className="space-y-1.5 text-sm text-[var(--linear-text-secondary)]">
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      4개 이하 옵션에 최적화
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      선택 상태가 한눈에 보임
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      클릭 한 번으로 선택 가능
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      모바일에서도 터치하기 쉬움
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      Linear 스타일과 잘 어울림
+                    </li>
+                  </ul>
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                    현재 상황 고려
+                  </LinearText>
+                  <div className="space-y-2 text-xs text-[var(--linear-text-tertiary)]">
+                    <div>
+                      • 현재는 KR만 제공 → Segmented Control로 표시하되 KR만 활성화
+                    </div>
+                    <div>
+                      • 향후 확장 시 → 추가 region 버튼 활성화
+                    </div>
+                    <div>
+                      • 사용자가 현재 사용 가능한 region을 명확히 인지
+                    </div>
+                  </div>
+                </div>
+                <LinearSeparator />
+                <div>
+                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                    구현 예시
+                  </LinearText>
+                  <div className="rounded-lg bg-[var(--linear-bg-level2)] p-3 text-xs text-[var(--linear-text-tertiary)]">
+                    <code className="text-[var(--linear-text-primary)]">
+                      {`<LinearSegmentedControl
+  options={[
+    { value: "KR", label: "KR" },
+    { value: "EU", label: "EU", disabled: true },
+    { value: "US", label: "US", disabled: true },
+    { value: "TW", label: "TW", disabled: true },
+  ]}
+  value={selectedRegion}
+  onChange={setSelectedRegion}
+/>`}
+                    </code>
                   </div>
                 </div>
               </div>
