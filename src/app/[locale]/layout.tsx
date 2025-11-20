@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import { cn } from "@/utils/styles";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
@@ -31,7 +32,7 @@ const RootLayout: AFC<PropsWithChildren> = async ({ children }) => {
       </Script>
       <Script src="https://wow.zamimg.com/js/tooltips.js" />
 
-      <body className={`${primaryFont.variable} antialiased`}>{children}</body>
+      <body className={cn(primaryFont.variable)}>{children}</body>
     </html>
   );
 };
