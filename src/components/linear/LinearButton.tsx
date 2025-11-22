@@ -1,12 +1,9 @@
 import { cn } from "@/utils/styles";
 import { type ComponentProps, type FC } from "react";
 
-type LinearButtonVariant = "primary" | "secondary" | "ghost" | "accent";
-type LinearButtonSize = "sm" | "md" | "lg";
-
 type Props = {
-  variant?: LinearButtonVariant;
-  size?: LinearButtonSize;
+  variant?: "primary" | "secondary" | "ghost" | "accent";
+  size?: "sm" | "md" | "lg";
   isLoading?: boolean;
 } & ComponentProps<"button">;
 
@@ -25,23 +22,22 @@ const LinearButton: FC<Props> = ({
         "inline-flex items-center justify-center font-medium transition-all",
         "focus-visible:ring-2 focus-visible:ring-accent-700 focus-visible:ring-offset-2 focus-visible:outline-none",
         "disabled:cursor-not-allowed disabled:opacity-50",
-        // Size variants
+
         size === "sm" && "h-8 rounded-lg px-3 text-sm",
         size === "md" && "h-10 rounded-lg px-4 text-sm",
         size === "lg" && "h-12 rounded-xl px-6 text-base",
-        // Primary variant
+
         variant === "primary" &&
           "border border-[#23252a] bg-gray-800 text-gray-100",
         variant === "primary" && "hover:border-[#34343a] hover:bg-[#191a1b]",
-        // Secondary variant
+
         variant === "secondary" &&
           "border border-[#23252a] bg-transparent text-gray-200",
         variant === "secondary" && "hover:bg-white/5 hover:text-gray-100",
-        // Ghost variant
+
         variant === "ghost" &&
           "border border-transparent bg-transparent text-gray-200",
         variant === "ghost" && "hover:bg-white/5 hover:text-gray-100",
-        // Accent variant
         variant === "accent" &&
           "border border-transparent bg-accent-600 text-white",
         variant === "accent" && "hover:bg-accent-500",

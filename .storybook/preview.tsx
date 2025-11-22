@@ -3,6 +3,8 @@ import "../public/fonts/PretendardVariable.woff2";
 import "../src/styles/globals.css";
 
 const preview: Preview = {
+  parameters: { layout: "centered" },
+  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <>
