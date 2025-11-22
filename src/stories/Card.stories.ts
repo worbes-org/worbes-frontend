@@ -10,8 +10,6 @@ const meta = {
   },
 } satisfies Meta<typeof Card>;
 
-export default meta;
-
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -25,3 +23,5 @@ export const Elevated: Story = {
 export const Outlined: Story = {
   args: { theme: "outlined" },
 };
+
+export default meta;

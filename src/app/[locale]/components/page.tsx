@@ -1,14 +1,14 @@
 "use client";
 
+import Badge from "@/components/Badge";
+import Button from "@/components/Button";
+import Card from "@/components/Card";
+import Input from "@/components/Input";
 import {
-  Badge,
-  Button,
-  Card,
   LinearCategoryList,
   LinearDropdown,
   type LinearDropdownOption,
   LinearHeading,
-  LinearInput,
   LinearSegmentedControl,
   LinearSeparator,
 } from "@/components/linear";
@@ -170,7 +170,8 @@ const ComponentsPage: FC = () => {
                 <Text theme="secondary" size="sm" className="mb-2">
                   Basic Input
                 </Text>
-                <LinearInput
+                <Input
+                  size="md"
                   placeholder="Enter text..."
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
@@ -181,7 +182,8 @@ const ComponentsPage: FC = () => {
                 <Text theme="secondary" size="sm" className="mb-2">
                   With Label & Helper Text
                 </Text>
-                <LinearInput
+                <Input
+                  size="md"
                   label="Email"
                   placeholder="you@example.com"
                   helperText="We'll never share your email."
@@ -192,7 +194,8 @@ const ComponentsPage: FC = () => {
                 <Text theme="secondary" size="sm" className="mb-2">
                   With Icons
                 </Text>
-                <LinearInput
+                <Input
+                  size="md"
                   placeholder="Search..."
                   leftIcon={<MagnifyingGlassIcon className="size-4" />}
                 />
@@ -202,7 +205,8 @@ const ComponentsPage: FC = () => {
                 <Text theme="secondary" size="sm" className="mb-2">
                   Error State
                 </Text>
-                <LinearInput
+                <Input
+                  size="md"
                   label="Password"
                   type="password"
                   placeholder="Enter password"
@@ -217,9 +221,9 @@ const ComponentsPage: FC = () => {
                   Sizes
                 </Text>
                 <div className="space-y-3">
-                  <LinearInput size="sm" placeholder="Small input" />
-                  <LinearInput size="md" placeholder="Medium input" />
-                  <LinearInput size="lg" placeholder="Large input" />
+                  <Input size="sm" placeholder="Small input" />
+                  <Input size="md" placeholder="Medium input" />
+                  <Input size="lg" placeholder="Large input" />
                 </div>
               </div>
             </div>
@@ -896,10 +900,18 @@ const ComponentsPage: FC = () => {
                   Text Sizes
                 </Text>
                 <div className="space-y-2">
-                  <Text size="xs">Extra small text</Text>
-                  <Text size="sm">Small text</Text>
-                  <Text size="md">Base text</Text>
-                  <Text size="lg">Large text</Text>
+                  <Text theme="secondary" size="xs">
+                    Extra small text
+                  </Text>
+                  <Text theme="secondary" size="sm">
+                    Small text
+                  </Text>
+                  <Text theme="secondary" size="md">
+                    Base text
+                  </Text>
+                  <Text theme="secondary" size="lg">
+                    Large text
+                  </Text>
                 </div>
               </div>
             </div>
@@ -923,12 +935,14 @@ const ComponentsPage: FC = () => {
               </div>
               <LinearSeparator />
               <div className="space-y-4">
-                <LinearInput
+                <Input
+                  size="md"
                   label="Project Name"
                   placeholder="My Awesome Project"
                   helperText="Choose a descriptive name for your project"
                 />
-                <LinearInput
+                <Input
+                  size="md"
                   label="Description"
                   placeholder="What is this project about?"
                 />
