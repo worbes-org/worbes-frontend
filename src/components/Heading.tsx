@@ -8,13 +8,7 @@ type Props = {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 } & ComponentProps<"h1">;
 
-const LinearHeading: FC<Props> = ({
-  as,
-  level,
-  className,
-  children,
-  ...props
-}) => {
+const Heading: FC<Props> = ({ as, level, className, children, ...props }) => {
   const HeadingTag = as || (`h${level || 1}` as LinearHeadingLevel);
   const actualLevel = level || 1;
 
@@ -22,17 +16,11 @@ const LinearHeading: FC<Props> = ({
     <HeadingTag
       className={cn(
         "font-semibold tracking-tight text-gray-100",
-        // Level 1
         actualLevel === 1 && "text-4xl leading-tight",
-        // Level 2
         actualLevel === 2 && "text-3xl leading-tight",
-        // Level 3
         actualLevel === 3 && "text-2xl leading-snug",
-        // Level 4
         actualLevel === 4 && "text-xl leading-snug",
-        // Level 5
         actualLevel === 5 && "text-lg leading-normal",
-        // Level 6
         actualLevel === 6 && "text-base leading-normal",
         className,
       )}
@@ -43,4 +31,4 @@ const LinearHeading: FC<Props> = ({
   );
 };
 
-export default LinearHeading;
+export default Heading;
