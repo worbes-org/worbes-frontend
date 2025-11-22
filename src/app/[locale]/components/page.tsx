@@ -9,8 +9,8 @@ import {
   LinearCategoryList,
   LinearDropdown,
   type LinearDropdownOption,
-  LinearSegmentedControl,
 } from "@/components/linear";
+import SegmentedControl from "@/components/SegmentedControl";
 import Separator from "@/components/Separator";
 import Text from "@/components/Text";
 import type { CategorySelection } from "@/types/category";
@@ -646,7 +646,8 @@ const ComponentsPage: FC = () => {
                   <Text theme="secondary" size="sm" className="mb-3">
                     Region Selection (추천)
                   </Text>
-                  <LinearSegmentedControl
+                  <SegmentedControl
+                    size="md"
                     options={[
                       { value: "KR", label: "KR" },
                       { value: "EU", label: "EU" },
@@ -662,27 +663,28 @@ const ComponentsPage: FC = () => {
                   <Text theme="secondary" size="sm" className="mb-3">
                     With Icons
                   </Text>
-                  <LinearSegmentedControl
+                  <SegmentedControl
+                    size="md"
                     options={[
                       {
                         value: "KR",
                         label: "Korea",
-                        icon: <GlobeAltIcon className="size-4" />,
+                        Icon: GlobeAltIcon,
                       },
                       {
                         value: "EU",
                         label: "Europe",
-                        icon: <GlobeAltIcon className="size-4" />,
+                        Icon: GlobeAltIcon,
                       },
                       {
                         value: "US",
                         label: "United States",
-                        icon: <GlobeAltIcon className="size-4" />,
+                        Icon: GlobeAltIcon,
                       },
                       {
                         value: "TW",
                         label: "Taiwan",
-                        icon: <GlobeAltIcon className="size-4" />,
+                        Icon: GlobeAltIcon,
                       },
                     ]}
                     value={selectedRegionSegmented}
@@ -694,7 +696,8 @@ const ComponentsPage: FC = () => {
                   <Text theme="secondary" size="sm" className="mb-3">
                     Full Width
                   </Text>
-                  <LinearSegmentedControl
+                  <SegmentedControl
+                    size="md"
                     options={[
                       { value: "KR", label: "KR" },
                       { value: "EU", label: "EU" },
@@ -712,7 +715,7 @@ const ComponentsPage: FC = () => {
                     Sizes
                   </Text>
                   <div className="space-y-3">
-                    <LinearSegmentedControl
+                    <SegmentedControl
                       size="sm"
                       options={[
                         { value: "KR", label: "KR" },
@@ -721,7 +724,7 @@ const ComponentsPage: FC = () => {
                       value={selectedRegionSegmented}
                       onChange={setSelectedRegionSegmented}
                     />
-                    <LinearSegmentedControl
+                    <SegmentedControl
                       size="md"
                       options={[
                         { value: "KR", label: "KR" },
@@ -730,7 +733,7 @@ const ComponentsPage: FC = () => {
                       value={selectedRegionSegmented}
                       onChange={setSelectedRegionSegmented}
                     />
-                    <LinearSegmentedControl
+                    <SegmentedControl
                       size="lg"
                       options={[
                         { value: "KR", label: "KR" },
@@ -747,7 +750,8 @@ const ComponentsPage: FC = () => {
                     States
                   </Text>
                   <div className="space-y-3">
-                    <LinearSegmentedControl
+                    <SegmentedControl
+                      size="md"
                       options={[
                         { value: "KR", label: "KR" },
                         { value: "EU", label: "EU", disabled: true },
@@ -756,7 +760,8 @@ const ComponentsPage: FC = () => {
                       value={selectedRegionSegmented}
                       onChange={setSelectedRegionSegmented}
                     />
-                    <LinearSegmentedControl
+                    <SegmentedControl
+                      size="md"
                       options={[
                         { value: "KR", label: "KR" },
                         { value: "EU", label: "EU" },

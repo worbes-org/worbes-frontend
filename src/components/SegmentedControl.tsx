@@ -1,48 +1,33 @@
 "use client";
 
 import { cn } from "@/utils/styles";
-import { type ReactNode } from "react";
 
-export type LinearSegmentedControlOption<T = string> = {
+export type SegmentedControlOption<T = string> = {
   value: T;
   label: string;
-  icon?: ReactNode;
+  Icon?: React.FC<{ className?: string }>;
   disabled?: boolean;
 };
-
-type LinearSegmentedControlSize = "sm" | "md" | "lg";
 
 type Props<T = string> = {
-  options: LinearSegmentedControlOption<T>[];
-  value?: T;
-  onChange?: (value: T) => void;
-  size?: LinearSegmentedControlSize;
-  disabled?: boolean;
   className?: string;
+  value?: T;
+  options: SegmentedControlOption<T>[];
+  size: "sm" | "md" | "lg";
+  disabled?: boolean;
   fullWidth?: boolean;
+  onChange?: (value: T) => void;
 };
 
-const LinearSegmentedControl = <T extends string | number = string>({
-  options,
-  value,
-  onChange,
-  size = "md",
-  disabled = false,
+const SegmentedControl = <T extends string | number = string>({
   className,
-  fullWidth = false,
+  value,
+  options,
+  size,
+  disabled,
+  fullWidth,
+  onChange,
 }: Props<T>) => {
-  const sizeClasses = {
-    sm: "h-8 text-sm px-3",
-    md: "h-10 text-sm px-4",
-    lg: "h-12 text-base px-6",
-  };
-
-  const iconSizeClasses = {
-    sm: "size-3.5",
-    md: "size-4",
-    lg: "size-5",
-  };
-
   return (
     <div
       className={cn(
@@ -69,29 +54,26 @@ const LinearSegmentedControl = <T extends string | number = string>({
               "relative flex items-center justify-center gap-2 rounded-md font-medium transition-all",
               "focus-visible:ring-2 focus-visible:ring-accent-700 focus-visible:ring-offset-1 focus-visible:outline-none",
               "disabled:cursor-not-allowed",
-              sizeClasses[size],
-              // 선택된 상태
+              size === "sm" && "h-8 px-3 text-sm",
+              size === "md" && "h-10 px-4 text-sm",
+              size === "lg" && "h-12 px-6 text-base",
               isSelected && "bg-accent-600 text-white shadow-sm",
-              // 선택되지 않은 상태
               !isSelected &&
                 !isDisabled &&
                 "text-gray-200 hover:bg-white/5 hover:text-gray-100",
-              // 비활성 상태
               isDisabled && !isSelected && "text-gray-400",
-              // 첫 번째와 마지막 항목의 간격 조정
-              index > 0 && "ml-0.5",
             )}
           >
-            {option.icon && (
-              <span
+            {option.Icon && (
+              <option.Icon
                 className={cn(
                   "shrink-0",
-                  iconSizeClasses[size],
+                  size === "sm" && "size-3.5",
+                  size === "md" && "size-4",
+                  size === "lg" && "size-5",
                   isSelected ? "text-white" : "text-current",
                 )}
-              >
-                {option.icon}
-              </span>
+              />
             )}
             <span className="truncate">{option.label}</span>
           </button>
@@ -101,4 +83,4 @@ const LinearSegmentedControl = <T extends string | number = string>({
   );
 };
 
-export default LinearSegmentedControl;
+export default SegmentedControl;
