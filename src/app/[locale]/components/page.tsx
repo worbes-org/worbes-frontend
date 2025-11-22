@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  LinearBadge,
-  LinearButton,
-  LinearCard,
+  Badge,
+  Button,
+  Card,
   LinearCategoryList,
   LinearDropdown,
   type LinearDropdownOption,
@@ -11,8 +11,8 @@ import {
   LinearInput,
   LinearSegmentedControl,
   LinearSeparator,
-  LinearText,
 } from "@/components/linear";
+import Text from "@/components/Text";
 import type { CategorySelection } from "@/types/category";
 import {
   BuildingOfficeIcon,
@@ -90,9 +90,9 @@ const ComponentsPage: FC = () => {
           <LinearHeading level={1} className="mb-4">
             Linear Design System
           </LinearHeading>
-          <LinearText variant="secondary" size="lg">
+          <Text theme="secondary" size="lg">
             재사용 가능한 컴포넌트 라이브러리 데모
-          </LinearText>
+          </Text>
         </div>
 
         {/* Buttons Section */}
@@ -100,43 +100,63 @@ const ComponentsPage: FC = () => {
           <LinearHeading level={2} className="mb-6">
             Buttons
           </LinearHeading>
-          <LinearCard padding="lg" className="space-y-6">
+          <Card theme="default" size="lg" className="space-y-6">
             <div className="space-y-4">
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-2">
+                <Text theme="secondary" size="sm" className="mb-2">
                   Variants
-                </LinearText>
+                </Text>
                 <div className="flex flex-wrap gap-3">
-                  <LinearButton variant="primary">Primary</LinearButton>
-                  <LinearButton variant="secondary">Secondary</LinearButton>
-                  <LinearButton variant="ghost">Ghost</LinearButton>
-                  <LinearButton variant="accent">Accent</LinearButton>
+                  <Button theme="primary" size="md">
+                    Primary
+                  </Button>
+                  <Button theme="secondary" size="md">
+                    Secondary
+                  </Button>
+                  <Button theme="tertiary" size="md">
+                    Tertiary
+                  </Button>
+                  <Button theme="quaternary" size="md">
+                    Quaternary
+                  </Button>
                 </div>
               </div>
               <LinearSeparator />
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-2">
+                <Text theme="secondary" size="sm" className="mb-2">
                   Sizes
-                </LinearText>
+                </Text>
                 <div className="flex flex-wrap items-center gap-3">
-                  <LinearButton size="sm">Small</LinearButton>
-                  <LinearButton size="md">Medium</LinearButton>
-                  <LinearButton size="lg">Large</LinearButton>
+                  <Button theme="primary" size="sm">
+                    Small
+                  </Button>
+                  <Button theme="primary" size="md">
+                    Medium
+                  </Button>
+                  <Button theme="primary" size="lg">
+                    Large
+                  </Button>
                 </div>
               </div>
               <LinearSeparator />
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-2">
+                <Text theme="secondary" size="sm" className="mb-2">
                   States
-                </LinearText>
+                </Text>
                 <div className="flex flex-wrap gap-3">
-                  <LinearButton>Normal</LinearButton>
-                  <LinearButton isLoading>Loading</LinearButton>
-                  <LinearButton disabled>Disabled</LinearButton>
+                  <Button theme="primary" size="md">
+                    Normal
+                  </Button>
+                  <Button theme="primary" size="md" isLoading>
+                    Loading
+                  </Button>
+                  <Button theme="primary" size="md" disabled>
+                    Disabled
+                  </Button>
                 </div>
               </div>
             </div>
-          </LinearCard>
+          </Card>
         </section>
 
         {/* Inputs Section */}
@@ -144,12 +164,12 @@ const ComponentsPage: FC = () => {
           <LinearHeading level={2} className="mb-6">
             Inputs
           </LinearHeading>
-          <LinearCard padding="lg" className="space-y-6">
+          <Card theme="default" size="lg" className="space-y-6">
             <div className="space-y-4">
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-2">
+                <Text theme="secondary" size="sm" className="mb-2">
                   Basic Input
-                </LinearText>
+                </Text>
                 <LinearInput
                   placeholder="Enter text..."
                   value={inputValue}
@@ -158,9 +178,9 @@ const ComponentsPage: FC = () => {
               </div>
               <LinearSeparator />
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-2">
+                <Text theme="secondary" size="sm" className="mb-2">
                   With Label & Helper Text
-                </LinearText>
+                </Text>
                 <LinearInput
                   label="Email"
                   placeholder="you@example.com"
@@ -169,9 +189,9 @@ const ComponentsPage: FC = () => {
               </div>
               <LinearSeparator />
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-2">
+                <Text theme="secondary" size="sm" className="mb-2">
                   With Icons
-                </LinearText>
+                </Text>
                 <LinearInput
                   placeholder="Search..."
                   leftIcon={<MagnifyingGlassIcon className="size-4" />}
@@ -179,9 +199,9 @@ const ComponentsPage: FC = () => {
               </div>
               <LinearSeparator />
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-2">
+                <Text theme="secondary" size="sm" className="mb-2">
                   Error State
-                </LinearText>
+                </Text>
                 <LinearInput
                   label="Password"
                   type="password"
@@ -193,9 +213,9 @@ const ComponentsPage: FC = () => {
               </div>
               <LinearSeparator />
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-2">
+                <Text theme="secondary" size="sm" className="mb-2">
                   Sizes
-                </LinearText>
+                </Text>
                 <div className="space-y-3">
                   <LinearInput size="sm" placeholder="Small input" />
                   <LinearInput size="md" placeholder="Medium input" />
@@ -203,7 +223,7 @@ const ComponentsPage: FC = () => {
                 </div>
               </div>
             </div>
-          </LinearCard>
+          </Card>
         </section>
 
         {/* Cards Section */}
@@ -212,30 +232,30 @@ const ComponentsPage: FC = () => {
             Cards
           </LinearHeading>
           <div className="grid gap-6 md:grid-cols-3">
-            <LinearCard variant="default" padding="md">
+            <Card theme="default" size="md">
               <LinearHeading level={4} className="mb-2">
                 Default Card
               </LinearHeading>
-              <LinearText variant="secondary" size="sm">
+              <Text theme="secondary" size="sm">
                 기본 카드 스타일입니다.
-              </LinearText>
-            </LinearCard>
-            <LinearCard variant="elevated" padding="md">
+              </Text>
+            </Card>
+            <Card theme="elevated" size="md">
               <LinearHeading level={4} className="mb-2">
                 Elevated Card
               </LinearHeading>
-              <LinearText variant="secondary" size="sm">
+              <Text theme="secondary" size="sm">
                 그림자가 있는 카드입니다.
-              </LinearText>
-            </LinearCard>
-            <LinearCard variant="outlined" padding="md">
+              </Text>
+            </Card>
+            <Card theme="outlined" size="md">
               <LinearHeading level={4} className="mb-2">
                 Outlined Card
               </LinearHeading>
-              <LinearText variant="secondary" size="sm">
+              <Text theme="secondary" size="sm">
                 테두리만 있는 카드입니다.
-              </LinearText>
-            </LinearCard>
+              </Text>
+            </Card>
           </div>
         </section>
 
@@ -244,33 +264,49 @@ const ComponentsPage: FC = () => {
           <LinearHeading level={2} className="mb-6">
             Badges
           </LinearHeading>
-          <LinearCard padding="lg" className="space-y-6">
+          <Card theme="default" size="lg" className="space-y-6">
             <div className="space-y-4">
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-2">
+                <Text theme="secondary" size="sm" className="mb-2">
                   Variants
-                </LinearText>
+                </Text>
                 <div className="flex flex-wrap gap-2">
-                  <LinearBadge variant="default">Default</LinearBadge>
-                  <LinearBadge variant="accent">Accent</LinearBadge>
-                  <LinearBadge variant="success">Success</LinearBadge>
-                  <LinearBadge variant="warning">Warning</LinearBadge>
-                  <LinearBadge variant="error">Error</LinearBadge>
-                  <LinearBadge variant="info">Info</LinearBadge>
+                  <Badge theme="default" size="md">
+                    Default
+                  </Badge>
+                  <Badge theme="accent" size="md">
+                    Accent
+                  </Badge>
+                  <Badge theme="success" size="md">
+                    Success
+                  </Badge>
+                  <Badge theme="warning" size="md">
+                    Warning
+                  </Badge>
+                  <Badge theme="error" size="md">
+                    Error
+                  </Badge>
+                  <Badge theme="info" size="md">
+                    Info
+                  </Badge>
                 </div>
               </div>
               <LinearSeparator />
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-2">
+                <Text theme="secondary" size="sm" className="mb-2">
                   Sizes
-                </LinearText>
+                </Text>
                 <div className="flex flex-wrap items-center gap-2">
-                  <LinearBadge size="sm">Small</LinearBadge>
-                  <LinearBadge size="md">Medium</LinearBadge>
+                  <Badge theme="default" size="sm">
+                    Small
+                  </Badge>
+                  <Badge theme="default" size="md">
+                    Medium
+                  </Badge>
                 </div>
               </div>
             </div>
-          </LinearCard>
+          </Card>
         </section>
 
         {/* Category List Section */}
@@ -279,18 +315,14 @@ const ComponentsPage: FC = () => {
             Category List
           </LinearHeading>
           <div className="grid gap-6 lg:grid-cols-2">
-            <LinearCard
-              variant="default"
-              padding="none"
-              className="overflow-hidden"
-            >
+            <Card theme="default" size="none" className="overflow-hidden">
               <div className="border-b border-[#23252a] bg-gray-800 px-4 py-3">
                 <LinearHeading level={4}>
                   Linear Style Category List
                 </LinearHeading>
-                <LinearText variant="tertiary" size="sm" className="mt-1">
+                <Text theme="tertiary" size="sm" className="mt-1">
                   아이템 카테고리 선택 컴포넌트
-                </LinearText>
+                </Text>
               </div>
               <div className="h-[600px] overflow-y-auto">
                 <LinearCategoryList
@@ -300,39 +332,35 @@ const ComponentsPage: FC = () => {
               </div>
               {categorySelection && (
                 <div className="border-t border-[#23252a] bg-gray-800 px-4 py-3">
-                  <LinearText variant="secondary" size="sm" className="mb-1">
+                  <Text theme="secondary" size="sm" className="mb-1">
                     선택된 카테고리:
-                  </LinearText>
-                  <LinearText
-                    variant="primary"
-                    size="sm"
-                    className="font-medium"
-                  >
+                  </Text>
+                  <Text theme="primary" size="sm" className="font-medium">
                     {categorySelection.label || "없음"}
-                  </LinearText>
+                  </Text>
                   {categorySelection.classId && (
-                    <LinearText variant="tertiary" size="xs" className="mt-1">
+                    <Text theme="tertiary" size="xs" className="mt-1">
                       Class: {categorySelection.classId}
                       {categorySelection.subClassId &&
                         `, SubClass: ${categorySelection.subClassId}`}
-                    </LinearText>
+                    </Text>
                   )}
                 </div>
               )}
-            </LinearCard>
-            <LinearCard variant="elevated" padding="lg">
+            </Card>
+            <Card theme="elevated" size="lg">
               <LinearHeading level={4} className="mb-4">
                 사용 방법
               </LinearHeading>
               <div className="space-y-4">
                 <div>
-                  <LinearText
-                    variant="secondary"
+                  <Text
+                    theme="secondary"
                     size="sm"
                     className="mb-2 font-medium"
                   >
                     Features
-                  </LinearText>
+                  </Text>
                   <ul className="space-y-1.5 text-sm text-gray-200">
                     <li className="flex items-start gap-2">
                       <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
@@ -358,13 +386,13 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText
-                    variant="secondary"
+                  <Text
+                    theme="secondary"
                     size="sm"
                     className="mb-2 font-medium"
                   >
                     Props
-                  </LinearText>
+                  </Text>
                   <div className="space-y-2 text-xs text-gray-300">
                     <div>
                       <code className="rounded bg-gray-800 px-1.5 py-0.5 text-gray-100">
@@ -387,7 +415,7 @@ const ComponentsPage: FC = () => {
                   </div>
                 </div>
               </div>
-            </LinearCard>
+            </Card>
           </div>
         </section>
 
@@ -397,21 +425,21 @@ const ComponentsPage: FC = () => {
             Dropdown
           </LinearHeading>
           <div className="grid gap-6 lg:grid-cols-2">
-            <LinearCard variant="default" padding="lg" className="space-y-6">
+            <Card theme="default" size="lg" className="space-y-6">
               <div>
                 <LinearHeading level={4} className="mb-2">
                   Dropdown Menu
                 </LinearHeading>
-                <LinearText variant="tertiary" size="sm">
+                <Text theme="tertiary" size="sm">
                   Linear 스타일의 드롭다운 메뉴 컴포넌트
-                </LinearText>
+                </Text>
               </div>
               <LinearSeparator />
               <div className="space-y-4">
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-3">
+                  <Text theme="secondary" size="sm" className="mb-3">
                     Basic Dropdown
-                  </LinearText>
+                  </Text>
                   <LinearDropdown
                     options={simpleOptions}
                     value={selectedSimple}
@@ -421,9 +449,9 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-3">
+                  <Text theme="secondary" size="sm" className="mb-3">
                     With Icons
-                  </LinearText>
+                  </Text>
                   <LinearDropdown
                     options={regionOptions}
                     value={selectedRegion}
@@ -434,9 +462,9 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-3">
+                  <Text theme="secondary" size="sm" className="mb-3">
                     Searchable Dropdown
-                  </LinearText>
+                  </Text>
                   <LinearDropdown
                     options={realmOptions}
                     value={selectedRealm}
@@ -449,9 +477,9 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-3">
+                  <Text theme="secondary" size="sm" className="mb-3">
                     With Label & Helper Text
-                  </LinearText>
+                  </Text>
                   <LinearDropdown
                     label="Region"
                     options={regionOptions}
@@ -463,9 +491,9 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-3">
+                  <Text theme="secondary" size="sm" className="mb-3">
                     Sizes
-                  </LinearText>
+                  </Text>
                   <div className="space-y-3">
                     <LinearDropdown
                       size="sm"
@@ -486,9 +514,9 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-3">
+                  <Text theme="secondary" size="sm" className="mb-3">
                     States
-                  </LinearText>
+                  </Text>
                   <div className="space-y-3">
                     <LinearDropdown
                       options={simpleOptions.slice(0, 3)}
@@ -503,20 +531,20 @@ const ComponentsPage: FC = () => {
                   </div>
                 </div>
               </div>
-            </LinearCard>
-            <LinearCard variant="elevated" padding="lg">
+            </Card>
+            <Card theme="elevated" size="lg">
               <LinearHeading level={4} className="mb-4">
                 사용 방법
               </LinearHeading>
               <div className="space-y-4">
                 <div>
-                  <LinearText
-                    variant="secondary"
+                  <Text
+                    theme="secondary"
                     size="sm"
                     className="mb-2 font-medium"
                   >
                     Features
-                  </LinearText>
+                  </Text>
                   <ul className="space-y-1.5 text-sm text-gray-200">
                     <li className="flex items-start gap-2">
                       <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
@@ -550,13 +578,13 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText
-                    variant="secondary"
+                  <Text
+                    theme="secondary"
                     size="sm"
                     className="mb-2 font-medium"
                   >
                     Props
-                  </LinearText>
+                  </Text>
                   <div className="space-y-2 text-xs text-gray-300">
                     <div>
                       <code className="rounded bg-gray-800 px-1.5 py-0.5 text-gray-100">
@@ -591,7 +619,7 @@ const ComponentsPage: FC = () => {
                   </div>
                 </div>
               </div>
-            </LinearCard>
+            </Card>
           </div>
         </section>
 
@@ -601,21 +629,21 @@ const ComponentsPage: FC = () => {
             Segmented Control
           </LinearHeading>
           <div className="grid gap-6 lg:grid-cols-2">
-            <LinearCard variant="default" padding="lg" className="space-y-6">
+            <Card theme="default" size="lg" className="space-y-6">
               <div>
                 <LinearHeading level={4} className="mb-2">
                   Region Selector
                 </LinearHeading>
-                <LinearText variant="tertiary" size="sm">
+                <Text theme="tertiary" size="sm">
                   4개 이하의 옵션 선택에 적합한 Segmented Control
-                </LinearText>
+                </Text>
               </div>
               <LinearSeparator />
               <div className="space-y-6">
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-3">
+                  <Text theme="secondary" size="sm" className="mb-3">
                     Region Selection (추천)
-                  </LinearText>
+                  </Text>
                   <LinearSegmentedControl
                     options={[
                       { value: "KR", label: "KR" },
@@ -629,9 +657,9 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-3">
+                  <Text theme="secondary" size="sm" className="mb-3">
                     With Icons
-                  </LinearText>
+                  </Text>
                   <LinearSegmentedControl
                     options={[
                       {
@@ -661,9 +689,9 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-3">
+                  <Text theme="secondary" size="sm" className="mb-3">
                     Full Width
-                  </LinearText>
+                  </Text>
                   <LinearSegmentedControl
                     options={[
                       { value: "KR", label: "KR" },
@@ -678,9 +706,9 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-3">
+                  <Text theme="secondary" size="sm" className="mb-3">
                     Sizes
-                  </LinearText>
+                  </Text>
                   <div className="space-y-3">
                     <LinearSegmentedControl
                       size="sm"
@@ -713,9 +741,9 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-3">
+                  <Text theme="secondary" size="sm" className="mb-3">
                     States
-                  </LinearText>
+                  </Text>
                   <div className="space-y-3">
                     <LinearSegmentedControl
                       options={[
@@ -738,20 +766,20 @@ const ComponentsPage: FC = () => {
                   </div>
                 </div>
               </div>
-            </LinearCard>
-            <LinearCard variant="elevated" padding="lg">
+            </Card>
+            <Card theme="elevated" size="lg">
               <LinearHeading level={4} className="mb-4">
                 Region 선택 UI/UX 제안
               </LinearHeading>
               <div className="space-y-4">
                 <div>
-                  <LinearText
-                    variant="secondary"
+                  <Text
+                    theme="secondary"
                     size="sm"
                     className="mb-2 font-medium"
                   >
                     추천: Segmented Control
-                  </LinearText>
+                  </Text>
                   <ul className="space-y-1.5 text-sm text-gray-200">
                     <li className="flex items-start gap-2">
                       <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
@@ -777,13 +805,13 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText
-                    variant="secondary"
+                  <Text
+                    theme="secondary"
                     size="sm"
                     className="mb-2 font-medium"
                   >
                     현재 상황 고려
-                  </LinearText>
+                  </Text>
                   <div className="space-y-2 text-xs text-gray-300">
                     <div>
                       • 현재는 KR만 제공 → Segmented Control로 표시하되 KR만
@@ -795,13 +823,13 @@ const ComponentsPage: FC = () => {
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText
-                    variant="secondary"
+                  <Text
+                    theme="secondary"
                     size="sm"
                     className="mb-2 font-medium"
                   >
                     구현 예시
-                  </LinearText>
+                  </Text>
                   <div className="rounded-lg bg-gray-800 p-3 text-xs text-gray-300">
                     <code className="text-gray-100">
                       {`<LinearSegmentedControl
@@ -818,7 +846,7 @@ const ComponentsPage: FC = () => {
                   </div>
                 </div>
               </div>
-            </LinearCard>
+            </Card>
           </div>
         </section>
 
@@ -827,12 +855,12 @@ const ComponentsPage: FC = () => {
           <LinearHeading level={2} className="mb-6">
             Typography
           </LinearHeading>
-          <LinearCard padding="lg" className="space-y-6">
+          <Card theme="default" size="lg" className="space-y-6">
             <div className="space-y-6">
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-3">
+                <Text theme="secondary" size="sm" className="mb-3">
                   Headings
-                </LinearText>
+                </Text>
                 <div className="space-y-2">
                   <LinearHeading level={1}>Heading 1</LinearHeading>
                   <LinearHeading level={2}>Heading 2</LinearHeading>
@@ -844,38 +872,38 @@ const ComponentsPage: FC = () => {
               </div>
               <LinearSeparator />
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-3">
+                <Text theme="secondary" size="sm" className="mb-3">
                   Text Variants
-                </LinearText>
+                </Text>
                 <div className="space-y-2">
-                  <LinearText variant="primary" size="base">
+                  <Text theme="primary" size="md">
                     Primary text - Lorem ipsum dolor sit amet
-                  </LinearText>
-                  <LinearText variant="secondary" size="base">
+                  </Text>
+                  <Text theme="secondary" size="md">
                     Secondary text - Lorem ipsum dolor sit amet
-                  </LinearText>
-                  <LinearText variant="tertiary" size="base">
+                  </Text>
+                  <Text theme="tertiary" size="md">
                     Tertiary text - Lorem ipsum dolor sit amet
-                  </LinearText>
-                  <LinearText variant="quaternary" size="base">
+                  </Text>
+                  <Text theme="quaternary" size="md">
                     Quaternary text - Lorem ipsum dolor sit amet
-                  </LinearText>
+                  </Text>
                 </div>
               </div>
               <LinearSeparator />
               <div>
-                <LinearText variant="secondary" size="sm" className="mb-3">
+                <Text theme="secondary" size="sm" className="mb-3">
                   Text Sizes
-                </LinearText>
+                </Text>
                 <div className="space-y-2">
-                  <LinearText size="xs">Extra small text</LinearText>
-                  <LinearText size="sm">Small text</LinearText>
-                  <LinearText size="base">Base text</LinearText>
-                  <LinearText size="lg">Large text</LinearText>
+                  <Text size="xs">Extra small text</Text>
+                  <Text size="sm">Small text</Text>
+                  <Text size="md">Base text</Text>
+                  <Text size="lg">Large text</Text>
                 </div>
               </div>
             </div>
-          </LinearCard>
+          </Card>
         </section>
 
         {/* Combined Example */}
@@ -883,15 +911,15 @@ const ComponentsPage: FC = () => {
           <LinearHeading level={2} className="mb-6">
             Combined Example
           </LinearHeading>
-          <LinearCard variant="elevated" padding="lg">
+          <Card theme="elevated" size="lg">
             <div className="space-y-6">
               <div>
                 <LinearHeading level={3} className="mb-2">
                   Create New Project
                 </LinearHeading>
-                <LinearText variant="secondary" size="sm">
+                <Text theme="secondary" size="sm">
                   Start a new project to organize your work
-                </LinearText>
+                </Text>
               </div>
               <LinearSeparator />
               <div className="space-y-4">
@@ -907,16 +935,24 @@ const ComponentsPage: FC = () => {
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex gap-2">
-                  <LinearBadge variant="accent">New</LinearBadge>
-                  <LinearBadge variant="info">Planning</LinearBadge>
+                  <Badge theme="accent" size="md">
+                    New
+                  </Badge>
+                  <Badge theme="info" size="md">
+                    Planning
+                  </Badge>
                 </div>
                 <div className="flex gap-3">
-                  <LinearButton variant="ghost">Cancel</LinearButton>
-                  <LinearButton variant="accent">Create Project</LinearButton>
+                  <Button theme="secondary" size="md">
+                    Cancel
+                  </Button>
+                  <Button theme="primary" size="md">
+                    Create Project
+                  </Button>
                 </div>
               </div>
             </div>
-          </LinearCard>
+          </Card>
         </section>
       </div>
     </div>

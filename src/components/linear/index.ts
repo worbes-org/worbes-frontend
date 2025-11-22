@@ -9,4 +9,3 @@ export { default as LinearInput } from "./LinearInput";
 export { default as LinearSegmentedControl } from "./LinearSegmentedControl";
 export type { LinearSegmentedControlOption } from "./LinearSegmentedControl";
 export { default as LinearSeparator } from "./LinearSeparator";
-export { default as LinearText } from "./LinearText";
