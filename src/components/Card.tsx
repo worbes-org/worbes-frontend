@@ -1,20 +1,21 @@
 import { cn } from "@/utils/styles";
-import { type ComponentProps, type FC } from "react";
+import { PropsWithChildren, type FC } from "react";
 
 type Props = {
-  theme: "default" | "elevated" | "outlined";
+  className?: string;
+  theme: "primary" | "secondary" | "tertiary";
   size: "none" | "sm" | "md" | "lg";
-} & ComponentProps<"div">;
+} & PropsWithChildren;
 
-const Card: FC<Props> = ({ theme, size, className, children, ...props }) => {
+const Card: FC<Props> = ({ className, theme, size, children, ...props }) => {
   return (
     <div
       className={cn(
         "rounded-xl border transition-colors",
-        theme === "default" && "border-[#23252a] bg-gray-900",
-        theme === "elevated" &&
+        theme === "primary" && "border-[#23252a] bg-gray-900",
+        theme === "secondary" &&
           "border-[#23252a] bg-gray-800 shadow-[0px_4px_24px_rgba(0,0,0,0.2)]",
-        theme === "outlined" && "border-[#34343a] bg-transparent",
+        theme === "tertiary" && "border-[#34343a] bg-transparent",
         size === "none" && "p-0",
         size === "sm" && "p-4",
         size === "md" && "p-6",

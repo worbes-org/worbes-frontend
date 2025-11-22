@@ -97,7 +97,7 @@ const ComponentsPage: FC = () => {
           <Heading level={2} className="mb-6">
             Buttons
           </Heading>
-          <Card theme="default" size="lg" className="space-y-6">
+          <Card theme="primary" size="lg" className="space-y-6">
             <div className="space-y-4">
               <div>
                 <Text theme="secondary" size="sm" className="mb-2">
@@ -161,7 +161,7 @@ const ComponentsPage: FC = () => {
           <Heading level={2} className="mb-6">
             Inputs
           </Heading>
-          <Card theme="default" size="lg" className="space-y-6">
+          <Card theme="primary" size="lg" className="space-y-6">
             <div className="space-y-4">
               <div>
                 <Text theme="secondary" size="sm" className="mb-2">
@@ -233,25 +233,25 @@ const ComponentsPage: FC = () => {
             Cards
           </Heading>
           <div className="grid gap-6 md:grid-cols-3">
-            <Card theme="default" size="md">
+            <Card theme="primary" size="md">
               <Heading level={4} className="mb-2">
-                Default Card
+                Primary Card
               </Heading>
               <Text theme="secondary" size="sm">
                 기본 카드 스타일입니다.
               </Text>
             </Card>
-            <Card theme="elevated" size="md">
+            <Card theme="secondary" size="md">
               <Heading level={4} className="mb-2">
-                Elevated Card
+                Secondary Card
               </Heading>
               <Text theme="secondary" size="sm">
                 그림자가 있는 카드입니다.
               </Text>
             </Card>
-            <Card theme="outlined" size="md">
+            <Card theme="tertiary" size="md">
               <Heading level={4} className="mb-2">
-                Outlined Card
+                Tertiary Card
               </Heading>
               <Text theme="secondary" size="sm">
                 테두리만 있는 카드입니다.
@@ -265,7 +265,7 @@ const ComponentsPage: FC = () => {
           <Heading level={2} className="mb-6">
             Badges
           </Heading>
-          <Card theme="default" size="lg" className="space-y-6">
+          <Card theme="primary" size="lg" className="space-y-6">
             <div className="space-y-4">
               <div>
                 <Text theme="secondary" size="sm" className="mb-2">
@@ -316,7 +316,7 @@ const ComponentsPage: FC = () => {
             Category List
           </Heading>
           <div className="grid gap-6 lg:grid-cols-2">
-            <Card theme="default" size="none" className="overflow-hidden">
+            <Card theme="primary" size="none" className="overflow-hidden">
               <div className="border-b border-[#23252a] bg-gray-800 px-4 py-3">
                 <Heading level={4}>Linear Style Category List</Heading>
                 <Text theme="tertiary" size="sm" className="mt-1">
@@ -347,7 +347,7 @@ const ComponentsPage: FC = () => {
                 </div>
               )}
             </Card>
-            <Card theme="elevated" size="lg">
+            <Card theme="secondary" size="lg">
               <Heading level={4} className="mb-4">
                 사용 방법
               </Heading>
@@ -424,7 +424,7 @@ const ComponentsPage: FC = () => {
             Dropdown
           </Heading>
           <div className="grid gap-6 lg:grid-cols-2">
-            <Card theme="default" size="lg" className="space-y-6">
+            <Card theme="primary" size="lg" className="space-y-6">
               <div>
                 <Heading level={4} className="mb-2">
                   Dropdown Menu
@@ -531,7 +531,7 @@ const ComponentsPage: FC = () => {
                 </div>
               </div>
             </Card>
-            <Card theme="elevated" size="lg">
+            <Card theme="secondary" size="lg">
               <Heading level={4} className="mb-4">
                 사용 방법
               </Heading>
@@ -628,7 +628,7 @@ const ComponentsPage: FC = () => {
             Segmented Control
           </Heading>
           <div className="grid gap-6 lg:grid-cols-2">
-            <Card theme="default" size="lg" className="space-y-6">
+            <Card theme="primary" size="lg" className="space-y-6">
               <div>
                 <Heading level={4} className="mb-2">
                   Region Selector
@@ -923,7 +923,7 @@ const ComponentsPage: FC = () => {
           <Heading level={2} className="mb-6">
             Combined Example
           </Heading>
-          <Card theme="elevated" size="lg">
+          <Card theme="secondary" size="lg">
             <div className="space-y-6">
               <div>
                 <Heading level={3} className="mb-2">

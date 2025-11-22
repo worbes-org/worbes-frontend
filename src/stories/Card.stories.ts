@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from "@storybook/nextjs";
 const meta = {
   component: Card,
   args: {
-    theme: "default",
     size: "md",
     children: "Card content",
   },
@@ -12,16 +11,16 @@ const meta = {
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: { theme: "default" },
+export const Primary: Story = {
+  args: { theme: "primary" },
 };
 
-export const Elevated: Story = {
-  args: { theme: "elevated" },
+export const Secondary: Story = {
+  args: { theme: "secondary" },
 };
 
-export const Outlined: Story = {
-  args: { theme: "outlined" },
+export const Tertiary: Story = {
+  args: { theme: "tertiary" },
 };
 
 export default meta;

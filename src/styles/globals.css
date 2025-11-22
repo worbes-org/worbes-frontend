@@ -6,7 +6,7 @@
   }
 
   body {
-    @apply bg-gray-950 font-primary;
+    @apply bg-gray-950 font-primary text-white;
   }
 
   button:not(:disabled),

@@ -3,17 +3,16 @@ import type { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta = {
   component: Separator,
-  args: { className: "w-100" },
 } satisfies Meta<typeof Separator>;
 
 type Story = StoryObj<typeof meta>;
 
 export const Horizontal: Story = {
-  args: { orientation: "horizontal" },
+  args: { className: "w-100", orientation: "horizontal" },
 };
 
 export const Vertical: Story = {
-  args: { orientation: "vertical" },
+  args: { className: "h-100", orientation: "vertical" },
 };
 
 export default meta;
