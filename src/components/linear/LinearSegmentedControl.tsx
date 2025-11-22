@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/utils/styles";
-import { type FC, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 export type LinearSegmentedControlOption<T = string> = {
   value: T;
@@ -46,9 +46,9 @@ const LinearSegmentedControl = <T extends string | number = string>({
   return (
     <div
       className={cn(
-        "inline-flex rounded-lg border border-[var(--linear-border-primary)] bg-[var(--linear-bg-level1)] p-1",
+        "inline-flex rounded-lg border border-[#23252a] bg-gray-900 p-1",
         fullWidth && "w-full",
-        disabled && "opacity-50 cursor-not-allowed",
+        disabled && "cursor-not-allowed opacity-50",
         className,
       )}
       role="tablist"
@@ -67,18 +67,17 @@ const LinearSegmentedControl = <T extends string | number = string>({
             onClick={() => !isDisabled && onChange?.(option.value)}
             className={cn(
               "relative flex items-center justify-center gap-2 rounded-md font-medium transition-all",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--linear-focus-ring-color)] focus-visible:ring-offset-1",
+              "focus-visible:ring-2 focus-visible:ring-accent-700 focus-visible:ring-offset-1 focus-visible:outline-none",
               "disabled:cursor-not-allowed",
               sizeClasses[size],
               // 선택된 상태
-              isSelected &&
-                "bg-[var(--linear-accent)] text-white shadow-sm",
+              isSelected && "bg-accent-600 text-white shadow-sm",
               // 선택되지 않은 상태
               !isSelected &&
                 !isDisabled &&
-                "text-[var(--linear-text-secondary)] hover:text-[var(--linear-text-primary)] hover:bg-[var(--linear-bg-translucent)]",
+                "text-gray-200 hover:bg-white/5 hover:text-gray-100",
               // 비활성 상태
-              isDisabled && !isSelected && "text-[var(--linear-text-quaternary)]",
+              isDisabled && !isSelected && "text-gray-400",
               // 첫 번째와 마지막 항목의 간격 조정
               index > 0 && "ml-0.5",
             )}
@@ -103,5 +102,3 @@ const LinearSegmentedControl = <T extends string | number = string>({
 };
 
 export default LinearSegmentedControl;
-
-

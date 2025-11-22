@@ -10,7 +10,6 @@ import {
   LinearHeading,
   LinearInput,
   LinearSegmentedControl,
-  type LinearSegmentedControlOption,
   LinearSeparator,
   LinearText,
 } from "@/components/linear";
@@ -39,16 +38,40 @@ const ComponentsPage: FC = () => {
 
   const regionOptions: LinearDropdownOption[] = [
     { value: "KR", label: "Korea", icon: <GlobeAltIcon className="size-4" /> },
-    { value: "US", label: "United States", icon: <GlobeAltIcon className="size-4" /> },
+    {
+      value: "US",
+      label: "United States",
+      icon: <GlobeAltIcon className="size-4" />,
+    },
     { value: "EU", label: "Europe", icon: <GlobeAltIcon className="size-4" /> },
   ];
 
   const realmOptions: LinearDropdownOption[] = [
-    { value: "azshara", label: "아즈샤라", icon: <BuildingOfficeIcon className="size-4" /> },
-    { value: "dalaran", label: "달라란", icon: <BuildingOfficeIcon className="size-4" /> },
-    { value: "stormrage", label: "스톰레이지", icon: <BuildingOfficeIcon className="size-4" /> },
-    { value: "arthas", label: "아서스", icon: <BuildingOfficeIcon className="size-4" /> },
-    { value: "kiljaeden", label: "킬제덴", icon: <BuildingOfficeIcon className="size-4" /> },
+    {
+      value: "azshara",
+      label: "아즈샤라",
+      icon: <BuildingOfficeIcon className="size-4" />,
+    },
+    {
+      value: "dalaran",
+      label: "달라란",
+      icon: <BuildingOfficeIcon className="size-4" />,
+    },
+    {
+      value: "stormrage",
+      label: "스톰레이지",
+      icon: <BuildingOfficeIcon className="size-4" />,
+    },
+    {
+      value: "arthas",
+      label: "아서스",
+      icon: <BuildingOfficeIcon className="size-4" />,
+    },
+    {
+      value: "kiljaeden",
+      label: "킬제덴",
+      icon: <BuildingOfficeIcon className="size-4" />,
+    },
   ];
 
   const simpleOptions: LinearDropdownOption[] = [
@@ -60,7 +83,7 @@ const ComponentsPage: FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--linear-bg-primary)]">
+    <div className="min-h-screen bg-gray-950">
       <div className="mx-auto max-w-6xl px-6 py-16">
         {/* Header */}
         <div className="mb-16">
@@ -256,9 +279,15 @@ const ComponentsPage: FC = () => {
             Category List
           </LinearHeading>
           <div className="grid gap-6 lg:grid-cols-2">
-            <LinearCard variant="default" padding="none" className="overflow-hidden">
-              <div className="border-b border-[var(--linear-border-primary)] bg-[var(--linear-bg-level2)] px-4 py-3">
-                <LinearHeading level={4}>Linear Style Category List</LinearHeading>
+            <LinearCard
+              variant="default"
+              padding="none"
+              className="overflow-hidden"
+            >
+              <div className="border-b border-[#23252a] bg-gray-800 px-4 py-3">
+                <LinearHeading level={4}>
+                  Linear Style Category List
+                </LinearHeading>
                 <LinearText variant="tertiary" size="sm" className="mt-1">
                   아이템 카테고리 선택 컴포넌트
                 </LinearText>
@@ -270,11 +299,15 @@ const ComponentsPage: FC = () => {
                 />
               </div>
               {categorySelection && (
-                <div className="border-t border-[var(--linear-border-primary)] bg-[var(--linear-bg-level2)] px-4 py-3">
+                <div className="border-t border-[#23252a] bg-gray-800 px-4 py-3">
                   <LinearText variant="secondary" size="sm" className="mb-1">
                     선택된 카테고리:
                   </LinearText>
-                  <LinearText variant="primary" size="sm" className="font-medium">
+                  <LinearText
+                    variant="primary"
+                    size="sm"
+                    className="font-medium"
+                  >
                     {categorySelection.label || "없음"}
                   </LinearText>
                   {categorySelection.classId && (
@@ -293,52 +326,60 @@ const ComponentsPage: FC = () => {
               </LinearHeading>
               <div className="space-y-4">
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                  <LinearText
+                    variant="secondary"
+                    size="sm"
+                    className="mb-2 font-medium"
+                  >
                     Features
                   </LinearText>
-                  <ul className="space-y-1.5 text-sm text-[var(--linear-text-secondary)]">
+                  <ul className="space-y-1.5 text-sm text-gray-200">
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       계층적 카테고리 구조 지원
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       선택 상태 시각적 표시
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       접기/펼치기 애니메이션
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       Linear 테마 스타일 적용
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       키보드 접근성 지원
                     </li>
                   </ul>
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                  <LinearText
+                    variant="secondary"
+                    size="sm"
+                    className="mb-2 font-medium"
+                  >
                     Props
                   </LinearText>
-                  <div className="space-y-2 text-xs text-[var(--linear-text-tertiary)]">
+                  <div className="space-y-2 text-xs text-gray-300">
                     <div>
-                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                      <code className="rounded bg-gray-800 px-1.5 py-0.5 text-gray-100">
                         value
                       </code>
                       : 선택된 카테고리
                     </div>
                     <div>
-                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                      <code className="rounded bg-gray-800 px-1.5 py-0.5 text-gray-100">
                         onChange
                       </code>
                       : 선택 변경 핸들러
                     </div>
                     <div>
-                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                      <code className="rounded bg-gray-800 px-1.5 py-0.5 text-gray-100">
                         className
                       </code>
                       : 추가 스타일
@@ -469,72 +510,80 @@ const ComponentsPage: FC = () => {
               </LinearHeading>
               <div className="space-y-4">
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                  <LinearText
+                    variant="secondary"
+                    size="sm"
+                    className="mb-2 font-medium"
+                  >
                     Features
                   </LinearText>
-                  <ul className="space-y-1.5 text-sm text-[var(--linear-text-secondary)]">
+                  <ul className="space-y-1.5 text-sm text-gray-200">
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       검색 가능한 드롭다운 (searchable)
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       아이콘 지원 (leftIcon, rightIcon, option.icon)
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       키보드 네비게이션 (Arrow keys, Enter, Escape)
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       외부 클릭 시 자동 닫기
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       선택 상태 시각적 표시
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       커스텀 렌더링 지원 (renderOption, renderTrigger)
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       Linear 테마 스타일 적용
                     </li>
                   </ul>
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                  <LinearText
+                    variant="secondary"
+                    size="sm"
+                    className="mb-2 font-medium"
+                  >
                     Props
                   </LinearText>
-                  <div className="space-y-2 text-xs text-[var(--linear-text-tertiary)]">
+                  <div className="space-y-2 text-xs text-gray-300">
                     <div>
-                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                      <code className="rounded bg-gray-800 px-1.5 py-0.5 text-gray-100">
                         options
                       </code>
                       : 드롭다운 옵션 배열
                     </div>
                     <div>
-                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                      <code className="rounded bg-gray-800 px-1.5 py-0.5 text-gray-100">
                         value
                       </code>
                       : 선택된 값
                     </div>
                     <div>
-                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                      <code className="rounded bg-gray-800 px-1.5 py-0.5 text-gray-100">
                         onChange
                       </code>
                       : 선택 변경 핸들러
                     </div>
                     <div>
-                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                      <code className="rounded bg-gray-800 px-1.5 py-0.5 text-gray-100">
                         searchable
                       </code>
                       : 검색 기능 활성화
                     </div>
                     <div>
-                      <code className="rounded bg-[var(--linear-bg-level2)] px-1.5 py-0.5 text-[var(--linear-text-primary)]">
+                      <code className="rounded bg-gray-800 px-1.5 py-0.5 text-gray-100">
                         size
                       </code>
                       : 크기 (sm, md, lg)
@@ -696,56 +745,65 @@ const ComponentsPage: FC = () => {
               </LinearHeading>
               <div className="space-y-4">
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                  <LinearText
+                    variant="secondary"
+                    size="sm"
+                    className="mb-2 font-medium"
+                  >
                     추천: Segmented Control
                   </LinearText>
-                  <ul className="space-y-1.5 text-sm text-[var(--linear-text-secondary)]">
+                  <ul className="space-y-1.5 text-sm text-gray-200">
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       4개 이하 옵션에 최적화
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       선택 상태가 한눈에 보임
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       클릭 한 번으로 선택 가능
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       모바일에서도 터치하기 쉬움
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--linear-accent)]" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-600" />
                       Linear 스타일과 잘 어울림
                     </li>
                   </ul>
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                  <LinearText
+                    variant="secondary"
+                    size="sm"
+                    className="mb-2 font-medium"
+                  >
                     현재 상황 고려
                   </LinearText>
-                  <div className="space-y-2 text-xs text-[var(--linear-text-tertiary)]">
+                  <div className="space-y-2 text-xs text-gray-300">
                     <div>
-                      • 현재는 KR만 제공 → Segmented Control로 표시하되 KR만 활성화
+                      • 현재는 KR만 제공 → Segmented Control로 표시하되 KR만
+                      활성화
                     </div>
-                    <div>
-                      • 향후 확장 시 → 추가 region 버튼 활성화
-                    </div>
-                    <div>
-                      • 사용자가 현재 사용 가능한 region을 명확히 인지
-                    </div>
+                    <div>• 향후 확장 시 → 추가 region 버튼 활성화</div>
+                    <div>• 사용자가 현재 사용 가능한 region을 명확히 인지</div>
                   </div>
                 </div>
                 <LinearSeparator />
                 <div>
-                  <LinearText variant="secondary" size="sm" className="mb-2 font-medium">
+                  <LinearText
+                    variant="secondary"
+                    size="sm"
+                    className="mb-2 font-medium"
+                  >
                     구현 예시
                   </LinearText>
-                  <div className="rounded-lg bg-[var(--linear-bg-level2)] p-3 text-xs text-[var(--linear-text-tertiary)]">
-                    <code className="text-[var(--linear-text-primary)]">
+                  <div className="rounded-lg bg-gray-800 p-3 text-xs text-gray-300">
+                    <code className="text-gray-100">
                       {`<LinearSegmentedControl
   options={[
     { value: "KR", label: "KR" },
@@ -866,4 +924,3 @@ const ComponentsPage: FC = () => {
 };
 
 export default ComponentsPage;
-

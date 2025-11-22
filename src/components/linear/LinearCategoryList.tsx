@@ -5,7 +5,7 @@ import type { CategorySelection, ItemCategory } from "@/types/category";
 import type { Nullable } from "@/types/misc";
 import type { ListSelectorOption } from "@/types/selector";
 import { cn } from "@/utils/styles";
-import { ChevronRightIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { CheckIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { last } from "lodash-es";
 import { useMemo, useState, type FC, type ReactNode } from "react";
 
@@ -31,10 +31,7 @@ const LinearCategoryList: FC<Props> = ({
   return (
     <div className={cn("relative", className)}>
       <ul
-        className={cn(
-          "space-y-0.5 divide-y divide-[var(--linear-border-primary)]",
-          listClassName,
-        )}
+        className={cn("space-y-0.5 divide-y divide-[#23252a]", listClassName)}
       >
         {options.map((option) => (
           <LinearCategoryItem
@@ -63,9 +60,11 @@ const LinearCategoryList: FC<Props> = ({
       (value) => !value.startsWith(parentKey),
     );
 
-    const nextValues = [...filtered, parentKey, isOpen ? optionValue : ""].filter(
-      Boolean,
-    );
+    const nextValues = [
+      ...filtered,
+      parentKey,
+      isOpen ? optionValue : "",
+    ].filter(Boolean);
     const nextState: CategorySelection = {
       classId: option.metadata?.class,
       subClassId: option.metadata?.subClass,
@@ -131,10 +130,10 @@ const LinearCategoryItem: FC<LinearCategoryItemProps> = ({
       <button
         className={cn(
           "flex w-full items-center gap-2 px-3 py-2 text-left transition-colors",
-          "hover:bg-[var(--linear-bg-translucent)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--linear-focus-ring-color)] focus-visible:ring-offset-2",
+          "hover:bg-white/5",
+          "focus-visible:ring-2 focus-visible:ring-accent-700 focus-visible:ring-offset-2 focus-visible:outline-none",
           level > 0 && "pl-6",
-          isSelected && "bg-[var(--linear-bg-level2)]",
+          isSelected && "bg-gray-800",
         )}
         onClick={handleToggle}
         style={{ paddingLeft: `${12 + level * 16}px` }}
@@ -142,30 +141,26 @@ const LinearCategoryItem: FC<LinearCategoryItemProps> = ({
         {hasChildren && (
           <ChevronRightIcon
             className={cn(
-              "size-4 shrink-0 text-[var(--linear-text-tertiary)] transition-transform",
+              "size-4 shrink-0 text-gray-300 transition-transform",
               isOpen && "rotate-90",
             )}
           />
         )}
         {!hasChildren && isSelected && (
-          <CheckIcon className="size-4 shrink-0 text-[var(--linear-focus-ring-color)]" />
+          <CheckIcon className="size-4 shrink-0 text-accent-700" />
         )}
-        {!hasChildren && !isSelected && (
-          <div className="size-4 shrink-0" />
-        )}
+        {!hasChildren && !isSelected && <div className="size-4 shrink-0" />}
         <span
           className={cn(
             "flex-1 text-sm",
-            isSelected
-              ? "text-[var(--linear-text-primary)] font-medium"
-              : "text-[var(--linear-text-secondary)]",
+            isSelected ? "font-medium text-gray-100" : "text-gray-200",
           )}
         >
           {option.label}
         </span>
       </button>
       {hasChildren && isOpen && (
-        <ul className="divide-y divide-[var(--linear-border-primary)]">
+        <ul className="divide-y divide-[#23252a]">
           {option.children?.map((childOption) => (
             <LinearCategoryItem
               key={childOption.value}
@@ -182,4 +177,3 @@ const LinearCategoryItem: FC<LinearCategoryItemProps> = ({
 };
 
 export default LinearCategoryList;
-

@@ -21,7 +21,7 @@ const LinearHeading: FC<Props> = ({
   return (
     <HeadingTag
       className={cn(
-        "font-semibold text-[var(--linear-text-primary)] tracking-tight",
+        "font-semibold tracking-tight text-gray-100",
         // Level 1
         actualLevel === 1 && "text-4xl leading-tight",
         // Level 2
@@ -44,4 +44,3 @@ const LinearHeading: FC<Props> = ({
 };
 
 export default LinearHeading;
-

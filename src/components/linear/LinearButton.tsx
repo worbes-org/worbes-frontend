@@ -23,7 +23,7 @@ const LinearButton: FC<Props> = ({
     <button
       className={cn(
         "inline-flex items-center justify-center font-medium transition-all",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--linear-focus-ring-color)] focus-visible:ring-offset-2",
+        "focus-visible:ring-2 focus-visible:ring-accent-700 focus-visible:ring-offset-2 focus-visible:outline-none",
         "disabled:cursor-not-allowed disabled:opacity-50",
         // Size variants
         size === "sm" && "h-8 rounded-lg px-3 text-sm",
@@ -31,24 +31,20 @@ const LinearButton: FC<Props> = ({
         size === "lg" && "h-12 rounded-xl px-6 text-base",
         // Primary variant
         variant === "primary" &&
-          "bg-[var(--linear-bg-level2)] text-[var(--linear-text-primary)] border border-[var(--linear-border-primary)]",
-        variant === "primary" &&
-          "hover:bg-[var(--linear-bg-level3)] hover:border-[var(--linear-border-secondary)]",
+          "border border-[#23252a] bg-gray-800 text-gray-100",
+        variant === "primary" && "hover:border-[#34343a] hover:bg-[#191a1b]",
         // Secondary variant
         variant === "secondary" &&
-          "bg-transparent text-[var(--linear-text-secondary)] border border-[var(--linear-border-primary)]",
-        variant === "secondary" &&
-          "hover:bg-[var(--linear-bg-translucent)] hover:text-[var(--linear-text-primary)]",
+          "border border-[#23252a] bg-transparent text-gray-200",
+        variant === "secondary" && "hover:bg-white/5 hover:text-gray-100",
         // Ghost variant
         variant === "ghost" &&
-          "bg-transparent text-[var(--linear-text-secondary)] border border-transparent",
-        variant === "ghost" &&
-          "hover:bg-[var(--linear-bg-translucent)] hover:text-[var(--linear-text-primary)]",
+          "border border-transparent bg-transparent text-gray-200",
+        variant === "ghost" && "hover:bg-white/5 hover:text-gray-100",
         // Accent variant
         variant === "accent" &&
-          "bg-[var(--linear-accent)] text-white border border-transparent",
-        variant === "accent" &&
-          "hover:bg-[var(--linear-accent-hover)]",
+          "border border-transparent bg-accent-600 text-white",
+        variant === "accent" && "hover:bg-accent-500",
         className,
       )}
       disabled={disabled || isLoading}
@@ -64,4 +60,3 @@ const LinearButton: FC<Props> = ({
 };
 
 export default LinearButton;
-

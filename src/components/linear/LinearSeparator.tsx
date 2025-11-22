@@ -13,7 +13,7 @@ const LinearSeparator: FC<Props> = ({
   return (
     <div
       className={cn(
-        "bg-[var(--linear-border-primary)]",
+        "bg-border-primary",
         orientation === "horizontal" && "h-px w-full",
         orientation === "vertical" && "h-full w-px",
         className,
@@ -24,4 +24,3 @@ const LinearSeparator: FC<Props> = ({
 };
 
 export default LinearSeparator;
-

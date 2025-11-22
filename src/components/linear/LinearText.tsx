@@ -27,10 +27,10 @@ const LinearText: FC<Props> = ({
         size === "base" && "text-base",
         size === "lg" && "text-lg",
         // Color variants
-        variant === "primary" && "text-[var(--linear-text-primary)]",
-        variant === "secondary" && "text-[var(--linear-text-secondary)]",
-        variant === "tertiary" && "text-[var(--linear-text-tertiary)]",
-        variant === "quaternary" && "text-[var(--linear-text-quaternary)]",
+        variant === "primary" && "text-gray-100",
+        variant === "secondary" && "text-gray-200",
+        variant === "tertiary" && "text-gray-300",
+        variant === "quaternary" && "text-gray-400",
         className,
       )}
       {...props}
@@ -41,4 +41,3 @@ const LinearText: FC<Props> = ({
 };
 
 export default LinearText;
-

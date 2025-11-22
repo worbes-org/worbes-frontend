@@ -3,12 +3,11 @@
 import { cn } from "@/utils/styles";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import {
-  type FC,
-  type ReactNode,
   useEffect,
   useRef,
   useState,
   type KeyboardEvent,
+  type ReactNode,
 } from "react";
 
 export type LinearDropdownOption<T = string> = {
@@ -199,42 +198,32 @@ const LinearDropdown = <T extends string | number = string>({
       onKeyDown={handleKeyDown}
       onClick={handleToggle}
       className={cn(
-        "w-full rounded-lg border bg-[var(--linear-bg-level1)] text-[var(--linear-text-primary)]",
-        "flex items-center gap-2 cursor-pointer transition-colors",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--linear-focus-ring-color)] focus-visible:ring-offset-2",
+        "w-full rounded-lg border bg-gray-900 text-gray-100",
+        "flex cursor-pointer items-center gap-2 transition-colors",
+        "focus-visible:ring-2 focus-visible:ring-accent-700 focus-visible:ring-offset-2 focus-visible:outline-none",
         disabled && "cursor-not-allowed opacity-50",
         isLoading && "cursor-wait",
-        error
-          ? "border-[var(--linear-semantic-red)]"
-          : "border-[var(--linear-border-primary)]",
-        !error &&
-          !disabled &&
-          "hover:border-[var(--linear-border-secondary)]",
+        error ? "border-red" : "border-[#23252a]",
+        !error && !disabled && "hover:border-[#34343a]",
         sizeClasses[size],
         triggerClassName,
       )}
     >
-      {leftIcon && (
-        <div className="shrink-0 text-[var(--linear-text-tertiary)]">
-          {leftIcon}
-        </div>
-      )}
+      {leftIcon && <div className="shrink-0 text-gray-300">{leftIcon}</div>}
       <span
         className={cn(
-          "flex-1 text-left truncate",
-          !selectedOption && "text-[var(--linear-text-quaternary)]",
+          "flex-1 truncate text-left",
+          !selectedOption && "text-gray-400",
         )}
       >
         {selectedOption ? selectedOption.label : placeholder}
       </span>
       {rightIcon ? (
-        <div className="shrink-0 text-[var(--linear-text-tertiary)]">
-          {rightIcon}
-        </div>
+        <div className="shrink-0 text-gray-300">{rightIcon}</div>
       ) : (
         <ChevronDownIcon
           className={cn(
-            "size-4 shrink-0 text-[var(--linear-text-tertiary)] transition-transform",
+            "size-4 shrink-0 text-gray-300 transition-transform",
             isOpen && "rotate-180",
           )}
         />
@@ -245,7 +234,7 @@ const LinearDropdown = <T extends string | number = string>({
   return (
     <div className={cn("relative w-full", className)}>
       {label && (
-        <label className="mb-1.5 block text-sm font-medium text-[var(--linear-text-secondary)]">
+        <label className="mb-1.5 block text-sm font-medium text-gray-200">
           {label}
         </label>
       )}
@@ -264,13 +253,13 @@ const LinearDropdown = <T extends string | number = string>({
         <div
           ref={dropdownRef}
           className={cn(
-            "absolute z-[1000] mt-2 w-full rounded-lg border border-[var(--linear-border-primary)] bg-[var(--linear-bg-level2)] shadow-[var(--linear-shadow-medium)] overflow-hidden",
+            "absolute z-[1000] mt-2 w-full overflow-hidden rounded-lg border border-[#23252a] bg-gray-800 shadow-[0px_4px_24px_rgba(0,0,0,0.2)]",
             dropdownClassName,
           )}
           role="listbox"
         >
           {searchable && (
-            <div className="border-b border-[var(--linear-border-primary)] p-2">
+            <div className="border-b border-[#23252a] p-2">
               <input
                 ref={searchInputRef}
                 type="text"
@@ -280,7 +269,7 @@ const LinearDropdown = <T extends string | number = string>({
                   setFocusedIndex(-1);
                 }}
                 placeholder={searchPlaceholder}
-                className="w-full rounded-md border border-[var(--linear-border-primary)] bg-[var(--linear-bg-level1)] px-3 py-1.5 text-sm text-[var(--linear-text-primary)] placeholder:text-[var(--linear-text-quaternary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--linear-focus-ring-color)] focus-visible:ring-offset-1"
+                className="w-full rounded-md border border-[#23252a] bg-gray-900 px-3 py-1.5 text-sm text-gray-100 placeholder:text-gray-400 focus-visible:ring-2 focus-visible:ring-accent-700 focus-visible:ring-offset-1 focus-visible:outline-none"
                 onKeyDown={(e) => {
                   if (e.key === "ArrowDown" || e.key === "ArrowUp") {
                     e.preventDefault();
@@ -293,9 +282,7 @@ const LinearDropdown = <T extends string | number = string>({
           <div className="max-h-[300px] overflow-y-auto py-2">
             {filteredOptions.length === 0 ? (
               <div className="px-4 py-8 text-center">
-                <p className="text-sm text-[var(--linear-text-tertiary)]">
-                  {emptyMessage}
-                </p>
+                <p className="text-sm text-gray-300">{emptyMessage}</p>
               </div>
             ) : (
               filteredOptions.map((option, index) => {
@@ -315,21 +302,19 @@ const LinearDropdown = <T extends string | number = string>({
                     disabled={isDisabled}
                     onClick={() => handleSelect(option)}
                     className={cn(
-                      "w-full px-4 py-2.5 text-left transition-colors flex items-center gap-3 text-sm",
-                      isFocused &&
-                        "bg-[var(--linear-bg-translucent)] outline-none",
-                      isSelected &&
-                        "bg-[var(--linear-accent)]/10 text-[var(--linear-accent)]",
+                      "flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition-colors",
+                      isFocused && "bg-white/5 outline-none",
+                      isSelected && "bg-accent-600/10 text-accent-600",
                       !isSelected &&
                         !isFocused &&
-                        "text-[var(--linear-text-primary)] hover:bg-[var(--linear-bg-translucent)]",
+                        "text-gray-100 hover:bg-white/5",
                       isDisabled &&
-                        "opacity-50 cursor-not-allowed hover:bg-transparent",
+                        "cursor-not-allowed opacity-50 hover:bg-transparent",
                     )}
                     onMouseEnter={() => setFocusedIndex(index)}
                   >
                     {option.icon && (
-                      <div className="shrink-0 text-[var(--linear-text-tertiary)]">
+                      <div className="shrink-0 text-gray-300">
                         {option.icon}
                       </div>
                     )}
@@ -339,7 +324,7 @@ const LinearDropdown = <T extends string | number = string>({
                       <span className="flex-1 font-medium">{option.label}</span>
                     )}
                     {isSelected && (
-                      <div className="shrink-0 size-1.5 rounded-full bg-[var(--linear-accent)]" />
+                      <div className="size-1.5 shrink-0 rounded-full bg-accent-600" />
                     )}
                   </button>
                 );
@@ -348,19 +333,12 @@ const LinearDropdown = <T extends string | number = string>({
           </div>
         </div>
       )}
-      {error && (
-        <p className="mt-1.5 text-sm text-[var(--linear-semantic-red)]">
-          {error}
-        </p>
-      )}
+      {error && <p className="mt-1.5 text-sm text-red">{error}</p>}
       {helperText && !error && (
-        <p className="mt-1.5 text-sm text-[var(--linear-text-tertiary)]">
-          {helperText}
-        </p>
+        <p className="mt-1.5 text-sm text-gray-300">{helperText}</p>
       )}
     </div>
   );
 };
 
 export default LinearDropdown;
-

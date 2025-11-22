@@ -3,76 +3,6 @@
 @layer base {
   :root {
     --header-height: 4rem;
-
-    /* Linear Theme Colors */
-    --linear-bg-primary: #08090a;
-    --linear-bg-secondary: #1c1c1f;
-    --linear-bg-tertiary: #232326;
-    --linear-bg-level0: #08090a;
-    --linear-bg-level1: #0f1011;
-    --linear-bg-level2: #141516;
-    --linear-bg-level3: #191a1b;
-    --linear-bg-translucent: rgba(255, 255, 255, 0.05);
-
-    --linear-text-primary: #f7f8f8;
-    --linear-text-secondary: #d0d6e0;
-    --linear-text-tertiary: #8a8f98;
-    --linear-text-quaternary: #62666d;
-
-    --linear-accent: #7170ff;
-    --linear-accent-hover: #828fff;
-    --linear-accent-tint: #18182f;
-
-    --linear-brand-bg: #5e6ad2;
-    --linear-brand-text: #fff;
-
-    --linear-border-primary: #23252a;
-    --linear-border-secondary: #34343a;
-    --linear-border-tertiary: #3e3e44;
-    --linear-border-translucent: rgba(255, 255, 255, 0.05);
-
-    --linear-line-primary: #37393a;
-    --linear-line-secondary: #202122;
-    --linear-line-tertiary: #18191a;
-
-    --linear-semantic-red: #eb5757;
-    --linear-semantic-orange: #fc7840;
-    --linear-semantic-yellow: #f2c94c;
-    --linear-semantic-green: #4cb782;
-    --linear-semantic-blue: #4ea7fc;
-    --linear-semantic-indigo: #5e6ad2;
-
-    --linear-link: #828fff;
-    --linear-link-hover: #fff;
-
-    /* Linear Theme Focus */
-    --linear-focus-ring-color: #5e6ad2;
-    --linear-focus-ring-width: 2px;
-    --linear-focus-ring-offset: 2px;
-
-    /* Linear Theme Spacing */
-    --linear-spacing-unit: 4px;
-
-    /* Linear Theme Shadows */
-    --linear-shadow-low: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    --linear-shadow-medium: 0px 4px 24px rgba(0, 0, 0, 0.2);
-    --linear-shadow-high: 0px 7px 32px rgba(0, 0, 0, 0.35);
-
-    /* Linear Theme Border Radius */
-    --linear-radius-4: 4px;
-    --linear-radius-6: 6px;
-    --linear-radius-8: 8px;
-    --linear-radius-12: 12px;
-    --linear-radius-16: 16px;
-    --linear-radius-24: 24px;
-    --linear-radius-32: 32px;
-    --linear-radius-full: 9999px;
-
-    /* Linear Theme Transitions */
-    --linear-transition-quick: 0.1s;
-    --linear-transition-regular: 0.25s;
-    --linear-ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --linear-ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
   body {
@@ -100,18 +30,38 @@
   --color-black: #000000;
   --color-white: #ffffff;
 
-  --color-gray-50: #f6f7f6;
-  --color-gray-100: #e3e5e2;
-  --color-gray-200: #c7cbc4;
-  --color-gray-300: #a2a99f;
-  --color-gray-400: #7d867b;
-  --color-gray-500: #636c60;
-  --color-gray-600: #545c52;
-  --color-gray-700: #41463f;
-  --color-gray-800: #363a35;
-  --color-gray-900: #30332e;
-  --color-gray-950: #181b18;
+  /* Linear theme palette exposed to Tailwind utilities */
+  --color-gray-100: #f7f8f8;
+  --color-gray-200: #d0d6e0;
+  --color-gray-300: #8a8f98;
+  --color-gray-400: #62666d;
+  --color-gray-500: #37393a;
+  --color-gray-600: #202122;
+  --color-gray-700: #18191a;
+  --color-gray-800: #141516;
+  --color-gray-900: #0f1011;
+  --color-gray-950: #08090a;
 
+  /* Accent palette */
+  --color-accent-100: #eef0ff;
+  --color-accent-200: #d9dcff;
+  --color-accent-300: #bcc0ff;
+  --color-accent-400: #9ea3ff;
+  --color-accent-500: #8488ff;
+  --color-accent-600: #7170ff;
+  --color-accent-700: #5e6ad2;
+  --color-accent-800: #4b52a5;
+  --color-accent-900: #34376f;
+  --color-accent-950: #1f2241;
+
+  --color-red: #eb5757;
+  --color-orange: #fc7840;
+  --color-yellow: #f2c94c;
+  --color-green: #4cb782;
+  --color-blue: #4ea7fc;
+  --color-indigo: #5e6ad2;
+
+  /* Deprecated colors, migrate to linear theme colors. To be removed in the future. */
   --color-blue-50: #f1f4fd;
   --color-blue-100: #dfe8fa;
   --color-blue-200: #c7d6f6;
@@ -123,7 +73,6 @@
   --color-blue-800: #303c9d;
   --color-blue-900: #2c377c;
   --color-blue-950: #1f234c;
-
   --color-purple-50: #faf6fe;
   --color-purple-100: #f2ebfc;
   --color-purple-200: #e7dbf9;
@@ -135,7 +84,6 @@
   --color-purple-800: #673699;
   --color-purple-900: #522b78;
   --color-purple-950: #351457;
-
   --color-green-50: #f5f8f7;
   --color-green-100: #e2eee9;
   --color-green-200: #b9d6ca;
@@ -147,6 +95,7 @@
   --color-green-800: #2c433d;
   --color-green-900: #273a34;
   --color-green-950: #13201d;
+  /* End of deprecated colors */
 
   --font-primary: var(--font-primary);
 

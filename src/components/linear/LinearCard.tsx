@@ -20,12 +20,10 @@ const LinearCard: FC<Props> = ({
       className={cn(
         "rounded-xl border transition-colors",
         // Variant styles
-        variant === "default" &&
-          "bg-[var(--linear-bg-level1)] border-[var(--linear-border-primary)]",
+        variant === "default" && "border-[#23252a] bg-gray-900",
         variant === "elevated" &&
-          "bg-[var(--linear-bg-level2)] border-[var(--linear-border-primary)] shadow-[var(--linear-shadow-medium)]",
-        variant === "outlined" &&
-          "bg-transparent border-[var(--linear-border-secondary)]",
+          "border-[#23252a] bg-gray-800 shadow-[0px_4px_24px_rgba(0,0,0,0.2)]",
+        variant === "outlined" && "border-[#34343a] bg-transparent",
         // Padding variants
         padding === "none" && "p-0",
         padding === "sm" && "p-4",
@@ -41,4 +39,3 @@ const LinearCard: FC<Props> = ({
 };
 
 export default LinearCard;
-
