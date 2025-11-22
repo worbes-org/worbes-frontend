@@ -1,5 +1,6 @@
 "use client";
 
+import Text from "@/components/Text";
 import { cn } from "@/utils/styles";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import {
@@ -12,6 +13,7 @@ import { useIsomorphicLayoutEffect } from "react-use";
 
 type Props = {
   className?: string;
+  titleClassName?: string;
   title: ReactNode;
   isOpen?: boolean;
   onToggle?: (isOpen: boolean) => void;
@@ -19,6 +21,7 @@ type Props = {
 
 const Disclosure: FC<Props> = ({
   className,
+  titleClassName,
   title,
   isOpen: _isOpen,
   onToggle,
@@ -31,23 +34,25 @@ const Disclosure: FC<Props> = ({
   }, [_isOpen]);
 
   return (
-    <div className={cn("overflow-hidden pt-2", className)}>
+    <div className={cn("overflow-hidden", className)}>
       <div
-        className="flex w-full items-center justify-between text-left"
+        className={cn("flex w-full items-center gap-x-2 py-2", titleClassName)}
         role="button"
         onClick={handleToggle}
       >
-        {title}
         <ChevronDownIcon
           className={cn(
-            "size-5 text-green-200 transition-transform duration-300 ease-in-out",
-            isOpen && "rotate-180",
+            "size-4 text-gray-300 transition-transform duration-500 ease-in-out",
+            !isOpen && "-rotate-90",
           )}
         />
+        <Text theme={isOpen ? "primary" : "secondary"} size="sm">
+          {title}
+        </Text>
       </div>
       <div
         className={cn(
-          "max-h-[2000px] pt-2 transition-all duration-200 ease-in-out",
+          "max-h-[2000px] transition-all duration-300 ease-in-out",
           !isOpen && "pointer-events-none max-h-0 opacity-0",
         )}
       >

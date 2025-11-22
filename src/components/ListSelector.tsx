@@ -1,8 +1,8 @@
 import Disclosure from "@/components/Disclosure";
+import Text from "@/components/Text";
 import type { Nullable } from "@/types/misc";
 import type { ListSelectorOption } from "@/types/selector";
 import { cn } from "@/utils/styles";
-import { CheckIcon } from "@heroicons/react/24/outline";
 import { type FC, type RefObject } from "react";
 
 type ListSelectorProps<TValue, TMetadata = unknown> = {
@@ -10,6 +10,7 @@ type ListSelectorProps<TValue, TMetadata = unknown> = {
   ref?: RefObject<Nullable<HTMLUListElement>>;
   options: ListSelectorOption<TValue, TMetadata>[];
   selectedValues: Nullable<TValue>[];
+  _depth?: number;
   onSelect: (
     option: ListSelectorOption<TValue, TMetadata>,
     isOpen?: boolean,
@@ -21,10 +22,14 @@ const ListSelector = <TValue extends string | number, TMetadata = unknown>({
   ref,
   options,
   selectedValues,
+  _depth = 0,
   onSelect,
 }: ListSelectorProps<TValue, TMetadata>) => {
   return (
-    <ul className={cn("divide-y divide-gray-800", className)} ref={ref}>
+    <ul
+      className={cn("space-y-0.5 divide-y divide-[#23252a]", className)}
+      ref={ref}
+    >
       {options.map((option) => {
         const isSelected = selectedValues.includes(option.value);
 
@@ -32,6 +37,10 @@ const ListSelector = <TValue extends string | number, TMetadata = unknown>({
           <li key={option.value}>
             {option.children ? (
               <Disclosure
+                titleClassName={cn(
+                  getLeftPadding(_depth),
+                  isSelected && "bg-gray-800",
+                )}
                 title={
                   <ListSelectorOption
                     label={option.label}
@@ -42,15 +51,15 @@ const ListSelector = <TValue extends string | number, TMetadata = unknown>({
                 onToggle={handleSelect(option)}
               >
                 <ListSelector
-                  className="pl-5"
                   options={option.children}
                   selectedValues={selectedValues}
+                  _depth={_depth + 1}
                   onSelect={onSelect}
                 />
               </Disclosure>
             ) : (
               <ListSelectorOption
-                className="w-full py-2"
+                className={cn("w-full py-2", getLeftPadding(_depth))}
                 label={option.label}
                 isSelected={isSelected}
                 onClick={handleSelect(option)}
@@ -64,6 +73,21 @@ const ListSelector = <TValue extends string | number, TMetadata = unknown>({
 
   function handleSelect(option: ListSelectorOption<TValue, TMetadata>) {
     return (isOpen?: boolean) => onSelect(option, isOpen);
+  }
+
+  function getLeftPadding(depth: number) {
+    switch (depth) {
+      case 0:
+        return "pl-2";
+      case 1:
+        return "pl-8";
+      case 2:
+        return "pl-14";
+      case 3:
+        return "pl-20";
+      default:
+        return "pl-2";
+    }
   }
 };
 
@@ -82,11 +106,12 @@ const ListSelectorOption: FC<ListSelectorItemProps> = ({
 }) => {
   return (
     <button
-      className={cn("flex items-center gap-x-2 text-green-200", className)}
+      className={cn("flex items-center gap-x-2", className)}
       onClick={onClick}
     >
-      {isSelected && <CheckIcon className="size-4 stroke-3 text-green-300" />}
-      {label}
+      <Text theme={isSelected ? "primary" : "secondary"} size="sm">
+        {label}
+      </Text>
     </button>
   );
 };

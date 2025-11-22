@@ -3,13 +3,10 @@
 import Badge from "@/components/Badge";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import CategorySelectorPanel from "@/components/CategorySelectorPanel";
 import Heading from "@/components/Heading";
 import Input from "@/components/Input";
-import {
-  LinearCategoryList,
-  LinearDropdown,
-  type LinearDropdownOption,
-} from "@/components/linear";
+import { LinearDropdown, type LinearDropdownOption } from "@/components/linear";
 import SegmentedControl from "@/components/SegmentedControl";
 import Separator from "@/components/Separator";
 import Text from "@/components/Text";
@@ -327,7 +324,7 @@ const ComponentsPage: FC = () => {
                 </Text>
               </div>
               <div className="h-[600px] overflow-y-auto">
-                <LinearCategoryList
+                <CategorySelectorPanel
                   value={categorySelection}
                   onChange={setCategorySelection}
                 />
