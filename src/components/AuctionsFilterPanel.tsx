@@ -1,6 +1,6 @@
 import BottomDrawer from "@/components/BottomDrawer";
 import DropdownPanel from "@/components/DropdownPanel";
-import ListSelector from "@/components/ListSelector";
+import NestedListSelector from "@/components/NestedListSelector";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
 import Slider from "@/components/Slider";
@@ -111,7 +111,7 @@ const AuctionsFilterPanel: FC<Props> = ({ className, filter, onChange }) => {
                 isOpen={isOpen}
                 onClose={onClose}
               >
-                <ListSelector
+                <NestedListSelector
                   className="scrollbar-hide max-h-[calc(95dvh-8rem)] overflow-y-auto"
                   options={EXPANSIONS}
                   selectedValues={
@@ -123,7 +123,7 @@ const AuctionsFilterPanel: FC<Props> = ({ className, filter, onChange }) => {
             }
             desktop={
               <DropdownPanel isOpen={isOpen} closeOnClick onClose={onClose}>
-                <ListSelector
+                <NestedListSelector
                   options={EXPANSIONS}
                   selectedValues={
                     selectedExpansion ? [selectedExpansion.value] : []

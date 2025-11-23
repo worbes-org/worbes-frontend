@@ -3,14 +3,15 @@
 import Badge from "@/components/Badge";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
-import CategorySelectorPanel from "@/components/CategorySelectorPanel";
+import CategoryListPanel from "@/components/CategoryListPanel";
 import Heading from "@/components/Heading";
 import Input from "@/components/Input";
-import { LinearDropdown, type LinearDropdownOption } from "@/components/linear";
+import LegacyDropdown from "@/components/LegacyDropdown";
 import SegmentedControl from "@/components/SegmentedControl";
 import Separator from "@/components/Separator";
 import Text from "@/components/Text";
 import type { CategorySelection } from "@/types/category";
+import { ListSelectorOption } from "@/types/selector";
 import {
   BuildingOfficeIcon,
   GlobeAltIcon,
@@ -33,49 +34,49 @@ const ComponentsPage: FC = () => {
   const [selectedRegionSegmented, setSelectedRegionSegmented] =
     useState<string>("KR");
 
-  const regionOptions: LinearDropdownOption[] = [
-    { value: "KR", label: "Korea", icon: <GlobeAltIcon className="size-4" /> },
+  const regionOptions: ListSelectorOption<string>[] = [
+    { value: "KR", label: "Korea", Icon: GlobeAltIcon },
     {
       value: "US",
       label: "United States",
-      icon: <GlobeAltIcon className="size-4" />,
+      Icon: GlobeAltIcon,
     },
-    { value: "EU", label: "Europe", icon: <GlobeAltIcon className="size-4" /> },
+    { value: "EU", label: "Europe", Icon: GlobeAltIcon },
   ];
 
-  const realmOptions: LinearDropdownOption[] = [
+  const realmOptions: ListSelectorOption<string>[] = [
     {
       value: "azshara",
       label: "아즈샤라",
-      icon: <BuildingOfficeIcon className="size-4" />,
+      Icon: BuildingOfficeIcon,
     },
     {
       value: "dalaran",
       label: "달라란",
-      icon: <BuildingOfficeIcon className="size-4" />,
+      Icon: BuildingOfficeIcon,
     },
     {
       value: "stormrage",
       label: "스톰레이지",
-      icon: <BuildingOfficeIcon className="size-4" />,
+      Icon: BuildingOfficeIcon,
     },
     {
       value: "arthas",
       label: "아서스",
-      icon: <BuildingOfficeIcon className="size-4" />,
+      Icon: BuildingOfficeIcon,
     },
     {
       value: "kiljaeden",
       label: "킬제덴",
-      icon: <BuildingOfficeIcon className="size-4" />,
+      Icon: BuildingOfficeIcon,
     },
   ];
 
-  const simpleOptions: LinearDropdownOption[] = [
+  const simpleOptions: ListSelectorOption<string>[] = [
     { value: "option1", label: "Option 1" },
     { value: "option2", label: "Option 2" },
     { value: "option3", label: "Option 3" },
-    { value: "option4", label: "Option 4", disabled: true },
+    { value: "option4", label: "Option 4" },
     { value: "option5", label: "Option 5" },
   ];
 
@@ -97,7 +98,7 @@ const ComponentsPage: FC = () => {
           <Heading level={2} className="mb-6">
             Buttons
           </Heading>
-          <Card theme="primary" size="lg" className="space-y-6">
+          <Card theme="primary" padding="lg" className="space-y-6">
             <div className="space-y-4">
               <div>
                 <Text theme="secondary" size="sm" className="mb-2">
@@ -161,7 +162,7 @@ const ComponentsPage: FC = () => {
           <Heading level={2} className="mb-6">
             Inputs
           </Heading>
-          <Card theme="primary" size="lg" className="space-y-6">
+          <Card theme="primary" padding="lg" className="space-y-6">
             <div className="space-y-4">
               <div>
                 <Text theme="secondary" size="sm" className="mb-2">
@@ -233,7 +234,7 @@ const ComponentsPage: FC = () => {
             Cards
           </Heading>
           <div className="grid gap-6 md:grid-cols-3">
-            <Card theme="primary" size="md">
+            <Card theme="primary" padding="md">
               <Heading level={4} className="mb-2">
                 Primary Card
               </Heading>
@@ -241,7 +242,7 @@ const ComponentsPage: FC = () => {
                 기본 카드 스타일입니다.
               </Text>
             </Card>
-            <Card theme="secondary" size="md">
+            <Card theme="secondary" padding="md">
               <Heading level={4} className="mb-2">
                 Secondary Card
               </Heading>
@@ -249,7 +250,7 @@ const ComponentsPage: FC = () => {
                 그림자가 있는 카드입니다.
               </Text>
             </Card>
-            <Card theme="tertiary" size="md">
+            <Card theme="tertiary" padding="md">
               <Heading level={4} className="mb-2">
                 Tertiary Card
               </Heading>
@@ -265,7 +266,7 @@ const ComponentsPage: FC = () => {
           <Heading level={2} className="mb-6">
             Badges
           </Heading>
-          <Card theme="primary" size="lg" className="space-y-6">
+          <Card theme="primary" padding="lg" className="space-y-6">
             <div className="space-y-4">
               <div>
                 <Text theme="secondary" size="sm" className="mb-2">
@@ -316,19 +317,24 @@ const ComponentsPage: FC = () => {
             Category List
           </Heading>
           <div className="grid gap-6 lg:grid-cols-2">
-            <Card theme="primary" size="none" className="overflow-hidden">
+            <Card theme="primary" padding="none" className="overflow-hidden">
               <div className="border-b border-[#23252a] bg-gray-800 px-4 py-3">
                 <Heading level={4}>Linear Style Category List</Heading>
                 <Text theme="tertiary" size="sm" className="mt-1">
                   아이템 카테고리 선택 컴포넌트
                 </Text>
               </div>
-              <div className="h-[600px] overflow-y-auto">
-                <CategorySelectorPanel
-                  value={categorySelection}
-                  onChange={setCategorySelection}
-                />
-              </div>
+
+              <CategoryListPanel
+                fadeGradientClassName={{
+                  from: "from-transparent",
+                  to: "to-gray-900",
+                }}
+                listClassName="h-[600px] overflow-y-auto"
+                value={categorySelection}
+                onChange={setCategorySelection}
+              />
+
               {categorySelection && (
                 <div className="border-t border-[#23252a] bg-gray-800 px-4 py-3">
                   <Text theme="secondary" size="sm" className="mb-1">
@@ -347,7 +353,7 @@ const ComponentsPage: FC = () => {
                 </div>
               )}
             </Card>
-            <Card theme="secondary" size="lg">
+            <Card theme="secondary" padding="lg">
               <Heading level={4} className="mb-4">
                 사용 방법
               </Heading>
@@ -424,7 +430,7 @@ const ComponentsPage: FC = () => {
             Dropdown
           </Heading>
           <div className="grid gap-6 lg:grid-cols-2">
-            <Card theme="primary" size="lg" className="space-y-6">
+            <Card theme="primary" padding="lg" className="space-y-6">
               <div>
                 <Heading level={4} className="mb-2">
                   Dropdown Menu
@@ -439,7 +445,7 @@ const ComponentsPage: FC = () => {
                   <Text theme="secondary" size="sm" className="mb-3">
                     Basic Dropdown
                   </Text>
-                  <LinearDropdown
+                  <LegacyDropdown
                     options={simpleOptions}
                     value={selectedSimple}
                     onChange={(value) => setSelectedSimple(value)}
@@ -451,7 +457,7 @@ const ComponentsPage: FC = () => {
                   <Text theme="secondary" size="sm" className="mb-3">
                     With Icons
                   </Text>
-                  <LinearDropdown
+                  <LegacyDropdown
                     options={regionOptions}
                     value={selectedRegion}
                     onChange={(value) => setSelectedRegion(value)}
@@ -464,7 +470,7 @@ const ComponentsPage: FC = () => {
                   <Text theme="secondary" size="sm" className="mb-3">
                     Searchable Dropdown
                   </Text>
-                  <LinearDropdown
+                  <LegacyDropdown
                     options={realmOptions}
                     value={selectedRealm}
                     onChange={(value) => setSelectedRealm(value)}
@@ -479,7 +485,7 @@ const ComponentsPage: FC = () => {
                   <Text theme="secondary" size="sm" className="mb-3">
                     With Label & Helper Text
                   </Text>
-                  <LinearDropdown
+                  <LegacyDropdown
                     label="Region"
                     options={regionOptions}
                     value={selectedRegion}
@@ -494,17 +500,17 @@ const ComponentsPage: FC = () => {
                     Sizes
                   </Text>
                   <div className="space-y-3">
-                    <LinearDropdown
+                    <LegacyDropdown
                       size="sm"
                       options={simpleOptions.slice(0, 3)}
                       placeholder="Small dropdown"
                     />
-                    <LinearDropdown
+                    <LegacyDropdown
                       size="md"
                       options={simpleOptions.slice(0, 3)}
                       placeholder="Medium dropdown"
                     />
-                    <LinearDropdown
+                    <LegacyDropdown
                       size="lg"
                       options={simpleOptions.slice(0, 3)}
                       placeholder="Large dropdown"
@@ -517,12 +523,12 @@ const ComponentsPage: FC = () => {
                     States
                   </Text>
                   <div className="space-y-3">
-                    <LinearDropdown
+                    <LegacyDropdown
                       options={simpleOptions.slice(0, 3)}
                       placeholder="Disabled dropdown"
                       disabled
                     />
-                    <LinearDropdown
+                    <LegacyDropdown
                       options={simpleOptions.slice(0, 3)}
                       placeholder="Loading dropdown"
                       isLoading
@@ -531,7 +537,7 @@ const ComponentsPage: FC = () => {
                 </div>
               </div>
             </Card>
-            <Card theme="secondary" size="lg">
+            <Card theme="secondary" padding="lg">
               <Heading level={4} className="mb-4">
                 사용 방법
               </Heading>
@@ -628,7 +634,7 @@ const ComponentsPage: FC = () => {
             Segmented Control
           </Heading>
           <div className="grid gap-6 lg:grid-cols-2">
-            <Card theme="primary" size="lg" className="space-y-6">
+            <Card theme="primary" padding="lg" className="space-y-6">
               <div>
                 <Heading level={4} className="mb-2">
                   Region Selector
@@ -771,7 +777,7 @@ const ComponentsPage: FC = () => {
                 </div>
               </div>
             </Card>
-            <Card theme="secondary" size="lg">
+            <Card theme="secondary" padding="lg">
               <Heading level={4} className="mb-4">
                 Region 선택 UI/UX 제안
               </Heading>
@@ -859,7 +865,7 @@ const ComponentsPage: FC = () => {
           <Heading level={2} className="mb-6">
             Typography
           </Heading>
-          <Card theme="primary" size="lg" className="space-y-6">
+          <Card theme="primary" padding="lg" className="space-y-6">
             <div className="space-y-6">
               <div>
                 <Text theme="secondary" size="sm" className="mb-3">
@@ -923,7 +929,7 @@ const ComponentsPage: FC = () => {
           <Heading level={2} className="mb-6">
             Combined Example
           </Heading>
-          <Card theme="secondary" size="lg">
+          <Card theme="secondary" padding="lg">
             <div className="space-y-6">
               <div>
                 <Heading level={3} className="mb-2">

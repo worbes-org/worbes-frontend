@@ -10,7 +10,7 @@ import {
   type ReactNode,
 } from "react";
 
-export type LinearDropdownOption<T = string> = {
+export type DropdownOption<T = string> = {
   value: T;
   label: string;
   icon?: ReactNode;
@@ -18,19 +18,16 @@ export type LinearDropdownOption<T = string> = {
   metadata?: unknown;
 };
 
-type LinearDropdownSize = "sm" | "md" | "lg";
-type LinearDropdownVariant = "default" | "input";
-
 type Props<T = string> = {
-  options: LinearDropdownOption<T>[];
+  options: DropdownOption<T>[];
   value?: T;
-  onChange?: (value: T, option: LinearDropdownOption<T>) => void;
+  onChange?: (value: T, option: DropdownOption<T>) => void;
   placeholder?: string;
   label?: string;
   error?: string;
   helperText?: string;
-  size?: LinearDropdownSize;
-  variant?: LinearDropdownVariant;
+  size?: "sm" | "md" | "lg";
+  variant?: "default" | "input";
   searchable?: boolean;
   searchPlaceholder?: string;
   disabled?: boolean;
@@ -41,15 +38,15 @@ type Props<T = string> = {
   className?: string;
   triggerClassName?: string;
   dropdownClassName?: string;
-  renderOption?: (option: LinearDropdownOption<T>) => ReactNode;
+  renderOption?: (option: DropdownOption<T>) => ReactNode;
   renderTrigger?: (props: {
     isOpen: boolean;
-    selectedOption?: LinearDropdownOption<T>;
+    selectedOption?: DropdownOption<T>;
     placeholder?: string;
   }) => ReactNode;
 };
 
-const LinearDropdown = <T extends string | number = string>({
+const LegacyDropdown = <T extends string | number = string>({
   options,
   value,
   onChange,
@@ -166,7 +163,7 @@ const LinearDropdown = <T extends string | number = string>({
     }
   }, [focusedIndex]);
 
-  const handleSelect = (option: LinearDropdownOption<T>) => {
+  const handleSelect = (option: DropdownOption<T>) => {
     if (option.disabled) return;
     onChange?.(option.value, option);
     setIsOpen(false);
@@ -341,4 +338,4 @@ const LinearDropdown = <T extends string | number = string>({
   );
 };
 
-export default LinearDropdown;
+export default LegacyDropdown;

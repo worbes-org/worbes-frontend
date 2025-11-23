@@ -4,7 +4,6 @@ import AuctionsFilterDialogContainer from "@/components/AuctionsFilterDialogCont
 import AuctionTable from "@/components/AuctionTable";
 import BlockSection from "@/components/BlockSection";
 import CategorySelector from "@/components/CategorySelector";
-import CategorySelectorPanel from "@/components/CategorySelectorPanel";
 import HomeBackground from "@/components/HomeBackground";
 import Input from "@/components/Input";
 import LayoutContainer from "@/components/LayoutContainer";
@@ -121,11 +120,11 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
 
       <LayoutContainer className="relative grid grid-cols-1 gap-x-6 lg:grid-cols-[15rem_1fr]">
         <BlockSection className="h-156 not-lg:hidden">
-          <CategorySelectorPanel
+          {/* <CategorySelectorPanel
             className="scrollbar-hide h-full overflow-y-auto"
             value={categorySelection}
             onChange={setCategorySelection}
-          />
+          /> */}
         </BlockSection>
 
         <AuctionTable

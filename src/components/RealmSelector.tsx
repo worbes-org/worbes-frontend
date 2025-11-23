@@ -2,7 +2,7 @@
 
 import BottomDrawer from "@/components/BottomDrawer";
 import DropdownPanel from "@/components/DropdownPanel";
-import ListSelector from "@/components/ListSelector";
+import NestedListSelector from "@/components/NestedListSelector";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
 import { Region } from "@/constants/game-server";
@@ -68,7 +68,7 @@ const RealmSelector: FC<Props> = ({ className, region, value, onChange }) => {
               isOpen={isOpen}
               onClose={onClose}
             >
-              <ListSelector
+              <NestedListSelector
                 className="scrollbar-hide max-h-[calc(70dvh-7.5rem)] overflow-y-auto"
                 options={options}
                 selectedValues={selectedValues}
@@ -77,8 +77,8 @@ const RealmSelector: FC<Props> = ({ className, region, value, onChange }) => {
             </BottomDrawer>
           }
           desktop={
-            <DropdownPanel isOpen={isOpen} closeOnClick onClose={onClose}>
-              <ListSelector
+            <DropdownPanel isOpen={isOpen}>
+              <NestedListSelector
                 className="scrollbar-hide max-h-[max(7rem,50dvh)] overflow-y-auto"
                 options={options}
                 selectedValues={selectedValues}

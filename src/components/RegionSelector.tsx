@@ -2,7 +2,7 @@
 
 import BottomDrawer from "@/components/BottomDrawer";
 import DropdownPanel from "@/components/DropdownPanel";
-import ListSelector from "@/components/ListSelector";
+import NestedListSelector from "@/components/NestedListSelector";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
 import { Region } from "@/constants/game-server";
@@ -46,7 +46,7 @@ const RegionSelector: FC<Props> = ({ className, value, onChange }) => {
               isOpen={isOpen}
               onClose={onClose}
             >
-              <ListSelector
+              <NestedListSelector
                 options={Object.values(Region).map((region) => ({
                   label: region,
                   value: region,
@@ -58,7 +58,7 @@ const RegionSelector: FC<Props> = ({ className, value, onChange }) => {
           }
           desktop={
             <DropdownPanel isOpen={isOpen} closeOnClick onClose={onClose}>
-              <ListSelector
+              <NestedListSelector
                 options={Object.values(Region).map((region) => ({
                   label: region,
                   value: region,

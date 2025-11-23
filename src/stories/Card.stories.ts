@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs";
 const meta = {
   component: Card,
   args: {
-    size: "md",
+    padding: "md",
     children: "Card content",
   },
 } satisfies Meta<typeof Card>;

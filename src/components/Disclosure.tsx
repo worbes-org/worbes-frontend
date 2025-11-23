@@ -1,6 +1,5 @@
 "use client";
 
-import Text from "@/components/Text";
 import { cn } from "@/utils/styles";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import {
@@ -36,7 +35,12 @@ const Disclosure: FC<Props> = ({
   return (
     <div className={cn("overflow-hidden", className)}>
       <div
-        className={cn("flex w-full items-center gap-x-2 py-2", titleClassName)}
+        className={cn(
+          "flex w-full items-center gap-x-2 py-2",
+          isOpen && "bg-accent-600/10",
+          !isOpen && "hover:bg-gray-700",
+          titleClassName,
+        )}
         role="button"
         onClick={handleToggle}
       >
@@ -46,9 +50,14 @@ const Disclosure: FC<Props> = ({
             !isOpen && "-rotate-90",
           )}
         />
-        <Text theme={isOpen ? "primary" : "secondary"} size="sm">
+        <span
+          className={cn("text-sm font-medium", isOpen && "text-accent-600")}
+        >
           {title}
-        </Text>
+        </span>
+        {isOpen && (
+          <div className="ml-auto size-1.5 rounded-full bg-accent-600" />
+        )}
       </div>
       <div
         className={cn(

@@ -1,6 +1,6 @@
 import BottomDrawer from "@/components/BottomDrawer";
 import DropdownPanel from "@/components/DropdownPanel";
-import ListSelector from "@/components/ListSelector";
+import NestedListSelector from "@/components/NestedListSelector";
 import Responsive from "@/components/Responsive";
 import SelectorTrigger from "@/components/SelectorTrigger";
 import { Locale } from "@/constants/i18n";
@@ -48,7 +48,7 @@ const LanguageSelector: FC<Props> = ({
               isOpen={isOpen}
               onClose={onClose}
             >
-              <ListSelector
+              <NestedListSelector
                 options={Object.values(Locale).map((locale) => ({
                   value: locale,
                   label: getLanguageLabel(locale),
@@ -60,7 +60,7 @@ const LanguageSelector: FC<Props> = ({
           }
           desktop={
             <DropdownPanel isOpen={isOpen} closeOnClick onClose={onClose}>
-              <ListSelector
+              <NestedListSelector
                 options={Object.values(Locale).map((locale) => ({
                   value: locale,
                   label: getLanguageLabel(locale),
