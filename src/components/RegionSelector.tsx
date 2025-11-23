@@ -30,13 +30,12 @@ const RegionSelector: FC<Props> = ({ className, value, onChange }) => {
   return (
     <SelectorTrigger
       className={cn("", className)}
-      theme="primary"
       size="md"
       label={label}
       placeholder={t("Select region")}
       closeOnClickAway={isMdBreakpoint}
-      LeftIcon={GlobeAltIcon}
-      RightIcon={ChevronDownIcon}
+      leftIcon={<GlobeAltIcon />}
+      rightIcon={<ChevronDownIcon />}
     >
       {({ isOpen, onClose }) => (
         <Responsive

@@ -1,11 +1,12 @@
 "use client";
 
 import { cn } from "@/utils/styles";
+import { type FC } from "react";
 
 export type SegmentedControlOption<T = string> = {
   value: T;
   label: string;
-  Icon?: React.FC<{ className?: string }>;
+  Icon?: FC<{ className?: string }>;
   disabled?: boolean;
 };
 

@@ -5,7 +5,7 @@ import type { ListSelectorOption } from "@/types/selector";
 import { cn } from "@/utils/styles";
 import { type FC, type RefObject } from "react";
 
-type ListSelectorProps<TValue, TMetadata = unknown> = {
+type Props<TValue, TMetadata = unknown> = {
   className?: string;
   ref?: RefObject<Nullable<HTMLUListElement>>;
   options: ListSelectorOption<TValue, TMetadata>[];
@@ -24,7 +24,7 @@ const ListSelector = <TValue extends string | number, TMetadata = unknown>({
   selectedValues,
   _depth = 0,
   onSelect,
-}: ListSelectorProps<TValue, TMetadata>) => {
+}: Props<TValue, TMetadata>) => {
   return (
     <ul
       className={cn("space-y-0.5 divide-y divide-[#23252a]", className)}
@@ -95,6 +95,7 @@ type ListSelectorItemProps = {
   className?: string;
   label: string;
   isSelected: boolean;
+  Icon?: FC<{ className?: string }>;
   onClick?: () => void;
 };
 
@@ -102,6 +103,7 @@ const ListSelectorOption: FC<ListSelectorItemProps> = ({
   className,
   label,
   isSelected,
+  Icon,
   onClick,
 }) => {
   return (
@@ -110,6 +112,7 @@ const ListSelectorOption: FC<ListSelectorItemProps> = ({
       onClick={onClick}
     >
       <Text theme={isSelected ? "primary" : "secondary"} size="sm">
+        {Icon && <Icon className="size-4 text-current" />}
         {label}
       </Text>
     </button>

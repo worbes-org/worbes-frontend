@@ -51,14 +51,13 @@ const RealmSelector: FC<Props> = ({ className, region, value, onChange }) => {
   return (
     <SelectorTrigger
       className={cn("", className)}
-      theme="primary"
       size="md"
       isLoading={isLoading}
       label={label}
       placeholder={t("Select realm")}
       closeOnClickAway={isMdBreakpoint}
-      LeftIcon={BuildingOfficeIcon}
-      RightIcon={ChevronDownIcon}
+      leftIcon={<BuildingOfficeIcon />}
+      rightIcon={<ChevronDownIcon />}
     >
       {({ isOpen, onClose }) => (
         <Responsive

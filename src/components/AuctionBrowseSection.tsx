@@ -87,10 +87,9 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
               />
               <Input
                 className="w-full"
-                theme="primary"
                 size="md"
                 placeholder={t("Search by name")}
-                LeftIcon={MagnifyingGlassIcon}
+                leftIcon={<MagnifyingGlassIcon />}
                 value={restFilters.name ?? ""}
                 onChange={handleInputChange}
               />

@@ -1,6 +1,8 @@
 import Input from "@/components/Input";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { cn } from "@/utils/styles";
+import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import type { Meta, StoryObj } from "@storybook/nextjs";
+import { useState } from "react";
 
 const meta = {
   component: Input,
@@ -24,7 +26,27 @@ export const WithLabel: Story = {
 
 export const WithIcons: Story = {
   args: {
-    leftIcon: <MagnifyingGlassIcon className="size-4" />,
+    leftIcon: <MagnifyingGlassIcon />,
+  },
+  render: (args) => {
+    const [value, setValue] = useState("");
+
+    return (
+      <Input
+        className="w-96"
+        {...args}
+        value={value}
+        rightIcon={
+          <button
+            className={cn(!value.length && "hidden")}
+            onClick={() => setValue("")}
+          >
+            <XMarkIcon />
+          </button>
+        }
+        onChange={(e) => setValue(e.target.value)}
+      />
+    );
   },
 };
 

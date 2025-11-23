@@ -194,7 +194,7 @@ const ComponentsPage: FC = () => {
                 <Input
                   size="md"
                   placeholder="Search..."
-                  leftIcon={<MagnifyingGlassIcon className="size-4" />}
+                  leftIcon={<MagnifyingGlassIcon />}
                 />
               </div>
               <Separator orientation="horizontal" />
@@ -771,7 +771,7 @@ const ComponentsPage: FC = () => {
                 </div>
               </div>
             </Card>
-            <Card theme="elevated" size="lg">
+            <Card theme="secondary" size="lg">
               <Heading level={4} className="mb-4">
                 Region 선택 UI/UX 제안
               </Heading>
@@ -859,7 +859,7 @@ const ComponentsPage: FC = () => {
           <Heading level={2} className="mb-6">
             Typography
           </Heading>
-          <Card theme="default" size="lg" className="space-y-6">
+          <Card theme="primary" size="lg" className="space-y-6">
             <div className="space-y-6">
               <div>
                 <Text theme="secondary" size="sm" className="mb-3">

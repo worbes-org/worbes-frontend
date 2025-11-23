@@ -30,15 +30,14 @@ const LanguageSelector: FC<Props> = ({
   return (
     <SelectorTrigger
       className={cn("", className)}
-      theme="primary"
       size="md"
       label={t("Language: {selectedLanguage}", {
         selectedLanguage: getLanguageLabel(value),
       })}
       placeholder={t("Select language")}
       closeOnClickAway={isMdBreakpoint}
-      LeftIcon={GlobeAltIcon}
-      RightIcon={ChevronDownIcon}
+      leftIcon={<GlobeAltIcon />}
+      rightIcon={<ChevronDownIcon />}
     >
       {({ isOpen, onClose }) => (
         <Responsive

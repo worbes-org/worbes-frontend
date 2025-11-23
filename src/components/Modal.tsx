@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import React, { type PropsWithChildren, type ReactNode } from "react";
+import { type FC, type PropsWithChildren, type ReactNode } from "react";
 
 type Props = {
   title: ReactNode;
@@ -17,7 +17,7 @@ type Props = {
   onClose: () => void;
 };
 
-const Modal: React.FC<PropsWithChildren<Props>> = ({
+const Modal: FC<PropsWithChildren<Props>> = ({
   title,
   visible,
   size,

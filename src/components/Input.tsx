@@ -1,16 +1,22 @@
+import CloneElement from "@/components/CloneElement";
 import ProcessingIcon from "@/svgs/ProcessingIcon";
 import { cn } from "@/utils/styles";
-import { useId, type ComponentProps, type FC, type ReactNode } from "react";
-
-type InputSize = "sm" | "md" | "lg";
+import {
+  MouseEvent,
+  ReactElement,
+  useId,
+  type ComponentProps,
+  type FC,
+  type ReactNode,
+} from "react";
 
 type Props = {
-  size: InputSize;
+  size: "sm" | "md" | "lg";
   label?: string;
   error?: string;
-  helperText?: string;
-  leftIcon?: ReactNode;
-  rightIcon?: ReactNode;
+  helperText?: ReactNode;
+  leftIcon?: ReactElement<ComponentProps<"svg">>;
+  rightIcon?: ReactElement<ComponentProps<"svg">>;
   isLoading?: boolean;
 } & Omit<ComponentProps<"input">, "size">;
 
@@ -43,16 +49,22 @@ const Input: FC<Props> = ({
       )}
       <div className="relative">
         {leftIcon && (
-          <div className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-gray-300">
-            {leftIcon}
-          </div>
+          <CloneElement
+            element={leftIcon}
+            props={{
+              className: cn(
+                "absolute top-1/2 left-3 size-4 -translate-y-1/2 text-gray-300",
+                leftIcon.type !== "button" && "pointer-events-none",
+              ),
+              onClick: handleIconClick,
+            }}
+          />
         )}
         <input
           id={inputId}
           className={cn(
             "w-full rounded-lg border bg-gray-900 text-gray-100",
-            "transition-colors placeholder:text-gray-400",
-            "focus-visible:ring-2 focus-visible:ring-accent-700 focus-visible:ring-offset-2 focus-visible:outline-none",
+            "transition-colors placeholder:text-gray-400 focus-visible:outline-none",
             "disabled:cursor-not-allowed disabled:opacity-50",
             size === "sm" && "h-8 px-3 text-sm",
             size === "md" && "h-10 px-3 text-sm",
@@ -80,9 +92,16 @@ const Input: FC<Props> = ({
           />
         ) : (
           rightIcon && (
-            <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-gray-300">
-              {rightIcon}
-            </div>
+            <CloneElement
+              element={rightIcon}
+              props={{
+                className: cn(
+                  "absolute top-1/2 right-3 size-4 -translate-y-1/2 text-gray-300",
+                  rightIcon.type !== "button" && "pointer-events-none",
+                ),
+                onClick: handleIconClick,
+              }}
+            />
           )
         )}
       </div>
@@ -92,6 +111,13 @@ const Input: FC<Props> = ({
       )}
     </div>
   );
+
+  function handleIconClick(e: MouseEvent<SVGSVGElement>) {
+    if (rightIcon?.props?.onClick) {
+      e.stopPropagation();
+      rightIcon.props.onClick(e);
+    }
+  }
 };
 
 export default Input;
