@@ -18,6 +18,8 @@ const meta = {
   },
 } satisfies Meta<typeof SegmentedControl>;
 
+export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
@@ -41,5 +43,3 @@ export const FullWidth: Story = {
     fullWidth: true,
   },
 };
-
-export default meta;

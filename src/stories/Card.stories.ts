@@ -9,6 +9,8 @@ const meta = {
   },
 } satisfies Meta<typeof Card>;
 
+export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
@@ -22,5 +24,3 @@ export const Secondary: Story = {
 export const Tertiary: Story = {
   args: { theme: "tertiary" },
 };
-
-export default meta;

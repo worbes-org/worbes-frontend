@@ -6,6 +6,8 @@ const meta = {
   args: { children: "Heading text" },
 } satisfies Meta<typeof Heading>;
 
+export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Level1: Story = {
@@ -31,5 +33,3 @@ export const Level5: Story = {
 export const Level6: Story = {
   args: { level: 6 },
 };
-
-export default meta;

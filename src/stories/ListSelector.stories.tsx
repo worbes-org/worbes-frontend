@@ -21,6 +21,8 @@ const meta = {
   },
 } satisfies Meta<typeof ListSelector>;
 
+export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Flat: Story = {
@@ -71,5 +73,3 @@ export const Nested: Story = {
     );
   },
 };
-
-export default meta;

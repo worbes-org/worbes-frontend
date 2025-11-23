@@ -6,6 +6,8 @@ const meta = {
   args: { size: "md", theme: "default", children: "Badge" },
 } satisfies Meta<typeof Badge>;
 
+export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -31,5 +33,3 @@ export const Error: Story = {
 export const Info: Story = {
   args: { theme: "info" },
 };
-
-export default meta;

@@ -12,6 +12,8 @@ const meta = {
   },
 } satisfies Meta<typeof Input>;
 
+export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {};
@@ -64,5 +66,3 @@ export const Loading: Story = {
     isLoading: true,
   },
 };
-
-export default meta;

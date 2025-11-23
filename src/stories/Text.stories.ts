@@ -6,6 +6,8 @@ const meta = {
   args: { theme: "primary", size: "md", children: "Sample copy" },
 } satisfies Meta<typeof Text>;
 
+export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
@@ -23,5 +25,3 @@ export const Tertiary: Story = {
 export const Quaternary: Story = {
   args: { theme: "quaternary" },
 };
-
-export default meta;

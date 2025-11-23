@@ -1,6 +1,7 @@
 import Input from "@/components/Input";
 import type { Optional } from "@/types/misc";
 import { cn } from "@/utils/styles";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { noop } from "lodash-es";
 import {
   useRef,
@@ -46,6 +47,14 @@ const SelectorTrigger: FC<Props> = ({
           className="pointer-events-none"
           value={label ?? ""}
           placeholder={placeholder}
+          rightIcon={
+            <ChevronDownIcon
+              className={cn(
+                "transition-transform duration-200",
+                isOpen && "rotate-180",
+              )}
+            />
+          }
           onChange={noop} // HACK: Suppress uncontrolled input warning
           {...props}
         />

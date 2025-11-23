@@ -9,7 +9,13 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { ListSelectorOption } from "@/types/selector";
 import { ViewportBreakpoint } from "@/types/viewport";
 import { cn } from "@/utils/styles";
-import { ReactNode, type ComponentProps, type ReactElement } from "react";
+import {
+  ReactNode,
+  useState,
+  type ComponentProps,
+  type ReactElement,
+} from "react";
+import { useDebounce } from "react-use";
 import Input from "./Input";
 
 type Props<TValue extends string | number, TMetadata = unknown> = {
@@ -27,6 +33,9 @@ type Props<TValue extends string | number, TMetadata = unknown> = {
     options: ListSelectorOption<TValue, TMetadata>[];
     values?: TValue[];
     closeOnSelect?: boolean;
+    searchInput?: {
+      placeholder: string;
+    };
     drawer: {
       title: string;
       renderContent?: (args: {
@@ -51,6 +60,14 @@ const ResponsiveSelector = <
   panel,
 }: Props<TValue, TMetadata>) => {
   const isBreakpoint = useBreakpoint(breakpoint);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
+
+  useDebounce(() => setDebouncedSearchQuery(searchQuery), 500, [searchQuery]);
+
+  const filteredOptions = panel.options.filter((option) =>
+    new RegExp(debouncedSearchQuery, "i").test(option.label),
+  );
 
   return (
     <SelectorTrigger
@@ -69,9 +86,18 @@ const ResponsiveSelector = <
                 isOpen={isOpen}
                 onClose={onClose}
               >
+                {panel.searchInput && (
+                  <Input
+                    size="md"
+                    autoFocus
+                    placeholder={panel.searchInput?.placeholder ?? "Search..."}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                )}
                 <ListSelector
-                  listClassName="scrollbar-hide max-h-[calc(70dvh-7.5rem)] overflow-y-auto"
-                  options={panel.options}
+                  listClassName="scrollbar-hide max-h-[calc(70dvh-7.5rem)] overflow-y-auto py-2"
+                  options={filteredOptions}
                   selectedValues={panel.values ?? []}
                   onSelect={handleSelect}
                 >
@@ -81,9 +107,22 @@ const ResponsiveSelector = <
             }
             desktop={
               <DropdownPanel isOpen={isOpen}>
+                {panel.searchInput && (
+                  <div className="border-b border-[#23252a] p-2">
+                    <Input
+                      size="md"
+                      autoFocus
+                      placeholder={
+                        panel.searchInput?.placeholder ?? "Search..."
+                      }
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                  </div>
+                )}
                 <ListSelector
-                  listClassName="scrollbar-hide max-h-70 overflow-y-auto"
-                  options={panel.options}
+                  listClassName="scrollbar-hide max-h-70 overflow-y-auto py-2"
+                  options={filteredOptions}
                   selectedValues={panel.values ?? []}
                   onSelect={handleSelect}
                 />

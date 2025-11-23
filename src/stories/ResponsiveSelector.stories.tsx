@@ -1,5 +1,6 @@
 import ResponsiveSelector from "@/components/ResponsiveSelector";
 import type { ListSelectorOption } from "@/types/selector";
+import { GlobeAltIcon } from "@heroicons/react/24/outline";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import { useState } from "react";
 
@@ -22,19 +23,11 @@ const meta = {
   component: ResponsiveSelector,
   args: {
     className: "max-w-sm",
-  },
-} satisfies Meta<typeof ResponsiveSelector>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
-  args: {
     button: {
       size: "md",
       label: "Select Sample Item",
       placeholder: "Select sample item...",
+      leftIcon: <GlobeAltIcon />,
     },
     panel: {
       drawer: {
@@ -43,6 +36,13 @@ export const Default: Story = {
       options: SAMPLE_OPTIONS,
     },
   },
+} satisfies Meta<typeof ResponsiveSelector>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
   render: (args) => {
     const [values, setValues] = useState<string[]>([]);
 
@@ -53,14 +53,46 @@ export const Default: Story = {
           ...args.panel,
           options: SAMPLE_OPTIONS,
           values,
-          onSelect: (option: ListSelectorOption<string>) =>
-            setValues((prev) =>
-              prev.includes(option.value)
-                ? prev.filter((v) => v !== option.value)
-                : [...prev, option.value],
-            ),
+          onSelect: handleSelect,
         }}
       />
     );
+
+    function handleSelect(option: ListSelectorOption<string>) {
+      setValues((prev) =>
+        prev.includes(option.value)
+          ? prev.filter((v) => v !== option.value)
+          : [...prev, option.value],
+      );
+    }
+  },
+};
+
+export const WithSearchInput: Story = {
+  render: (args) => {
+    const [values, setValues] = useState<string[]>([]);
+
+    return (
+      <ResponsiveSelector
+        {...args}
+        panel={{
+          ...args.panel,
+          searchInput: {
+            placeholder: "Search...",
+          },
+          options: SAMPLE_OPTIONS,
+          values,
+          onSelect: handleSelect,
+        }}
+      />
+    );
+
+    function handleSelect(option: ListSelectorOption<string>) {
+      setValues((prev) =>
+        prev.includes(option.value)
+          ? prev.filter((v) => v !== option.value)
+          : [...prev, option.value],
+      );
+    }
   },
 };

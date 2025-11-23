@@ -5,6 +5,8 @@ const meta = {
   component: Separator,
 } satisfies Meta<typeof Separator>;
 
+export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Horizontal: Story = {
@@ -14,5 +16,3 @@ export const Horizontal: Story = {
 export const Vertical: Story = {
   args: { className: "h-100", orientation: "vertical" },
 };
-
-export default meta;
