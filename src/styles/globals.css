@@ -30,7 +30,6 @@
   --color-black: #000000;
   --color-white: #ffffff;
 
-  /* Linear theme palette exposed to Tailwind utilities */
   --color-gray-100: #f7f8f8;
   --color-gray-200: #d0d6e0;
   --color-gray-300: #8a8f98;
@@ -41,8 +40,6 @@
   --color-gray-800: #141516;
   --color-gray-900: #0f1011;
   --color-gray-950: #08090a;
-
-  /* Accent palette */
   --color-accent-100: #eef0ff;
   --color-accent-200: #d9dcff;
   --color-accent-300: #bcc0ff;
@@ -53,7 +50,6 @@
   --color-accent-800: #4b52a5;
   --color-accent-900: #34376f;
   --color-accent-950: #1f2241;
-
   --color-red: #eb5757;
   --color-orange: #fc7840;
   --color-yellow: #f2c94c;
