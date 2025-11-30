@@ -1,9 +1,9 @@
-import CookiesProvider from "@/providers/CookiesProvider";
 import GlobalProvider from "@/providers/GlobalProvider";
 import IntlProvider from "@/providers/IntlProvider";
 import TanstackQueryProvider from "@/providers/TanstackQueryProvider";
 import { cookies } from "next/headers";
 import { type AFC, type PropsWithChildren } from "react";
+import { SyncedStorageProvider } from "synced-storage/react";
 
 type Props = {
   locale: string;
@@ -12,11 +12,11 @@ type Props = {
 const RootProvider: AFC<Props> = async ({ locale, children }) => {
   return (
     <IntlProvider locale={locale}>
-      <CookiesProvider cookies={(await cookies()).getAll()}>
-        <GlobalProvider>
-          <TanstackQueryProvider>{children}</TanstackQueryProvider>
-        </GlobalProvider>
-      </CookiesProvider>
+      <TanstackQueryProvider>
+        <SyncedStorageProvider ssrCookies={(await cookies()).getAll()}>
+          <GlobalProvider>{children}</GlobalProvider>
+        </SyncedStorageProvider>
+      </TanstackQueryProvider>
     </IntlProvider>
   );
 };
