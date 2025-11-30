@@ -1,93 +1,88 @@
 "use client";
 
-import IconButton from "@/components/IconButton";
+import Button from "@/components/Button";
+import Input from "@/components/Input";
 import LayoutContainer from "@/components/LayoutContainer";
-import SideDrawer from "@/components/SideDrawer";
-import SideMenuPanel from "@/components/SideMenuPanel";
 import Translation from "@/components/Translation";
 import { HEADER_NAV_ITEMS } from "@/constants/navigation";
 import { usePathnameWithoutLocale } from "@/hooks/usePathnameWithoutLocale";
+import { useTranslations } from "@/hooks/useTranslations";
 import { cn } from "@/utils/styles";
 import { AppUrlBuilder } from "@/utils/url";
-import { Bars3CenterLeftIcon } from "@heroicons/react/24/outline";
+import { GlobeAltIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { useState, type FC } from "react";
-import { useWindowScroll } from "react-use";
+import { type FC } from "react";
 
 type Props = {
   className?: string;
 };
 
 const Header: FC<Props> = ({ className }) => {
-  const { y } = useWindowScroll();
-  const [menuOpen, setMenuOpen] = useState(false);
-
+  const t = useTranslations();
   const pathname = usePathnameWithoutLocale();
 
-  const activeItem = HEADER_NAV_ITEMS.find((item) => item.href === pathname);
-  const isScrolled = y > 10;
+  const navItems = HEADER_NAV_ITEMS.map((item) => ({
+    ...item,
+    isActive: item.href === pathname,
+  }));
 
   return (
-    <>
-      <div
-        className={cn(
-          "h-(--header-height) border-b border-b-transparent bg-gray-950",
-          isScrolled && "border-gray-800",
-          className,
-        )}
-      >
-        <LayoutContainer className="flex h-full items-center">
-          <Link
-            className="ml-4 text-2xl font-extrabold text-green-300"
-            href={AppUrlBuilder.home()}
-          >
-            worbes
-          </Link>
+    <header
+      className={cn(
+        "h-(--header-height) border-b border-b-gray-600",
+        className,
+      )}
+    >
+      <LayoutContainer className="flex h-full items-center justify-between gap-x-6">
+        <nav>
+          <ul className="flex items-center gap-x-8">
+            <li>
+              <Link
+                className="text-xl font-bold text-accent-800 drop-shadow-[0_0_10px_var(--color-accent-900)]"
+                href={AppUrlBuilder.home()}
+              >
+                Worbes
+              </Link>
+            </li>
 
-          <nav className="-mb-1 ml-14 flex gap-x-9 not-md:hidden">
-            {HEADER_NAV_ITEMS.map((item) => {
-              const isActive = activeItem?.href === item.href;
-
-              return (
+            {navItems.map((item) => (
+              <li key={item.href}>
                 <Link
                   className={cn(
-                    isActive
-                      ? "font-extrabold text-green-100"
-                      : "font-bold text-gray-400",
+                    "align-sub font-semibold",
+                    item.isActive
+                      ? "text-white drop-shadow-[0_0_10px_var(--color-gray-400)]"
+                      : "text-gray-300 hover:text-gray-100",
                   )}
-                  key={item.href}
                   href={item.href}
                 >
-                  <Translation messageKey={item.label} />
+                  {item.label}
                 </Link>
-              );
-            })}
-          </nav>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-          <IconButton
-            className="ml-auto"
-            theme="clear"
+        <div className="flex w-full max-w-sm items-center gap-x-2">
+          <Input
             size="md"
-            Icon={Bars3CenterLeftIcon}
-            onClick={handleToggleSideMenu(true)}
+            placeholder={t("Search by name")}
+            leftIcon={<MagnifyingGlassIcon />}
           />
-        </LayoutContainer>
-      </div>
+          <Button theme="quaternary" size="md">
+            <Translation messageKey="Search" />
+          </Button>
+        </div>
 
-      <SideDrawer
-        className="w-full max-w-md"
-        isOpen={menuOpen}
-        position="right"
-        onClose={handleToggleSideMenu(false)}
-      >
-        {({ onClose }) => <SideMenuPanel onClose={onClose} />}
-      </SideDrawer>
-    </>
+        <div className="flex items-center gap-x-4">
+          <GlobeAltIcon className="size-6 text-gray-300" />
+          <Button theme="primary" size="md">
+            <Translation messageKey="Select Realm" />
+          </Button>
+        </div>
+      </LayoutContainer>
+    </header>
   );
-
-  function handleToggleSideMenu(isOpen: boolean) {
-    return () => setMenuOpen(isOpen);
-  }
 };
 
 export default Header;

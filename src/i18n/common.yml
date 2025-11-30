@@ -1,43 +1,51 @@
-Apply:
-  en: "Apply"
-  ko: "적용하기"
+# Apply:
+#   en: "Apply"
+#   ko: "적용하기"
 
-Close:
-  en: "Close"
-  ko: "닫기"
+# Close:
+#   en: "Close"
+#   ko: "닫기"
 
-Select region:
-  ko: "지역 선택"
-  en: "Select region"
+# Select region:
+#   ko: "지역 선택"
+#   en: "Select region"
 
-"Region: {selectedRegion}":
-  ko: "지역: {selectedRegion}"
-  en: "Region: {selectedRegion}"
+# "Region: {selectedRegion}":
+#   ko: "지역: {selectedRegion}"
+#   en: "Region: {selectedRegion}"
 
-"Realm: {selectedRealm}":
-  ko: "서버: {selectedRealm}"
-  en: "Realm: {selectedRealm}"
+# "Realm: {selectedRealm}":
+#   ko: "서버: {selectedRealm}"
+#   en: "Realm: {selectedRealm}"
 
-Select realm:
+Select Realm:
   ko: "서버 선택"
   en: "Select realm"
 
-Select language:
-  ko: "언어 선택"
-  en: "Select language"
+# Select language:
+#   ko: "언어 선택"
+#   en: "Select language"
 
-"Language: {selectedLanguage}":
-  ko: "언어: {selectedLanguage}"
-  en: "Language: {selectedLanguage}"
+# "Language: {selectedLanguage}":
+#   ko: "언어: {selectedLanguage}"
+#   en: "Language: {selectedLanguage}"
 
-Home:
-  ko: "홈"
-  en: "Home"
+# Home:
+#   ko: "홈"
+#   en: "Home"
 
-Auctions:
-  ko: "경매 목록"
-  en: "Auctions"
+# Auctions:
+#   ko: "경매 목록"
+#   en: "Auctions"
 
-Settings:
-  ko: "환경설정"
-  en: "Settings"
+# Settings:
+#   ko: "환경설정"
+#   en: "Settings"
+
+Search:
+  ko: "검색"
+  en: "Search"
+
+Search by name:
+  ko: "이름으로 검색"
+  en: "Search by name"
