@@ -4,7 +4,6 @@ import AuctionsFilterDialogContainer from "@/components/AuctionsFilterDialogCont
 import AuctionTable from "@/components/AuctionTable";
 import BlockSection from "@/components/BlockSection";
 import CategorySelector from "@/components/CategorySelector";
-import HomeBackground from "@/components/HomeBackground";
 import Input from "@/components/Input";
 import LayoutContainer from "@/components/LayoutContainer";
 import RealmSelector from "@/components/RealmSelector";
@@ -70,7 +69,6 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
   return (
     <section className={cn("", className)}>
       <div className="relative h-85 w-full py-13 sm:h-65 lg:h-55">
-        <HomeBackground className="absolute inset-0 -z-10 h-full" />
         <LayoutContainer className="space-y-6">
           <Translation
             className="text-2xl font-bold text-green-300"

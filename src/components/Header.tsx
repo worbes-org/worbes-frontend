@@ -31,7 +31,7 @@ const Header: FC<Props> = ({ className }) => {
     <>
       <div
         className={cn(
-          "h-16 border-b border-b-transparent bg-gray-950",
+          "h-(--header-height) border-b border-b-transparent bg-gray-950",
           isScrolled && "border-gray-800",
           className,
         )}
