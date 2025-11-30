@@ -1,62 +1,49 @@
-import ProcessingIcon from "@/svgs/ProcessingIcon";
 import { cn } from "@/utils/styles";
 import { type ComponentProps, type FC } from "react";
 
 type Props = {
-  className?: string;
-  theme: "primary" | "secondary" | "clear";
-  size: "xs" | "sm" | "md";
+  theme: "primary" | "secondary" | "tertiary" | "quaternary";
+  size: "sm" | "md" | "lg";
   isLoading?: boolean;
 } & ComponentProps<"button">;
 
 const Button: FC<Props> = ({
-  className,
-  size = "md",
   theme,
+  size,
   isLoading,
   disabled,
-  type = "button",
+  className,
   children,
   ...props
 }) => {
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center rounded-xl font-semibold text-white transition-colors",
-        size === "md" && "px-4 py-3 text-base",
-        size === "sm" && "px-3 py-2.5 text-sm",
-        size === "xs" && "rounded-lg px-2.5 py-2 text-xs",
-        theme === "primary" && "bg-blue-600",
+        "inline-flex items-center justify-center font-medium transition-all",
+        "focus-visible:ring-2 focus-visible:ring-accent-700 focus-visible:ring-offset-2 focus-visible:outline-none",
+        "disabled:cursor-not-allowed disabled:opacity-50",
+        size === "sm" && "h-8 rounded-lg px-3 text-sm",
+        size === "md" && "h-10 rounded-lg px-4 text-sm",
+        size === "lg" && "h-12 rounded-xl px-6 text-base",
         theme === "primary" &&
-          !disabled &&
-          "hover:bg-blue-700 active:bg-blue-800",
-        theme === "primary" && disabled && "bg-gray-600 text-gray-400",
-        theme === "secondary" && "border border-blue-500/25 bg-transparent",
+          "border border-[#23252a] bg-gray-800 text-gray-100",
+        theme === "primary" && "hover:border-[#34343a] hover:bg-[#191a1b]",
         theme === "secondary" &&
-          !disabled &&
-          "hover:bg-blue-500/10 active:bg-blue-500/20",
-        theme === "secondary" && disabled && "text-gray-500",
-        theme === "clear" && "bg-transparent",
-        theme === "clear" &&
-          !disabled &&
-          "hover:bg-blue-500/10 active:bg-blue-500/20",
-        theme === "clear" && disabled && "text-gray-500",
-        (disabled || isLoading) && "cursor-not-allowed",
+          "border border-[#23252a] bg-transparent text-gray-200",
+        theme === "secondary" && "hover:bg-white/5 hover:text-gray-100",
+        theme === "tertiary" &&
+          "border border-transparent bg-transparent text-gray-200",
+        theme === "tertiary" && "hover:bg-white/5 hover:text-gray-100",
+        theme === "quaternary" &&
+          "border border-transparent bg-accent-600 text-white",
+        theme === "quaternary" && "hover:bg-accent-500",
         className,
       )}
       disabled={disabled || isLoading}
-      type={type}
       {...props}
     >
       {isLoading ? (
-        <ProcessingIcon
-          className={cn(
-            "animate-angle-rotate",
-            size === "md" && "size-5",
-            size === "sm" && "size-5",
-            size === "xs" && "size-4",
-          )}
-        />
+        <span className="inline-block size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
       ) : (
         children
       )}

@@ -1,95 +1,123 @@
+import CloneElement from "@/components/CloneElement";
 import ProcessingIcon from "@/svgs/ProcessingIcon";
 import { cn } from "@/utils/styles";
-import type { ComponentProps, FC } from "react";
+import {
+  MouseEvent,
+  ReactElement,
+  useId,
+  type ComponentProps,
+  type FC,
+  type ReactNode,
+} from "react";
 
 type Props = {
-  className?: string;
-  inputClassName?: string;
-  theme: "primary" | "secondary" | "clear";
-  size: "xs" | "sm" | "md";
-  LeftIcon?: FC<{ className?: string }>;
-  RightIcon?: FC<{ className?: string }>;
+  size: "sm" | "md" | "lg";
+  label?: string;
+  error?: string;
+  helperText?: ReactNode;
+  leftIcon?: ReactElement<ComponentProps<"svg">>;
+  rightIcon?: ReactElement<ComponentProps<"svg">>;
   isLoading?: boolean;
 } & Omit<ComponentProps<"input">, "size">;
 
 const Input: FC<Props> = ({
+  size,
+  label,
+  error,
+  helperText,
+  leftIcon,
+  rightIcon,
+  isLoading = false,
   className,
-  inputClassName,
-  ref,
-  theme,
-  size = "md",
-  LeftIcon,
-  RightIcon,
-  isLoading,
+  id,
   disabled,
   ...props
 }) => {
+  const generatedId = useId();
+  const inputId = id || generatedId;
+  const isDisabled = disabled || isLoading;
+
   return (
-    <div className={cn("relative", className)}>
-      {LeftIcon && (
-        <LeftIcon
-          className={cn(
-            "pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-white/70",
-            size === "md" && "size-5",
-            size === "sm" && "size-5",
-            size === "xs" && "size-4",
-          )}
-        />
+    <div className="w-full">
+      {label && (
+        <label
+          htmlFor={inputId}
+          className="mb-1.5 block text-sm font-medium text-gray-200"
+        >
+          {label}
+        </label>
       )}
-
-      <input
-        className={cn(
-          "w-full truncate rounded-xl text-white placeholder-white/40 transition-colors outline-none",
-          size === "md" && "px-4 py-3 text-sm",
-          size === "sm" && "px-3 py-2.5 text-sm",
-          size === "xs" && "rounded-lg px-2.5 py-2 text-xs",
-          theme === "primary" && "border border-blue-500/25 bg-green-600/40",
-          theme === "primary" && "hover:bg-green-600/40",
-          theme === "primary" &&
-            "focus-visible:ring-2 focus-visible:ring-green-500",
-          theme === "secondary" && "border border-blue-500/25 bg-transparent",
-          theme === "secondary" && "hover:bg-blue-500/10",
-          theme === "secondary" &&
-            "focus-visible:ring-2 focus-visible:ring-blue-500",
-          theme === "clear" && "border border-transparent bg-transparent",
-          theme === "clear" && "hover:bg-blue-500/10",
-          theme === "clear" &&
-            "focus-visible:ring-2 focus-visible:ring-blue-500",
-          disabled &&
-            "cursor-not-allowed border-gray-600 bg-gray-600 text-gray-400 placeholder-gray-500",
-          LeftIcon && (size === "xs" ? "pl-8" : "pl-10"),
-          isLoading && (size === "xs" ? "pr-8" : "pr-10"),
-          inputClassName,
+      <div className="relative">
+        {leftIcon && (
+          <CloneElement
+            element={leftIcon}
+            props={{
+              className: cn(
+                "absolute top-1/2 left-3 size-4 -translate-y-1/2 text-gray-300",
+                leftIcon.type !== "button" && "pointer-events-none",
+              ),
+              onClick: handleIconClick,
+            }}
+          />
         )}
-        ref={ref}
-        disabled={disabled || isLoading}
-        aria-busy={!!isLoading}
-        {...props}
-      />
-
-      {isLoading ? (
-        <ProcessingIcon
+        <input
+          id={inputId}
           className={cn(
-            "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 animate-angle-rotate text-white/70",
-            size === "md" && "size-5",
-            size === "sm" && "size-5",
-            size === "xs" && "size-4",
+            "w-full rounded-lg border bg-gray-900 text-gray-100",
+            "transition-colors placeholder:text-gray-400 focus-visible:outline-none",
+            "disabled:cursor-not-allowed disabled:opacity-50",
+            size === "sm" && "h-8 px-3 text-sm",
+            size === "md" && "h-10 px-3 text-sm",
+            size === "lg" && "h-12 px-4 text-base",
+            error ? "border-red" : "border-[#23252a]",
+            !error && "hover:border-[#34343a] focus-visible:border-accent-700",
+            leftIcon &&
+              (size === "sm" ? "pl-9" : size === "md" ? "pl-10" : "pl-12"),
+            (rightIcon || isLoading) &&
+              (size === "sm" ? "pr-9" : size === "md" ? "pr-10" : "pr-12"),
+            className,
           )}
+          disabled={isDisabled}
+          aria-busy={isLoading}
+          aria-invalid={!!error}
+          {...props}
         />
-      ) : (
-        RightIcon && (
-          <RightIcon
+        {isLoading ? (
+          <ProcessingIcon
             className={cn(
-              "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-white/70",
-              size === "md" && "size-5",
-              size === "sm" && "size-5",
-              size === "xs" && "size-4",
+              "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 animate-angle-rotate text-gray-300",
+              size === "lg" && "size-5",
+              size !== "lg" && "size-4",
             )}
           />
-        )
+        ) : (
+          rightIcon && (
+            <CloneElement
+              element={rightIcon}
+              props={{
+                className: cn(
+                  "absolute top-1/2 right-3 size-4 -translate-y-1/2 text-gray-300",
+                  rightIcon.type !== "button" && "pointer-events-none",
+                ),
+                onClick: handleIconClick,
+              }}
+            />
+          )
+        )}
+      </div>
+      {error && <p className="mt-1.5 text-sm text-red">{error}</p>}
+      {helperText && !error && (
+        <p className="mt-1.5 text-sm text-gray-300">{helperText}</p>
       )}
     </div>
   );
+
+  function handleIconClick(e: MouseEvent<SVGSVGElement>) {
+    if (rightIcon?.props?.onClick) {
+      e.stopPropagation();
+      rightIcon.props.onClick(e);
+    }
+  }
 };
 
 export default Input;

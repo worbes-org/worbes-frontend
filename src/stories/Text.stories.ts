@@ -1,10 +1,10 @@
-import Button from "@/components/Button";
+import Text from "@/components/Text";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta = {
-  component: Button,
-  args: { size: "md", children: "Button" },
-} satisfies Meta<typeof Button>;
+  component: Text,
+  args: { theme: "primary", size: "md", children: "Sample copy" },
+} satisfies Meta<typeof Text>;
 
 export default meta;
 

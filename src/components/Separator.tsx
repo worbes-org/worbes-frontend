@@ -2,18 +2,14 @@ import { cn } from "@/utils/styles";
 import { type ComponentProps, type FC } from "react";
 
 type Props = {
-  orientation?: "horizontal" | "vertical";
+  orientation: "horizontal" | "vertical";
 } & ComponentProps<"div">;
 
-const LinearSeparator: FC<Props> = ({
-  orientation = "horizontal",
-  className,
-  ...props
-}) => {
+const Separator: FC<Props> = ({ className, orientation, ...props }) => {
   return (
     <div
       className={cn(
-        "bg-[var(--linear-border-primary)]",
+        "bg-gray-500",
         orientation === "horizontal" && "h-px w-full",
         orientation === "vertical" && "h-full w-px",
         className,
@@ -23,5 +19,4 @@ const LinearSeparator: FC<Props> = ({
   );
 };
 
-export default LinearSeparator;
-
+export default Separator;

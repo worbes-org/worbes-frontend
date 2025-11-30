@@ -1,10 +1,13 @@
-import Button from "@/components/Button";
+import Card from "@/components/Card";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta = {
-  component: Button,
-  args: { size: "md", children: "Button" },
-} satisfies Meta<typeof Button>;
+  component: Card,
+  args: {
+    padding: "md",
+    children: "Card content",
+  },
+} satisfies Meta<typeof Card>;
 
 export default meta;
 
@@ -20,8 +23,4 @@ export const Secondary: Story = {
 
 export const Tertiary: Story = {
   args: { theme: "tertiary" },
-};
-
-export const Quaternary: Story = {
-  args: { theme: "quaternary" },
 };

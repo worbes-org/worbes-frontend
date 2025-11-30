@@ -1,6 +1,7 @@
 import Input from "@/components/Input";
 import type { Optional } from "@/types/misc";
 import { cn } from "@/utils/styles";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { noop } from "lodash-es";
 import {
   useRef,
@@ -21,7 +22,7 @@ type Props = {
     | ((props: { isOpen: boolean; onClose: () => void }) => ReactNode);
 } & Pick<
   ComponentProps<typeof Input>,
-  "LeftIcon" | "RightIcon" | "theme" | "size" | "isLoading"
+  "leftIcon" | "rightIcon" | "size" | "isLoading"
 >;
 
 const SelectorTrigger: FC<Props> = ({
@@ -46,6 +47,14 @@ const SelectorTrigger: FC<Props> = ({
           className="pointer-events-none"
           value={label ?? ""}
           placeholder={placeholder}
+          rightIcon={
+            <ChevronDownIcon
+              className={cn(
+                "transition-transform duration-200",
+                isOpen && "rotate-180",
+              )}
+            />
+          }
           onChange={noop} // HACK: Suppress uncontrolled input warning
           {...props}
         />

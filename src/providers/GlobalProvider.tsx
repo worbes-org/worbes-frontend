@@ -1,10 +1,10 @@
 "use client";
 
 import { Region } from "@/constants/game-server";
-import useCookieState from "@/hooks/useCookieState";
 import { type Realm } from "@/types/game-server";
 import { type Nullable } from "@/types/misc";
 import { createContext, type FC, type PropsWithChildren } from "react";
+import { useCookieState } from "synced-storage/react";
 
 type GlobalContextState = {
   regionState: ReturnType<typeof useCookieState<Nullable<Region>>>;
