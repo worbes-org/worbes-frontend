@@ -6,7 +6,7 @@ import SegmentedControl from "@/components/SegmentedControl";
 import Separator from "@/components/Separator";
 import Translation from "@/components/Translation";
 import { Region } from "@/constants/game-server";
-import { useAuctionFilter } from "@/hooks/useAuctionFilter";
+import { useSettingsContext } from "@/hooks/useSettingsContext";
 import { useTranslations } from "@/hooks/useTranslations";
 import { Realm } from "@/types/game-server";
 import { Nullable } from "@/types/misc";
@@ -23,9 +23,9 @@ const ServerMenuTrigger: FC<Props> = ({ className }) => {
   const t = useTranslations();
   const locale = useLocale();
 
-  const { filter, onFilterChange } = useAuctionFilter();
+  const { settings, onSettingsChange } = useSettingsContext();
 
-  const isRegionSelected = !!filter.realm;
+  const isRegionSelected = !!settings.realm;
 
   return (
     <MenuTrigger
@@ -38,7 +38,7 @@ const ServerMenuTrigger: FC<Props> = ({ className }) => {
           size="md"
           onClick={onClick}
         >
-          {buildButtonLabel({ ...filter, isRegionSelected })}
+          {buildButtonLabel({ ...settings, isRegionSelected })}
           {!isRegionSelected && (
             <ExclamationCircleIcon className="absolute -top-2 -right-2 size-5.5 rounded-full bg-red p-0.5" />
           )}
@@ -69,12 +69,12 @@ const ServerMenuTrigger: FC<Props> = ({ className }) => {
             <SegmentedControl
               size="md"
               fullWidth
-              value={filter.region}
+              value={settings.region}
               options={Object.values(Region).map((region) => ({
                 value: region,
                 label: region,
               }))}
-              onChange={(region) => onFilterChange({ region, realm: null })}
+              onChange={(region) => onSettingsChange({ region, realm: null })}
             />
           </div>
 

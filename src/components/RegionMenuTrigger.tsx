@@ -3,8 +3,8 @@ import Input from "@/components/Input";
 import MenuTrigger from "@/components/MenuTrigger";
 import SearchableListSelector from "@/components/SearchableListSelector";
 import { Locale } from "@/constants/i18n";
-import { useAuctionFilter } from "@/hooks/useAuctionFilter";
 import { useRealms } from "@/hooks/useRealms";
+import { useSettingsContext } from "@/hooks/useSettingsContext";
 import { useTranslations } from "@/hooks/useTranslations";
 import { Realm } from "@/types/game-server";
 import { ListSelectorOption } from "@/types/selector";
@@ -26,11 +26,13 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
   const locale = useLocale();
   const t = useTranslations();
 
-  const { filter, onFilterChange } = useAuctionFilter();
+  const { settings, onSettingsChange } = useSettingsContext();
 
-  const { data: realms, isLoading } = useRealms(filter.region);
+  const { data: realms, isLoading } = useRealms(settings.region);
 
-  const label = filter.realm ? getRealmNameByLocale(filter.realm, locale) : "";
+  const label = settings.realm
+    ? getRealmNameByLocale(settings.realm, locale)
+    : "";
 
   return (
     <MenuTrigger
@@ -70,9 +72,12 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
               listClassName: "scrollbar-hide max-h-80 overflow-y-auto",
               fadeGradientClassName: { to: "to-gray-900" },
               options: buildRealmOptions(realms ?? [], locale),
-              selectedValues: filter.realm ? [filter.realm.id] : [],
+              selectedValues: settings.realm ? [settings.realm.id] : [],
               onSelect: (option) =>
-                onFilterChange({ ...filter, realm: option.metadata ?? null }),
+                onSettingsChange({
+                  ...settings,
+                  realm: option.metadata ?? null,
+                }),
             }}
           />
         </DropdownPanel>

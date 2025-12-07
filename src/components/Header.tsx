@@ -1,17 +1,12 @@
 "use client";
 
-import Button from "@/components/Button";
-import Input from "@/components/Input";
 import LanguageMenuTrigger from "@/components/LanguageMenuTrigger";
 import LayoutContainer from "@/components/LayoutContainer";
 import ServerMenuTrigger from "@/components/ServerMenuTrigger";
-import Translation from "@/components/Translation";
 import { HEADER_NAV_ITEMS } from "@/constants/navigation";
 import { usePathnameWithoutLocale } from "@/hooks/usePathnameWithoutLocale";
-import { useTranslations } from "@/hooks/useTranslations";
 import { cn } from "@/utils/styles";
 import { AppUrlBuilder } from "@/utils/url";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { type FC } from "react";
 
@@ -20,7 +15,6 @@ type Props = {
 };
 
 const Header: FC<Props> = ({ className }) => {
-  const t = useTranslations();
   const pathname = usePathnameWithoutLocale();
 
   const navItems = HEADER_NAV_ITEMS.map((item) => ({
@@ -64,17 +58,6 @@ const Header: FC<Props> = ({ className }) => {
             ))}
           </ul>
         </nav>
-
-        <div className="flex w-full max-w-sm items-center gap-x-2">
-          <Input
-            size="md"
-            placeholder={t("Search by name")}
-            leftIcon={<MagnifyingGlassIcon />}
-          />
-          <Button theme="quaternary" size="md">
-            <Translation messageKey="Search" />
-          </Button>
-        </div>
 
         <div className="flex gap-x-2">
           <LanguageMenuTrigger />

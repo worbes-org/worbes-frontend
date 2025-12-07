@@ -1,5 +1,5 @@
-import GlobalProvider from "@/providers/AuctionFilterProvider";
 import IntlProvider from "@/providers/IntlProvider";
+import SettingsProvider from "@/providers/SettingsProvider";
 import TanstackQueryProvider from "@/providers/TanstackQueryProvider";
 import { cookies } from "next/headers";
 import { type AFC, type PropsWithChildren } from "react";
@@ -14,7 +14,7 @@ const RootProvider: AFC<Props> = async ({ locale, children }) => {
     <IntlProvider locale={locale}>
       <TanstackQueryProvider>
         <SyncedStorageProvider ssrCookies={(await cookies()).getAll()}>
-          <GlobalProvider>{children}</GlobalProvider>
+          <SettingsProvider>{children}</SettingsProvider>
         </SyncedStorageProvider>
       </TanstackQueryProvider>
     </IntlProvider>
