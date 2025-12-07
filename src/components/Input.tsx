@@ -21,27 +21,25 @@ type Props = {
 } & Omit<ComponentProps<"input">, "size">;
 
 const Input: FC<Props> = ({
+  className,
   size,
   label,
   error,
   helperText,
   leftIcon,
   rightIcon,
-  isLoading = false,
-  className,
+  isLoading,
   id,
   disabled,
   ...props
 }) => {
   const generatedId = useId();
-  const inputId = id || generatedId;
-  const isDisabled = disabled || isLoading;
 
   return (
     <div className="w-full">
       {label && (
         <label
-          htmlFor={inputId}
+          htmlFor={id || generatedId}
           className="mb-1.5 block text-sm font-medium text-gray-200"
         >
           {label}
@@ -61,7 +59,7 @@ const Input: FC<Props> = ({
           />
         )}
         <input
-          id={inputId}
+          id={id || generatedId}
           className={cn(
             "w-full rounded-lg border bg-gray-900 text-gray-100",
             "transition-colors placeholder:text-gray-400 focus-visible:outline-none",
@@ -77,7 +75,7 @@ const Input: FC<Props> = ({
               (size === "sm" ? "pr-9" : size === "md" ? "pr-10" : "pr-12"),
             className,
           )}
-          disabled={isDisabled}
+          disabled={disabled || isLoading}
           aria-busy={isLoading}
           aria-invalid={!!error}
           {...props}

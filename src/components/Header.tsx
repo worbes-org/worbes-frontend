@@ -2,14 +2,16 @@
 
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import LanguageMenuTrigger from "@/components/LanguageMenuTrigger";
 import LayoutContainer from "@/components/LayoutContainer";
+import ServerMenuTrigger from "@/components/ServerMenuTrigger";
 import Translation from "@/components/Translation";
 import { HEADER_NAV_ITEMS } from "@/constants/navigation";
 import { usePathnameWithoutLocale } from "@/hooks/usePathnameWithoutLocale";
 import { useTranslations } from "@/hooks/useTranslations";
 import { cn } from "@/utils/styles";
 import { AppUrlBuilder } from "@/utils/url";
-import { GlobeAltIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { type FC } from "react";
 
@@ -51,7 +53,7 @@ const Header: FC<Props> = ({ className }) => {
                   className={cn(
                     "align-sub font-semibold",
                     item.isActive
-                      ? "text-white drop-shadow-[0_0_10px_var(--color-gray-400)]"
+                      ? "text-white drop-shadow-[0_0_6px_var(--color-gray-400)]"
                       : "text-gray-300 hover:text-gray-100",
                   )}
                   href={item.href}
@@ -74,11 +76,9 @@ const Header: FC<Props> = ({ className }) => {
           </Button>
         </div>
 
-        <div className="flex items-center gap-x-4">
-          <GlobeAltIcon className="size-6 text-gray-300" />
-          <Button theme="primary" size="md">
-            <Translation messageKey="Select Realm" />
-          </Button>
+        <div className="flex gap-x-2">
+          <LanguageMenuTrigger />
+          <ServerMenuTrigger />
         </div>
       </LayoutContainer>
     </header>

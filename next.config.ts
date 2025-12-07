@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
-const API_URL =
-  process.env.API_URL ??
-  "http://worbes-server-alb-281547945.ap-northeast-2.elb.amazonaws.com";
+const API_URL = process.env.API_URL ?? "http://api.worbes.kro.kr/";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,

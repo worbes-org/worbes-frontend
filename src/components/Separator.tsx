@@ -9,7 +9,7 @@ const Separator: FC<Props> = ({ className, orientation, ...props }) => {
   return (
     <div
       className={cn(
-        "bg-gray-500",
+        "bg-gray-600",
         orientation === "horizontal" && "h-px w-full",
         orientation === "vertical" && "h-full w-px",
         className,

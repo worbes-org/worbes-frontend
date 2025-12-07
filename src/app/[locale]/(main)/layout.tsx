@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import RootProvider from "@/providers/RootProvider";
 import { type AFC, type PropsWithChildren } from "react";
@@ -17,7 +16,6 @@ const MainLayout: AFC<PropsWithChildren<Props>> = async ({
     <RootProvider locale={locale}>
       <Header className="sticky top-0 z-10" />
       {children}
-      <Footer className="mt-auto shrink-0" />
     </RootProvider>
   );
 };

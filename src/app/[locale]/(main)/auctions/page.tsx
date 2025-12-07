@@ -1,9 +1,12 @@
 import AuctionBrowseSection from "@/components/AuctionBrowseSection";
+import LayoutContainer from "@/components/LayoutContainer";
 import { type FC } from "react";
 
 const AuctionsPage: FC = () => {
   return (
-    <AuctionBrowseSection className="min-h-[calc(100dvh-var(--header-height))] pb-6" />
+    <LayoutContainer>
+      <AuctionBrowseSection className="h-[calc(100dvh-var(--header-height))]" />
+    </LayoutContainer>
   );
 };
 

@@ -19,7 +19,7 @@ const Button: FC<Props> = ({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center font-medium transition-all",
+        "inline-flex items-center justify-center font-medium text-nowrap transition-all",
         "focus-visible:ring-2 focus-visible:ring-accent-700 focus-visible:ring-offset-2 focus-visible:outline-none",
         "disabled:cursor-not-allowed disabled:opacity-50",
         size === "sm" && "h-8 rounded-lg px-3 text-sm",

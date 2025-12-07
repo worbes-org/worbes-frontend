@@ -61,7 +61,7 @@ const Disclosure: FC<Props> = ({
       </div>
       <div
         className={cn(
-          "max-h-[2000px] transition-all duration-300 ease-in-out",
+          "max-h-[2000px] transition-all duration-500 ease-in-out",
           !isOpen && "pointer-events-none max-h-0 opacity-0",
         )}
       >

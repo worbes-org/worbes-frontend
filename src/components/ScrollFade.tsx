@@ -13,7 +13,7 @@ type Props = {
 
 const ScrollFade: FC<Props> = ({
   className,
-  gradientClassName = { from: "from-transparent", to: "to-gray-950/50" },
+  gradientClassName = { from: "from-transparent", to: "to-gray-950" },
   scrollAreaRef,
   direction,
   disabled,

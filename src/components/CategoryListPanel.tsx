@@ -32,7 +32,7 @@ const CategoryListPanel: FC<Props> = ({
   return (
     <NestedListSelector
       className={cn("", className)}
-      listClassName={cn("scrollbar-hide", listClassName)}
+      listClassName={cn("", listClassName)}
       fadeGradientClassName={fadeGradientClassName}
       options={buildCategoryOptions(ITEM_CATEGORIES)}
       selectedValues={selectedValues}

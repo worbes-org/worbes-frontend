@@ -32,7 +32,8 @@ const SegmentedControl = <T extends string | number = string>({
   return (
     <div
       className={cn(
-        "inline-flex rounded-lg border border-[#23252a] bg-gray-900 p-1",
+        "inline-flex space-x-1 rounded-lg border border-[#23252a] bg-gray-900 p-1",
+        !fullWidth && "w-fit",
         fullWidth && "w-full",
         disabled && "cursor-not-allowed opacity-50",
         className,
@@ -58,6 +59,7 @@ const SegmentedControl = <T extends string | number = string>({
               size === "sm" && "h-8 px-3 text-sm",
               size === "md" && "h-10 px-4 text-sm",
               size === "lg" && "h-12 px-6 text-base",
+              fullWidth && "flex-1",
               isSelected && "bg-accent-600 text-white shadow-sm",
               !isSelected &&
                 !isDisabled &&

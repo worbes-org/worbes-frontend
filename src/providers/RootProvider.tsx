@@ -1,4 +1,4 @@
-import GlobalProvider from "@/providers/GlobalProvider";
+import GlobalProvider from "@/providers/AuctionFilterProvider";
 import IntlProvider from "@/providers/IntlProvider";
 import TanstackQueryProvider from "@/providers/TanstackQueryProvider";
 import { cookies } from "next/headers";
