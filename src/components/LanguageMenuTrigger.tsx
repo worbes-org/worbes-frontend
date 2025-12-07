@@ -30,7 +30,11 @@ const LanguageMenuTrigger: FC<Props> = ({ className }) => {
         </Button>
       )}
       renderMenu={({ isOpen }) => (
-        <DropdownPanel className="w-40" isOpen={isOpen} position="bottom-right">
+        <DropdownPanel
+          className="w-40 overflow-hidden"
+          isOpen={isOpen}
+          position="bottom-right"
+        >
           <ListSelector
             options={Object.values(Locale).map((locale) => ({
               value: locale,

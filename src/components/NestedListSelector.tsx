@@ -18,11 +18,15 @@ const NestedListSelector = <
   fadeGradientClassName,
   options,
   selectedValues,
+  isLoading,
   _depth = 0,
+  renderEmpty,
   onSelect,
   children,
 }: Props<TValue, TMetadata>) => {
   const scrollAreaRef = useRef<HTMLElement>(null!);
+
+  const shouldRenderEmpty = options.length === 0 && !isLoading;
 
   return (
     <div className={cn("relative flex flex-col", className)}>
@@ -30,36 +34,41 @@ const NestedListSelector = <
         className={cn("flex-1", listClassName)}
         ref={scrollAreaRef as RefObject<HTMLUListElement>}
       >
-        {options.map((option) => {
-          const isSelected = selectedValues.includes(option.value);
+        {shouldRenderEmpty
+          ? renderEmpty?.()
+          : options.map((option) => {
+              const isSelected = selectedValues.includes(option.value);
 
-          return (
-            <li key={option.value}>
-              {option.children ? (
-                <Disclosure
-                  titleClassName={cn("pr-4", getLeftPadding(_depth))}
-                  title={<SelectorOption label={option.label} />}
-                  isOpen={isSelected}
-                  onToggle={handleSelect(option)}
-                >
-                  <NestedListSelector
-                    options={option.children}
-                    selectedValues={selectedValues}
-                    _depth={_depth + 1}
-                    onSelect={onSelect}
-                  />
-                </Disclosure>
-              ) : (
-                <SelectorOption
-                  className={cn("w-full py-2.5 pr-4", getLeftPadding(_depth))}
-                  label={option.label}
-                  isSelected={isSelected}
-                  onClick={handleSelect(option)}
-                />
-              )}
-            </li>
-          );
-        })}
+              return (
+                <li key={option.value}>
+                  {option.children ? (
+                    <Disclosure
+                      titleClassName={cn("pr-4", getLeftPadding(_depth))}
+                      title={<SelectorOption label={option.label} />}
+                      isOpen={isSelected}
+                      onToggle={handleSelect(option)}
+                    >
+                      <NestedListSelector
+                        options={option.children}
+                        selectedValues={selectedValues}
+                        _depth={_depth + 1}
+                        onSelect={onSelect}
+                      />
+                    </Disclosure>
+                  ) : (
+                    <SelectorOption
+                      className={cn(
+                        "w-full py-2.5 pr-4",
+                        getLeftPadding(_depth),
+                      )}
+                      label={option.label}
+                      isSelected={isSelected}
+                      onClick={handleSelect(option)}
+                    />
+                  )}
+                </li>
+              );
+            })}
       </ul>
       <ScrollFade
         gradientClassName={fadeGradientClassName}

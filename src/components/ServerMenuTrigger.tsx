@@ -7,6 +7,12 @@ import Separator from "@/components/Separator";
 import Translation from "@/components/Translation";
 import { Region } from "@/constants/game-server";
 import { useAuctionFilter } from "@/hooks/useAuctionFilter";
+import { useTranslations } from "@/hooks/useTranslations";
+import { Realm } from "@/types/game-server";
+import { Nullable } from "@/types/misc";
+import { getRealmNameByLocale } from "@/utils/realm";
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import { useLocale } from "next-intl";
 import { FC } from "react";
 
 type Props = {
@@ -14,15 +20,28 @@ type Props = {
 };
 
 const ServerMenuTrigger: FC<Props> = ({ className }) => {
+  const t = useTranslations();
+  const locale = useLocale();
+
   const { filter, onFilterChange } = useAuctionFilter();
+
+  const isRegionSelected = !!filter.realm;
 
   return (
     <MenuTrigger
       className={className}
       menu={{ position: "bottom-right" }}
       renderButton={({ onClick }) => (
-        <Button theme="primary" size="md" onClick={onClick}>
-          <Translation messageKey="Select Realm" />
+        <Button
+          className="relative"
+          theme="primary"
+          size="md"
+          onClick={onClick}
+        >
+          {buildButtonLabel({ ...filter, isRegionSelected })}
+          {!isRegionSelected && (
+            <ExclamationCircleIcon className="absolute -top-2 -right-2 size-5.5 rounded-full bg-red p-0.5" />
+          )}
         </Button>
       )}
       renderMenu={({ isOpen }) => (
@@ -69,6 +88,19 @@ const ServerMenuTrigger: FC<Props> = ({ className }) => {
       )}
     />
   );
+
+  function buildButtonLabel(args: {
+    region: Region;
+    realm: Nullable<Realm>;
+    isRegionSelected: boolean;
+  }) {
+    if (args.isRegionSelected && args.realm) {
+      const realmName = getRealmNameByLocale(args.realm, locale);
+      return `${args.region}-${realmName}`;
+    }
+
+    return t("Select Realm");
+  }
 };
 
 export default ServerMenuTrigger;

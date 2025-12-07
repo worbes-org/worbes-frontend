@@ -25,3 +25,7 @@ Search by name:
 Search realm...:
   ko: "서버 검색..."
   en: "Search realm..."
+
+No options found...:
+  ko: "옵션을 찾을 수 없습니다..."
+  en: "No options found..."

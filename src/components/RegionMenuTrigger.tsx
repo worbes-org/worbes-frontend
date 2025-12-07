@@ -14,6 +14,7 @@ import {
   ChevronUpDownIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
+import { noop } from "lodash-es";
 import { useLocale } from "next-intl";
 import { FC } from "react";
 
@@ -38,7 +39,7 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
         <div
           className={cn(isLoading && "cursor-wait")}
           role="button"
-          onClick={onClick}
+          onClick={isLoading ? noop : onClick}
         >
           <Input
             className="pointer-events-none"
