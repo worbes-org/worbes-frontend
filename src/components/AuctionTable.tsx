@@ -58,8 +58,8 @@ const AuctionTable: FC<Props> = ({
 
     return [
       {
-        key: "name",
-        label: t("Name"),
+        key: "item",
+        label: t("ITEM"),
         align: "left",
         className: "truncate",
         headClassName: "w-[max(20rem,20cqw)]",
@@ -86,7 +86,7 @@ const AuctionTable: FC<Props> = ({
       },
       {
         key: "price",
-        label: t("Price"),
+        label: t("PRICE"),
         headClassName: "w-[max(9rem,10cqw)]",
         render: (auction: Auction) => {
           const gold = Math.floor(auction.lowestPrice / SILVER_PER_GOLD);
@@ -108,13 +108,13 @@ const AuctionTable: FC<Props> = ({
       },
       {
         key: "itemLevel",
-        label: t("iLevel"),
+        label: t("LEVEL"),
         headClassName: "w-[max(4rem,10cqw)]",
         render: (auction: Auction) => auction.itemLevel,
       },
       {
         key: "quantity",
-        label: t("Quantity"),
+        label: t("QUANTITY"),
         headClassName: "w-[max(5rem,10cqw)]",
         render: (auction: Auction) => auction.totalQuantity,
       },

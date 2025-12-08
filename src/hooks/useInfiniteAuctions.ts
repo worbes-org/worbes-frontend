@@ -27,7 +27,7 @@ type AuctionsPagination = {
 };
 
 export function useInfiniteAuctions(args: {
-  filters: AuctionsFilter;
+  filter: AuctionsFilter;
   initialPagination: AuctionsPagination;
 }) {
   const query = useInfiniteQuery({
@@ -35,7 +35,7 @@ export function useInfiniteAuctions(args: {
     queryFn: async ({ pageParam }) => {
       const response = await fetch(
         `/api/auctions?${qs.stringify({
-          ...args.filters,
+          ...args.filter,
           page: pageParam,
           size: args.initialPagination.size,
         })}`,
@@ -49,7 +49,7 @@ export function useInfiniteAuctions(args: {
       return lastPage.last ? undefined : lastPage.pageable.pageNumber + 1;
     },
     initialPageParam: args.initialPagination.page,
-    enabled: !!args.filters.region && !!args.filters.realmId,
+    enabled: !!args.filter.region && !!args.filter.realmId,
     select: (data) => {
       const flattened = data.pages.flatMap((page) => page.content);
       const auctions = flattened.map<Auction>((item) => ({

@@ -1,5 +1,6 @@
 "use client";
 
+import ScrollFade from "@/components/ScrollFade";
 import Skeleton from "@/components/Skeleton";
 import type { Nullable } from "@/types/misc";
 import type {
@@ -11,7 +12,7 @@ import { cn } from "@/utils/styles";
 import { resolveAlignClass } from "@/utils/table";
 import { useVirtualizer, type VirtualItem } from "@tanstack/react-virtual";
 import { range } from "lodash-es";
-import { useRef } from "react";
+import { RefObject, useRef } from "react";
 import { InView } from "react-intersection-observer";
 import { useIsomorphicLayoutEffect } from "react-use";
 
@@ -30,13 +31,13 @@ function Table<TData>({
 }: TableProps<TData>) {
   const columns = _columns.filter((column) => !column.hide);
 
-  const scrollContainerRef = useRef<Nullable<HTMLDivElement>>(null);
+  const scrollAreaRef = useRef<Nullable<HTMLDivElement>>(null);
 
   const virtualizer = useVirtualizer({
     count: (_values?.length ?? 0) + (isLoading ? placeholderRowCount : 0),
     overscan: 30,
     estimateSize: () => getRowHeight(rowSize),
-    getScrollElement: () => scrollContainerRef.current,
+    getScrollElement: () => scrollAreaRef.current,
   });
   const virtualItems = virtualizer.getVirtualItems();
   const virtualValues = _values ? getVirtualValues(virtualItems, _values) : [];
@@ -55,15 +56,18 @@ function Table<TData>({
   return (
     <div
       className={cn(
-        "overflow-auto rounded-xl border border-blue-500/25 bg-green-900/50",
+        "relative flex flex-col [--table-head-height:3rem]",
         className,
       )}
-      ref={scrollContainerRef}
     >
-      <div style={{ height: totalSize === 0 ? "auto" : totalSize }}>
+      <div
+        className="scrollbar-hide flex-1 overflow-auto"
+        style={{ height: totalSize === 0 ? "auto" : totalSize }}
+        ref={scrollAreaRef}
+      >
         <table
           className={cn(
-            "w-full text-green-100 [&_th]:h-11 [&_th,&_td]:p-3 [&_th,&_td]:first-of-type:pl-5 [&_th,&_td]:last-of-type:pr-5",
+            "min-w-full text-green-100 [&_th]:h-11 [&_th,&_td]:p-3 [&_th,&_td]:first-of-type:pl-5 [&_th,&_td]:last-of-type:pr-5",
             rowSize === "sm" && "[&_td]:h-11",
             rowSize === "md" && "[&_td]:h-17",
             rowSize === "lg" && "[&_td]:h-23",
@@ -87,6 +91,16 @@ function Table<TData>({
           />
         </table>
       </div>
+
+      <ScrollFade
+        scrollAreaRef={scrollAreaRef as RefObject<HTMLElement>}
+        direction="bottom"
+      />
+      <ScrollFade
+        className="top-(--table-head-height)"
+        scrollAreaRef={scrollAreaRef as RefObject<HTMLElement>}
+        direction="top"
+      />
     </div>
   );
 
@@ -115,7 +129,10 @@ function TableHeader<TData>({
 }: TableHeaderProps<TData>) {
   return (
     <thead
-      className={cn("z-[1] bg-green-800 text-base font-semibold", className)}
+      className={cn(
+        "z-[1] h-(--table-head-height) text-base font-semibold before:absolute before:inset-0 before:-z-10 before:rounded-lg before:bg-gray-800",
+        className,
+      )}
     >
       <tr>
         {columns.map((column, index) => (
@@ -184,6 +201,7 @@ function TableBody<TData>({
           {values.map((value: TData, index: number) => (
             <tr
               className={cn(
+                "hover:bg-gray-900",
                 typeof rowClassName === "function"
                   ? rowClassName(value)
                   : rowClassName,
