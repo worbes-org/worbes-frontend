@@ -54,7 +54,7 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
           className="h-[calc(100%-var(--auction-filter-input-height))]"
           listClassName="scrollbar-hide overflow-y-auto py-5"
           value={categorySelection}
-          onChange={setCategorySelection}
+          onChange={handleCategoryChange}
         />
       </div>
 
@@ -68,6 +68,10 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
 
   function handleSearch() {
     setFilter({ ...filter, name: searchQuery });
+  }
+
+  function handleCategoryChange(selection: CategorySelection) {
+    setFilter({ ...filter, ...selection });
   }
 };
 

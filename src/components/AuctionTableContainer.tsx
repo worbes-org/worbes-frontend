@@ -19,9 +19,7 @@ const AuctionTableContainer: FC<Props> = ({ className, filter, onChange }) => {
     isLoading,
     isFetchingNextPage,
   } = useInfiniteAuctions({
-    filter: {
-      ...filter,
-    },
+    filter,
     initialPagination: {
       page: 0,
       size: 30,
