@@ -59,31 +59,22 @@ const AuctionFilterMenuTrigger: FC<Props> = ({
             <MinMaxInput
               size="md"
               value={{ min: filter.minItemLevel, max: filter.maxItemLevel }}
+              limit={{ min: ITEM_LEVEL.MIN, max: ITEM_LEVEL.MAX }}
               minPlaceholder={t("Min")}
               maxPlaceholder={t("Max")}
-              onChange={handleItemLevelChange}
+              onChange={(value) =>
+                onChange({
+                  ...filter,
+                  minItemLevel: value.min,
+                  maxItemLevel: value.max,
+                })
+              }
             />
           </div>
         </DropdownPanel>
       )}
     />
   );
-
-  function handleItemLevelChange(value: { min: number; max: number }) {
-    if (value.min > value.max) {
-      value.min = value.max;
-    }
-
-    if (value.min < ITEM_LEVEL.MIN || value.max > ITEM_LEVEL.MAX) {
-      return;
-    }
-
-    onChange({
-      ...filter,
-      minItemLevel: value.min,
-      maxItemLevel: value.max,
-    });
-  }
 };
 
 export default AuctionFilterMenuTrigger;
