@@ -36,9 +36,9 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
 
   return (
     <section className={cn("flex divide-x divide-gray-600", className)}>
-      <div className="flex w-80 flex-col pt-6 pr-3 [--auction-filter-input-height:2.5rem]">
+      <div className="flex w-80 flex-col pt-6 pr-3 [--auction-filter-form-height:2.5rem]">
         <form
-          className="flex h-(--auction-filter-input-height) gap-x-2"
+          className="flex h-(--auction-filter-form-height) gap-x-2"
           onSubmit={handleSearchClick}
         >
           <Input
@@ -54,7 +54,7 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
         </form>
 
         <CategoryListPanel
-          className="h-[calc(100%-var(--auction-filter-input-height))]"
+          className="h-[calc(100%-var(--auction-filter-form-height))]"
           listClassName="scrollbar-hide overflow-y-auto py-5"
           value={categorySelection}
           onChange={setCategorySelection}
