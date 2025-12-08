@@ -12,7 +12,7 @@ import { CategorySelection } from "@/types/category";
 import { Nullable } from "@/types/misc";
 import { cn } from "@/utils/styles";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { FC, useState } from "react";
+import { FC, FormEvent, useState } from "react";
 
 type Props = {
   className?: string;
@@ -37,7 +37,10 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
   return (
     <section className={cn("flex divide-x divide-gray-600", className)}>
       <div className="flex w-80 flex-col pt-6 pr-3 [--auction-filter-input-height:2.5rem]">
-        <div className="flex h-(--auction-filter-input-height) gap-x-2">
+        <form
+          className="flex h-(--auction-filter-input-height) gap-x-2"
+          onSubmit={handleSearchClick}
+        >
           <Input
             size="md"
             placeholder={t("Search by name")}
@@ -45,16 +48,16 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Button theme="quaternary" size="md" onClick={handleSearch}>
+          <Button theme="quaternary" size="md" type="submit">
             <Translation messageKey="Search" />
           </Button>
-        </div>
+        </form>
 
         <CategoryListPanel
           className="h-[calc(100%-var(--auction-filter-input-height))]"
           listClassName="scrollbar-hide overflow-y-auto py-5"
           value={categorySelection}
-          onChange={handleCategoryChange}
+          onChange={setCategorySelection}
         />
       </div>
 
@@ -66,12 +69,9 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
     </section>
   );
 
-  function handleSearch() {
-    setFilter({ ...filter, name: searchQuery });
-  }
-
-  function handleCategoryChange(selection: CategorySelection) {
-    setFilter({ ...filter, ...selection });
+  function handleSearchClick(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setFilter({ ...filter, ...categorySelection, name: searchQuery });
   }
 };
 
