@@ -30,7 +30,6 @@ const ServerMenuTrigger: FC<Props> = ({ className }) => {
   return (
     <MenuTrigger
       className={className}
-      menu={{ position: "bottom-right" }}
       renderButton={({ onClick }) => (
         <Button
           className="relative"

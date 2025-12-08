@@ -23,7 +23,6 @@ const LanguageMenuTrigger: FC<Props> = ({ className }) => {
   return (
     <MenuTrigger
       className={cn("", className)}
-      menu={{ position: "bottom-right" }}
       renderButton={({ onClick }) => (
         <Button className="px-2" theme="tertiary" size="md" onClick={onClick}>
           <GlobeAltIcon className="size-6 text-gray-300" />

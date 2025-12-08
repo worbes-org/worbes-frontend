@@ -15,9 +15,6 @@ type RenderMenuProps = {
 type Props = {
   className?: string;
   closeOnClickAway?: boolean;
-  menu?: {
-    position: "bottom-left" | "bottom-right";
-  };
   renderButton: (props: RenderButtonProps) => ReactNode;
   renderMenu: (props: RenderMenuProps) => ReactNode;
 };
@@ -25,7 +22,6 @@ type Props = {
 const MenuTrigger: FC<Props> = ({
   className,
   closeOnClickAway = true,
-  menu,
   renderButton,
   renderMenu,
 }) => {

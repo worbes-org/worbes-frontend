@@ -1,6 +1,5 @@
 import CategoryListPanel from "@/components/CategoryListPanel";
 import ListSelector from "@/components/ListSelector";
-import Text from "@/components/Text";
 import { CategorySelection } from "@/types/category";
 import type { ListSelectorOption } from "@/types/selector";
 import type { Meta, StoryObj } from "@storybook/nextjs";
@@ -59,9 +58,9 @@ export const Nested: Story = {
     const [selection, setSelection] = useState<CategorySelection>({});
     return (
       <div className="w-full space-y-2">
-        <Text theme="secondary" size="sm">
+        <span className="text-sm text-gray-400">
           {JSON.stringify(selection)}
-        </Text>
+        </span>
 
         <CategoryListPanel
           {...args}

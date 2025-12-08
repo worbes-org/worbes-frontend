@@ -25,7 +25,6 @@ const AuctionFilterMenuTrigger: FC<Props> = ({
   return (
     <MenuTrigger
       className={className}
-      menu={{ position: "bottom-left" }}
       renderButton={({ onClick }) => (
         <Button
           className="flex items-center gap-x-2"
