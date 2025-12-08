@@ -36,7 +36,7 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
 
   return (
     <section className={cn("flex divide-x divide-gray-600", className)}>
-      <div className="flex w-100 flex-col pt-6 pr-3 [--auction-filter-input-height:2.5rem]">
+      <div className="flex w-80 flex-col pt-6 pr-3 [--auction-filter-input-height:2.5rem]">
         <div className="flex h-(--auction-filter-input-height) gap-x-2">
           <Input
             size="md"

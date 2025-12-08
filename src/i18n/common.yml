@@ -53,3 +53,15 @@ Crafting Tier:
 items:
   ko: "아이템 개수"
   en: "items"
+
+Filter:
+  ko: "필터"
+  en: "Filter"
+
+Min:
+  ko: "최소"
+  en: "Min"
+
+Max:
+  ko: "최대"
+  en: "Max"

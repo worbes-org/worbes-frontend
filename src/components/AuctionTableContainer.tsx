@@ -1,3 +1,4 @@
+import AuctionFilterMenuTrigger from "@/components/AuctionFilterMenuTrigger";
 import AuctionTable from "@/components/AuctionTable";
 import Translation from "@/components/Translation";
 import useInfiniteAuctions from "@/hooks/useInfiniteAuctions";
@@ -34,19 +35,27 @@ const AuctionTableContainer: FC<Props> = ({ className, filter, onChange }) => {
         className,
       )}
     >
-      <div className="h-(--auction-table-details-height) shrink-0">
+      <div className="flex h-(--auction-table-details-height) shrink-0 justify-between">
         <div>
-          {/* TODO: use total items length */}
-          <span className="text-sm text-accent-700">{auctions.length}</span>
-          &nbsp;
-          <Translation className="text-sm text-gray-400" messageKey="items" />
+          <div>
+            {/* TODO: use total items length */}
+            <span className="text-sm text-accent-700">{auctions.length}</span>
+            &nbsp;
+            <Translation className="text-sm text-gray-400" messageKey="items" />
+          </div>
+
+          <Translation
+            className="text-sm text-gray-400"
+            messageKey="Last updated: {date}"
+            // TODO: use correct time value from the API
+            values={{ date: 1234 }}
+          />
         </div>
 
-        <Translation
-          className="text-sm text-gray-400"
-          messageKey="Last updated: {date}"
-          // TODO: use correct time value from the API
-          values={{ date: 1234 }}
+        <AuctionFilterMenuTrigger
+          className="self-start"
+          filter={filter}
+          onChange={onChange}
         />
       </div>
 
