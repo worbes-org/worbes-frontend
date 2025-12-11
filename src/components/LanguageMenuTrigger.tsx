@@ -1,9 +1,12 @@
+import BottomDrawer from "@/components/BottomDrawer";
 import Button from "@/components/Button";
 import DropdownPanel from "@/components/DropdownPanel";
 import ListSelector from "@/components/ListSelector";
 import MenuTrigger from "@/components/MenuTrigger";
+import Responsive from "@/components/Responsive";
 import { Locale } from "@/constants/i18n";
 import { usePathnameWithoutLocale } from "@/hooks/usePathnameWithoutLocale";
+import { useTranslations } from "@/hooks/useTranslations";
 import { ListSelectorOption } from "@/types/selector";
 import { cn } from "@/utils/styles";
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
@@ -16,6 +19,7 @@ type Props = {
 };
 
 const LanguageMenuTrigger: FC<Props> = ({ className }) => {
+  const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathnameWithoutLocale();
@@ -28,21 +32,42 @@ const LanguageMenuTrigger: FC<Props> = ({ className }) => {
           <GlobeAltIcon className="size-6 text-gray-300" />
         </Button>
       )}
-      renderMenu={({ isOpen }) => (
-        <DropdownPanel
-          className="w-40 overflow-hidden"
-          isOpen={isOpen}
-          position="bottom-right"
-        >
-          <ListSelector
-            options={Object.values(Locale).map((locale) => ({
-              value: locale,
-              label: getLanguageLabel(locale),
-            }))}
-            selectedValues={[locale]}
-            onSelect={handleSelect}
-          />
-        </DropdownPanel>
+      renderMenu={({ isOpen, onClose }) => (
+        <Responsive
+          mobile={
+            <BottomDrawer
+              title={t("Language")}
+              theme="primary"
+              isOpen={isOpen}
+              onClose={onClose}
+            >
+              <ListSelector
+                options={Object.values(Locale).map((locale) => ({
+                  value: locale,
+                  label: getLanguageLabel(locale),
+                }))}
+                selectedValues={[locale]}
+                onSelect={handleSelect}
+              />
+            </BottomDrawer>
+          }
+          desktop={
+            <DropdownPanel
+              className="w-40 overflow-hidden"
+              isOpen={isOpen}
+              position="bottom-right"
+            >
+              <ListSelector
+                options={Object.values(Locale).map((locale) => ({
+                  value: locale,
+                  label: getLanguageLabel(locale),
+                }))}
+                selectedValues={[locale]}
+                onSelect={handleSelect}
+              />
+            </DropdownPanel>
+          }
+        />
       )}
     />
   );
