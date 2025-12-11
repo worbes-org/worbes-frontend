@@ -6,6 +6,7 @@ import MinMaxInput from "@/components/MinMaxInput";
 import Responsive from "@/components/Responsive";
 import Translation from "@/components/Translation";
 import { ITEM_LEVEL } from "@/constants/auction";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useTranslations } from "@/hooks/useTranslations";
 import { AuctionsFilter } from "@/types/auction";
 import { cn } from "@/utils/styles";
@@ -23,11 +24,13 @@ const AuctionFilterMenuTrigger: FC<Props> = ({
   filter,
   onChange,
 }) => {
+  const isSmBreakpoint = useBreakpoint("sm");
   const t = useTranslations();
 
   return (
     <MenuTrigger
       className={className}
+      closeOnClickAway={isSmBreakpoint}
       renderButton={({ onClick }) => (
         <Button
           className="flex items-center gap-x-2 not-sm:px-2.5"
