@@ -11,6 +11,7 @@ import { Region } from "@/constants/game-server";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useSettingsContext } from "@/hooks/useSettingsContext";
 import { useTranslations } from "@/hooks/useTranslations";
+import { SettingsState } from "@/providers/SettingsProvider";
 import { Realm } from "@/types/game-server";
 import { Nullable } from "@/types/misc";
 import { getRealmNameByLocale } from "@/utils/realm";
@@ -29,7 +30,7 @@ const ServerMenuTrigger: FC<Props> = ({ className, buttonClassName }) => {
   const locale = useLocale();
   const isSmBreakpoint = useBreakpoint("sm");
 
-  const { settings } = useSettingsContext();
+  const { settings, onSettingsChange } = useSettingsContext();
 
   const isRegionSelected = !!settings.realm;
 
@@ -59,7 +60,10 @@ const ServerMenuTrigger: FC<Props> = ({ className, buttonClassName }) => {
               isOpen={isOpen}
               onClose={onClose}
             >
-              <ServerMenuContent />
+              <ServerMenuContent
+                settings={settings}
+                onSettingsChange={onSettingsChange}
+              />
             </BottomDrawer>
           }
           desktop={
@@ -82,7 +86,11 @@ const ServerMenuTrigger: FC<Props> = ({ className, buttonClassName }) => {
                 />
               </div>
 
-              <ServerMenuContent className="mt-6" />
+              <ServerMenuContent
+                className="mt-6"
+                settings={settings}
+                onSettingsChange={onSettingsChange}
+              />
             </DropdownPanel>
           }
         />
@@ -104,13 +112,11 @@ const ServerMenuTrigger: FC<Props> = ({ className, buttonClassName }) => {
   }
 };
 
-type ServerMenuContentProps = {
+const ServerMenuContent: FC<{
   className?: string;
-};
-
-const ServerMenuContent: FC<ServerMenuContentProps> = ({ className }) => {
-  const { settings, onSettingsChange } = useSettingsContext();
-  console.log(settings);
+  settings: SettingsState["settings"];
+  onSettingsChange: SettingsState["onSettingsChange"];
+}> = ({ className, settings, onSettingsChange }) => {
   return (
     <div className={cn("space-y-5", className)}>
       <div className="space-y-3">

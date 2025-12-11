@@ -1,11 +1,15 @@
+import BottomDrawer from "@/components/BottomDrawer";
 import DropdownPanel from "@/components/DropdownPanel";
 import Input from "@/components/Input";
 import MenuTrigger from "@/components/MenuTrigger";
+import Responsive from "@/components/Responsive";
 import SearchableListSelector from "@/components/SearchableListSelector";
 import { Locale } from "@/constants/i18n";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useRealms } from "@/hooks/useRealms";
 import { useSettingsContext } from "@/hooks/useSettingsContext";
 import { useTranslations } from "@/hooks/useTranslations";
+import { SettingsState } from "@/providers/SettingsProvider";
 import { Realm } from "@/types/game-server";
 import { ListSelectorOption } from "@/types/selector";
 import { getRealmNameByLocale } from "@/utils/realm";
@@ -23,8 +27,9 @@ type Props = {
 };
 
 const RegionMenuTrigger: FC<Props> = ({ className }) => {
-  const locale = useLocale();
+  const isSmBreakpoint = useBreakpoint("sm");
   const t = useTranslations();
+  const locale = useLocale();
 
   const { settings, onSettingsChange } = useSettingsContext();
 
@@ -37,6 +42,7 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
   return (
     <MenuTrigger
       className={cn("", className)}
+      closeOnClickAway={isSmBreakpoint}
       renderButton={({ onClick }) => (
         <div
           className={cn(isLoading && "cursor-wait")}
@@ -54,49 +60,99 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
         </div>
       )}
       renderMenu={({ isOpen, onClose }) => (
-        <DropdownPanel
-          className="overflow-hidden"
-          isOpen={isOpen}
-          position="bottom"
-        >
-          <SearchableListSelector
-            className="divide-y divide-gray-600"
-            input={{
-              className: "border-none",
-              size: "md",
-              autoFocus: true,
-              placeholder: t("Search realm..."),
-              leftIcon: <MagnifyingGlassIcon />,
-            }}
-            selector={{
-              listClassName: "scrollbar-hide max-h-80 overflow-y-auto",
-              fadeGradientClassName: { to: "to-gray-900" },
-              options: buildRealmOptions(realms ?? [], locale),
-              selectedValues: settings.realm ? [settings.realm.id] : [],
-              onSelect: (option) => {
-                onSettingsChange({
-                  ...settings,
-                  realm: option.metadata ?? null,
-                });
-                onClose();
-              },
-            }}
-          />
-        </DropdownPanel>
+        <Responsive
+          mobile={
+            <BottomDrawer
+              className="h-[90dvh]"
+              title={t("Select Realm")}
+              theme="secondary"
+              isOpen={isOpen}
+              onClose={onClose}
+            >
+              <RegionMenuContent
+                listClassName="h-[calc(90dvh-7rem)]"
+                realms={realms ?? []}
+                settings={settings}
+                onSettingsChange={onSettingsChange}
+                onClose={onClose}
+              />
+            </BottomDrawer>
+          }
+          desktop={
+            <DropdownPanel
+              className="overflow-hidden"
+              isOpen={isOpen}
+              position="bottom"
+            >
+              <RegionMenuContent
+                listClassName="max-h-60"
+                realms={realms ?? []}
+                settings={settings}
+                onSettingsChange={onSettingsChange}
+                onClose={onClose}
+              />
+            </DropdownPanel>
+          }
+        />
       )}
     />
   );
 };
 
-function buildRealmOptions(
-  realms: Realm[],
-  locale: Locale,
-): ListSelectorOption<number, Realm>[] {
-  return realms.map((realm) => ({
-    label: getRealmNameByLocale(realm, locale),
-    value: realm.id,
-    metadata: realm,
-  }));
-}
+const RegionMenuContent: FC<{
+  className?: string;
+  listClassName?: string;
+  realms: Realm[];
+  settings: SettingsState["settings"];
+  onClose: () => void;
+  onSettingsChange: SettingsState["onSettingsChange"];
+}> = ({
+  className,
+  listClassName,
+  realms,
+  settings,
+  onSettingsChange,
+  onClose,
+}) => {
+  const t = useTranslations();
+  const locale = useLocale();
+
+  return (
+    <SearchableListSelector
+      className={cn("divide-y divide-gray-600", className)}
+      input={{
+        className: "border-none",
+        size: "md",
+        autoFocus: true,
+        placeholder: t("Search realm..."),
+        leftIcon: <MagnifyingGlassIcon />,
+      }}
+      selector={{
+        listClassName: cn("scrollbar-hide overflow-y-auto", listClassName),
+        fadeGradientClassName: { to: "to-gray-900" },
+        options: buildRealmOptions(realms ?? [], locale),
+        selectedValues: settings.realm ? [settings.realm.id] : [],
+        onSelect: (option) => {
+          onSettingsChange({
+            ...settings,
+            realm: option.metadata ?? null,
+          });
+          onClose();
+        },
+      }}
+    />
+  );
+
+  function buildRealmOptions(
+    realms: Realm[],
+    locale: Locale,
+  ): ListSelectorOption<number, Realm>[] {
+    return realms.map((realm) => ({
+      label: getRealmNameByLocale(realm, locale),
+      value: realm.id,
+      metadata: realm,
+    }));
+  }
+};
 
 export default RegionMenuTrigger;
