@@ -16,7 +16,7 @@ const Responsive: FC<Props> = ({
   mobile,
   desktop,
   determiner = "breakpoint",
-  breakpoint = "md",
+  breakpoint = "sm",
 }) => {
   const isBreakpoint = useBreakpoint(breakpoint);
   const isMobileDevice = useIsMobileDevice();

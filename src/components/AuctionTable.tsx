@@ -109,13 +109,13 @@ const AuctionTable: FC<Props> = ({
       {
         key: "itemLevel",
         label: t("LEVEL"),
-        headClassName: "w-[max(4rem,10cqw)]",
+        headClassName: "w-[max(5rem,10cqw)]",
         render: (auction: Auction) => auction.itemLevel,
       },
       {
         key: "quantity",
         label: t("QUANTITY"),
-        headClassName: "w-[max(5rem,10cqw)]",
+        headClassName: "w-[max(6rem,10cqw)]",
         render: (auction: Auction) => auction.totalQuantity,
       },
     ];

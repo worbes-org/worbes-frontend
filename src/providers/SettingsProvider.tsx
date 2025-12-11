@@ -6,7 +6,7 @@ import { type Nullable } from "@/types/misc";
 import { createContext, type FC, type PropsWithChildren } from "react";
 import { useCookieState } from "synced-storage/react";
 
-type SettingsState = {
+export type SettingsState = {
   settings: {
     region: Region;
     realm: Nullable<Realm>;

@@ -6,6 +6,10 @@ Select game region and server:
   ko: "게임 지역과 서버를 선택해주세요"
   en: "Select game region and server"
 
+Select Category:
+  ko: "카테고리 선택"
+  en: "Select Category"
+
 Select Region:
   ko: "지역 선택"
   en: "Select Region"
@@ -65,3 +69,23 @@ Min:
 Max:
   ko: "최대"
   en: "Max"
+
+Search Settings:
+  ko: "검색 설정"
+  en: "Search Settings"
+
+Menu:
+  ko: "메뉴"
+  en: "Menu"
+
+Language:
+  ko: "언어"
+  en: "Language"
+
+Home:
+  ko: "홈"
+  en: "Home"
+
+Auctions:
+  ko: "경매"
+  en: "Auctions"

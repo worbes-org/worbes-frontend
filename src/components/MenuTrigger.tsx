@@ -10,6 +10,7 @@ type RenderButtonProps = {
 
 type RenderMenuProps = {
   isOpen: boolean;
+  onClose: () => void;
 };
 
 type Props = {
@@ -34,7 +35,7 @@ const MenuTrigger: FC<Props> = ({
   return (
     <div className={cn("relative", className)} ref={ref}>
       {renderButton({ isOpen, onClick: handleToggle(!isOpen) })}
-      {renderMenu({ isOpen })}
+      {renderMenu({ isOpen, onClose: handleToggle(false) })}
     </div>
   );
 
