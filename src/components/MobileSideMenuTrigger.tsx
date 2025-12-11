@@ -70,7 +70,7 @@ const MobileSideMenuTrigger = () => {
                       )}
                     />
 
-                    {item.label}
+                    <Translation messageKey={item.label} />
                   </Link>
                 </li>
               ))}

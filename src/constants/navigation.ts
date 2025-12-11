@@ -3,7 +3,7 @@ import { HomeIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 
 export const HEADER_NAV_ITEMS = [
   {
-    label: "Home",
+    label: "Trends",
     href: AppUrlBuilder.home(),
     Icon: HomeIcon,
   },

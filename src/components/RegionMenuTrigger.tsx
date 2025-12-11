@@ -122,7 +122,7 @@ const RegionMenuContent: FC<{
       className={cn("divide-y divide-gray-600", className)}
       input={{
         className: "border-none",
-        size: "md",
+        size: "lg",
         autoFocus: true,
         placeholder: t("Search realm..."),
         leftIcon: <MagnifyingGlassIcon />,

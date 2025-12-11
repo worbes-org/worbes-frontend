@@ -3,6 +3,7 @@
 import LanguageMenuTrigger from "@/components/LanguageMenuTrigger";
 import LayoutContainer from "@/components/LayoutContainer";
 import ServerMenuTrigger from "@/components/ServerMenuTrigger";
+import Translation from "@/components/Translation";
 import { HEADER_NAV_ITEMS } from "@/constants/navigation";
 import { usePathnameWithoutLocale } from "@/hooks/usePathnameWithoutLocale";
 import { cn } from "@/utils/styles";
@@ -52,7 +53,7 @@ const DesktopHeader: FC<Props> = ({ className }) => {
                   )}
                   href={item.href}
                 >
-                  {item.label}
+                  <Translation messageKey={item.label} />
                 </Link>
               </li>
             ))}

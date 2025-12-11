@@ -130,7 +130,7 @@ function TableHeader<TData>({
   return (
     <thead
       className={cn(
-        "z-[1] h-(--table-head-height) text-base font-semibold before:absolute before:inset-0 before:-z-10 before:rounded-lg before:bg-gray-800",
+        "z-[1] h-(--table-head-height) bg-gray-800 text-base font-semibold",
         className,
       )}
     >
