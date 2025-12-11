@@ -51,7 +51,7 @@ const AuctionTableContainer: FC<Props> = ({ className, filter, onChange }) => {
         </div>
 
         <AuctionFilterMenuTrigger
-          className="self-start"
+          className="self-start not-sm:hidden"
           filter={filter}
           onChange={onChange}
         />

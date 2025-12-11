@@ -116,7 +116,7 @@ const DrawerPanel: FC<DrawerPanelProps> = ({
     >
       <div
         className={cn(
-          "relative h-full space-y-4 bg-gray-950 px-4 pb-4",
+          "relative h-full space-y-4 bg-gray-900 px-4 pb-4",
           theme === "primary" && "rounded-4xl",
           theme === "secondary" && "rounded-t-2xl pt-4",
         )}

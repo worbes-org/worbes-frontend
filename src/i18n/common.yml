@@ -6,6 +6,10 @@ Select game region and server:
   ko: "게임 지역과 서버를 선택해주세요"
   en: "Select game region and server"
 
+Select Category:
+  ko: "카테고리 선택"
+  en: "Select Category"
+
 Select Region:
   ko: "지역 선택"
   en: "Select Region"
