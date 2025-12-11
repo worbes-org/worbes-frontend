@@ -46,7 +46,7 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
   return (
     <section className={cn("flex divide-x divide-gray-600", className)}>
       <DesktopFilterSection
-        className="pt-3 pr-3 not-sm:hidden sm:pt-6"
+        className="w-60 pt-3 pr-3 not-sm:hidden sm:pt-6 md:w-80"
         searchQuery={searchQuery}
         categorySelection={categorySelection}
         onCategoryChange={setCategorySelection}
@@ -99,7 +99,7 @@ const DesktopFilterSection: FC<{
   return (
     <div
       className={cn(
-        "flex w-80 flex-col [--auction-filter-form-height:2.5rem]",
+        "flex flex-col [--auction-filter-form-height:2.5rem]",
         className,
       )}
     >
