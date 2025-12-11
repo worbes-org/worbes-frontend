@@ -53,7 +53,7 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
           />
         </div>
       )}
-      renderMenu={({ isOpen }) => (
+      renderMenu={({ isOpen, onClose }) => (
         <DropdownPanel
           className="overflow-hidden"
           isOpen={isOpen}
@@ -73,11 +73,13 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
               fadeGradientClassName: { to: "to-gray-900" },
               options: buildRealmOptions(realms ?? [], locale),
               selectedValues: settings.realm ? [settings.realm.id] : [],
-              onSelect: (option) =>
+              onSelect: (option) => {
                 onSettingsChange({
                   ...settings,
                   realm: option.metadata ?? null,
-                }),
+                });
+                onClose();
+              },
             }}
           />
         </DropdownPanel>
