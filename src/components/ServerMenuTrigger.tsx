@@ -11,15 +11,17 @@ import { useTranslations } from "@/hooks/useTranslations";
 import { Realm } from "@/types/game-server";
 import { Nullable } from "@/types/misc";
 import { getRealmNameByLocale } from "@/utils/realm";
+import { cn } from "@/utils/styles";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { useLocale } from "next-intl";
 import { FC } from "react";
 
 type Props = {
   className?: string;
+  buttonClassName?: string;
 };
 
-const ServerMenuTrigger: FC<Props> = ({ className }) => {
+const ServerMenuTrigger: FC<Props> = ({ className, buttonClassName }) => {
   const t = useTranslations();
   const locale = useLocale();
 
@@ -32,7 +34,7 @@ const ServerMenuTrigger: FC<Props> = ({ className }) => {
       className={className}
       renderButton={({ onClick }) => (
         <Button
-          className="relative"
+          className={cn("relative", buttonClassName)}
           theme="primary"
           size="md"
           onClick={onClick}
