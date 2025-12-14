@@ -48,13 +48,13 @@ const AuctionTableContainer: FC<Props> = ({
   return (
     <div
       className={cn(
-        "flex flex-col [--auction-table-details-height:10rem] md:[--auction-table-details-height:4rem]",
+        "flex flex-col [--auction-table-details-height:10rem] sm:[--auction-table-details-height:7.5rem] md:[--auction-table-details-height:4rem]",
         className,
       )}
     >
       <div className="flex h-(--auction-table-details-height) shrink-0 flex-col gap-y-2 md:justify-between">
         <CategoryMenuTrigger
-          className="md:hidden"
+          className="sm:hidden"
           value={categorySelection}
           onChange={onCategoryChange}
         />
