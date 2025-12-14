@@ -7,7 +7,6 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { type FC, type PropsWithChildren } from "react";
 
 let browserQueryClient: Nullable<QueryClient> = null;
@@ -16,7 +15,7 @@ const TanstackQueryProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <QueryClientProvider client={getQueryClient()}>
       {children}
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 

@@ -53,3 +53,8 @@ export function getCategorySelection(args: {
     label: last(values)?.split(":").join(" > "),
   };
 }
+
+export function parseCategoryLabel(label: string): string[] {
+  const segments = label.split(" > ");
+  return segments.map((_, i) => segments.slice(0, i + 1).join(":"));
+}
