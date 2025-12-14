@@ -37,8 +37,8 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
   return (
     <section className={cn("flex divide-x divide-gray-600", className)}>
       <CategoryListPanel
-        className="w-60 pt-3 pr-3 not-sm:hidden sm:pt-6 md:w-80"
-        listClassName="scrollbar-hide overflow-y-auto py-5"
+        className="w-60 pt-3 pr-3 not-sm:hidden sm:pt-3 md:w-80"
+        listClassName="scrollbar-hide overflow-y-auto pb-5"
         value={categorySelection}
         onChange={handleCategoryChange}
       />
