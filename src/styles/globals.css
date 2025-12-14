@@ -3,6 +3,11 @@
 @layer base {
   :root {
     --header-height: 4rem;
+    /* 
+    --auction-table-details-height: 4rem;
+    @variant sm {
+      --auction-table-details-height: 10rem;
+    } */
   }
 
   body {

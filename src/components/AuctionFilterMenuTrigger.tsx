@@ -40,7 +40,7 @@ const AuctionFilterMenuTrigger: FC<Props> = ({
           onClick={onClick}
         >
           <FunnelIcon className="size-5 text-gray-300" />
-          <Translation className="not-sm:hidden" messageKey="Filter" />
+          <Translation messageKey="Filter" />
         </Button>
       )}
       renderMenu={({ isOpen, onClose }) => (

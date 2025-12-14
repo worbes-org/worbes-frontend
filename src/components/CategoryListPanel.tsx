@@ -8,9 +8,10 @@ import {
   buildCategoryOptions,
   getCategorySelection,
   getSelectedValues,
+  parseCategoryLabel,
 } from "@/utils/selector";
 import { cn } from "@/utils/styles";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 type Props = {
   className?: string;
@@ -28,6 +29,11 @@ const CategoryListPanel: FC<Props> = ({
   onChange,
 }) => {
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
+
+  useEffect(() => {
+    const selectedValues = value?.label ? parseCategoryLabel(value.label) : [];
+    setSelectedValues(selectedValues);
+  }, [value]);
 
   return (
     <NestedListSelector
