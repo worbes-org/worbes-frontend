@@ -11,12 +11,14 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { type FC, type PropsWithChildren, type ReactNode } from "react";
 
 type Props = {
+  contentClassName?: string;
   title: ReactNode;
   visible: Optional<boolean>;
   onClose: () => void;
 };
 
 const FullscreenModal: FC<PropsWithChildren<Props>> = ({
+  contentClassName,
   title,
   visible,
   onClose,
@@ -33,7 +35,7 @@ const FullscreenModal: FC<PropsWithChildren<Props>> = ({
         transition
       />
 
-      <div className="fixed inset-0 z-50 h-screen w-screen p-4">
+      <div className="fixed inset-0 z-50 h-dvh w-screen p-4">
         <DialogPanel
           className={cn(
             "duration-300 data-[closed]:translate-y-3 data-[closed]:opacity-0",
@@ -56,7 +58,15 @@ const FullscreenModal: FC<PropsWithChildren<Props>> = ({
             />
           </div>
 
-          <div className="mt-8">{children}</div>
+          <div
+            className={cn(
+              "[--content-height-offset:7.75rem]",
+              "mt-8 h-[calc(100dvh-var(--content-height-offset))] overflow-y-auto",
+              contentClassName,
+            )}
+          >
+            {children}
+          </div>
         </DialogPanel>
       </div>
     </Dialog>
