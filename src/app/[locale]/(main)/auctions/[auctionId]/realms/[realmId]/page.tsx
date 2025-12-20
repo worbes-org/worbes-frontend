@@ -2,14 +2,14 @@ import { AFC } from "react";
 
 type Props = {
   params: Promise<{
-    id: string;
+    auctionId: string;
   }>;
 };
 
 const AuctionDetailPage: AFC<Props> = async ({ params }) => {
-  const { id } = await params;
+  const { auctionId } = await params;
 
-  return <div>Auction Detail Page: {id}</div>;
+  return <div>Auction Detail Page: {auctionId}</div>;
 };
 
 export default AuctionDetailPage;

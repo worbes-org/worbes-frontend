@@ -6,6 +6,7 @@ import WowheadItemLink from "@/components/WowheadItemLink";
 import { COPPER_PER_SILVER, SILVER_PER_GOLD } from "@/constants/currency";
 import { useTranslations } from "@/hooks/useTranslations";
 import type { Auction } from "@/types/auction";
+import { Realm } from "@/types/game-server";
 import type { TableColumn } from "@/types/table";
 import { isBrowser } from "@/utils/env";
 import { formatNumber } from "@/utils/misc";
@@ -17,6 +18,7 @@ import { type FC } from "react";
 type Props = {
   className?: string;
   values: Auction[];
+  realm: Realm;
   isLoading: boolean;
   onLastVisible: () => void;
 };
@@ -24,6 +26,7 @@ type Props = {
 const AuctionTable: FC<Props> = ({
   className,
   values,
+  realm,
   isLoading,
   onLastVisible,
 }) => {
@@ -67,7 +70,7 @@ const AuctionTable: FC<Props> = ({
           <div className="inline-flex items-center gap-x-2">
             <WowheadItemLink
               className="peer space-x-1 truncate"
-              href={AppUrlBuilder.auctionDetail(auction)}
+              href={AppUrlBuilder.auctionDetail(auction, realm)}
               id={auction.itemId}
               level={auction.itemLevel}
               locale={locale}
