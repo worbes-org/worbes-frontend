@@ -38,11 +38,7 @@ export const AuctionDetailSchema = z
       item_bonus: z.string().nullable(),
       lowest_price: z.number(),
       total_quantity: z.number(),
-      current_auctions: z.object({
-        additionalProp1: z.number(),
-        additionalProp2: z.number(),
-        additionalProp3: z.number(),
-      }),
+      current_auctions: z.record(z.string(), z.number()),
     }),
   })
   .transform((data) => ({

@@ -1,34 +1,32 @@
 "use client";
 
-import AuctionDetail from "@/components/AuctionDetail";
+import AuctionDetailContainer from "@/components/AuctionDetailContainer";
 import FullscreenModal from "@/components/FullscreenModal";
 import { usePathnameWithoutLocale } from "@/hooks/usePathnameWithoutLocale";
-import { useSettingsContext } from "@/hooks/useSettingsContext";
-import { useRouter } from "next/navigation";
-import { FC, Suspense, useEffect, useMemo, useState } from "react";
-import { usePrevious } from "react-use";
+import { Nullable } from "@/types/misc";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { FC, useEffect, useMemo, useState } from "react";
 
-type Props = {};
+type Params = {
+  realmId: string;
+  auctionId: string;
+};
 
-const AuctionDetailModal: FC<Props> = ({}) => {
+const AuctionDetailModal: FC = () => {
   const router = useRouter();
   const pathname = usePathnameWithoutLocale();
-
-  const {
-    settings: { region: selectedRegion },
-  } = useSettingsContext();
+  const searchParams = useSearchParams();
 
   const [visible, setVisible] = useState(false);
 
+  const params = useParams<Params>();
   const reactiveParams = useMemo(() => extractParams(pathname), [pathname]);
-  const prevParams = usePrevious(reactiveParams);
+  const activeParams = reactiveParams ?? params;
 
   useEffect(() => {
     const nextVisible = !!reactiveParams;
     setVisible(!!nextVisible);
   }, [reactiveParams]);
-
-  const activeParams = reactiveParams ?? prevParams;
 
   return (
     <FullscreenModal
@@ -36,16 +34,11 @@ const AuctionDetailModal: FC<Props> = ({}) => {
       visible={visible}
       onClose={handleClose}
     >
-      {activeParams && (
-        <Suspense fallback={<div>Loading...</div>}>
-          <AuctionDetail
-            region={selectedRegion}
-            realmId={activeParams.realmId}
-            itemId={activeParams.auctionId}
-            itemBonus={null}
-          />
-        </Suspense>
-      )}
+      <AuctionDetailContainer
+        realmId={activeParams.realmId}
+        auctionId={activeParams.auctionId}
+        itemBonus={searchParams.get("itemBonus")}
+      />
     </FullscreenModal>
   );
 
@@ -53,19 +46,13 @@ const AuctionDetailModal: FC<Props> = ({}) => {
     router.push("/auctions");
   }
 
-  function extractParams(pathname: string) {
+  function extractParams(pathname: string): Nullable<Params> {
     const regex = /\/auctions\/(\d+)\/realms\/(\d+)/;
     const match = pathname.match(regex);
-    const realmId = Number(match?.[1]);
-    const auctionId = Number(match?.[2]);
+    const auctionId = match?.[1];
+    const realmId = match?.[2];
 
-    if (Number.isNaN(realmId)) {
-      console.error(`Invalid realm ID: ${match?.[1]}`);
-      return null;
-    }
-
-    if (Number.isNaN(auctionId)) {
-      console.error(`Invalid auction ID: ${match?.[2]}`);
+    if (typeof realmId !== "string" || typeof auctionId !== "string") {
       return null;
     }
 

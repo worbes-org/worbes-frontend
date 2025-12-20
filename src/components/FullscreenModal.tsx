@@ -39,7 +39,7 @@ const FullscreenModal: FC<PropsWithChildren<Props>> = ({
         <DialogPanel
           className={cn(
             "duration-300 data-[closed]:translate-y-3 data-[closed]:opacity-0",
-            "shadow-brand h-full w-full space-y-8 rounded-3xl border border-gray-600 bg-gray-900 p-4 text-left transition-transform",
+            "shadow-brand h-full w-full space-y-8 rounded-3xl border border-gray-600 bg-gray-900 p-4 text-left",
           )}
           transition
         >
