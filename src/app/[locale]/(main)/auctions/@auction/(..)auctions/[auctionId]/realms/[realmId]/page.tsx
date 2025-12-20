@@ -17,11 +17,15 @@ const AuctionDetailModal: FC = () => {
   const pathname = usePathnameWithoutLocale();
   const searchParams = useSearchParams();
 
-  const [visible, setVisible] = useState(false);
-
   const params = useParams<Params>();
-  const reactiveParams = useMemo(() => extractParams(pathname), [pathname]);
+  const reactiveParams = useMemo<Nullable<Params>>(
+    () => extractParams(pathname),
+    [pathname],
+  );
+
   const activeParams = reactiveParams ?? params;
+
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const nextVisible = !!reactiveParams;
