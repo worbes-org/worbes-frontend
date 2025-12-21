@@ -1,5 +1,6 @@
 import AuctionDetail from "@/components/AuctionDetail";
 import { Region } from "@/constants/game-server";
+import { fetchWowheadItem } from "@/injectors/item";
 import { notFound } from "next/navigation";
 import { AFC, Suspense } from "react";
 
@@ -16,6 +17,12 @@ const AuctionDetailPage: AFC<Props> = async ({ params }) => {
     notFound();
   }
 
+  const item = await fetchWowheadItem(Number(auctionId));
+  if (!item) {
+    console.error(`Failed to fetch Wowhead item ${auctionId}`);
+    notFound();
+  }
+
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
@@ -23,6 +30,7 @@ const AuctionDetailPage: AFC<Props> = async ({ params }) => {
           region={Region.KR}
           realmId={realmId}
           auctionId={auctionId}
+          item={item}
         />
       </Suspense>
     </div>
