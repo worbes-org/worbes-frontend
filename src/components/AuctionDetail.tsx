@@ -23,7 +23,7 @@ const AuctionDetail: FC<Props> = ({
 }) => {
   const { data } = useAuctionDetail({ region, realmId, auctionId, itemBonus });
 
-  return <div className={cn("", className)}>AuctionDetail</div>;
+  return <div className={cn("", className)}></div>;
 };
 
 export default AuctionDetail;
