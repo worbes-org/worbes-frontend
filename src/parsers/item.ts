@@ -20,8 +20,7 @@ export function parseWowheadItemXml(xmlText: string): WowheadItem {
     throw new Error("Invalid Wowhead XML: missing required fields");
   }
 
-  const iconUrl = `https://www.wowhead.com/images/wow/icons/medium/${iconName}.jpg`;
-
+  const iconUrl = `https://wow.zamimg.com/images/wow/icons/large/${iconName}.jpg`;
   return {
     id,
     name,
