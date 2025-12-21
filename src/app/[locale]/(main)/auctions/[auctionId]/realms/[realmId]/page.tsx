@@ -1,7 +1,7 @@
 import AuctionDetail, {
   AuctionDetailSkeleton,
 } from "@/components/AuctionDetail";
-import { fetchWowheadItem } from "@/injectors/item";
+import { injectWowheadItem } from "@/injectors/item";
 import { notFound } from "next/navigation";
 import { AFC, Suspense } from "react";
 
@@ -22,7 +22,7 @@ const AuctionDetailPage: AFC<Props> = async ({ params, searchParams }) => {
     notFound();
   }
 
-  const item = await fetchWowheadItem(Number(auctionId));
+  const item = await injectWowheadItem(Number(auctionId));
   if (!item) {
     console.error(`Failed to fetch Wowhead item ${auctionId}`);
     notFound();

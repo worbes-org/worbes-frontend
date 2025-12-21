@@ -1,5 +1,5 @@
 import AuctionModalContainer from "@/components/AuctionModalContainer";
-import { fetchWowheadItem } from "@/injectors/item";
+import { injectWowheadItem } from "@/injectors/item";
 import { notFound } from "next/navigation";
 import { AFC } from "react";
 
@@ -16,7 +16,7 @@ const AuctionDetailPage: AFC<Props> = async ({ params }) => {
     notFound();
   }
 
-  const item = await fetchWowheadItem(Number(auctionId));
+  const item = await injectWowheadItem(Number(auctionId));
   if (!item) {
     console.error(`Failed to fetch Wowhead item ${auctionId}`);
     notFound();

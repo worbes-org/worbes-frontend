@@ -16,7 +16,7 @@ export function parseWowheadItemXml(xmlText: string): WowheadItem {
   const qualityLabel = safeParseString(item?.quality);
   const iconName = safeParseString(item?.icon);
 
-  if (!id || !name || qualityId == null || !qualityLabel || !iconName) {
+  if (!id || !name || !qualityId || !qualityLabel || !iconName) {
     throw new Error("Invalid Wowhead XML: missing required fields");
   }
 
