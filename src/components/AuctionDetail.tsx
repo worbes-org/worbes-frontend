@@ -1,7 +1,7 @@
 "use client";
 
-import { Region } from "@/constants/game-server";
 import { useAuctionDetail } from "@/hooks/useAuctionDetail";
+import { useSettingsContext } from "@/hooks/useSettingsContext";
 import { Nullable } from "@/types/misc";
 import { WowheadItem } from "@/types/wowhead";
 import { cn } from "@/utils/styles";
@@ -9,7 +9,6 @@ import { FC } from "react";
 
 type Props = {
   className?: string;
-  region: Region;
   realmId: string;
   auctionId: string;
   item: WowheadItem;
@@ -18,15 +17,23 @@ type Props = {
 
 const AuctionDetail: FC<Props> = ({
   className,
-  region,
   realmId,
   auctionId,
   item,
   itemBonus,
 }) => {
+  const {
+    settings: { region },
+  } = useSettingsContext();
   const { data } = useAuctionDetail({ region, realmId, auctionId, itemBonus });
 
   return <div className={cn("", className)}></div>;
+};
+
+export const AuctionDetailSkeleton: FC<{ className?: string }> = ({
+  className,
+}) => {
+  return <div className={cn("", className)}>Loading...</div>;
 };
 
 export default AuctionDetail;

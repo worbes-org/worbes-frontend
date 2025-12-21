@@ -1,12 +1,14 @@
 "use client";
 
-import AuctionDetailContainer from "@/components/AuctionDetailContainer";
+import AuctionDetail, {
+  AuctionDetailSkeleton,
+} from "@/components/AuctionDetail";
 import FullscreenModal from "@/components/FullscreenModal";
 import { usePathnameWithoutLocale } from "@/hooks/usePathnameWithoutLocale";
 import { Nullable } from "@/types/misc";
 import type { WowheadItem } from "@/types/wowhead";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, Suspense, useEffect, useMemo, useState } from "react";
 
 type Params = {
   realmId: string;
@@ -45,11 +47,14 @@ const AuctionModalContainer: FC<AuctionModalContainerProps> = ({
       visible={visible}
       onClose={handleClose}
     >
-      <AuctionDetailContainer
-        realmId={activeParams.realmId}
-        auctionId={activeParams.auctionId}
-        itemBonus={searchParams.get("itemBonus")}
-      />
+      <Suspense fallback={<AuctionDetailSkeleton />}>
+        <AuctionDetail
+          realmId={activeParams.realmId}
+          auctionId={activeParams.auctionId}
+          item={item}
+          itemBonus={searchParams.get("itemBonus")}
+        />
+      </Suspense>
     </FullscreenModal>
   );
 

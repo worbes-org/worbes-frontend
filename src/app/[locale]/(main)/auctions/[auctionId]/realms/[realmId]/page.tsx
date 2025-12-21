@@ -1,5 +1,6 @@
-import AuctionDetail from "@/components/AuctionDetail";
-import { Region } from "@/constants/game-server";
+import AuctionDetail, {
+  AuctionDetailSkeleton,
+} from "@/components/AuctionDetail";
 import { fetchWowheadItem } from "@/injectors/item";
 import { notFound } from "next/navigation";
 import { AFC, Suspense } from "react";
@@ -9,9 +10,13 @@ type Props = {
     realmId: string;
     auctionId: string;
   }>;
+  searchParams: Promise<{
+    itemBonus: string;
+  }>;
 };
 
-const AuctionDetailPage: AFC<Props> = async ({ params }) => {
+const AuctionDetailPage: AFC<Props> = async ({ params, searchParams }) => {
+  const { itemBonus } = await searchParams;
   const { realmId, auctionId } = await params;
   if (Number.isNaN(Number(realmId)) || Number.isNaN(Number(auctionId))) {
     notFound();
@@ -24,16 +29,14 @@ const AuctionDetailPage: AFC<Props> = async ({ params }) => {
   }
 
   return (
-    <div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <AuctionDetail
-          region={Region.KR}
-          realmId={realmId}
-          auctionId={auctionId}
-          item={item}
-        />
-      </Suspense>
-    </div>
+    <Suspense fallback={<AuctionDetailSkeleton />}>
+      <AuctionDetail
+        realmId={realmId}
+        auctionId={auctionId}
+        item={item}
+        itemBonus={itemBonus}
+      />
+    </Suspense>
   );
 };
 
