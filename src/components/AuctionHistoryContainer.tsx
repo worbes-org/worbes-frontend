@@ -1,4 +1,5 @@
 import AuctionHistoryChart from "@/components/AuctionHistoryChart";
+import AuctionPrice from "@/components/AuctionPrice";
 import AuctionStatCards from "@/components/AuctionStatCards";
 import Card from "@/components/Card";
 import SegmentedControl from "@/components/SegmentedControl";
@@ -9,7 +10,6 @@ import { useTranslations } from "@/hooks/useTranslations";
 import { AuctionDetail } from "@/types/auction";
 import { Maybe, Timeframe } from "@/types/misc";
 import { getFloorPrice } from "@/utils/currency";
-import { formatCurrency } from "@/utils/misc";
 import { cn } from "@/utils/styles";
 import { FC, useState } from "react";
 
@@ -44,7 +44,6 @@ const AuctionHistoryContainer: FC<Props> = ({
   });
 
   const floorPrice = getFloorPrice(detail.currentAuctions);
-  const formattedFloorPrice = formatCurrency(floorPrice);
 
   return (
     <div className={cn("space-y-4", className)}>
@@ -55,9 +54,10 @@ const AuctionHistoryContainer: FC<Props> = ({
               className="block text-sm"
               messageKey="Current Lowest Price"
             />
-            <span className="text-2xl font-semibold">
-              {formattedFloorPrice}
-            </span>
+            <AuctionPrice
+              className="text-2xl font-semibold"
+              price={floorPrice}
+            />
           </div>
 
           <SegmentedControl

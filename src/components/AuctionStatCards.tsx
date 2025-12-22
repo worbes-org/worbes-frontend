@@ -1,9 +1,9 @@
+import AuctionPrice from "@/components/AuctionPrice";
 import Card from "@/components/Card";
 import Translation from "@/components/Translation";
 import { useTranslations } from "@/hooks/useTranslations";
 import { AuctionDetail, AuctionHistory } from "@/types/auction";
 import { getFloorPrice } from "@/utils/currency";
-import { formatCurrency } from "@/utils/misc";
 import { FC } from "react";
 
 type Props = {
@@ -44,9 +44,10 @@ const AuctionStatCards: FC<Props> = ({ className, detail, history }) => {
             <h3>{item.title}</h3>
 
             {item.isCurrency ? (
-              formatCurrency(item.value)
+              <AuctionPrice price={item.value} />
             ) : (
               <Translation
+                className="text-yellow"
                 messageKey="{count} items"
                 values={{ count: item.value }}
               />

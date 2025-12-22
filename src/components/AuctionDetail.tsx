@@ -3,7 +3,7 @@
 import AuctionHistoryContainer, {
   AuctionHistoryContainerSkeleton,
 } from "@/components/AuctionHistoryContainer";
-import Card from "@/components/Card";
+import CurrentAuctionListCard from "@/components/CurrentAuctionListCard";
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import Translation from "@/components/Translation";
 import { useAuctionDetail } from "@/hooks/useAuctionDetail";
@@ -78,9 +78,10 @@ const AuctionDetail: FC<Props> = ({
           </Suspense>
         </div>
 
-        <Card className="min-w-96 self-start" theme="primary" padding="md">
-          asd
-        </Card>
+        <CurrentAuctionListCard
+          className="min-w-96 self-start"
+          detail={detail}
+        />
       </div>
     </div>
   );
