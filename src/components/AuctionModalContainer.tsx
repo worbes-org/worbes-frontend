@@ -7,7 +7,7 @@ import FullscreenModal from "@/components/FullscreenModal";
 import { usePathnameWithoutLocale } from "@/hooks/usePathnameWithoutLocale";
 import { Nullable } from "@/types/misc";
 import type { WowheadItem } from "@/types/wowhead";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FC, Suspense, useEffect, useMemo, useState } from "react";
 
 type Params = {
@@ -15,18 +15,19 @@ type Params = {
   auctionId: string;
 };
 
-type AuctionModalContainerProps = {
+type Props = {
   item: WowheadItem;
   initialParams: Params;
+  itemBonus: Nullable<string>;
 };
 
-const AuctionModalContainer: FC<AuctionModalContainerProps> = ({
+const AuctionModalContainer: FC<Props> = ({
   item,
   initialParams,
+  itemBonus,
 }) => {
   const router = useRouter();
   const pathname = usePathnameWithoutLocale();
-  const searchParams = useSearchParams();
 
   const reactiveParams = useMemo<Nullable<Params>>(
     () => extractParams(pathname),
@@ -52,7 +53,7 @@ const AuctionModalContainer: FC<AuctionModalContainerProps> = ({
           realmId={activeParams.realmId}
           auctionId={activeParams.auctionId}
           item={item}
-          itemBonus={searchParams.get("itemBonus")}
+          itemBonus={itemBonus}
         />
       </Suspense>
     </FullscreenModal>

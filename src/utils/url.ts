@@ -15,7 +15,7 @@ export class AppUrlBuilder {
   static auctionDetail(auction: Auction, realm: Realm) {
     const searchParams = qs.stringify(
       compactObject({
-        itemBonus: auction.itemBonus,
+        itemBonus: auction.itemBonus?.replace(":", "_"),
       }),
     );
 

@@ -45,3 +45,7 @@ export function parseWowheadItemXml(xmlText: string): WowheadItem {
     subClassLabel,
   };
 }
+
+export function parseItemBonus(itemBonus: string): string {
+  return itemBonus.replace("_", ":");
+}

@@ -3,6 +3,7 @@ import AuctionDetail, {
 } from "@/components/AuctionDetail";
 import LayoutContainer from "@/components/LayoutContainer";
 import { injectWowheadItem } from "@/injectors/item";
+import { parseItemBonus } from "@/parsers/item";
 import { AppUrlBuilder } from "@/utils/url";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { getLocale } from "next-intl/server";
@@ -21,7 +22,9 @@ type Props = {
 };
 
 const AuctionDetailPage: AFC<Props> = async ({ params, searchParams }) => {
-  const { itemBonus } = await searchParams;
+  const { itemBonus: _itemBonus } = await searchParams;
+  const itemBonus = _itemBonus ? parseItemBonus(_itemBonus) : null;
+
   const { realmId, auctionId } = await params;
   if (Number.isNaN(Number(realmId)) || Number.isNaN(Number(auctionId))) {
     notFound();

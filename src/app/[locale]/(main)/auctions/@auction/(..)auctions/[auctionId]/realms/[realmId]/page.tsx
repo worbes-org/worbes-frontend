@@ -1,5 +1,7 @@
 import AuctionModalContainer from "@/components/AuctionModalContainer";
 import { injectWowheadItem } from "@/injectors/item";
+import { parseItemBonus } from "@/parsers/item";
+import { Nullable } from "@/types/misc";
 import { getLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { AFC } from "react";
@@ -9,9 +11,15 @@ type Props = {
     realmId: string;
     auctionId: string;
   }>;
+  searchParams: Promise<{
+    itemBonus: Nullable<string>;
+  }>;
 };
 
-const AuctionDetailPage: AFC<Props> = async ({ params }) => {
+const AuctionDetailPage: AFC<Props> = async ({ params, searchParams }) => {
+  const { itemBonus: _itemBonus } = await searchParams;
+  const itemBonus = _itemBonus ? parseItemBonus(_itemBonus) : null;
+
   const { realmId, auctionId } = await params;
   if (Number.isNaN(Number(realmId)) || Number.isNaN(Number(auctionId))) {
     notFound();
@@ -25,7 +33,11 @@ const AuctionDetailPage: AFC<Props> = async ({ params }) => {
   }
 
   return (
-    <AuctionModalContainer initialParams={{ realmId, auctionId }} item={item} />
+    <AuctionModalContainer
+      initialParams={{ realmId, auctionId }}
+      item={item}
+      itemBonus={itemBonus}
+    />
   );
 };
 
