@@ -1,5 +1,6 @@
 import AuctionModalContainer from "@/components/AuctionModalContainer";
 import { injectWowheadItem } from "@/injectors/item";
+import { getLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { AFC } from "react";
 
@@ -16,7 +17,8 @@ const AuctionDetailPage: AFC<Props> = async ({ params }) => {
     notFound();
   }
 
-  const item = await injectWowheadItem(Number(auctionId));
+  const locale = await getLocale();
+  const item = await injectWowheadItem({ itemId: Number(auctionId), locale });
   if (!item) {
     console.error(`Failed to fetch Wowhead item ${auctionId}`);
     notFound();

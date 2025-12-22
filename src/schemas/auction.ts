@@ -48,3 +48,27 @@ export const AuctionDetailSchema = z
     totalQuantity: data.content.total_quantity,
     currentAuctions: data.content.current_auctions,
   }));
+
+export const AuctionHistorySchema = z
+  .object({
+    content: z.object({
+      average_lowest_price: z.number(),
+      median_lowest_price: z.number(),
+      history: z.array(
+        z.object({
+          time: z.string(),
+          lowest_price: z.number(),
+          total_quantity: z.number(),
+        }),
+      ),
+    }),
+  })
+  .transform((data) => ({
+    averageLowestPrice: data.content.average_lowest_price,
+    medianLowestPrice: data.content.median_lowest_price,
+    history: data.content.history.map((item) => ({
+      time: new Date(item.time),
+      lowestPrice: item.lowest_price,
+      totalQuantity: item.total_quantity,
+    })),
+  }));

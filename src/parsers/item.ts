@@ -15,8 +15,20 @@ export function parseWowheadItemXml(xmlText: string): WowheadItem {
   const name = safeParseString(item?.name);
   const qualityLabel = safeParseString(item?.quality);
   const iconName = safeParseString(item?.icon);
+  const level = safeParseInt(item?.level);
+  const classLabel = safeParseString(item?.class["#text"]);
+  const subClassLabel = safeParseString(item?.subclass["#text"]);
 
-  if (!id || !name || !qualityId || !qualityLabel || !iconName) {
+  if (
+    !id ||
+    !name ||
+    !qualityId ||
+    !qualityLabel ||
+    !iconName ||
+    !level ||
+    !classLabel ||
+    !subClassLabel
+  ) {
     throw new Error("Invalid Wowhead XML: missing required fields");
   }
 
@@ -28,5 +40,8 @@ export function parseWowheadItemXml(xmlText: string): WowheadItem {
     qualityLabel,
     iconName,
     iconUrl,
+    level,
+    classLabel,
+    subClassLabel,
   };
 }

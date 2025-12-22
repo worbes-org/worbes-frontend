@@ -1,5 +1,8 @@
 "use client";
 
+import AuctionHistoryContainer from "@/components/AuctionHistoryContainer";
+import Card from "@/components/Card";
+import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import { useAuctionDetail } from "@/hooks/useAuctionDetail";
 import { useSettingsContext } from "@/hooks/useSettingsContext";
 import { Nullable } from "@/types/misc";
@@ -25,9 +28,49 @@ const AuctionDetail: FC<Props> = ({
   const {
     settings: { region },
   } = useSettingsContext();
-  const { data } = useAuctionDetail({ region, realmId, auctionId, itemBonus });
+  const { data: detail } = useAuctionDetail({
+    region,
+    realmId,
+    auctionId,
+    itemBonus,
+  });
 
-  return <div className={cn("", className)}></div>;
+  return (
+    <div className={cn("space-y-6", className)}>
+      <div className="flex items-center gap-x-4">
+        <ImageWithPlaceholder
+          className="size-16 overflow-hidden rounded-xl border-2 border-accent-600"
+          src={item.iconUrl}
+          alt={item.name}
+        />
+        <div>
+          <h1 className="text-2xl font-semibold">{item.name}</h1>
+          <div className="flex items-center gap-x-2">
+            <div className="text-sm text-gray-200">{item.level}</div>
+            <div className="size-1 rounded-full bg-gray-200" />
+            <div className="text-sm text-gray-200">{item.classLabel}</div>
+            <div className="size-1 rounded-full bg-gray-200" />
+            <div className="text-sm text-gray-200">{itemBonus}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex gap-x-6">
+        <div className="flex flex-1 flex-col gap-y-4">
+          <AuctionHistoryContainer
+            detail={detail}
+            realmId={realmId}
+            auctionId={auctionId}
+            itemBonus={itemBonus}
+          />
+        </div>
+
+        <Card className="min-w-96" theme="primary" padding="md">
+          asd
+        </Card>
+      </div>
+    </div>
+  );
 };
 
 export const AuctionDetailSkeleton: FC<{ className?: string }> = ({

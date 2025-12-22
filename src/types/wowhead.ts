@@ -5,4 +5,7 @@ export type WowheadItem = {
   qualityLabel: string;
   iconName: string;
   iconUrl: string;
+  level: number;
+  classLabel: string;
+  subClassLabel: string;
 };
