@@ -29,3 +29,7 @@
 "{count} items":
   ko: "{count}개"
   en: "{count} items"
+
+"{level} Level":
+  ko: "{level} 레벨"
+  en: "{level} Level"

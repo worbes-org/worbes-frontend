@@ -77,4 +77,10 @@ const AuctionHistoryContainer: FC<Props> = ({
   }
 };
 
+export const AuctionHistoryContainerSkeleton: FC<{ className?: string }> = ({
+  className,
+}) => {
+  return <div className={cn("", className)}>Loading...</div>;
+};
+
 export default AuctionHistoryContainer;

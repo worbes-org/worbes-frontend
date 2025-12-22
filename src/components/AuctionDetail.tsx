@@ -1,14 +1,17 @@
 "use client";
 
-import AuctionHistoryContainer from "@/components/AuctionHistoryContainer";
+import AuctionHistoryContainer, {
+  AuctionHistoryContainerSkeleton,
+} from "@/components/AuctionHistoryContainer";
 import Card from "@/components/Card";
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
+import Translation from "@/components/Translation";
 import { useAuctionDetail } from "@/hooks/useAuctionDetail";
 import { useSettingsContext } from "@/hooks/useSettingsContext";
 import { Nullable } from "@/types/misc";
 import { WowheadItem } from "@/types/wowhead";
 import { cn } from "@/utils/styles";
-import { FC } from "react";
+import { FC, Suspense } from "react";
 
 type Props = {
   className?: string;
@@ -46,26 +49,36 @@ const AuctionDetail: FC<Props> = ({
         <div>
           <h1 className="text-2xl font-semibold">{item.name}</h1>
           <div className="flex items-center gap-x-2">
-            <div className="text-sm text-gray-200">{item.level}</div>
+            <Translation
+              className="text-sm text-gray-200"
+              messageKey="{level} Level"
+              values={{ level: item.level }}
+            />
             <div className="size-1 rounded-full bg-gray-200" />
-            <div className="text-sm text-gray-200">{item.classLabel}</div>
-            <div className="size-1 rounded-full bg-gray-200" />
-            <div className="text-sm text-gray-200">{itemBonus}</div>
+            <div className="text-sm text-gray-200">{item.subClassLabel}</div>
+            {!!itemBonus && (
+              <>
+                <div className="size-1 rounded-full bg-gray-200" />
+                <div className="text-sm text-gray-200">{itemBonus}</div>
+              </>
+            )}
           </div>
         </div>
       </div>
 
       <div className="flex gap-x-6">
-        <div className="flex flex-1 flex-col gap-y-4">
-          <AuctionHistoryContainer
-            detail={detail}
-            realmId={realmId}
-            auctionId={auctionId}
-            itemBonus={itemBonus}
-          />
+        <div className="flex-1">
+          <Suspense fallback={<AuctionHistoryContainerSkeleton />}>
+            <AuctionHistoryContainer
+              detail={detail}
+              realmId={realmId}
+              auctionId={auctionId}
+              itemBonus={itemBonus}
+            />
+          </Suspense>
         </div>
 
-        <Card className="min-w-96" theme="primary" padding="md">
+        <Card className="min-w-96 self-start" theme="primary" padding="md">
           asd
         </Card>
       </div>
