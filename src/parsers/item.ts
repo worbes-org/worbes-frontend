@@ -1,6 +1,7 @@
 import { safeParseInt, safeParseString } from "@/parsers/misc";
 import { WowheadItem } from "@/types/wowhead";
 import { XMLParser } from "fast-xml-parser";
+import { isNull } from "lodash-es";
 
 const xmlParser = new XMLParser({
   ignoreAttributes: false,
@@ -20,14 +21,14 @@ export function parseWowheadItemXml(xmlText: string): WowheadItem {
   const subClassLabel = safeParseString(item?.subclass["#text"]);
 
   if (
-    !id ||
-    !name ||
-    !qualityId ||
-    !qualityLabel ||
-    !iconName ||
-    !level ||
-    !classLabel ||
-    !subClassLabel
+    isNull(id) ||
+    isNull(name) ||
+    isNull(qualityId) ||
+    isNull(qualityLabel) ||
+    isNull(iconName) ||
+    isNull(level) ||
+    isNull(classLabel) ||
+    isNull(subClassLabel)
   ) {
     throw new Error("Invalid Wowhead XML: missing required fields");
   }
