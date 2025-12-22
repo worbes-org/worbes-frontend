@@ -2,8 +2,8 @@ import Card from "@/components/Card";
 import Translation from "@/components/Translation";
 import { useTranslations } from "@/hooks/useTranslations";
 import { AuctionDetail, AuctionHistory } from "@/types/auction";
-import { getGoldSilverCopper } from "@/utils/currency";
-import { formatNumber } from "@/utils/misc";
+import { getFloorPrice, getGoldSilverCopper } from "@/utils/currency";
+import { formatCurrency } from "@/utils/misc";
 import { FC } from "react";
 
 type Props = {
@@ -28,10 +28,11 @@ const AuctionStatCards: FC<Props> = ({ className, detail, history }) => {
           value: history.medianLowestPrice,
           isCurrency: true,
         },
-        // {
-        //   title: t("Current Price"),
-        //   value: detail.currentAuctions,
-        // }
+        {
+          title: t("Current Price"),
+          value: getFloorPrice(detail.currentAuctions),
+          isCurrency: true,
+        },
         {
           title: t("Available Now"),
           value: detail.totalQuantity,
@@ -46,7 +47,7 @@ const AuctionStatCards: FC<Props> = ({ className, detail, history }) => {
               <h3>{item.title}</h3>
 
               {item.isCurrency ? (
-                `${formatNumber(gold)}g`
+                formatCurrency(item.value)
               ) : (
                 <Translation
                   messageKey="{count} items"

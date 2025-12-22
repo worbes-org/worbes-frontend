@@ -33,3 +33,7 @@
 "{level} Level":
   ko: "{level} 레벨"
   en: "{level} Level"
+
+Current Price:
+  ko: "현재 가격"
+  en: "Current Price"

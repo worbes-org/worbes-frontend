@@ -7,3 +7,7 @@ export function getGoldSilverCopper(value: number) {
 
   return { gold, silver, copper };
 }
+
+export function getFloorPrice(currentAuctions: Record<string, number>) {
+  return Math.min(...Object.keys(currentAuctions).map(Number));
+}
