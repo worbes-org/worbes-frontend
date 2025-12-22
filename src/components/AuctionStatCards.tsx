@@ -2,7 +2,7 @@ import Card from "@/components/Card";
 import Translation from "@/components/Translation";
 import { useTranslations } from "@/hooks/useTranslations";
 import { AuctionDetail, AuctionHistory } from "@/types/auction";
-import { getFloorPrice, getGoldSilverCopper } from "@/utils/currency";
+import { getFloorPrice } from "@/utils/currency";
 import { formatCurrency } from "@/utils/misc";
 import { FC } from "react";
 
@@ -38,26 +38,22 @@ const AuctionStatCards: FC<Props> = ({ className, detail, history }) => {
           value: detail.totalQuantity,
           isCurrency: false,
         },
-      ].map((item) => {
-        const { gold } = getGoldSilverCopper(item.value);
+      ].map((item) => (
+        <li key={item.title}>
+          <Card theme="primary" padding="md">
+            <h3>{item.title}</h3>
 
-        return (
-          <li key={item.title}>
-            <Card theme="primary" padding="md">
-              <h3>{item.title}</h3>
-
-              {item.isCurrency ? (
-                formatCurrency(item.value)
-              ) : (
-                <Translation
-                  messageKey="{count} items"
-                  values={{ count: item.value }}
-                />
-              )}
-            </Card>
-          </li>
-        );
-      })}
+            {item.isCurrency ? (
+              formatCurrency(item.value)
+            ) : (
+              <Translation
+                messageKey="{count} items"
+                values={{ count: item.value }}
+              />
+            )}
+          </Card>
+        </li>
+      ))}
     </ul>
   );
 };
