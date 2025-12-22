@@ -13,6 +13,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@bprogress/next": "^3.2.12",
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
     "@tanstack/react-query": "^5.90.5",

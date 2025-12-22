@@ -1,4 +1,5 @@
 import IntlProvider from "@/providers/IntlProvider";
+import PageTransitionIndicatorProvider from "@/providers/PageTransitionIndicatorProvider";
 import SettingsProvider from "@/providers/SettingsProvider";
 import TanstackQueryProvider from "@/providers/TanstackQueryProvider";
 import { cookies } from "next/headers";
@@ -12,11 +13,13 @@ type Props = {
 const RootProvider: AFC<Props> = async ({ locale, children }) => {
   return (
     <IntlProvider locale={locale}>
-      <TanstackQueryProvider>
-        <SyncedStorageProvider ssrCookies={(await cookies()).getAll()}>
-          <SettingsProvider>{children}</SettingsProvider>
-        </SyncedStorageProvider>
-      </TanstackQueryProvider>
+      <PageTransitionIndicatorProvider>
+        <TanstackQueryProvider>
+          <SyncedStorageProvider ssrCookies={(await cookies()).getAll()}>
+            <SettingsProvider>{children}</SettingsProvider>
+          </SyncedStorageProvider>
+        </TanstackQueryProvider>
+      </PageTransitionIndicatorProvider>
     </IntlProvider>
   );
 };
