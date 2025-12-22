@@ -25,3 +25,7 @@
 "Current Lowest Price":
   ko: "현재 최저가"
   en: "Current Lowest Price"
+
+"{count} items":
+  ko: "{count}개"
+  en: "{count} items"

@@ -3,11 +3,11 @@
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import Table from "@/components/Table";
 import WowheadItemLink from "@/components/WowheadItemLink";
-import { COPPER_PER_SILVER, SILVER_PER_GOLD } from "@/constants/currency";
 import { useTranslations } from "@/hooks/useTranslations";
 import type { Auction } from "@/types/auction";
 import { Realm } from "@/types/game-server";
 import type { TableColumn } from "@/types/table";
+import { getGoldSilverCopper } from "@/utils/currency";
 import { isBrowser } from "@/utils/env";
 import { formatNumber } from "@/utils/misc";
 import { cn } from "@/utils/styles";
@@ -92,10 +92,7 @@ const AuctionTable: FC<Props> = ({
         label: t("PRICE"),
         headClassName: "w-[max(9rem,10cqw)]",
         render: (auction: Auction) => {
-          const gold = Math.floor(auction.lowestPrice / SILVER_PER_GOLD);
-          const silver = Math.floor(
-            (auction.lowestPrice % SILVER_PER_GOLD) / COPPER_PER_SILVER,
-          );
+          const { gold, silver } = getGoldSilverCopper(auction.lowestPrice);
 
           return (
             <div className="inline-flex items-center gap-x-2">
