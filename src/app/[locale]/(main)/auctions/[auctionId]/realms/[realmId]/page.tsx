@@ -38,16 +38,16 @@ const AuctionDetailPage: AFC<Props> = async ({ params, searchParams }) => {
   }
 
   return (
-    <Suspense fallback={<AuctionDetailSkeleton />}>
-      <LayoutContainer className="space-y-10 py-6">
-        <Link
-          className="flex items-center gap-x-4 text-gray-200 transition-colors duration-500 hover:text-gray-100"
-          href={AppUrlBuilder.auctions()}
-        >
-          <ArrowLeftIcon className="size-6" />
-          <span className="text-lg">Back to Auctions</span>
-        </Link>
+    <LayoutContainer className="space-y-10 py-6">
+      <Link
+        className="flex items-center gap-x-4 text-gray-200 transition-colors duration-500 hover:text-gray-100"
+        href={AppUrlBuilder.auctions()}
+      >
+        <ArrowLeftIcon className="size-6" />
+        <span className="text-lg">Back to Auctions</span>
+      </Link>
 
+      <Suspense fallback={<AuctionDetailSkeleton />}>
         <AuctionDetail
           historyClassName="sticky top-[calc(var(--header-height)+1rem)] "
           realmId={realmId}
@@ -55,8 +55,8 @@ const AuctionDetailPage: AFC<Props> = async ({ params, searchParams }) => {
           item={item}
           itemBonus={itemBonus}
         />
-      </LayoutContainer>
-    </Suspense>
+      </Suspense>
+    </LayoutContainer>
   );
 };
 

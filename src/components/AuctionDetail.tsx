@@ -5,6 +5,7 @@ import AuctionHistoryContainer, {
 } from "@/components/AuctionHistoryContainer";
 import CurrentAuctionListCard from "@/components/CurrentAuctionListCard";
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
+import Skeleton from "@/components/Skeleton";
 import Translation from "@/components/Translation";
 import { useAuctionDetail } from "@/hooks/useAuctionDetail";
 import { useSettingsContext } from "@/hooks/useSettingsContext";
@@ -94,7 +95,22 @@ const AuctionDetail: FC<Props> = ({
 export const AuctionDetailSkeleton: FC<{ className?: string }> = ({
   className,
 }) => {
-  return <div className={cn("", className)}>Loading...</div>;
+  return (
+    <div className={cn("space-y-6", className)}>
+      <div className="flex items-center gap-x-4">
+        <Skeleton className="size-16" />
+        <div className="flex-1 space-y-1">
+          <Skeleton className="h-7 w-full max-w-50" />
+          <Skeleton className="h-5 w-full max-w-40" />
+        </div>
+      </div>
+
+      <div className="flex gap-4 not-lg:flex-col">
+        <AuctionHistoryContainerSkeleton className="flex-1" />
+        <Skeleton className="h-dvh w-full lg:max-w-96" />
+      </div>
+    </div>
+  );
 };
 
 export default AuctionDetail;
