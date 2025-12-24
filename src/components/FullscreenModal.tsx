@@ -61,7 +61,7 @@ const FullscreenModal: FC<PropsWithChildren<Props>> = ({
           <div
             className={cn(
               "[--content-height-offset:7.75rem]",
-              "h-[calc(100dvh-var(--content-height-offset))] overflow-y-auto",
+              "scrollbar-hide h-[calc(100dvh-var(--content-height-offset))] overflow-y-auto",
               contentClassName,
             )}
           >
