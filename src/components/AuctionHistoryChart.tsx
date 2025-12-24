@@ -120,10 +120,12 @@ const AuctionHistoryChart: FC<Props> = ({ className, history }) => {
               borderColor: COLORS.BORDER,
             }}
             labelFormatter={(label: Date) =>
-              label.toLocaleDateString(locale, {
+              label.toLocaleString(locale, {
                 year: "numeric",
                 month: "short",
                 day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
               })
             }
             formatter={(value: number, name: string) => {
