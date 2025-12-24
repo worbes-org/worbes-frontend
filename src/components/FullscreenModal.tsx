@@ -44,7 +44,7 @@ const FullscreenModal: FC<PropsWithChildren<Props>> = ({
           transition
         >
           <div className="relative">
-            <DialogTitle className="font-brand text-lg text-green-300" as="h2">
+            <DialogTitle className="font-brand text-lg text-accent-700" as="h2">
               {title}
             </DialogTitle>
 
