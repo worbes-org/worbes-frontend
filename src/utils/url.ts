@@ -1,4 +1,7 @@
 import { Auction } from "@/types/auction";
+import { Realm } from "@/types/game-server";
+import { compactObject } from "@/utils/misc";
+import qs from "qs";
 
 export class AppUrlBuilder {
   static home() {
@@ -9,8 +12,14 @@ export class AppUrlBuilder {
     return "/auctions";
   }
 
-  static auctionDetail(auction: Auction) {
-    return `/auctions/${auction.itemId}`;
+  static auctionDetail(auction: Auction, realm: Realm) {
+    const searchParams = qs.stringify(
+      compactObject({
+        itemBonus: auction.itemBonus?.replace(":", "_"),
+      }),
+    );
+
+    return `/auctions/${auction.itemId}/realms/${realm.connectedRealmId}?${searchParams}`;
   }
 
   static craftingTierImage(tier: number) {

@@ -5,6 +5,7 @@ import CategoryMenuTrigger from "@/components/CategoryMenuTrigger";
 import Input from "@/components/Input";
 import Translation from "@/components/Translation";
 import useInfiniteAuctions from "@/hooks/useInfiniteAuctions";
+import { useSettingsContext } from "@/hooks/useSettingsContext";
 import { useTranslations } from "@/hooks/useTranslations";
 import { AuctionsFilter } from "@/types/auction";
 import { CategorySelection } from "@/types/category";
@@ -29,6 +30,9 @@ const AuctionTableContainer: FC<Props> = ({
   onCategoryChange,
 }) => {
   const t = useTranslations();
+  const {
+    settings: { realm },
+  } = useSettingsContext();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -94,12 +98,17 @@ const AuctionTableContainer: FC<Props> = ({
         </div>
       </div>
 
-      <AuctionTable
-        className="h-[calc(100%-var(--auction-table-details-height))]"
-        values={auctions}
-        isLoading={isLoading || isFetchingNextPage}
-        onLastVisible={fetchNextPage}
-      />
+      {!realm ? (
+        <div>No realm selected</div>
+      ) : (
+        <AuctionTable
+          className="h-[calc(100%-var(--auction-table-details-height))]"
+          values={auctions}
+          realm={realm}
+          isLoading={isLoading || isFetchingNextPage}
+          onLastVisible={fetchNextPage}
+        />
+      )}
     </div>
   );
 

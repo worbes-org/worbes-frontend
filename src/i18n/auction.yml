@@ -1,0 +1,55 @@
+14-Day Average:
+  ko: "14일 평균가"
+  en: "14-Day Average"
+
+14-Day Median:
+  ko: "14일 중앙값"
+  en: "14-Day Median"
+
+Available Now:
+  ko: "현재 재고"
+  en: "Available Now"
+
+7d:
+  ko: "7일"
+  en: "7d"
+
+14d:
+  ko: "14일"
+  en: "14d"
+
+30d:
+  ko: "30일"
+  en: "30d"
+
+Current Lowest Price:
+  ko: "현재 최저가"
+  en: "Current Lowest Price"
+
+"{count} items":
+  ko: "{count}개"
+  en: "{count} items"
+
+"{level} Level":
+  ko: "{level} 레벨"
+  en: "{level} Level"
+
+Current Price:
+  ko: "현재 가격"
+  en: "Current Price"
+
+Current Auctions:
+  ko: "현재 경매"
+  en: "Current Auctions"
+
+Price:
+  ko: "가격"
+  en: "Price"
+
+Quantity:
+  ko: "수량"
+  en: "Quantity"
+
+Total Available:
+  ko: "총 재고"
+  en: "Total Available"

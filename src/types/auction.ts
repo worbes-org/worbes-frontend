@@ -1,16 +1,17 @@
 import { Region } from "@/constants/game-server";
-import type { Maybe, Nullable } from "@/types/misc";
+import {
+  AuctionDetailSchema,
+  AuctionHistorySchema,
+  AuctionsSchema,
+} from "@/schemas/auction";
+import type { Maybe } from "@/types/misc";
+import { z } from "zod";
 
-export type Auction = {
-  uuid: string;
+export type Auction = z.infer<typeof AuctionsSchema>["content"][number];
 
-  itemId: number;
-  itemBonus: Nullable<string>;
-  itemLevel: number;
-  craftingTier: Nullable<number>;
-  lowestPrice: number;
-  totalQuantity: number;
-};
+export type AuctionDetail = z.infer<typeof AuctionDetailSchema>;
+
+export type AuctionHistory = z.infer<typeof AuctionHistorySchema>;
 
 export type AuctionsFilter = {
   region: Maybe<Region>;

@@ -61,6 +61,7 @@
   --color-green: #4cb782;
   --color-blue: #4ea7fc;
   --color-indigo: #5e6ad2;
+  --color-copper: #cd7f32;
 
   /* Deprecated colors, migrate to linear theme colors. To be removed in the future. */
   --color-blue-50: #f1f4fd;

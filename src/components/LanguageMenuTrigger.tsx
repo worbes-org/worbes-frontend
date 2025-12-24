@@ -73,7 +73,7 @@ const LanguageMenuTrigger: FC<Props> = ({ className }) => {
   );
 
   function handleSelect(option: ListSelectorOption<Locale>) {
-    router.replace(`/${option.value}${pathname}`);
+    router.replace(`/${option.value}`);
   }
 
   function getLanguageLabel(locale: Locale) {

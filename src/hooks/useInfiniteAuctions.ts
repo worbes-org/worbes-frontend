@@ -1,25 +1,7 @@
-import type { Auction, AuctionsFilter } from "@/types/auction";
+import { AuctionsSchema } from "@/schemas/auction";
+import type { AuctionsFilter } from "@/types/auction";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import qs from "qs";
-import { z } from "zod";
-
-const AuctionsResponseSchema = z.object({
-  content: z.array(
-    z.object({
-      item_id: z.number(),
-      item_bonus: z.string().nullable(),
-      item_level: z.number(),
-      crafting_tier: z.number().nullable(),
-      lowest_price: z.number(),
-      total_quantity: z.number(),
-    }),
-  ),
-  first: z.boolean(),
-  last: z.boolean(),
-  pageable: z.object({
-    pageNumber: z.number(),
-  }),
-});
 
 type AuctionsPagination = {
   page: number;
@@ -41,8 +23,7 @@ export function useInfiniteAuctions(args: {
         })}`,
       );
       const data = await response.json();
-      const parsed = AuctionsResponseSchema.parse(data);
-
+      const parsed = AuctionsSchema.parse(data);
       return parsed;
     },
     getNextPageParam: (lastPage) => {
@@ -52,17 +33,7 @@ export function useInfiniteAuctions(args: {
     enabled: !!args.filter.region && !!args.filter.realmId,
     select: (data) => {
       const flattened = data.pages.flatMap((page) => page.content);
-      const auctions = flattened.map<Auction>((item) => ({
-        uuid: crypto.randomUUID(),
-        itemId: item.item_id,
-        itemBonus: item.item_bonus,
-        itemLevel: item.item_level,
-        craftingTier: item.crafting_tier,
-        lowestPrice: item.lowest_price,
-        totalQuantity: item.total_quantity,
-      }));
-
-      return auctions;
+      return flattened;
     },
   });
 
