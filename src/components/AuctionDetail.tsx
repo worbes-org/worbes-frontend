@@ -15,6 +15,8 @@ import { FC, Suspense } from "react";
 
 type Props = {
   className?: string;
+  historyClassName?: string;
+  auctionsClassName?: string;
   realmId: string;
   auctionId: string;
   item: WowheadItem;
@@ -23,6 +25,8 @@ type Props = {
 
 const AuctionDetail: FC<Props> = ({
   className,
+  historyClassName,
+  auctionsClassName,
   realmId,
   auctionId,
   item,
@@ -67,7 +71,7 @@ const AuctionDetail: FC<Props> = ({
       </div>
 
       <div className="flex gap-4 not-lg:flex-col">
-        <div className="flex-1">
+        <div className={cn("flex-1 self-start", historyClassName)}>
           <Suspense fallback={<AuctionHistoryContainerSkeleton />}>
             <AuctionHistoryContainer
               detail={detail}
@@ -79,7 +83,7 @@ const AuctionDetail: FC<Props> = ({
         </div>
 
         <CurrentAuctionListCard
-          className="w-full self-start lg:max-w-96"
+          className={cn("w-full self-start lg:max-w-96", auctionsClassName)}
           detail={detail}
         />
       </div>

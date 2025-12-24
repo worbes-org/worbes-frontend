@@ -50,6 +50,7 @@ const AuctionModalContainer: FC<Props> = ({
     >
       <Suspense fallback={<AuctionDetailSkeleton />}>
         <AuctionDetail
+          historyClassName="sticky top-0"
           realmId={activeParams.realmId}
           auctionId={activeParams.auctionId}
           item={item}

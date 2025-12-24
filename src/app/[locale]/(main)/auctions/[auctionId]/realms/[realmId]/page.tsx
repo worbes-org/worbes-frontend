@@ -49,6 +49,7 @@ const AuctionDetailPage: AFC<Props> = async ({ params, searchParams }) => {
         </Link>
 
         <AuctionDetail
+          historyClassName="sticky top-[calc(var(--header-height)+1rem)] "
           realmId={realmId}
           auctionId={auctionId}
           item={item}
