@@ -15,7 +15,7 @@ const DesktopHeader: FC<Props> = ({ className }) => {
   return (
     <header
       className={cn(
-        "h-(--header-height) border-b border-b-gray-600",
+        "h-(--header-height) border-b border-b-gray-600 bg-gray-950",
         className,
       )}
     >
