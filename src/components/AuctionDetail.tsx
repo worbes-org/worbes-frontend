@@ -72,7 +72,7 @@ const AuctionDetail: FC<Props> = ({
       </div>
 
       <div className="flex gap-4 not-lg:flex-col">
-        <div className={cn("flex-1 self-start", historyClassName)}>
+        <div className={cn("w-full flex-1 self-start", historyClassName)}>
           <Suspense fallback={<AuctionHistoryContainerSkeleton />}>
             <AuctionHistoryContainer
               detail={detail}

@@ -49,7 +49,7 @@ const AuctionDetailPage: AFC<Props> = async ({ params, searchParams }) => {
 
       <Suspense fallback={<AuctionDetailSkeleton />}>
         <AuctionDetail
-          historyClassName="sticky top-[calc(var(--header-height)+1rem)] "
+          historyClassName="lg:sticky lg:top-[calc(var(--header-height)+1rem)] "
           realmId={realmId}
           auctionId={auctionId}
           item={item}
