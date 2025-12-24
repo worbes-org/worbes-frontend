@@ -49,3 +49,7 @@ Price:
 Quantity:
   ko: "수량"
   en: "Quantity"
+
+Total Available:
+  ko: "총 재고"
+  en: "Total Available"
