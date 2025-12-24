@@ -35,7 +35,7 @@ const AuctionHistoryContainer: FC<Props> = ({
   } = useSettingsContext();
   const [timeframe, setTimeframe] = useState<Timeframe>(Timeframe.ONE_WEEK);
 
-  const { data } = useAuctionHistory({
+  const { data: history } = useAuctionHistory({
     region,
     realmId,
     auctionId,
@@ -72,10 +72,10 @@ const AuctionHistoryContainer: FC<Props> = ({
           />
         </div>
 
-        <AuctionHistoryChart />
+        <AuctionHistoryChart history={history} />
       </Card>
 
-      <AuctionStatCards detail={detail} history={data} />
+      <AuctionStatCards detail={detail} history={history} />
     </div>
   );
 

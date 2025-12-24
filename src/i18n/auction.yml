@@ -41,3 +41,11 @@ Current Price:
 Current Auctions:
   ko: "현재 경매"
   en: "Current Auctions"
+
+Price:
+  ko: "가격"
+  en: "Price"
+
+Quantity:
+  ko: "수량"
+  en: "Quantity"
