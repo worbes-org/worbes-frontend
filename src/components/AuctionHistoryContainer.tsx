@@ -3,6 +3,7 @@ import AuctionPrice from "@/components/AuctionPrice";
 import AuctionStatCards from "@/components/AuctionStatCards";
 import Card from "@/components/Card";
 import SegmentedControl from "@/components/SegmentedControl";
+import Skeleton from "@/components/Skeleton";
 import Translation from "@/components/Translation";
 import { useAuctionHistory } from "@/hooks/useAuctionHistory";
 import { useSettingsContext } from "@/hooks/useSettingsContext";
@@ -11,6 +12,7 @@ import { AuctionDetail } from "@/types/auction";
 import { Maybe, Timeframe } from "@/types/misc";
 import { getFloorPrice } from "@/utils/currency";
 import { cn } from "@/utils/styles";
+import { range } from "lodash-es";
 import { FC, useState } from "react";
 
 type Props = {
@@ -87,7 +89,16 @@ const AuctionHistoryContainer: FC<Props> = ({
 export const AuctionHistoryContainerSkeleton: FC<{ className?: string }> = ({
   className,
 }) => {
-  return <div className={cn("", className)}>Loading...</div>;
+  return (
+    <div className={cn("space-y-4", className)}>
+      <Skeleton className="h-111.5 w-full" />
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        {range(4).map((index) => (
+          <Skeleton key={index} className="h-30 w-full" />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default AuctionHistoryContainer;
