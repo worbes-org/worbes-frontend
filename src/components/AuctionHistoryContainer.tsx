@@ -72,7 +72,7 @@ const AuctionHistoryContainer: FC<Props> = ({
           />
         </div>
 
-        <AuctionHistoryChart history={history} />
+        <AuctionHistoryChart className="-mx-4" history={history} />
       </Card>
 
       <AuctionStatCards detail={detail} history={history} />
