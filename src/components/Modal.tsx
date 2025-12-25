@@ -13,7 +13,7 @@ import { type FC, type PropsWithChildren, type ReactNode } from "react";
 type Props = {
   title: ReactNode;
   visible: Optional<boolean>;
-  size: "sm" | "md";
+  size: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
   onClose: () => void;
 };
 
@@ -40,15 +40,19 @@ const Modal: FC<PropsWithChildren<Props>> = ({
           <DialogPanel
             className={cn(
               "duration-300 data-[closed]:scale-95 data-[closed]:opacity-0",
-              "shadow-brand relative w-full rounded-3xl border border-blue-500/25 bg-green-950/90 p-4 text-left transition-transform",
+              "shadow-brand relative w-full rounded-3xl border border-gray-600 bg-gray-900 p-4 text-left transition-transform",
               size === "sm" && "max-w-[328px]",
               size === "md" && "max-w-[468px]",
+              size === "lg" && "max-w-[800px]",
+              size === "xl" && "max-w-[1280px]",
+              size === "2xl" && "max-w-[1600px]",
+              size === "3xl" && "max-w-[1920px]",
             )}
             transition
           >
             <div className="relative">
               <DialogTitle
-                className="font-brand text-lg text-green-300"
+                className="font-brand text-lg text-accent-700"
                 as="h2"
               >
                 {title}

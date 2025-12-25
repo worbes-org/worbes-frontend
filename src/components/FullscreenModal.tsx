@@ -35,11 +35,11 @@ const FullscreenModal: FC<PropsWithChildren<Props>> = ({
         transition
       />
 
-      <div className="fixed inset-0 z-50 h-dvh w-screen p-4">
+      <div className="fixed inset-0 z-50 p-4">
         <DialogPanel
           className={cn(
             "mx-auto max-w-480 duration-300 data-[closed]:translate-y-3 data-[closed]:opacity-0",
-            "shadow-brand h-full w-full space-y-8 rounded-3xl border border-gray-600 bg-gray-900 p-4 text-left",
+            "shadow-brand -full space-y-8 rounded-3xl border border-gray-600 bg-gray-900 p-4 text-left",
           )}
           transition
         >
@@ -61,7 +61,7 @@ const FullscreenModal: FC<PropsWithChildren<Props>> = ({
           <div
             className={cn(
               "[--content-height-offset:7.75rem]",
-              "scrollbar-hide h-[calc(100dvh-var(--content-height-offset))] overflow-y-auto",
+              "scrollbar-hide h-[calc(100%-var(--content-height-offset))] overflow-y-auto",
               contentClassName,
             )}
           >

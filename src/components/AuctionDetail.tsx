@@ -107,7 +107,7 @@ export const AuctionDetailSkeleton: FC<{ className?: string }> = ({
 
       <div className="flex gap-4 not-lg:flex-col">
         <AuctionHistoryContainerSkeleton className="flex-1" />
-        <Skeleton className="h-dvh w-full lg:max-w-96" />
+        <Skeleton className="h-145.5 w-full lg:max-w-96" />
       </div>
     </div>
   );

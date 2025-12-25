@@ -3,7 +3,7 @@
 import AuctionDetail, {
   AuctionDetailSkeleton,
 } from "@/components/AuctionDetail";
-import FullscreenModal from "@/components/FullscreenModal";
+import Modal from "@/components/Modal";
 import { usePathnameWithoutLocale } from "@/hooks/usePathnameWithoutLocale";
 import { Nullable } from "@/types/misc";
 import type { WowheadItem } from "@/types/wowhead";
@@ -43,21 +43,22 @@ const AuctionModalContainer: FC<Props> = ({
   }, [reactiveParams]);
 
   return (
-    <FullscreenModal
+    <Modal
       title="Auction Detail"
+      size="3xl"
       visible={visible}
       onClose={handleClose}
     >
       <Suspense fallback={<AuctionDetailSkeleton />}>
         <AuctionDetail
-          historyClassName="lg:sticky lg:top-0"
+          historyClassName="lg:sticky lg:top-4"
           realmId={activeParams.realmId}
           auctionId={activeParams.auctionId}
           item={item}
           itemBonus={itemBonus}
         />
       </Suspense>
-    </FullscreenModal>
+    </Modal>
   );
 
   function handleClose() {
