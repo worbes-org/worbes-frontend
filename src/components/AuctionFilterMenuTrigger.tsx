@@ -50,7 +50,11 @@ const AuctionFilterMenuTrigger: FC<Props> = ({
               isOpen={isOpen}
               onClose={onClose}
             >
-              <AuctionFilterMenu filter={filter} onChange={onChange} />
+              <AuctionFilterMenu
+                filter={filter}
+                onApply={onChange}
+                onClose={onClose}
+              />
             </BottomDrawer>
           }
           desktop={
@@ -68,7 +72,8 @@ const AuctionFilterMenuTrigger: FC<Props> = ({
               <AuctionFilterMenu
                 className="mt-4"
                 filter={filter}
-                onChange={onChange}
+                onApply={onChange}
+                onClose={onClose}
               />
             </DropdownPanel>
           }

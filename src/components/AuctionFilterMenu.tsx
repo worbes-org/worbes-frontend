@@ -1,4 +1,5 @@
 import BottomDrawer from "@/components/BottomDrawer";
+import Button from "@/components/Button";
 import DropdownPanel from "@/components/DropdownPanel";
 import Input from "@/components/Input";
 import ListSelector from "@/components/ListSelector";
@@ -20,17 +21,24 @@ import { getExpansionLabel, getQualityLabel } from "@/utils/auction";
 import { cn } from "@/utils/styles";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { first, last } from "lodash-es";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 type Props = {
   className?: string;
   filter: AuctionsFilter;
-  onChange: (filter: AuctionsFilter) => void;
+  onApply: (filter: AuctionsFilter) => void;
+  onClose?: () => void;
 };
 
-const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
+const AuctionFilterMenu: FC<Props> = ({
+  className,
+  filter,
+  onApply,
+  onClose,
+}) => {
   const t = useTranslations();
   const isSmBreakpoint = useBreakpoint("sm");
+  const [localFilter, setLocalFilter] = useState(filter);
 
   return (
     <div
@@ -47,13 +55,16 @@ const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
         />
         <MinMaxInput
           size="md"
-          value={{ min: filter.minItemLevel, max: filter.maxItemLevel }}
+          value={{
+            min: localFilter.minItemLevel,
+            max: localFilter.maxItemLevel,
+          }}
           limit={{ min: ITEM_LEVEL.MIN, max: ITEM_LEVEL.MAX }}
           minPlaceholder={t("Min")}
           maxPlaceholder={t("Max")}
           onChange={(value) =>
-            onChange({
-              ...filter,
+            setLocalFilter({
+              ...localFilter,
               minItemLevel: value.min,
               maxItemLevel: value.max,
             })
@@ -73,16 +84,17 @@ const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
           step={1}
           showTicks
           value={{
-            start: filter.minQuality ?? QUALITY.MIN,
-            end: filter.maxQuality ?? QUALITY.MAX,
+            start: localFilter.minQuality ?? QUALITY.MIN,
+            end: localFilter.maxQuality ?? QUALITY.MAX,
           }}
           renderTooltip={(value) => {
             const label = getQualityLabel(value);
-            return label ? t(label) : null;
+
+            return <div className="text-nowrap">{label ? t(label) : null}</div>;
           }}
           onChange={(value) =>
-            onChange({
-              ...filter,
+            setLocalFilter({
+              ...localFilter,
               minQuality: value.start,
               maxQuality: value.end,
             })
@@ -110,8 +122,8 @@ const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
         <MenuTrigger
           closeOnClickAway={isSmBreakpoint}
           renderButton={({ isOpen, onClick }) => {
-            const label = filter.expansionId
-              ? getExpansionLabel(filter.expansionId)
+            const label = localFilter.expansionId
+              ? getExpansionLabel(localFilter.expansionId)
               : null;
 
             return (
@@ -120,7 +132,7 @@ const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
                   className="pointer-events-none"
                   size="md"
                   placeholder={t("All Expansions")}
-                  value={label ? t(label) : undefined}
+                  value={label ? t(label) : ""}
                   rightIcon={
                     <ChevronDownIcon
                       className={cn(
@@ -133,10 +145,10 @@ const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
               </div>
             );
           }}
-          renderMenu={({ isOpen, onClose }) => {
+          renderMenu={({ isOpen, onClose: closeExpansionMenu }) => {
             const selectedValues =
-              typeof filter.expansionId === "number"
-                ? [filter.expansionId]
+              typeof localFilter.expansionId === "number"
+                ? [localFilter.expansionId]
                 : [];
 
             return (
@@ -146,7 +158,7 @@ const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
                     title="Expansion"
                     theme="primary"
                     isOpen={isOpen}
-                    onClose={onClose}
+                    onClose={closeExpansionMenu}
                   >
                     <ListSelector
                       listClassName="max-h-[60dvh] overflow-y-auto"
@@ -158,9 +170,13 @@ const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
                         label: t(expansion.label),
                       }))}
                       selectedValues={selectedValues}
-                      onSelect={(value) =>
-                        onChange({ ...filter, expansionId: value.value })
-                      }
+                      onSelect={(value) => {
+                        setLocalFilter({
+                          ...localFilter,
+                          expansionId: value.value,
+                        });
+                        closeExpansionMenu();
+                      }}
                     />
                   </BottomDrawer>
                 }
@@ -180,9 +196,13 @@ const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
                         label: t(expansion.label),
                       }))}
                       selectedValues={selectedValues}
-                      onSelect={(value) =>
-                        onChange({ ...filter, expansionId: value.value })
-                      }
+                      onSelect={(value) => {
+                        setLocalFilter({
+                          ...localFilter,
+                          expansionId: value.value,
+                        });
+                        closeExpansionMenu();
+                      }}
                     />
                   </DropdownPanel>
                 }
@@ -191,8 +211,31 @@ const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
           }}
         />
       </div>
+
+      <div className="flex justify-between gap-2">
+        <Button theme="secondary" size="md" onClick={handleReset}>
+          <Translation messageKey="Reset" />
+        </Button>
+        <Button
+          className="not-sm:flex-1"
+          theme="quaternary"
+          size="md"
+          onClick={handleApply}
+        >
+          <Translation messageKey="Apply" />
+        </Button>
+      </div>
     </div>
   );
+
+  function handleReset() {
+    setLocalFilter(filter);
+  }
+
+  function handleApply() {
+    onApply(localFilter);
+    onClose?.();
+  }
 };
 
 export default AuctionFilterMenu;
