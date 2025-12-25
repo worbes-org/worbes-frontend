@@ -1,20 +1,12 @@
-import BottomDrawer from "@/components/BottomDrawer";
 import Button from "@/components/Button";
-import DropdownPanel from "@/components/DropdownPanel";
-import Input from "@/components/Input";
-import ListSelector from "@/components/ListSelector";
-import MenuTrigger from "@/components/MenuTrigger";
+import ExpansionMenuTrigger from "@/components/ExpansionMenuTrigger";
 import MinMaxInput from "@/components/MinMaxInput";
 import QualitySlider from "@/components/QualitySlider";
-import Responsive from "@/components/Responsive";
 import Translation from "@/components/Translation";
-import { EXPANSIONS, ITEM_LEVEL } from "@/constants/auction";
-import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { ITEM_LEVEL } from "@/constants/auction";
 import { useTranslations } from "@/hooks/useTranslations";
 import { AuctionsFilter } from "@/types/auction";
-import { getExpansionLabel } from "@/utils/auction";
 import { cn } from "@/utils/styles";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { FC, useState } from "react";
 
 type Props = {
@@ -31,7 +23,6 @@ const AuctionFilterMenu: FC<Props> = ({
   onClose,
 }) => {
   const t = useTranslations();
-  const isSmBreakpoint = useBreakpoint("sm");
   const [localFilter, setLocalFilter] = useState(filter);
 
   return (
@@ -89,96 +80,11 @@ const AuctionFilterMenu: FC<Props> = ({
 
       <div className="space-y-2">
         <Translation className="text-gray-200" messageKey="Expansion" as="h3" />
-        <MenuTrigger
-          closeOnClickAway={isSmBreakpoint}
-          renderButton={({ isOpen, onClick }) => {
-            const label = localFilter.expansionId
-              ? getExpansionLabel(localFilter.expansionId)
-              : null;
-
-            return (
-              <div role="button" onClick={onClick}>
-                <Input
-                  className="pointer-events-none"
-                  size="md"
-                  placeholder={t("All Expansions")}
-                  value={label ? t(label) : ""}
-                  rightIcon={
-                    <ChevronDownIcon
-                      className={cn(
-                        "size-5 text-gray-300 transition-transform duration-200",
-                        isOpen && "rotate-180",
-                      )}
-                    />
-                  }
-                />
-              </div>
-            );
-          }}
-          renderMenu={({ isOpen, onClose: closeExpansionMenu }) => {
-            const selectedValues =
-              typeof localFilter.expansionId === "number"
-                ? [localFilter.expansionId]
-                : [];
-
-            return (
-              <Responsive
-                mobile={
-                  <BottomDrawer
-                    title="Expansion"
-                    theme="primary"
-                    isOpen={isOpen}
-                    onClose={closeExpansionMenu}
-                  >
-                    <ListSelector
-                      listClassName="max-h-[60dvh] overflow-y-auto"
-                      fadeGradientClassName={{
-                        to: "to-gray-900",
-                      }}
-                      options={EXPANSIONS.map((expansion) => ({
-                        ...expansion,
-                        label: t(expansion.label),
-                      }))}
-                      selectedValues={selectedValues}
-                      onSelect={(value) => {
-                        setLocalFilter({
-                          ...localFilter,
-                          expansionId: value.value,
-                        });
-                        closeExpansionMenu();
-                      }}
-                    />
-                  </BottomDrawer>
-                }
-                desktop={
-                  <DropdownPanel
-                    className="overflow-hidden"
-                    position="bottom"
-                    isOpen={isOpen}
-                  >
-                    <ListSelector
-                      listClassName="max-h-80 overflow-y-auto"
-                      fadeGradientClassName={{
-                        to: "to-gray-900",
-                      }}
-                      options={EXPANSIONS.map((expansion) => ({
-                        ...expansion,
-                        label: t(expansion.label),
-                      }))}
-                      selectedValues={selectedValues}
-                      onSelect={(value) => {
-                        setLocalFilter({
-                          ...localFilter,
-                          expansionId: value.value,
-                        });
-                        closeExpansionMenu();
-                      }}
-                    />
-                  </DropdownPanel>
-                }
-              />
-            );
-          }}
+        <ExpansionMenuTrigger
+          value={localFilter.expansionId}
+          onChange={(value) =>
+            setLocalFilter({ ...localFilter, expansionId: value })
+          }
         />
       </div>
 
