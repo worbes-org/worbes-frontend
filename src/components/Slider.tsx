@@ -81,7 +81,7 @@ const Slider: FC<Props> = ({
         ref={sliderDivRef}
       >
         <div
-          className="absolute h-full rounded-sm bg-green-500 transition-all duration-200"
+          className="absolute h-full rounded-sm bg-accent-500 transition-all duration-200"
           style={{
             left: `${((value.start - min) / range) * 100}%`,
             width: `${((value.end - value.start) / range) * 100}%`,
@@ -100,7 +100,7 @@ const Slider: FC<Props> = ({
         {valuesRef.current.map((value, index) => (
           <div
             className={cn(
-              "absolute top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 transform-gpu cursor-pointer rounded-full bg-green-500 transition-all duration-200",
+              "absolute top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 transform-gpu cursor-pointer rounded-full bg-accent-500 transition-all duration-200",
               thumbClassName,
             )}
             style={{
