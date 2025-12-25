@@ -5,6 +5,15 @@ export const QUALITY = Object.freeze({
   MAX: 6,
 });
 
+export const QUALITY_LABELS = [
+  "Common",
+  "Uncommon",
+  "Rare",
+  "Epic",
+  "Legendary",
+  "Artifact",
+] as const;
+
 export const ITEM_LEVEL = Object.freeze({
   MIN: 1,
   MAX: 999,

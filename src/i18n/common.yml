@@ -89,3 +89,31 @@ Home:
 Auctions:
   ko: "경매"
   en: "Auctions"
+
+Item rarity:
+  ko: "아이템 희귀도"
+  en: "Item rarity"
+
+Common:
+  ko: "일반"
+  en: "Common"
+
+Uncommon:
+  ko: "고급"
+  en: "Uncommon"
+
+Rare:
+  ko: "희귀"
+  en: "Rare"
+
+Epic:
+  ko: "영웅"
+  en: "Epic"
+
+Legendary:
+  ko: "전설"
+  en: "Legendary"
+
+Artifact:
+  ko: "유물"
+  en: "Artifact"
