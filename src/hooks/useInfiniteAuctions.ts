@@ -1,5 +1,6 @@
 import { AuctionsSchema } from "@/schemas/auction";
 import type { AuctionsFilter } from "@/types/auction";
+import { compactObject } from "@/utils/misc";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import qs from "qs";
 
@@ -16,11 +17,13 @@ export function useInfiniteAuctions(args: {
     queryKey: ["auctions", args],
     queryFn: async ({ pageParam }) => {
       const response = await fetch(
-        `/api/auctions?${qs.stringify({
-          ...args.filter,
-          page: pageParam,
-          size: args.initialPagination.size,
-        })}`,
+        `/api/auctions?${qs.stringify(
+          compactObject({
+            ...args.filter,
+            page: pageParam,
+            size: args.initialPagination.size,
+          }),
+        )}`,
       );
       const data = await response.json();
       const parsed = AuctionsSchema.parse(data);

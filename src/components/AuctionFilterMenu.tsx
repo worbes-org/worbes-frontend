@@ -1,10 +1,24 @@
+import BottomDrawer from "@/components/BottomDrawer";
+import DropdownPanel from "@/components/DropdownPanel";
+import Input from "@/components/Input";
+import ListSelector from "@/components/ListSelector";
+import MenuTrigger from "@/components/MenuTrigger";
 import MinMaxInput from "@/components/MinMaxInput";
+import Responsive from "@/components/Responsive";
 import Slider from "@/components/Slider";
 import Translation from "@/components/Translation";
-import { ITEM_LEVEL, QUALITY, QUALITY_LABELS } from "@/constants/auction";
+import {
+  EXPANSIONS,
+  ITEM_LEVEL,
+  QUALITY,
+  QUALITY_LABELS,
+} from "@/constants/auction";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useTranslations } from "@/hooks/useTranslations";
 import { AuctionsFilter } from "@/types/auction";
+import { getExpansionLabel, getQualityLabel } from "@/utils/auction";
 import { cn } from "@/utils/styles";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { first, last } from "lodash-es";
 import { FC } from "react";
 
@@ -16,6 +30,7 @@ type Props = {
 
 const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
   const t = useTranslations();
+  const isSmBreakpoint = useBreakpoint("sm");
 
   return (
     <div
@@ -61,9 +76,10 @@ const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
             start: filter.minQuality ?? QUALITY.MIN,
             end: filter.maxQuality ?? QUALITY.MAX,
           }}
-          renderTooltip={(value) => (
-            <div className="text-nowrap">{getQualityLabel(value)}</div>
-          )}
+          renderTooltip={(value) => {
+            const label = getQualityLabel(value);
+            return label ? t(label) : null;
+          }}
           onChange={(value) =>
             onChange({
               ...filter,
@@ -88,17 +104,95 @@ const AuctionFilterMenu: FC<Props> = ({ className, filter, onChange }) => {
           </div>
         </div>
       </div>
+
+      <div className="space-y-2">
+        <Translation className="text-gray-200" messageKey="Expansion" as="h3" />
+        <MenuTrigger
+          closeOnClickAway={isSmBreakpoint}
+          renderButton={({ isOpen, onClick }) => {
+            const label = filter.expansionId
+              ? getExpansionLabel(filter.expansionId)
+              : null;
+
+            return (
+              <div role="button" onClick={onClick}>
+                <Input
+                  className="pointer-events-none"
+                  size="md"
+                  placeholder={t("All Expansions")}
+                  value={label ? t(label) : undefined}
+                  rightIcon={
+                    <ChevronDownIcon
+                      className={cn(
+                        "size-5 text-gray-300 transition-transform duration-200",
+                        isOpen && "rotate-180",
+                      )}
+                    />
+                  }
+                />
+              </div>
+            );
+          }}
+          renderMenu={({ isOpen, onClose }) => {
+            const selectedValues =
+              typeof filter.expansionId === "number"
+                ? [filter.expansionId]
+                : [];
+
+            return (
+              <Responsive
+                mobile={
+                  <BottomDrawer
+                    title="Expansion"
+                    theme="primary"
+                    isOpen={isOpen}
+                    onClose={onClose}
+                  >
+                    <ListSelector
+                      listClassName="max-h-[60dvh] overflow-y-auto"
+                      fadeGradientClassName={{
+                        to: "to-gray-900",
+                      }}
+                      options={EXPANSIONS.map((expansion) => ({
+                        ...expansion,
+                        label: t(expansion.label),
+                      }))}
+                      selectedValues={selectedValues}
+                      onSelect={(value) =>
+                        onChange({ ...filter, expansionId: value.value })
+                      }
+                    />
+                  </BottomDrawer>
+                }
+                desktop={
+                  <DropdownPanel
+                    className="overflow-hidden"
+                    position="bottom"
+                    isOpen={isOpen}
+                  >
+                    <ListSelector
+                      listClassName="max-h-80 overflow-y-auto"
+                      fadeGradientClassName={{
+                        to: "to-gray-900",
+                      }}
+                      options={EXPANSIONS.map((expansion) => ({
+                        ...expansion,
+                        label: t(expansion.label),
+                      }))}
+                      selectedValues={selectedValues}
+                      onSelect={(value) =>
+                        onChange({ ...filter, expansionId: value.value })
+                      }
+                    />
+                  </DropdownPanel>
+                }
+              />
+            );
+          }}
+        />
+      </div>
     </div>
   );
-
-  function getQualityLabel(value: number) {
-    const label = QUALITY_LABELS[value - QUALITY.MIN];
-    if (!label) {
-      return null;
-    }
-
-    return t(label);
-  }
 };
 
 export default AuctionFilterMenu;

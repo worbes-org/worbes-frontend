@@ -117,3 +117,55 @@ Legendary:
 Artifact:
   ko: "유물"
   en: "Artifact"
+
+All Expansions:
+  ko: "모든 확장팩"
+  en: "All Expansions"
+
+Expansion:
+  ko: "확장팩"
+  en: "Expansion"
+
+Vanilla:
+  ko: "오리지널"
+  en: "Vanilla"
+
+The Burning Crusade:
+  ko: "불타는 성전"
+  en: "The Burning Crusade"
+
+Wrath of the Lich King:
+  ko: "리치 왕의 분노"
+  en: "Wrath of the Lich King"
+
+Cataclysm:
+  ko: "대격변"
+  en: "Cataclysm"
+
+Mists of Pandaria:
+  ko: "판다리아의 안개"
+  en: "Mists of Pandaria"
+
+Warlords of Draenor:
+  ko: "드레노어의 전쟁군주"
+  en: "Warlords of Draenor"
+
+Legion:
+  ko: "군단"
+  en: "Legion"
+
+Battle for Azeroth:
+  ko: "격전의 아제로스"
+  en: "Battle for Azeroth"
+
+Shadowlands:
+  ko: "어둠땅"
+  en: "Shadowlands"
+
+Dragonflight:
+  ko: "용군단"
+  en: "Dragonflight"
+
+The War Within:
+  ko: "내부 전쟁"
+  en: "The War Within"

@@ -20,6 +20,7 @@ export const ITEM_LEVEL = Object.freeze({
 });
 
 export const EXPANSIONS = [
+  { value: 0, label: "All Expansions" },
   { value: 1, label: "Vanilla" },
   { value: 2, label: "The Burning Crusade" },
   { value: 3, label: "Wrath of the Lich King" },
