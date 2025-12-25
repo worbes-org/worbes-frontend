@@ -3,6 +3,7 @@ import AuctionTable from "@/components/AuctionTable";
 import Button from "@/components/Button";
 import CategoryMenuTrigger from "@/components/CategoryMenuTrigger";
 import Input from "@/components/Input";
+import Skeleton from "@/components/Skeleton";
 import Translation from "@/components/Translation";
 import useInfiniteAuctions from "@/hooks/useInfiniteAuctions";
 import { useSettingsContext } from "@/hooks/useSettingsContext";
@@ -70,21 +71,25 @@ const AuctionTableContainer: FC<Props> = ({
         <div className="flex justify-between gap-y-4 not-md:flex-col-reverse">
           <div>
             <Translation messageKey="Search results" as="p" />
-            <Translation
-              className="text-sm text-gray-400"
-              messageKey="Last updated: {date}"
-              values={{
-                // TODO: use correct time value from the API
-                date: dataUpdatedAt
-                  ? new Date(dataUpdatedAt).toLocaleString(locale, {
-                      month: "short",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })
-                  : "--",
-              }}
-            />
+            {isLoading ? (
+              <Skeleton className="h-4 w-full max-w-30" />
+            ) : (
+              <Translation
+                className="text-sm text-gray-400"
+                messageKey="Last updated: {date}"
+                values={{
+                  // TODO: use correct time value from the API
+                  date: dataUpdatedAt
+                    ? new Date(dataUpdatedAt).toLocaleString(locale, {
+                        month: "short",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })
+                    : "N/A",
+                }}
+              />
+            )}
           </div>
 
           <form className="flex gap-x-2" onSubmit={handleSearchClick}>
