@@ -94,6 +94,10 @@ Item rarity:
   ko: "아이템 희귀도"
   en: "Item rarity"
 
+Poor:
+  ko: "형편없는"
+  en: "Poor"
+
 Common:
   ko: "일반"
   en: "Common"
@@ -113,10 +117,6 @@ Epic:
 Legendary:
   ko: "전설"
   en: "Legendary"
-
-Artifact:
-  ko: "유물"
-  en: "Artifact"
 
 All Expansions:
   ko: "모든 확장팩"

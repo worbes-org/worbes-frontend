@@ -6,12 +6,12 @@ export const QUALITY = Object.freeze({
 });
 
 export const QUALITY_LABELS = [
+  "Poor",
   "Common",
   "Uncommon",
   "Rare",
   "Epic",
   "Legendary",
-  "Artifact",
 ] as const;
 
 export const ITEM_LEVEL = Object.freeze({

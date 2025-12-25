@@ -21,3 +21,25 @@ export function getQualityLabel(value: number) {
 
   return label;
 }
+
+export function getQualityColor(
+  label: Exclude<ReturnType<typeof getQualityLabel>, null>,
+) {
+  switch (label) {
+    case "Poor":
+      return "var(--color-gray-400)";
+    case "Common":
+      return "var(--color-white)";
+    case "Uncommon":
+      return "var(--color-green-600)";
+    case "Rare":
+      return "var(--color-blue-700)";
+    case "Epic":
+      return "var(--color-purple-700)";
+    case "Legendary":
+      return "var(--color-orange)";
+    default:
+      console.error(`Quality ${label} not found`);
+      return null;
+  }
+}

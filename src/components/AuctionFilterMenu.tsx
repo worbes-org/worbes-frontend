@@ -5,22 +5,16 @@ import Input from "@/components/Input";
 import ListSelector from "@/components/ListSelector";
 import MenuTrigger from "@/components/MenuTrigger";
 import MinMaxInput from "@/components/MinMaxInput";
+import QualitySlider from "@/components/QualitySlider";
 import Responsive from "@/components/Responsive";
-import Slider from "@/components/Slider";
 import Translation from "@/components/Translation";
-import {
-  EXPANSIONS,
-  ITEM_LEVEL,
-  QUALITY,
-  QUALITY_LABELS,
-} from "@/constants/auction";
+import { EXPANSIONS, ITEM_LEVEL } from "@/constants/auction";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { useTranslations } from "@/hooks/useTranslations";
 import { AuctionsFilter } from "@/types/auction";
-import { getExpansionLabel, getQualityLabel } from "@/utils/auction";
+import { getExpansionLabel } from "@/utils/auction";
 import { cn } from "@/utils/styles";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { first, last } from "lodash-es";
 import { FC, useState } from "react";
 
 type Props = {
@@ -78,19 +72,10 @@ const AuctionFilterMenu: FC<Props> = ({
           messageKey="Item rarity"
           as="h3"
         />
-        <Slider
-          min={QUALITY.MIN}
-          max={QUALITY.MAX}
-          step={1}
-          showTicks
+        <QualitySlider
           value={{
-            start: localFilter.minQuality ?? QUALITY.MIN,
-            end: localFilter.maxQuality ?? QUALITY.MAX,
-          }}
-          renderTooltip={(value) => {
-            const label = getQualityLabel(value);
-
-            return <div className="text-nowrap">{label ? t(label) : null}</div>;
+            start: localFilter.minQuality,
+            end: localFilter.maxQuality,
           }}
           onChange={(value) =>
             setLocalFilter({
@@ -100,21 +85,6 @@ const AuctionFilterMenu: FC<Props> = ({
             })
           }
         />
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-x-2">
-            <div className="size-3.5 rounded-sm bg-gray-400 drop-shadow-[0_0_2px_var(--color-gray-400)]" />
-            <div className="text-sm font-medium text-gray-300">
-              <Translation messageKey={first(QUALITY_LABELS)} />
-            </div>
-          </div>
-          <div className="text-gray-400">~</div>
-          <div className="flex items-center gap-x-2">
-            <div className="text-sm font-medium text-orange">
-              <Translation messageKey={last(QUALITY_LABELS)!} />
-            </div>
-            <div className="size-3.5 rounded-sm bg-orange drop-shadow-[0_0_2px_var(--color-orange)]" />
-          </div>
-        </div>
       </div>
 
       <div className="space-y-2">
