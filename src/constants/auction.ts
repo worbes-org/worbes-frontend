@@ -5,12 +5,22 @@ export const QUALITY = Object.freeze({
   MAX: 6,
 });
 
+export const QUALITY_LABELS = [
+  "Poor",
+  "Common",
+  "Uncommon",
+  "Rare",
+  "Epic",
+  "Legendary",
+] as const;
+
 export const ITEM_LEVEL = Object.freeze({
   MIN: 1,
   MAX: 999,
 });
 
 export const EXPANSIONS = [
+  { value: 0, label: "All Expansions" },
   { value: 1, label: "Vanilla" },
   { value: 2, label: "The Burning Crusade" },
   { value: 3, label: "Wrath of the Lich King" },
