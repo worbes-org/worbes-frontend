@@ -20,17 +20,19 @@ export const metadata: Metadata = {
 const RootLayout: AFC<PropsWithChildren> = async ({ children }) => {
   return (
     <html lang="en">
-      <Script id="wh-init" strategy="beforeInteractive">
-        {`
+      <head>
+        <Script id="wh-init" strategy="beforeInteractive">
+          {`
             var whTooltips = {
               colorLinks: true,
               iconizeLinks: true,
               iconSize: 'large',
               renameLinks: true,
-            };
-        `}
-      </Script>
-      <Script src="https://wow.zamimg.com/js/tooltips.js" />
+              };
+              `}
+        </Script>
+        <Script src="https://wow.zamimg.com/js/tooltips.js" />
+      </head>
 
       <body className={cn(primaryFont.variable)}>{children}</body>
     </html>
