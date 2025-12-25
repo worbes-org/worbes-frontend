@@ -54,9 +54,9 @@ Crafting Tier:
   ko: "제작 등급"
   en: "Crafting Tier"
 
-"Search Results: {count}":
-  ko: "검색 결과: {count}개"
-  en: "Search Results: {count}"
+Search results:
+  ko: "검색 결과"
+  en: "Search results"
 
 Filter:
   ko: "필터"

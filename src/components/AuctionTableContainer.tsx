@@ -12,6 +12,7 @@ import { CategorySelection } from "@/types/category";
 import { Nullable } from "@/types/misc";
 import { cn } from "@/utils/styles";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useLocale } from "next-intl";
 import { FC, FormEvent, useState } from "react";
 
 type Props = {
@@ -30,6 +31,8 @@ const AuctionTableContainer: FC<Props> = ({
   onCategoryChange,
 }) => {
   const t = useTranslations();
+  const locale = useLocale();
+
   const {
     settings: { realm },
   } = useSettingsContext();
@@ -41,6 +44,7 @@ const AuctionTableContainer: FC<Props> = ({
     fetchNextPage,
     isLoading,
     isFetchingNextPage,
+    dataUpdatedAt,
   } = useInfiniteAuctions({
     filter,
     initialPagination: {
@@ -65,16 +69,21 @@ const AuctionTableContainer: FC<Props> = ({
 
         <div className="flex justify-between gap-y-4 not-md:flex-col-reverse">
           <div>
-            <Translation
-              messageKey="Search Results: {count}"
-              values={{ count: auctions.length }}
-              as="p"
-            />
+            <Translation messageKey="Search results" as="p" />
             <Translation
               className="text-sm text-gray-400"
               messageKey="Last updated: {date}"
-              // TODO: use correct time value from the API
-              values={{ date: 1234 }}
+              values={{
+                // TODO: use correct time value from the API
+                date: dataUpdatedAt
+                  ? new Date(dataUpdatedAt).toLocaleString(locale, {
+                      month: "short",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                  : "--",
+              }}
             />
           </div>
 
