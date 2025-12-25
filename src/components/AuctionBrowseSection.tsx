@@ -21,6 +21,7 @@ const AuctionBrowseSection: FC<Props> = ({ className }) => {
   } = useSettingsContext();
 
   const [filter, setFilter] = useState<AuctionsFilter>({
+    name: "",
     region: selectedRegion,
     realmId: selectedRealm?.connectedRealmId,
     ...categorySelection,
