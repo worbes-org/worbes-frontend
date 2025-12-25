@@ -3,7 +3,7 @@
 import { Nullable } from "@/types/misc";
 import { cn } from "@/utils/styles";
 import { clamp, isEqual, throttle } from "lodash-es";
-import { FC, useRef, useState } from "react";
+import { FC, useMemo, useRef, useState } from "react";
 import { useIsomorphicLayoutEffect } from "react-use";
 
 const INDEX = { START: 0, END: 1 };
@@ -17,6 +17,8 @@ type Props = {
   max: number;
   step: number;
   value?: SliderValue;
+  showTicks?: boolean;
+  renderTooltip?: (value: number) => React.ReactNode;
   onChange: (value: SliderValue) => void;
   onCommit?: (value: SliderValue) => void;
 };
@@ -28,6 +30,8 @@ const Slider: FC<Props> = ({
   max,
   step,
   value = { start: min, end: max },
+  showTicks,
+  renderTooltip,
   onChange,
   onCommit,
 }) => {
@@ -39,6 +43,18 @@ const Slider: FC<Props> = ({
 
   const handleRange = throttle(_handleRange, 100);
   const range = max - min;
+
+  const tickPositions = useMemo(() => {
+    if (!showTicks) {
+      return [];
+    }
+
+    const ticks: number[] = [];
+    for (let i = min; i <= max; i += step) {
+      ticks.push(((i - min) / range) * 100);
+    }
+    return ticks;
+  }, [showTicks, min, max, step, range]);
 
   useIsomorphicLayoutEffect(() => {
     document.addEventListener("mousemove", handleMove);
@@ -72,6 +88,15 @@ const Slider: FC<Props> = ({
           }}
         />
 
+        {showTicks &&
+          tickPositions.map((position, index) => (
+            <div
+              key={index}
+              className="absolute top-1/2 h-2 w-px -translate-x-1/2 translate-y-1/2 bg-gray-400"
+              style={{ left: `${position}%` }}
+            />
+          ))}
+
         {valuesRef.current.map((value, index) => (
           <div
             className={cn(
@@ -99,7 +124,7 @@ const Slider: FC<Props> = ({
               aria-label={value.toString()}
               aria-hidden={!visibleTooltip}
             >
-              {value}
+              {renderTooltip ? renderTooltip(value) : value}
               <div className="absolute top-full left-1/2 -translate-x-1/2 border-x-4 border-t-4 border-x-transparent border-t-gray-500" />
             </div>
           </div>
