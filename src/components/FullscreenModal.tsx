@@ -38,7 +38,7 @@ const FullscreenModal: FC<PropsWithChildren<Props>> = ({
       <div className="fixed inset-0 z-50 h-dvh w-screen p-4">
         <DialogPanel
           className={cn(
-            "duration-300 data-[closed]:translate-y-3 data-[closed]:opacity-0",
+            "mx-auto max-w-480 duration-300 data-[closed]:translate-y-3 data-[closed]:opacity-0",
             "shadow-brand h-full w-full space-y-8 rounded-3xl border border-gray-600 bg-gray-900 p-4 text-left",
           )}
           transition
