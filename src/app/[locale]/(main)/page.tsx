@@ -1,11 +1,11 @@
+import { redirectWithoutLocale } from "@/hooks/usePathnameWithoutLocale";
 import { AppUrlBuilder } from "@/utils/url";
-import { redirect } from "next/navigation";
+import { getLocale } from "next-intl/server";
 import { AFC } from "react";
 
 const HomePage: AFC = async () => {
-  // TODO: Implement home page
-  redirect(AppUrlBuilder.auctions());
-  // return null;
+  const locale = await getLocale();
+  redirectWithoutLocale({ href: AppUrlBuilder.auctions(), locale });
 };
 
 export default HomePage;
