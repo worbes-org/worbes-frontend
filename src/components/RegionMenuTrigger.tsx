@@ -20,7 +20,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { noop } from "lodash-es";
 import { useLocale } from "next-intl";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 
 type Props = {
   className?: string;
@@ -38,6 +38,17 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
   const label = settings.realm
     ? getRealmNameByLocale(settings.realm, locale)
     : "";
+
+  useEffect(() => {
+    if (settings.realm || !realms?.[0]) {
+      return;
+    }
+
+    onSettingsChange({
+      ...settings,
+      realm: realms[0],
+    });
+  }, [settings, realms]);
 
   return (
     <MenuTrigger
