@@ -1,9 +1,15 @@
 "use client";
 
 import { Region } from "@/constants/game-server";
+import { useRealms } from "@/hooks/useRealms";
 import { type Realm } from "@/types/game-server";
 import { type Nullable } from "@/types/misc";
-import { createContext, type FC, type PropsWithChildren } from "react";
+import {
+  createContext,
+  useEffect,
+  type FC,
+  type PropsWithChildren,
+} from "react";
 import { useCookieState } from "synced-storage/react";
 
 export type SettingsState = {
@@ -28,10 +34,15 @@ const SettingsProvider: FC<Props> = ({ children }) => {
     path: "/",
   });
 
-  const setSettings = (settings: SettingsState["settings"]) => {
-    setRegion(settings.region);
-    setRealm(settings.realm);
-  };
+  const { data: realms } = useRealms(region);
+
+  useEffect(() => {
+    if (realm || !realms?.[0]) {
+      return;
+    }
+
+    setSettings({ region, realm: realms[0] });
+  }, [region, realm, realms]);
 
   return (
     <SettingsContext
@@ -43,6 +54,11 @@ const SettingsProvider: FC<Props> = ({ children }) => {
       {children}
     </SettingsContext>
   );
+
+  function setSettings(settings: SettingsState["settings"]) {
+    setRegion(settings.region);
+    setRealm(settings.realm);
+  }
 };
 
 export default SettingsProvider;
