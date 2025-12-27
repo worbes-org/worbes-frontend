@@ -6,10 +6,12 @@ export const HEADER_NAV_ITEMS = [
     label: "Home",
     href: AppUrlBuilder.home(),
     Icon: HomeIcon,
+    hidden: true,
   },
   {
     label: "Auctions",
     href: AppUrlBuilder.auctions(),
     Icon: ShoppingBagIcon,
+    hidden: false,
   },
 ] as const;

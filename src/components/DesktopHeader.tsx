@@ -18,10 +18,12 @@ type Props = {
 const DesktopHeader: FC<Props> = ({ className }) => {
   const pathname = usePathnameWithoutLocale();
 
-  const navItems = HEADER_NAV_ITEMS.map((item) => ({
-    ...item,
-    isActive: item.href === pathname,
-  }));
+  const navItems = HEADER_NAV_ITEMS.filter((item) => !item.hidden).map(
+    (item) => ({
+      ...item,
+      isActive: item.href === pathname,
+    }),
+  );
 
   return (
     <header
