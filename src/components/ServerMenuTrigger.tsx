@@ -30,7 +30,7 @@ const ServerMenuTrigger: FC<Props> = ({ className, buttonClassName }) => {
   const locale = useLocale();
   const isSmBreakpoint = useBreakpoint("sm");
 
-  const { settings, onSettingsChange } = useSettingsContext();
+  const { settings, setSettings } = useSettingsContext();
 
   const isRegionSelected = !!settings.realm;
 
@@ -62,7 +62,7 @@ const ServerMenuTrigger: FC<Props> = ({ className, buttonClassName }) => {
             >
               <ServerMenuContent
                 settings={settings}
-                onSettingsChange={onSettingsChange}
+                onSettingsChange={setSettings}
               />
             </BottomDrawer>
           }
@@ -89,7 +89,7 @@ const ServerMenuTrigger: FC<Props> = ({ className, buttonClassName }) => {
               <ServerMenuContent
                 className="mt-6"
                 settings={settings}
-                onSettingsChange={onSettingsChange}
+                onSettingsChange={setSettings}
               />
             </DropdownPanel>
           }
@@ -115,7 +115,7 @@ const ServerMenuTrigger: FC<Props> = ({ className, buttonClassName }) => {
 const ServerMenuContent: FC<{
   className?: string;
   settings: SettingsState["settings"];
-  onSettingsChange: SettingsState["onSettingsChange"];
+  onSettingsChange: SettingsState["setSettings"];
 }> = ({ className, settings, onSettingsChange }) => {
   return (
     <div className={cn("space-y-5", className)}>

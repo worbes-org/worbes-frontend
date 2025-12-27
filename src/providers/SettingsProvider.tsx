@@ -11,7 +11,7 @@ export type SettingsState = {
     region: Region;
     realm: Nullable<Realm>;
   };
-  onSettingsChange: (settings: SettingsState["settings"]) => void;
+  setSettings: (settings: SettingsState["settings"]) => void;
 };
 
 export const SettingsContext = createContext<Nullable<SettingsState>>(null);
@@ -28,7 +28,7 @@ const SettingsProvider: FC<Props> = ({ children }) => {
     path: "/",
   });
 
-  const onSettingsChange = (settings: SettingsState["settings"]) => {
+  const setSettings = (settings: SettingsState["settings"]) => {
     setRegion(settings.region);
     setRealm(settings.realm);
   };
@@ -37,7 +37,7 @@ const SettingsProvider: FC<Props> = ({ children }) => {
     <SettingsContext
       value={{
         settings: { region, realm },
-        onSettingsChange,
+        setSettings,
       }}
     >
       {children}

@@ -31,7 +31,7 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
   const t = useTranslations();
   const locale = useLocale();
 
-  const { settings, onSettingsChange } = useSettingsContext();
+  const { settings, setSettings } = useSettingsContext();
 
   const { data: realms, isLoading } = useRealms(settings.region);
 
@@ -44,7 +44,7 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
       return;
     }
 
-    onSettingsChange({
+    setSettings({
       ...settings,
       realm: realms[0],
     });
@@ -84,7 +84,7 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
                 listClassName="h-[calc(90dvh-7rem)]"
                 realms={realms ?? []}
                 settings={settings}
-                onSettingsChange={onSettingsChange}
+                onSettingsChange={setSettings}
                 onClose={onClose}
               />
             </BottomDrawer>
@@ -99,7 +99,7 @@ const RegionMenuTrigger: FC<Props> = ({ className }) => {
                 listClassName="max-h-60"
                 realms={realms ?? []}
                 settings={settings}
-                onSettingsChange={onSettingsChange}
+                onSettingsChange={setSettings}
                 onClose={onClose}
               />
             </DropdownPanel>
@@ -116,7 +116,7 @@ const RegionMenuContent: FC<{
   realms: Realm[];
   settings: SettingsState["settings"];
   onClose: () => void;
-  onSettingsChange: SettingsState["onSettingsChange"];
+  onSettingsChange: SettingsState["setSettings"];
 }> = ({
   className,
   listClassName,
