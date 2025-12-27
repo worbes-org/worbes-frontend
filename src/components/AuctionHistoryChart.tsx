@@ -48,7 +48,7 @@ const AuctionHistoryChart: FC<Props> = ({ className, history }) => {
   const gradientId = useId();
 
   const chartData = useMemo(() => {
-    return history.history.map((item) => ({
+    return history.data.map((item) => ({
       [DATA_KEY.TIME]: item.time,
       [DATA_KEY.PRICE]: item.lowestPrice,
       [DATA_KEY.QUANTITY]: item.totalQuantity,

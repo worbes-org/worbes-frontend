@@ -63,12 +63,18 @@ export const AuctionHistorySchema = z
       ),
     }),
   })
-  .transform((data) => ({
-    averageLowestPrice: data.content.average_lowest_price,
-    medianLowestPrice: data.content.median_lowest_price,
-    history: data.content.history.map((item) => ({
-      time: new Date(item.time),
-      lowestPrice: item.lowest_price,
-      totalQuantity: item.total_quantity,
-    })),
-  }));
+  .transform((data) => {
+    const sorted = data.content.history.sort(
+      (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
+    );
+
+    return {
+      averageLowestPrice: data.content.average_lowest_price,
+      medianLowestPrice: data.content.median_lowest_price,
+      data: sorted.map((item) => ({
+        time: new Date(item.time),
+        lowestPrice: item.lowest_price,
+        totalQuantity: item.total_quantity,
+      })),
+    };
+  });
