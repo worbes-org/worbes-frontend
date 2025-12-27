@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
-const API_URL = process.env.API_URL ?? "http://api.worbes.kro.kr/";
+const API_URL = process.env.API_URL ?? "http://api.worbes.kro.kr";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
