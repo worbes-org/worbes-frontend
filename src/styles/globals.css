@@ -23,7 +23,8 @@
     @apply cursor-not-allowed;
   }
 
-  .wowhead-tooltip-powered {
+  .wowhead-tooltip-powered,
+  .wowhead-tooltip-screen {
     @apply !hidden;
   }
 }

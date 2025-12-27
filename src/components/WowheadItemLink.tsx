@@ -2,6 +2,7 @@ import ConditionalLink from "@/components/ConditionalLink";
 import type { Locale } from "@/constants/i18n";
 import type { Nullable } from "@/types/misc";
 import { cn } from "@/utils/styles";
+import { useRouter } from "next/navigation";
 import QueryString from "qs";
 import type { FC, PropsWithChildren } from "react";
 
@@ -25,6 +26,8 @@ const WowheadItemLink: FC<Props> = ({
   bonus,
   children,
 }) => {
+  const router = useRouter();
+
   const dataWowhead = QueryString.stringify({
     item: id,
     domain: locale,
@@ -38,7 +41,7 @@ const WowheadItemLink: FC<Props> = ({
       href={href}
       data-wowhead={dataWowhead}
       data-wh-icon-size={getIconSize(iconSize)}
-      onClickCapture={handleClickCapture}
+      onClick={handleClick}
     >
       {children}
     </ConditionalLink>
@@ -57,9 +60,9 @@ const WowheadItemLink: FC<Props> = ({
     }
   }
 
-  // NOTE: Prevent default behavior from wowhead tooltip
-  function handleClickCapture(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.stopPropagation();
+  // NOTE: Wowhead script calls preventDefault(), so we manually trigger navigation
+  function handleClick() {
+    router.push(href);
   }
 };
 
