@@ -65,7 +65,7 @@ const Input: FC<Props> = ({
             "transition-colors placeholder:text-gray-400 focus-visible:outline-none",
             "disabled:cursor-not-allowed disabled:opacity-50",
             size === "sm" && "h-8 px-3 text-sm",
-            size === "md" && "h-10 px-3 text-sm",
+            size === "md" && "h-10 px-3 text-base",
             size === "lg" && "h-12 px-4 text-base",
             error ? "border-red" : "border-[#23252a]",
             !error && "hover:border-[#34343a] focus-visible:border-accent-700",
