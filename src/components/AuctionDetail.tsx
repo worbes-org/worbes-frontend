@@ -47,11 +47,11 @@ const AuctionDetail: FC<Props> = ({
     <div className={cn("space-y-6", className)}>
       <div className="flex items-center gap-x-4">
         <ImageWithPlaceholder
-          className="size-16 overflow-hidden rounded-xl border-2 border-accent-600"
+          className="size-16 shrink-0 overflow-hidden rounded-xl border-2 border-accent-600"
           src={item.iconUrl}
           alt={item.name}
         />
-        <div>
+        <div className="min-w-0 flex-1">
           <h1 className="text-2xl font-semibold">{item.name}</h1>
           <div className="flex items-center gap-x-2">
             <Translation
@@ -64,7 +64,9 @@ const AuctionDetail: FC<Props> = ({
             {!!itemBonus && (
               <>
                 <div className="size-1 rounded-full bg-gray-200" />
-                <div className="text-sm text-gray-200">{itemBonus}</div>
+                <div className="min-w-0 flex-1 truncate text-sm text-gray-200">
+                  {itemBonus}
+                </div>
               </>
             )}
           </div>

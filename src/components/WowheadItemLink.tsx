@@ -11,7 +11,7 @@ type Props = {
   level: number;
   iconSize: "sm" | "md" | "lg";
   locale: Locale;
-  href?: string;
+  href: string;
   bonus?: Nullable<string>;
 } & PropsWithChildren;
 
@@ -35,9 +35,10 @@ const WowheadItemLink: FC<Props> = ({
   return (
     <ConditionalLink
       className={cn("", className)}
-      href={href ?? `https://www.wowhead.com/${locale}/item=${id}`}
+      href={href}
       data-wowhead={dataWowhead}
       data-wh-icon-size={getIconSize(iconSize)}
+      onClickCapture={handleClickCapture}
     >
       {children}
     </ConditionalLink>
@@ -54,6 +55,11 @@ const WowheadItemLink: FC<Props> = ({
       default:
         return "medium";
     }
+  }
+
+  // NOTE: Prevent default behavior from wowhead tooltip
+  function handleClickCapture(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.stopPropagation();
   }
 };
 
